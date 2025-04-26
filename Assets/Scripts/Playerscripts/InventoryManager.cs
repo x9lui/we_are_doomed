@@ -82,8 +82,27 @@ public class InventoryManager : MonoBehaviour
     {
         if (slotIndex >= 0 && slotIndex < weaponSlots.Count)
         {
+            // Actualiza el slot actual
             currentSlot = slotIndex;
             InventorySlot selectedSlot = weaponSlots[currentSlot];
+
+            // Elimina todas las instancias previas de armas
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            // Instancia y posiciona el arma seleccionada
+            if (selectedSlot.gun != null)
+            {
+                GameObject gunInstance = Instantiate(selectedSlot.gun.gameObject, transform);
+                gunInstance.name = selectedSlot.gun.gunName; // Opcional: Renombra la instancia para mayor claridad
+                gunInstance.transform.localPosition = new Vector3(0, 0, 1); // Posición frente al jugador
+                gunInstance.transform.localRotation = Quaternion.identity; // Rotación por defecto
+                gunInstance.SetActive(true); // Activa el arma seleccionada
+            }
+
+            // Mensaje de depuración
             Debug.Log($"Switched to slot {slotIndex + 1}: {selectedSlot.type} - {selectedSlot.gun?.gunName ?? "No weapon"}");
         }
     }
