@@ -5,7 +5,17 @@ public class InventoryManager : MonoBehaviour
 {
     // Define the number of slots and their types
     public enum WeaponType { None, Pistol, Rifle, Shotgun, RocketLauncher }
-    public WeaponType[] weaponSlots = new WeaponType[5]; // 5 slots for weapons
+
+    // Class to represent a slot in the inventory
+    [System.Serializable]
+    public class InventorySlot
+    {
+        public WeaponType type; // The type of weapon (e.g., Pistol, Rifle)
+        public Gun gun;         // The specific weapon instance (e.g., AutomaticPistol)
+    }
+
+    // List of inventory slots
+    public List<InventorySlot> weaponSlots = new List<InventorySlot>();
 
     // Currently selected slot
     private int currentSlot = 0;
@@ -13,14 +23,42 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first execution of Update
     void Start()
     {
-        // // Initialize all slots to None
-        // for (int i = 0; i < weaponSlots.Length; i++)
+        // Initialize the inventory with empty slots
+        // for (int i = 0; i < 5; i++)
         // {
-        //     weaponSlots[i] = WeaponType.None;
+        //     weaponSlots.Add(new InventorySlot { type = WeaponType.None, gun = null });
         // }
 
-        // // Example: Assign a default weapon to the first slot
-        // weaponSlots[0] = WeaponType.Pistol;
+        // Assign a default weapon (Automatic Pistol) to the first slot
+        // GameObject pistolPrefab = Resources.Load<GameObject>("Prefabs/Weapons/AutomaticPistol.prefab"); // Ensure the prefab is in a Resources folder
+        // if (pistolPrefab != null)
+        // {
+        //     GameObject pistolInstance = Instantiate(pistolPrefab, transform);
+        //     pistolInstance.SetActive(true);
+        //     Debug.Log("Automatic Pistol instantiated successfully!");
+        //     pistolInstance.transform.localPosition = Vector3.zero; // Adjust position as needed
+        //     pistolInstance.transform.localRotation = Quaternion.identity;
+
+        //     // Assign the weapon to the first slot
+        //     Gun pistolGun = pistolInstance.GetComponent<Gun>();
+        //     if (pistolGun != null)
+        //     {
+        //         weaponSlots[0].type = WeaponType.Pistol;
+        //         weaponSlots[0].gun = pistolGun;
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.LogWarning("Automatic Pistol prefab not found in Resources/Weapons!");
+        // }
+            // Call Initialize on all weapons in the inventory
+        foreach (var slot in weaponSlots)
+        {
+            if (slot.gun != null)
+            {
+                slot.gun.Initialize();
+            }
+        }
     }
 
     // Update is called once per frame
@@ -42,20 +80,22 @@ public class InventoryManager : MonoBehaviour
     // Select a weapon slot
     private void SelectSlot(int slotIndex)
     {
-        if (slotIndex >= 0 && slotIndex < weaponSlots.Length)
+        if (slotIndex >= 0 && slotIndex < weaponSlots.Count)
         {
             currentSlot = slotIndex;
-            Debug.Log($"Switched to slot {slotIndex + 1}: {weaponSlots[slotIndex]}");
+            InventorySlot selectedSlot = weaponSlots[currentSlot];
+            Debug.Log($"Switched to slot {slotIndex + 1}: {selectedSlot.type} - {selectedSlot.gun?.gunName ?? "No weapon"}");
         }
     }
 
     // Add a weapon to a specific slot
-    public bool AddWeaponToSlot(WeaponType weapon, int slotIndex)
+    public bool AddWeaponToSlot(WeaponType weaponType, Gun weapon, int slotIndex)
     {
-        if (slotIndex >= 0 && slotIndex < weaponSlots.Length && weaponSlots[slotIndex] == WeaponType.None)
+        if (slotIndex >= 0 && slotIndex < weaponSlots.Count && weaponSlots[slotIndex].type == WeaponType.None)
         {
-            weaponSlots[slotIndex] = weapon;
-            Debug.Log($"Added {weapon} to slot {slotIndex + 1}");
+            weaponSlots[slotIndex].type = weaponType;
+            weaponSlots[slotIndex].gun = weapon;
+            Debug.Log($"Added {weapon.gunName} to slot {slotIndex + 1}");
             return true;
         }
         Debug.Log($"Slot {slotIndex + 1} is already occupied or invalid.");
@@ -63,8 +103,8 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Get the currently selected weapon
-    public WeaponType GetCurrentWeapon()
+    public Gun GetCurrentWeapon()
     {
-        return weaponSlots[currentSlot];
+        return weaponSlots[currentSlot].gun;
     }
 }
