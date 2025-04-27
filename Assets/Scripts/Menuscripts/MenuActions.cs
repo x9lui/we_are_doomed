@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 
 /// <summary>
 /// Defines actions that can be triggered from menu buttons.
@@ -8,6 +10,9 @@ public class MenuActions : MonoBehaviour
 {
     [SerializeField] private GameObject _MainMenu;
     [SerializeField] private GameObject _OptionsMenu;
+
+    [SerializeField] private GameObject _ExitMenu;
+    [SerializeField] private Image _transitionPanel;
 
     /// <summary>
     /// Starts the game by loading the SinglePlayerScene.
@@ -40,16 +45,20 @@ public class MenuActions : MonoBehaviour
     /// </summary>
     public void QuitGame()
     {
-        Application.Quit();
+        _ExitMenu.SetActive(true);
+        _MainMenu.SetActive(false);
+        SetPanelOpacityInstant(0.7f); // Set to 50% instantly
         Debug.Log("Game Exited.");
+        Application.Quit();
     }
 
     /// <summary>
-    /// Quits the application.
+    /// Opens the credits scene with a fade transition.
     /// </summary>
     public void Credits()
     {
         Debug.Log("Credits.");
+        StartCoroutine(FadeAndLoadCredits());
     }
 
     /// <summary>
@@ -59,7 +68,58 @@ public class MenuActions : MonoBehaviour
     {
         _MainMenu.SetActive(true);
         _OptionsMenu.SetActive(false);
-
         Debug.Log("Back.");
+    }
+
+    /// <summary>
+    /// Sets the panel opacity instantly to a target value.
+    /// </summary>
+    /// <param name="targetAlpha">Target opacity value between 0 and 1.</param>
+    private void SetPanelOpacityInstant(float targetAlpha)
+    {
+        if (_transitionPanel != null)
+        {
+            _transitionPanel.gameObject.SetActive(true);
+            Color color = _transitionPanel.color;
+            color.a = targetAlpha;
+            _transitionPanel.color = color;
+        }
+    }
+
+    /// <summary>
+    /// Coroutine to fade the transition panel to full opacity and load Credits scene.
+    /// </summary>
+    private IEnumerator FadeAndLoadCredits()
+    {
+        yield return StartCoroutine(FadeToOpacity(1f)); // Fade to full black (opacity 1.0)
+        SceneManager.LoadScene("Credits");
+    }
+
+    /// <summary>
+    /// Coroutine to fade the panel smoothly to a target opacity.
+    /// </summary>
+    /// <param name="targetAlpha">Target opacity value between 0 and 1.</param>
+    private IEnumerator FadeToOpacity(float targetAlpha)
+    {
+        if (_transitionPanel != null)
+        {
+            _transitionPanel.gameObject.SetActive(true);
+
+            float fadeDuration = 1.0f;
+            float elapsed = 0f;
+            Color color = _transitionPanel.color;
+            float initialAlpha = color.a;
+
+            while (elapsed < fadeDuration)
+            {
+                elapsed += Time.deltaTime;
+                color.a = Mathf.Lerp(initialAlpha, targetAlpha, elapsed / fadeDuration);
+                _transitionPanel.color = color;
+                yield return null;
+            }
+
+            color.a = targetAlpha;
+            _transitionPanel.color = color;
+        }
     }
 }

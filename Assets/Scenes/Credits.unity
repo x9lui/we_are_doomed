@@ -204,7 +204,6 @@ GameObject:
   m_Component:
   - component: {fileID: 314206825}
   - component: {fileID: 314206826}
-  - component: {fileID: 314206827}
   m_Layer: 0
   m_Name: Credits
   m_TagString: Untagged
@@ -249,23 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3981145c4a2650b48bfeab56a30b2b3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneTransition: {fileID: 314206827}
   _speed: 20
   timeToReturn: 120
---- !u!114 &314206827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314206824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06871f64a26eec341a3a6daf5bec9fa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeImage: {fileID: 793934789}
-  fadeDuration: 1
 --- !u!1 &333124590
 GameObject:
   m_ObjectHideFlags: 0

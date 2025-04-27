@@ -7,11 +7,6 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MoveUpwards : MonoBehaviour
 {
-    
-    /// <summary>
-    /// Reference to a transition script.
-    /// </summary>
-    public SceneTransition sceneTransition;  // Referencia al script de transición
 
     /// <summary>
     /// Speed at which the GameObject moves upwards.
@@ -57,6 +52,7 @@ public class MoveUpwards : MonoBehaviour
     /// </summary>
     void LoadMainMenu()
     {
-        sceneTransition.FadeToScene("MainMenu");
+        SceneManager.LoadScene("MainMenu");
+
     }
 }
