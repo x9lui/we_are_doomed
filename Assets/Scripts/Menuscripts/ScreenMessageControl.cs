@@ -34,7 +34,7 @@ public class ScreenMessageControl : MonoBehaviour
 
             case "MultiPlayer":
                 _baseDescription = "\n.- ¡Reune a tus amigos!\n\n" +
-                                   "Masacra demonios o compite contra ellos en un sangriento festín multijugador.\n\n.-";
+                                   "Masacra demonios o compite contra ellos en un sangriento festin multijugador.\n\n.-";
                 break;
 
             case "Options":
@@ -44,7 +44,7 @@ public class ScreenMessageControl : MonoBehaviour
 
             case "Credits":
                 _baseDescription = "\n.- Honra a los arquitectos del caos.\n\n" +
-                                   "Descubre a las mentes retorcidas detrás de este festín infernal.\n\n.-";
+                                   "Descubre a las mentes retorcidas detras de este festin infernal.\n\n.-";
                 break;
 
             case "Exit":
