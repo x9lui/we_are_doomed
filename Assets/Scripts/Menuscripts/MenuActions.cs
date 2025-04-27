@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Defines actions that can be triggered from menu buttons.
@@ -12,7 +13,11 @@ public class MenuActions : MonoBehaviour
     [SerializeField] private GameObject _OptionsMenu;
 
     [SerializeField] private GameObject _ExitMenu;
-    [SerializeField] private Image _transitionPanel;
+    [SerializeField] private Image _TransitionPanel;
+
+    [SerializeField] private float _MenuSlideDuration = 0.2f; // Duración rápida
+    [SerializeField] private Vector3 _MenuHiddenPosition = new Vector3(0, -500, 0); // Posición inicial fuera de pantalla
+    [SerializeField] private Vector3 _MenuVisiblePosition = Vector3.zero; // Centro del canvas
 
     /// <summary>
     /// Starts the game by loading the SinglePlayerScene.
@@ -46,10 +51,11 @@ public class MenuActions : MonoBehaviour
     public void QuitGame()
     {
         _ExitMenu.SetActive(true);
-        _MainMenu.SetActive(false);
-        SetPanelOpacityInstant(0.7f); // Set to 50% instantly
+        _ExitMenu.transform.localPosition = _MenuHiddenPosition;
+        StartCoroutine(SlideMenuUp(_ExitMenu));
+
+        SetPanelOpacityInstant(0.9f);
         Debug.Log("Game Exited.");
-        Application.Quit();
     }
 
     /// <summary>
@@ -71,18 +77,24 @@ public class MenuActions : MonoBehaviour
         Debug.Log("Back.");
     }
 
+    public void QuitConfirm()
+    {
+        Application.Quit();
+        Debug.Log("QuitConfirm.");
+    }
+
     /// <summary>
     /// Sets the panel opacity instantly to a target value.
     /// </summary>
     /// <param name="targetAlpha">Target opacity value between 0 and 1.</param>
     private void SetPanelOpacityInstant(float targetAlpha)
     {
-        if (_transitionPanel != null)
+        if (_TransitionPanel != null)
         {
-            _transitionPanel.gameObject.SetActive(true);
-            Color color = _transitionPanel.color;
+            _TransitionPanel.gameObject.SetActive(true);
+            Color color = _TransitionPanel.color;
             color.a = targetAlpha;
-            _transitionPanel.color = color;
+            _TransitionPanel.color = color;
         }
     }
 
@@ -101,25 +113,42 @@ public class MenuActions : MonoBehaviour
     /// <param name="targetAlpha">Target opacity value between 0 and 1.</param>
     private IEnumerator FadeToOpacity(float targetAlpha)
     {
-        if (_transitionPanel != null)
+        if (_TransitionPanel != null)
         {
-            _transitionPanel.gameObject.SetActive(true);
+            _TransitionPanel.gameObject.SetActive(true);
 
             float fadeDuration = 1.0f;
             float elapsed = 0f;
-            Color color = _transitionPanel.color;
+            Color color = _TransitionPanel.color;
             float initialAlpha = color.a;
 
             while (elapsed < fadeDuration)
             {
                 elapsed += Time.deltaTime;
                 color.a = Mathf.Lerp(initialAlpha, targetAlpha, elapsed / fadeDuration);
-                _transitionPanel.color = color;
+                _TransitionPanel.color = color;
                 yield return null;
             }
 
             color.a = targetAlpha;
-            _transitionPanel.color = color;
+            _TransitionPanel.color = color;
         }
     }
+
+    private IEnumerator SlideMenuUp(GameObject menu)
+    {
+        float elapsed = 0f;
+        Vector3 start = _MenuHiddenPosition;
+        Vector3 end = _MenuVisiblePosition;
+
+        while (elapsed < _MenuSlideDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            menu.transform.localPosition = Vector3.Lerp(start, end, elapsed / _MenuSlideDuration);
+            yield return null;
+        }
+
+        menu.transform.localPosition = end;
+    }
+
 }

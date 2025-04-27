@@ -15,6 +15,8 @@ public class ScreenMessageControl : MonoBehaviour
     private string _baseDescription = "";
     private Coroutine _blinkCoroutine;
 
+    
+
     /// <summary>
     /// Called when a new button is selected.
     /// </summary>
