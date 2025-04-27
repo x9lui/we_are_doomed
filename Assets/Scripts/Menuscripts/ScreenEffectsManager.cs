@@ -1,16 +1,21 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 /// <summary>
-/// Manages visual effects on a UI screen to simulate an old CRT monitor.
+/// Manages visual effects on multiple UI screens to simulate an old CRT monitor.
 /// </summary>
 public class ScreenEffectManager : MonoBehaviour
 {
-    [SerializeField]
-    private RectTransform _screenPanel;
+    [System.Serializable]
+    public class TextPanelPair
+    {
+        public RectTransform _screenPanel;
+        public TextMeshProUGUI _screenText;
+    }
 
     [SerializeField]
-    private TextMeshProUGUI _screenText;
+    private List<TextPanelPair> _screenPairs;
 
     [SerializeField]
     private float _shakeMagnitude = 2f;
@@ -24,19 +29,28 @@ public class ScreenEffectManager : MonoBehaviour
     [SerializeField]
     private float _flickerSpeed = 5f;
 
-    private Vector3 _initialPosition;
-    private Color _initialColor;
+    private List<Vector3> _initialPositions = new List<Vector3>();
+    private List<Color> _initialColors = new List<Color>();
+    private Vector3 _maxShakeOffset;
 
     private void Start()
     {
-        if (this._screenPanel != null)
+        if (_screenPairs != null && _screenPairs.Count > 0)
         {
-            this._initialPosition = this._screenPanel.localPosition;
-        }
+            foreach (var pair in _screenPairs)
+            {
+                if (pair._screenPanel != null)
+                {
+                    _initialPositions.Add(pair._screenPanel.localPosition);
+                }
 
-        if (this._screenText != null)
-        {
-            this._initialColor = this._screenText.color;
+                if (pair._screenText != null)
+                {
+                    _initialColors.Add(pair._screenText.color);
+                }
+            }
+
+            _maxShakeOffset = new Vector3(_shakeMagnitude, _shakeMagnitude, 0f);
         }
     }
 
@@ -50,46 +64,50 @@ public class ScreenEffectManager : MonoBehaviour
     /// </summary>
     private void ApplyScreenEffects()
     {
-        this.ApplyShake();
-        this.ApplyFlicker();
+        for (int i = 0; i < _screenPairs.Count; i++)
+        {
+            if (_screenPairs[i]._screenPanel != null)
+            {
+                ApplyShake(i);
+            }
+            if (_screenPairs[i]._screenText != null)
+            {
+                ApplyFlicker(i);
+            }
+        }
     }
 
     /// <summary>
-    /// Applies a small shake to the screen panel.
+    /// Applies a small shake to the screen panel while keeping it within the allowed bounds.
     /// </summary>
-    private void ApplyShake()
+    private void ApplyShake(int index)
     {
-        if (this._screenPanel == null)
-        {
-            return;
-        }
-
         Vector3 randomOffset = new Vector3(
-            Mathf.PerlinNoise(Time.time * this._shakeSpeed, 0f) - 0.5f,
-            Mathf.PerlinNoise(0f, Time.time * this._shakeSpeed) - 0.5f,
+            Mathf.PerlinNoise(Time.time * _shakeSpeed, 0f) - 0.5f,
+            Mathf.PerlinNoise(0f, Time.time * _shakeSpeed) - 0.5f,
             0f
-        ) * this._shakeMagnitude;
+        ) * _shakeMagnitude;
 
-        this._screenPanel.localPosition = this._initialPosition + randomOffset;
+        Vector3 newPosition = _initialPositions[index] + randomOffset;
+
+        // Restringir el desplazamiento a los límites establecidos
+        newPosition.x = Mathf.Clamp(newPosition.x, _initialPositions[index].x - _maxShakeOffset.x, _initialPositions[index].x + _maxShakeOffset.x);
+        newPosition.y = Mathf.Clamp(newPosition.y, _initialPositions[index].y - _maxShakeOffset.y, _initialPositions[index].y + _maxShakeOffset.y);
+
+        _screenPairs[index]._screenPanel.localPosition = newPosition;
     }
 
     /// <summary>
     /// Applies a flicker effect to the screen text.
     /// </summary>
-    private void ApplyFlicker()
+    private void ApplyFlicker(int index)
     {
-        if (this._screenText == null)
-        {
-            return;
-        }
-
-        float flicker = Mathf.PerlinNoise(Time.time * this._flickerSpeed, 0f) * this._flickerIntensity;
-        this._screenText.color = new Color(
-            this._initialColor.r,
-            this._initialColor.g,
-            this._initialColor.b,
+        float flicker = Mathf.PerlinNoise(Time.time * _flickerSpeed, 0f) * _flickerIntensity;
+        _screenPairs[index]._screenText.color = new Color(
+            _initialColors[index].r,
+            _initialColors[index].g,
+            _initialColors[index].b,
             1f - flicker
         );
     }
 }
-

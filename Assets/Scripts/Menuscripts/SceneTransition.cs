@@ -1,117 +1,114 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
+/// <summary>
+/// Handles the fade-out of a black panel at the start of the scene
+/// and then smoothly fades in a group of UI elements.
+/// </summary>
 public class SceneTransition : MonoBehaviour
 {
     /// <summary>
-    /// Reference to the Image component used for the fade effect.
+    /// The black panel that will fade out.
     /// </summary>
-    [SerializeField] private Image _fadeImage;
+    [Header("Fade Panel Settings")]
+    public Image fadePanel;
 
     /// <summary>
-    /// Duration of the fade transition.
+    /// Duration of the fade-out effect in seconds.
     /// </summary>
-    [SerializeField] private float _fadeDuration = 1f;
+    public float fadeDuration = 2f;
 
     /// <summary>
-    /// Initializes the fade transition by setting the fade image based on its current alpha value.
+    /// The group of UI elements to appear after the fade.
     /// </summary>
-    void Start()
+    [Header("UI Content Settings")]
+    public GameObject contentGroup;
+
+    /// <summary>
+    /// Delay before starting the UI content fade-in after panel fade-out.
+    /// </summary>
+    public float appearDelay = 0.5f;
+
+    /// <summary>
+    /// Duration of the UI content fade-in effect in seconds.
+    /// </summary>
+    public float contentFadeDuration = 1.5f;
+
+    private CanvasGroup contentCanvasGroup;
+
+    /// <summary>
+    /// Called on the frame when the script is enabled, before any Update methods.
+    /// </summary>
+    private void Start()
     {
-        // If the _fadeImage is transparent, ensure it is fully transparent
-        if (_fadeImage.color.a == 0)
+        // Ensure contentGroup has a CanvasGroup
+        contentCanvasGroup = contentGroup.GetComponent<CanvasGroup>();
+        if (contentCanvasGroup == null)
         {
-            _fadeImage.color = new Color(0, 0, 0, 0); // Transparent
+            contentCanvasGroup = contentGroup.AddComponent<CanvasGroup>();
         }
-        else
-        {
-            _fadeImage.color = new Color(0, 0, 0, 1); // Black
-        }
+
+        // Initially hide the UI content
+        contentGroup.SetActive(false);
+        contentCanvasGroup.alpha = 0f;
+
+        // Start the fade-out sequence
+        StartCoroutine(FadeOutPanel());
     }
 
     /// <summary>
-    /// Starts the fade transition to the specified scene.
+    /// Coroutine that handles fading out the panel and then fading in the content group.
     /// </summary>
-    /// <param name="sceneName">The name of the scene to load after the fade transition.</param>
-    public void FadeToScene(string sceneName)
+    private IEnumerator FadeOutPanel()
     {
-        if (_fadeImage.color.a == 0)
-        {
-            StartCoroutine(FadeOutToBlack(sceneName));
-        }
-        else
-        {
-            StartCoroutine(FadeBlackToWhite(sceneName));
-        }
-    }
+        float elapsed = 0f;
+        Color panelColor = fadePanel.color;
 
-    /// <summary>
-    /// Coroutine that handles fading from transparent to black and then loading the target scene.
-    /// </summary>
-    /// <param name="sceneName">The name of the scene to load after fade out.</param>
-    private IEnumerator FadeOutToBlack(string sceneName)
-    {
-        float timeElapsed = 0f;
-
-        // Fade to black
-        while (timeElapsed < _fadeDuration)
+        // Gradually reduce panel alpha from 1 to 0
+        while (elapsed < fadeDuration)
         {
-            timeElapsed += Time.deltaTime;
-            float alpha = Mathf.Clamp01(timeElapsed / _fadeDuration);
-            _fadeImage.color = new Color(0, 0, 0, alpha);
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            panelColor.a = alpha;
+            fadePanel.color = panelColor;
             yield return null;
         }
 
-        // Load the new scene
-        SceneManager.LoadScene(sceneName);
+        // Ensure the panel is fully transparent
+        panelColor.a = 0f;
+        fadePanel.color = panelColor;
 
-        // Optionally fade from black to transparent after loading
-        StartCoroutine(FadeInFromBlack());
+        // Deactivate the panel
+        fadePanel.gameObject.SetActive(false);
+
+        // Wait before showing the UI content
+        yield return new WaitForSeconds(appearDelay);
+
+        // Activate the UI content
+        contentGroup.SetActive(true);
+
+        // Start fading in the content
+        StartCoroutine(FadeInContent());
     }
 
     /// <summary>
-    /// Coroutine that handles fading from black to transparent after loading a scene.
+    /// Coroutine that handles the fade-in of the content group.
     /// </summary>
-    private IEnumerator FadeInFromBlack()
+    private IEnumerator FadeInContent()
     {
-        float timeElapsed = 0f;
+        float elapsed = 0f;
 
-        while (timeElapsed < _fadeDuration)
+        // Gradually increase content alpha from 0 to 1
+        while (elapsed < contentFadeDuration)
         {
-            timeElapsed += Time.deltaTime;
-            float alpha = Mathf.Clamp01(1 - (timeElapsed / _fadeDuration));
-            _fadeImage.color = new Color(0, 0, 0, alpha);
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, elapsed / contentFadeDuration);
+            contentCanvasGroup.alpha = alpha;
             yield return null;
         }
 
-        _fadeImage.color = new Color(0, 0, 0, 0);
-    }
-
-    /// <summary>
-    /// Coroutine that handles fading from black to white and then loading the target scene.
-    /// </summary>
-    /// <param name="sceneName">The name of the scene to load after fade transition.</param>
-    private IEnumerator FadeBlackToWhite(string sceneName)
-    {
-        float timeElapsed = 0f;
-
-        // Start from black
-        Color startColor = new Color(0, 0, 0, 1);
-        Color endColor = new Color(1, 1, 1, 1);
-
-        while (timeElapsed < _fadeDuration)
-        {
-            timeElapsed += Time.deltaTime;
-            _fadeImage.color = Color.Lerp(startColor, endColor, Mathf.Clamp01(timeElapsed / _fadeDuration));
-            yield return null;
-        }
-
-        // Ensure it is completely white at the end
-        _fadeImage.color = endColor;
-
-        // Load the new scene
-        SceneManager.LoadScene(sceneName);
+        // Ensure content is fully opaque
+        contentCanvasGroup.alpha = 1f;
     }
 }
