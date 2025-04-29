@@ -13,12 +13,16 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Separación de Celdas")]
     public int maxSeparationIterations = 1000;
 
+    [Header("Selección de Habitaciones")]
+    public Vector2 roomSizeThreshold = new Vector2(5, 5);
+
     private List<Cell> cells = new List<Cell>();
+    private List<Cell> rooms = new List<Cell>();
 
     private void Start()
     {
         GenerateInitialCells();
-        StartCoroutine(SeparateCells());
+        StartCoroutine(SeparateAndSelectRooms());
     }
 
     private void GenerateInitialCells()
@@ -29,15 +33,13 @@ public class DungeonGenerator : MonoBehaviour
         {
             int width, height;
 
-            // Repetir hasta que la celda no sea demasiado alargada
             do
             {
                 width = Mathf.RoundToInt(Mathf.Lerp(roomSizeMin.x, roomSizeMax.x, Mathf.Pow(Random.value, 2)));
                 height = Mathf.RoundToInt(Mathf.Lerp(roomSizeMin.y, roomSizeMax.y, Mathf.Pow(Random.value, 2)));
             }
-            while (Mathf.Abs(width - height) > 3); // Si la diferencia es mayor que 3, repetir
+            while (Mathf.Abs(width - height) > 3);
 
-            // Generar posición aleatoria en circunferencia
             float angle = Random.Range(0f, Mathf.PI * 2f);
             float distance = Random.Range(0f, spawnRadius);
 
@@ -49,6 +51,15 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         Debug.Log($"{cells.Count} celdas generadas.");
+    }
+
+    private IEnumerator SeparateAndSelectRooms()
+    {
+        yield return StartCoroutine(SeparateCells());
+
+        rooms = SelectRooms();
+
+        Debug.Log($"Se han seleccionado {rooms.Count} habitaciones.");
     }
 
     private IEnumerator SeparateCells()
@@ -87,7 +98,7 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
 
-            yield return null; // esperar un frame para evitar freeze
+            yield return null;
         }
 
         Debug.Log($"Separación terminada en {iterations} iteraciones.");
@@ -123,6 +134,26 @@ public class DungeonGenerator : MonoBehaviour
         return false;
     }
 
+    private List<Cell> SelectRooms()
+    {
+        List<Cell> selectedRooms = new List<Cell>();
+
+        foreach (var cell in cells)
+        {
+            if (cell.size.x >= roomSizeThreshold.x || cell.size.y >= roomSizeThreshold.y)
+            {
+                cell.isRoom = true;
+                selectedRooms.Add(cell);
+            }
+            else
+            {
+                cell.isRoom = false;
+            }
+        }
+
+        return selectedRooms;
+    }
+
     private void OnDrawGizmos()
     {
         if (cells == null) return;
@@ -130,8 +161,20 @@ public class DungeonGenerator : MonoBehaviour
         foreach (var cell in cells)
         {
             Vector3 center = new Vector3(cell.position.x + cell.size.x / 2f, 0, cell.position.y + cell.size.y / 2f);
-            Gizmos.color = Color.gray;
-            Gizmos.DrawWireCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
+
+            if (cell.isRoom)
+            {
+                Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
+                Gizmos.DrawCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
+
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
+            }
+            else
+            {
+                Gizmos.color = Color.gray;
+                Gizmos.DrawWireCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
+            }
         }
     }
 
@@ -139,6 +182,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         public Vector2 position;
         public Vector2 size;
+        public bool isRoom = false;
 
         public Cell(Vector2 position, Vector2 size)
         {
