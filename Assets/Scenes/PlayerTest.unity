@@ -615,7 +615,7 @@ MonoBehaviour:
   - type: 3
     gun: {fileID: 8516890639696813159, guid: a6bfd2b910a6b214594e968eda866d29, type: 3}
   - type: 4
-    gun: {fileID: 0}
+    gun: {fileID: 6929808018601093668, guid: 8401a64c1bf5ccb44a20e23c37ca8e7e, type: 3}
   - type: 0
     gun: {fileID: 0}
 --- !u!1 &1321525227
