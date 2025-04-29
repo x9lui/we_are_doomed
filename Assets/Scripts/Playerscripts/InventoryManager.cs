@@ -4,8 +4,10 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     // Define the number of slots and their types
-    public enum WeaponType { None, Pistol, Rifle, Shotgun, RocketLauncher }
+    public enum WeaponType { None, Pistol, Rifle, Shotgun, Fist }
 
+    public SpriteRenderer gunHolder;
+    private Sprite GunSprite;
     // Class to represent a slot in the inventory
     [System.Serializable]
     public class InventorySlot
@@ -97,9 +99,22 @@ public class InventoryManager : MonoBehaviour
             {
                 GameObject gunInstance = Instantiate(selectedSlot.gun.gameObject, transform);
                 gunInstance.name = selectedSlot.gun.gunName; // Opcional: Renombra la instancia para mayor claridad
-                gunInstance.transform.localPosition = new Vector3(0, 0, 1); // Posición frente al jugador
-                gunInstance.transform.localRotation = Quaternion.identity; // Rotación por defecto
-                gunInstance.SetActive(true); // Activa el arma seleccionada
+
+                // Busca el SpriteRenderer en los hijos de la instancia
+                SpriteRenderer spriteRenderer = gunInstance.GetComponentInChildren<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    GunSprite = spriteRenderer.sprite; // Obtiene el sprite del SpriteRenderer
+                    gunHolder.sprite = GunSprite; // Cambia el sprite del gunHolder
+                    gunHolder.transform.localPosition = selectedSlot.gun.possitionOffset; // Ajusta la posición del gunHolder
+                    gunHolder.transform.localScale = selectedSlot.gun.scaleoffset; // Ajusta la escala del gunHolder
+                }
+                else
+                {
+                    Debug.LogWarning("No SpriteRenderer found in the gun instance or its children!");
+                }
+
+                gunInstance.SetActive(false); // Activa el arma seleccionada
             }
 
             // Mensaje de depuración
