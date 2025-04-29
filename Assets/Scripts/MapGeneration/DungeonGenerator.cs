@@ -59,6 +59,8 @@ public class DungeonGenerator : MonoBehaviour
 
         rooms = SelectRooms();
 
+        FillEmptySpacesWithSmallCells();
+
         Debug.Log($"Se han seleccionado {rooms.Count} habitaciones.");
     }
 
@@ -154,6 +156,59 @@ public class DungeonGenerator : MonoBehaviour
         return selectedRooms;
     }
 
+    private void FillEmptySpacesWithSmallCells()
+    {
+        Vector2 min = new Vector2(float.MaxValue, float.MaxValue);
+        Vector2 max = new Vector2(float.MinValue, float.MinValue);
+
+        foreach (var cell in cells)
+        {
+            Vector2 cellMin = cell.position;
+            Vector2 cellMax = cell.position + cell.size;
+
+            min = Vector2.Min(min, cellMin);
+            max = Vector2.Max(max, cellMax);
+        }
+
+        int width = Mathf.CeilToInt(max.x - min.x);
+        int height = Mathf.CeilToInt(max.y - min.y);
+
+        bool[,] grid = new bool[width, height];
+
+        foreach (var cell in cells)
+        {
+            for (int x = 0; x < Mathf.RoundToInt(cell.size.x); x++)
+            {
+                for (int y = 0; y < Mathf.RoundToInt(cell.size.y); y++)
+                {
+                    int gridX = Mathf.RoundToInt(cell.position.x - min.x) + x;
+                    int gridY = Mathf.RoundToInt(cell.position.y - min.y) + y;
+
+                    if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height)
+                    {
+                        grid[gridX, gridY] = true;
+                    }
+                }
+            }
+        }
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (!grid[x, y])
+                {
+                    Vector2 pos = new Vector2(min.x + x, min.y + y);
+                    Cell newCell = new Cell(pos, Vector2.one);
+                    newCell.isRoom = false;
+                    cells.Add(newCell);
+                }
+            }
+        }
+
+        Debug.Log("Huecos rellenados con celdas 1x1.");
+    }
+
     private void OnDrawGizmos()
     {
         if (cells == null) return;
@@ -166,7 +221,6 @@ public class DungeonGenerator : MonoBehaviour
             {
                 Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
                 Gizmos.DrawCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
-
                 Gizmos.color = Color.green;
                 Gizmos.DrawWireCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
             }
