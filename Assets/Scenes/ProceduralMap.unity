@@ -244,6 +244,8 @@ MonoBehaviour:
   spawnRadius: 30
   roomSizeMin: {x: 4, y: 4}
   roomSizeMax: {x: 30, y: 30}
+  maxSeparationIterations: 1000
+  roomSizeThreshold: {x: 20, y: 20}
 --- !u!4 &1514884218
 Transform:
   m_ObjectHideFlags: 0
