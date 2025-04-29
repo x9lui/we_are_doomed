@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &134895396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 134895397}
+  m_Layer: 0
+  m_Name: DungeonRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &134895397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134895396}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &823524103
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,6 +277,19 @@ MonoBehaviour:
   roomSizeMax: {x: 30, y: 30}
   maxSeparationIterations: 1000
   roomSizeThreshold: {x: 20, y: 20}
+  tilePrefab: {fileID: 203207713530102449, guid: f4744c459f8019541a51200e1eb4eb66, type: 3}
+  wallPrefab: {fileID: 4011140061345648185, guid: eee1e4e9915bae64cade3bd8dd943b28, type: 3}
+  floorMaterials:
+  - {fileID: 2100000, guid: a01d567cad641a24c8b43b1752114aad, type: 2}
+  - {fileID: 2100000, guid: 77000c220704869479bf4dfcfd95a4fb, type: 2}
+  - {fileID: 2100000, guid: b2e412f155b568041bb8b96c7b29e4fb, type: 2}
+  - {fileID: 2100000, guid: 69f4302e0b66b6d46b842b917fe32798, type: 2}
+  wallMaterials:
+  - {fileID: 2100000, guid: 53aa4bf70d1ad114b882d6ecd963b20a, type: 2}
+  - {fileID: 2100000, guid: 2854b14f56e8e5a45b2f2d6a458515cc, type: 2}
+  - {fileID: 2100000, guid: 3a7afccf270bf4343ab8bd75742171af, type: 2}
+  - {fileID: 2100000, guid: 69f4302e0b66b6d46b842b917fe32798, type: 2}
+  dungeonParent: {fileID: 134895397}
 --- !u!4 &1514884218
 Transform:
   m_ObjectHideFlags: 0
@@ -389,3 +433,4 @@ SceneRoots:
   - {fileID: 823524106}
   - {fileID: 1959357476}
   - {fileID: 1514884218}
+  - {fileID: 134895397}
