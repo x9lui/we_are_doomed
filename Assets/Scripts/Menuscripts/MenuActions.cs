@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
-using Unity.VisualScripting;
 
 /// <summary>
 /// Defines actions that can be triggered from menu buttons.
@@ -24,7 +23,12 @@ public class MenuActions : MonoBehaviour
     /// </summary>
     public void SinglePlayerMode()
     {
-        // Load the SinglePlayerScene  
+        Debug.Log("Single Player Mode Started.");  
+        
+        // Temporaly load the SinglePlayerScene
+        SceneManager.LoadScene("LoadScene");
+
+        
     }
 
     /// <summary>
