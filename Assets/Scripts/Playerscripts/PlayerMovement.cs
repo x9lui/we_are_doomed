@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-                // Find the InventoryManager script in the Inventory GameObject
+        // Find the InventoryManager script in the Inventory GameObject
         GameObject inventoryObject = GameObject.Find("Inventory");
         if (inventoryObject != null)
         {
