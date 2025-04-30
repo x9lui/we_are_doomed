@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
     // Define the number of slots and their types
     public enum WeaponType { None, Pistol, Rifle, Shotgun, Fist }
 
-    public SpriteRenderer gunHolder;
-    private Sprite GunSprite;
+    private Image gunHolder;
+
+    public Image PlayerGunHolder;
     // Class to represent a slot in the inventory
     [System.Serializable]
     public class InventorySlot
@@ -100,21 +102,51 @@ public class InventoryManager : MonoBehaviour
                 GameObject gunInstance = Instantiate(selectedSlot.gun.gameObject, transform);
                 gunInstance.name = selectedSlot.gun.gunName; // Opcional: Renombra la instancia para mayor claridad
 
-                // Busca el SpriteRenderer en los hijos de la instancia
-                SpriteRenderer spriteRenderer = gunInstance.GetComponentInChildren<SpriteRenderer>();
-                if (spriteRenderer != null)
+                // Busca el componente Image en el gunHolder de la instancia
+                gunHolder = gunInstance.GetComponentInChildren<Image>();
+                if (gunHolder != null)
                 {
-                    GunSprite = spriteRenderer.sprite; // Obtiene el sprite del SpriteRenderer
-                    gunHolder.sprite = GunSprite; // Cambia el sprite del gunHolder
-                    gunHolder.transform.localPosition = selectedSlot.gun.possitionOffset; // Ajusta la posición del gunHolder
-                    gunHolder.transform.localScale = selectedSlot.gun.scaleoffset; // Ajusta la escala del gunHolder
+                    // Obtén el padre del PlayerGunHolder
+                    Transform parent = PlayerGunHolder.transform.parent;
+
+                    // Destruye el PlayerGunHolder actual
+                    Destroy(PlayerGunHolder.gameObject);
+
+                    // Crea un nuevo PlayerGunHolder basado en el gunHolder
+                    GameObject newPlayerGunHolder = Instantiate(gunHolder.gameObject, parent);
+                    newPlayerGunHolder.name = "GunHolder"; // Opcional: Renombra el nuevo objeto
+                    PlayerGunHolder = newPlayerGunHolder.GetComponent<Image>(); // Actualiza la referencia
+
+                    // Ajusta la posición y escala del nuevo PlayerGunHolder
+                    // PlayerGunHolder.transform.localPosition = selectedSlot.gun.possitionOffset;
+                    PlayerGunHolder.transform.localScale = Vector3.one; // Ajusta la escala según sea necesario
                 }
                 else
                 {
-                    Debug.LogWarning("No SpriteRenderer found in the gun instance or its children!");
+                    Debug.LogWarning("No Image component found in the gun instance or its children!");
                 }
 
-                gunInstance.SetActive(false); // Activa el arma seleccionada
+                // Busca el componente Animator en el gunHolder de la instancia
+                Animator gunHolderAnimator = gunInstance.GetComponentInChildren<Animator>();
+                if (gunHolderAnimator != null)
+                {
+                    // Configura el Animator del nuevo PlayerGunHolder (si tiene uno)
+                    Animator playerAnimator = PlayerGunHolder.GetComponent<Animator>();
+                    if (playerAnimator != null)
+                    {
+                        playerAnimator.runtimeAnimatorController = gunHolderAnimator.runtimeAnimatorController; // Asigna el controlador de animación
+                    }
+                    else
+                    {
+                        Debug.LogWarning("New PlayerGunHolder does not have an Animator component!");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("No Animator component found in the gun instance or its children!");
+                }
+
+                gunInstance.SetActive(false); // Desactiva el arma seleccionada
             }
 
             // Mensaje de depuración

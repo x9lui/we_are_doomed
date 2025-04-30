@@ -15,8 +15,8 @@ public class Shotgun : Gun
         gunName = "Shotgun";
         ammoCapacity = 15;
         fireRate = 0.2f;
-        possitionOffset = new Vector3(0.04f, -0.82f, 0);
-        scaleoffset = new Vector3(2, 2, 2);
+        // possitionOffset = new Vector3(0.04f, -0.82f, 0);
+        // scaleoffset = new Vector3(2, 2, 2);
         Debug.Log("Shotgun initialized with default values.");    
     }
 }

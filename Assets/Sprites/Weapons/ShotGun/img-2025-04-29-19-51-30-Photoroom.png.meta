@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a2cdae9602af0d147ab20525214d9d1e
+guid: bf8dcb798ac65344bb239f5088918ce8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -138,8 +138,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf268d40f0f239d4aa1439640f43a2a9
-      internalID: -1241319143
+      spriteID: c5c39003bdf75f642923fac51dca5ca3
+      internalID: -840156908
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a8887673450d124c9f8b81ed9cbf1c1
-      internalID: -567843681
+      spriteID: 29147579188e8ea42be22b0cf915c9a9
+      internalID: -1109116378
       vertices: []
       indices: 
       edges: []
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b58d73be5496fba4d9c0faf2992f22c3
-      internalID: 60118234
+      spriteID: b4dea56f63ef16c4799a1a0929cb98bf
+      internalID: -433676264
       vertices: []
       indices: 
       edges: []
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 563ad80b7293c51458d73d26ec24e6b7
-      internalID: 2027594369
+      spriteID: e3d9df440ab88e744a3783ae84662534
+      internalID: 2081931306
       vertices: []
       indices: 
       edges: []
@@ -226,8 +226,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0dce9cf2e1987d145b81097fbecf2148
-      internalID: 532480716
+      spriteID: 1e719cbc0786a3a469f0d19cb9f2c2c1
+      internalID: -908847048
       vertices: []
       indices: 
       edges: []
@@ -248,8 +248,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f6111a765ae42244866f8fd0dc968bf
-      internalID: -1522291225
+      spriteID: fb0e7fcf765fa344b9d79fa6295bc383
+      internalID: 1433072193
       vertices: []
       indices: 
       edges: []
@@ -270,8 +270,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfd0982e24ce679428c6805d43f4b392
-      internalID: 2569488
+      spriteID: dbcef8131c9f11a41adeb00b35eb5477
+      internalID: -458225834
       vertices: []
       indices: 
       edges: []
@@ -280,7 +280,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4b9cea762f27f4e4ebd85e2488507e41
+    spriteID: a4c9b0bb75f150a42aa92001f0732d3f
     internalID: 0
     vertices: []
     indices: 
@@ -290,54 +290,54 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      icon: 2569488
-      idle: -1241319143
-      img-2025-04-29-19-51-30-Photoroom_0: -701172202
-      img-2025-04-29-19-51-30-Photoroom_1: 768868133
-      img-2025-04-29-19-51-30-Photoroom_16: -333935402
-      img-2025-04-29-19-51-30-Photoroom_17: 1525112157
-      img-2025-04-29-19-51-30-Photoroom_18: 401048924
-      img-2025-04-29-19-51-30-Photoroom_19: 1778093853
-      img-2025-04-29-19-51-30-Photoroom_2: 515937538
-      img-2025-04-29-19-51-30-Photoroom_20: -132387343
-      img-2025-04-29-19-51-30-Photoroom_21: -2013311183
-      img-2025-04-29-19-51-30-Photoroom_22: 1238384993
-      img-2025-04-29-19-51-30-Photoroom_23: 984340461
-      img-2025-04-29-19-51-30-Photoroom_24: -766315411
-      img-2025-04-29-19-51-30-Photoroom_25: -949557779
-      img-2025-04-29-19-51-30-Photoroom_26: 275684593
-      img-2025-04-29-19-51-30-Photoroom_27: -2049625325
-      img-2025-04-29-19-51-30-Photoroom_28: 491544514
-      img-2025-04-29-19-51-30-Photoroom_29: 507312305
-      img-2025-04-29-19-51-30-Photoroom_3: 2057720713
-      img-2025-04-29-19-51-30-Photoroom_30: 1606921741
-      img-2025-04-29-19-51-30-Photoroom_31: -700331992
-      img-2025-04-29-19-51-30-Photoroom_32: -1262239896
-      img-2025-04-29-19-51-30-Photoroom_33: -560419321
-      img-2025-04-29-19-51-30-Photoroom_34: -234372370
-      img-2025-04-29-19-51-30-Photoroom_35: -1364731836
-      img-2025-04-29-19-51-30-Photoroom_36: -402745018
-      img-2025-04-29-19-51-30-Photoroom_37: -612988428
-      img-2025-04-29-19-51-30-Photoroom_38: 1791422269
-      img-2025-04-29-19-51-30-Photoroom_39: -1926265641
-      img-2025-04-29-19-51-30-Photoroom_4: -277461861
-      img-2025-04-29-19-51-30-Photoroom_40: 1333339953
-      img-2025-04-29-19-51-30-Photoroom_41: -901385800
-      img-2025-04-29-19-51-30-Photoroom_42: -67627423
-      img-2025-04-29-19-51-30-Photoroom_43: -1512006252
-      img-2025-04-29-19-51-30-Photoroom_44: -1959014317
-      img-2025-04-29-19-51-30-Photoroom_45: -1051977907
-      img-2025-04-29-19-51-30-Photoroom_46: 949133455
-      img-2025-04-29-19-51-30-Photoroom_47: 823528830
-      img-2025-04-29-19-51-30-Photoroom_5: 1336126182
-      img-2025-04-29-19-51-30-Photoroom_6: 2110222778
-      img-2025-04-29-19-51-30-Photoroom_7: 2123726380
-      img-2025-04-29-19-51-30-Photoroom_8: -1245056006
-      shoot_1: -567843681
-      shoot_2: 60118234
-      shoot_3: 2027594369
-      shoot_4: 532480716
-      shoot_5: -1522291225
+      icon: -458225834
+      idle: -840156908
+      img-2025-04-29-19-51-30-Photoroom_0: -1003164426
+      img-2025-04-29-19-51-30-Photoroom_1: -1253324542
+      img-2025-04-29-19-51-30-Photoroom_16: -1617315986
+      img-2025-04-29-19-51-30-Photoroom_17: 1778523749
+      img-2025-04-29-19-51-30-Photoroom_18: 695612110
+      img-2025-04-29-19-51-30-Photoroom_19: 685019291
+      img-2025-04-29-19-51-30-Photoroom_2: -2019487684
+      img-2025-04-29-19-51-30-Photoroom_20: 969376405
+      img-2025-04-29-19-51-30-Photoroom_21: 131401353
+      img-2025-04-29-19-51-30-Photoroom_22: 1634962697
+      img-2025-04-29-19-51-30-Photoroom_23: 726146882
+      img-2025-04-29-19-51-30-Photoroom_24: -1510744947
+      img-2025-04-29-19-51-30-Photoroom_25: -104658478
+      img-2025-04-29-19-51-30-Photoroom_26: -794554078
+      img-2025-04-29-19-51-30-Photoroom_27: -1207311120
+      img-2025-04-29-19-51-30-Photoroom_28: -155044681
+      img-2025-04-29-19-51-30-Photoroom_29: -1982335126
+      img-2025-04-29-19-51-30-Photoroom_3: -64928664
+      img-2025-04-29-19-51-30-Photoroom_30: 1459719814
+      img-2025-04-29-19-51-30-Photoroom_31: -1491934365
+      img-2025-04-29-19-51-30-Photoroom_32: 861373514
+      img-2025-04-29-19-51-30-Photoroom_33: 322402274
+      img-2025-04-29-19-51-30-Photoroom_34: 967701280
+      img-2025-04-29-19-51-30-Photoroom_35: 424679681
+      img-2025-04-29-19-51-30-Photoroom_36: -2114594041
+      img-2025-04-29-19-51-30-Photoroom_37: 244848547
+      img-2025-04-29-19-51-30-Photoroom_38: -1518021882
+      img-2025-04-29-19-51-30-Photoroom_39: 1682504749
+      img-2025-04-29-19-51-30-Photoroom_4: 1009162710
+      img-2025-04-29-19-51-30-Photoroom_40: 2127949301
+      img-2025-04-29-19-51-30-Photoroom_41: -938524719
+      img-2025-04-29-19-51-30-Photoroom_42: -262420033
+      img-2025-04-29-19-51-30-Photoroom_43: -1050588824
+      img-2025-04-29-19-51-30-Photoroom_44: -1785205945
+      img-2025-04-29-19-51-30-Photoroom_45: 1476854985
+      img-2025-04-29-19-51-30-Photoroom_46: -1130746811
+      img-2025-04-29-19-51-30-Photoroom_47: 1597297556
+      img-2025-04-29-19-51-30-Photoroom_5: -480068525
+      img-2025-04-29-19-51-30-Photoroom_6: 2038379045
+      img-2025-04-29-19-51-30-Photoroom_7: 9724580
+      img-2025-04-29-19-51-30-Photoroom_8: -1490959888
+      shoot_1: -1109116378
+      shoot_2: -433676264
+      shoot_3: 2081931306
+      shoot_4: -908847048
+      shoot_5: 1433072193
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

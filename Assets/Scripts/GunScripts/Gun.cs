@@ -8,8 +8,8 @@ public abstract class Gun : MonoBehaviour
     public string gunName;
     public int ammoCapacity;
     public float fireRate;
-    public Vector3 possitionOffset;
-    public Vector3 scaleoffset;
+    // public Vector3 possitionOffset;
+    // public Vector3 scaleoffset;
 
     // Abstract method for firing
     public abstract void Fire();

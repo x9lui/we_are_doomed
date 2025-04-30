@@ -97,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2651331284883992522}
   - component: {fileID: 1486214667767345902}
+  - component: {fileID: 2350259373726040272}
   m_Layer: 0
   m_Name: AutomaticPistol
   m_TagString: Untagged
@@ -136,3 +137,21 @@ MonoBehaviour:
   gunName: Automatic Pistol
   ammoCapacity: 15
   fireRate: 0.2
+  possitionOffset: {x: 0, y: 0, z: 0}
+  scaleoffset: {x: 0, y: 0, z: 0}
+--- !u!111 &2350259373726040272
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961637767180506992}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
