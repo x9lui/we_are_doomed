@@ -13,6 +13,24 @@ public class OptionActions : MonoBehaviour
     [SerializeField] private GameObject _DescripcionText;
     [SerializeField] private Image _TransitionPanel;
 
+    [SerializeField] private GameObject _OptionsMenuDisplay;
+    [SerializeField] private GameObject _MenuPrincipalDisplay;
+
+    [Header("Mover")]
+    [SerializeField] private UIElementMover _mover;
+
+    private Vector3 _optionsOriginal;
+    private Vector3 _menuOriginal;
+
+    private bool pulsado = false;
+
+    private void Start()
+    {
+        // Guardamos las posiciones originales
+        _optionsOriginal = _OptionsMenuDisplay.transform.localPosition;
+        _menuOriginal = _MenuPrincipalDisplay.transform.localPosition;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -28,7 +46,6 @@ public class OptionActions : MonoBehaviour
 
         if (!isActive)
         {
-            // Si se está mostrando el menú, reseteamos cualquier confirmación previa
             _ConfirmationExit.SetActive(false);
             _ConfirmationExitYes.SetActive(false);
             _ConfirmationExitNo.SetActive(false);
@@ -38,6 +55,11 @@ public class OptionActions : MonoBehaviour
 
     public void Reanudar()
     {
+        // Ambos bajan desde su posición actual
+        Vector3 downOffset = new Vector3(0, -600, 0);
+        _mover.Move(_OptionsMenuDisplay, _OptionsMenuDisplay.transform.localPosition, _optionsOriginal + downOffset);
+        _mover.Move(_MenuPrincipalDisplay, _MenuPrincipalDisplay.transform.localPosition, _menuOriginal + downOffset);
+        pulsado = false;
         _OptionsMenu.SetActive(false);
     }
 
@@ -46,23 +68,39 @@ public class OptionActions : MonoBehaviour
         // Aquí iría la lógica de reaparecer al jugador
     }
 
+    public void Opciones()
+    {
+        // MenuPrincipal se mueve un poco a la izquierda
+        // OptionsMenuDisplay se mueve un poco a la derecha
+        Vector3 menuLeft = _menuOriginal + new Vector3(-138, 0, 0);
+        Vector3 optionsRight = _optionsOriginal + new Vector3(214, 0, 0);
+
+        if(!pulsado)
+        {
+            pulsado = true;
+    
+            _mover.Move(_MenuPrincipalDisplay, _MenuPrincipalDisplay.transform.localPosition, menuLeft);
+            _mover.Move(_OptionsMenuDisplay, _OptionsMenuDisplay.transform.localPosition, optionsRight);
+        }
+        else
+        {
+            pulsado = false;
+            _mover.Move(_MenuPrincipalDisplay, _MenuPrincipalDisplay.transform.localPosition, _menuOriginal);
+            _mover.Move(_OptionsMenuDisplay, _OptionsMenuDisplay.transform.localPosition, _optionsOriginal);
+        }
+
+    }
+
     public void Salir()
     {
-        if(_ConfirmationExit.activeSelf)
-        {
-            _ConfirmationExit.SetActive(false);
-            _ConfirmationExitYes.SetActive(false);
-            _ConfirmationExitNo.SetActive(false);
-            _DescripcionText.SetActive(false);
-        }else{
-            _ConfirmationExit.SetActive(true);
-            _ConfirmationExitYes.SetActive(true);
-            _ConfirmationExitNo.SetActive(true);
-            _DescripcionText.SetActive(true);
+        bool active = _ConfirmationExit.activeSelf;
 
-            Debug.Log("Menú de confirmación abierto.");
-        }
-        
+        _ConfirmationExit.SetActive(!active);
+        _ConfirmationExitYes.SetActive(!active);
+        _ConfirmationExitNo.SetActive(!active);
+        _DescripcionText.SetActive(!active);
+
+        Debug.Log(active ? "Menú de confirmación cerrado." : "Menú de confirmación abierto.");
     }
 
     public void SalirSI()

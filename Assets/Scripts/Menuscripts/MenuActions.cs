@@ -9,49 +9,51 @@ using System.Collections;
 public class MenuActions : MonoBehaviour
 {
     [SerializeField] private GameObject _MainMenu;
-    [SerializeField] private GameObject _OptionsMenu;
 
     [SerializeField] private GameObject _ExitMenu;
     [SerializeField] private Image _TransitionPanel;
 
-    [SerializeField] private float _MenuSlideDuration = 0.2f; // Duración rápida
-    [SerializeField] private Vector3 _MenuHiddenPosition = new Vector3(0, -500, 0); // Posición inicial fuera de pantalla
-    [SerializeField] private Vector3 _MenuVisiblePosition = Vector3.zero; // Centro del canvas
+    [SerializeField] private GameObject _MessagePanel;
+    [SerializeField] private GameObject _SettingPanel;
 
-    /// <summary>
-    /// Starts the game by loading the SinglePlayerScene.
-    /// </summary>
+    [SerializeField] private float _MenuSlideDuration = 0.2f;
+    [SerializeField] private Vector3 _MenuHiddenPosition = new Vector3(0, -500, 0);
+    [SerializeField] private Vector3 _MenuVisiblePosition = Vector3.zero;
+
+    private Vector3 _messagePanelOriginalPos;
+    private Vector3 _settingPanelOriginalPos;
+
+    void Awake()
+    {
+        // Guardar posiciones originales
+        if (_MessagePanel != null) _messagePanelOriginalPos = _MessagePanel.transform.localPosition;
+        if (_SettingPanel != null) _settingPanelOriginalPos = _SettingPanel.transform.localPosition;
+    }
+
     public void SinglePlayerMode()
     {
         Debug.Log("Single Player Mode Started.");  
-        
-        // Temporaly load the SinglePlayerScene
-        SceneManager.LoadScene("LoadScene");
-
-        
+        StartCoroutine(FadeAndLoadCredits("LoadScene"));
     }
 
-    /// <summary>
-    /// Starts the game by loading the MultiPlayerScene.
-    /// </summary>
     public void MultiplayerMode()
     {
-        // Load the MultiPlayerScene
+        // Implementar si es necesario
     }
 
-    /// <summary>
-    /// Opens the options menu.
-    /// </summary>
     public void OpenOptions()
     {
         _MainMenu.SetActive(false);
-        _OptionsMenu.SetActive(true);
+
+        if (_MessagePanel != null)
+            StartCoroutine(SlidePanel(_MessagePanel, _messagePanelOriginalPos + new Vector3(-800, 0, 0), _messagePanelOriginalPos));
+        
+        if (_SettingPanel != null)
+            StartCoroutine(SlidePanel(_SettingPanel, _settingPanelOriginalPos + new Vector3(0, 600, 0), _settingPanelOriginalPos));
+
         Debug.Log("Options Menu Opened.");
     }
 
-    /// <summary>
-    /// Quits the application.
-    /// </summary>
     public void QuitGame()
     {
         _ExitMenu.SetActive(true);
@@ -62,23 +64,28 @@ public class MenuActions : MonoBehaviour
         Debug.Log("Game Exited.");
     }
 
-    /// <summary>
-    /// Opens the credits scene with a fade transition.
-    /// </summary>
     public void Credits()
     {
         Debug.Log("Credits.");
-        StartCoroutine(FadeAndLoadCredits());
+        StartCoroutine(FadeAndLoadCredits("Credits"));
     }
 
-    /// <summary>
-    /// Return to the main menu.
-    /// </summary>
     public void Back()
     {
-        _MainMenu.SetActive(true);
-        _OptionsMenu.SetActive(false);
+        if (_MessagePanel != null)
+            StartCoroutine(SlidePanel(_MessagePanel, _messagePanelOriginalPos, _messagePanelOriginalPos + new Vector3(-800, 0, 0)));
+        
+        if (_SettingPanel != null)
+            StartCoroutine(SlidePanel(_SettingPanel, _settingPanelOriginalPos, _settingPanelOriginalPos + new Vector3(0, 600, 0)));
+
+        StartCoroutine(SwitchToMainAfterDelay(_MenuSlideDuration));
         Debug.Log("Back.");
+    }
+
+    private IEnumerator SwitchToMainAfterDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        _MainMenu.SetActive(true);
     }
 
     public void QuitConfirm()
@@ -87,10 +94,6 @@ public class MenuActions : MonoBehaviour
         Debug.Log("QuitConfirm.");
     }
 
-    /// <summary>
-    /// Sets the panel opacity instantly to a target value.
-    /// </summary>
-    /// <param name="targetAlpha">Target opacity value between 0 and 1.</param>
     private void SetPanelOpacityInstant(float targetAlpha)
     {
         if (_TransitionPanel != null)
@@ -102,19 +105,12 @@ public class MenuActions : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Coroutine to fade the transition panel to full opacity and load Credits scene.
-    /// </summary>
-    private IEnumerator FadeAndLoadCredits()
+    private IEnumerator FadeAndLoadCredits(string name)
     {
-        yield return StartCoroutine(FadeToOpacity(1f)); // Fade to full black (opacity 1.0)
-        SceneManager.LoadScene("Credits");
+        yield return StartCoroutine(FadeToOpacity(1f));
+        SceneManager.LoadScene(name);
     }
 
-    /// <summary>
-    /// Coroutine to fade the panel smoothly to a target opacity.
-    /// </summary>
-    /// <param name="targetAlpha">Target opacity value between 0 and 1.</param>
     private IEnumerator FadeToOpacity(float targetAlpha)
     {
         if (_TransitionPanel != null)
@@ -155,4 +151,20 @@ public class MenuActions : MonoBehaviour
         menu.transform.localPosition = end;
     }
 
+    private IEnumerator SlidePanel(GameObject panel, Vector3 start, Vector3 end)
+    {
+        panel.SetActive(true);
+        panel.transform.localPosition = start;
+
+        float elapsed = 0f;
+
+        while (elapsed < _MenuSlideDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            panel.transform.localPosition = Vector3.Lerp(start, end, elapsed / _MenuSlideDuration);
+            yield return null;
+        }
+
+        panel.transform.localPosition = end;
+    }
 }
