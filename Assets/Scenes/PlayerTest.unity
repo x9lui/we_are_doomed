@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 212006133}
   - component: {fileID: 212006135}
   - component: {fileID: 212006134}
+  - component: {fileID: 212006136}
   m_Layer: 0
   m_Name: SemiPistol
   m_TagString: Untagged
@@ -340,7 +341,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212006132}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -371,6 +372,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212006132}
   m_CullTransparentMesh: 1
+--- !u!114 &212006136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212006132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 638c67b64da33594d9aa15b01730929a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  range: 100
+  fireRate: 0.5
+  ammo: 30
+  maxAmmo: 30
+  gunSound: {fileID: 0}
 --- !u!1 &351862516
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +401,7 @@ GameObject:
   - component: {fileID: 351862519}
   - component: {fileID: 351862518}
   - component: {fileID: 351862517}
+  - component: {fileID: 351862520}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -445,6 +465,25 @@ Transform:
   - {fileID: 515071303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &351862520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351862516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3171f1d15324a488f9e22c88b7b5c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory:
+  - weaponType: 0
+    weaponName: Fist
+  - weaponType: 1
+    weaponName: SemiPistol
+  - weaponType: 2
+    weaponName: ShotgunNormal
 --- !u!1 &515071302
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +581,7 @@ GameObject:
   - component: {fileID: 843321402}
   - component: {fileID: 843321404}
   - component: {fileID: 843321403}
+  - component: {fileID: 843321405}
   m_Layer: 0
   m_Name: ShotgunNormal
   m_TagString: Untagged
@@ -575,7 +615,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843321401}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -606,6 +646,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843321401}
   m_CullTransparentMesh: 1
+--- !u!114 &843321405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843321401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a048959996710459cb312065b406d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  range: 100
+  fireRate: 0.5
+  ammo: 30
+  maxAmmo: 30
+  gunSound: {fileID: 0}
+  pellets: 8
+  spreadAngle: 10
 --- !u!1 &864216144
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +787,8 @@ GameObject:
   - component: {fileID: 1026130855}
   - component: {fileID: 1026130857}
   - component: {fileID: 1026130856}
+  - component: {fileID: 1026130858}
+  - component: {fileID: 1026130859}
   m_Layer: 0
   m_Name: Fist
   m_TagString: Untagged
@@ -791,6 +853,47 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026130854}
   m_CullTransparentMesh: 1
+--- !u!95 &1026130858
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026130854}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1053e0691f3f1244aa7e4e5b3b4e8ec5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1026130859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026130854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0eddbd09ddabe5489f4d17e75f13353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  range: 100
+  fireRate: 0.5
+  ammo: 30
+  maxAmmo: 30
+  gunSound: {fileID: 0}
+  punchRange: 2
 --- !u!1 &1359389361
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +973,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1555283891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1555283892}
+  - component: {fileID: 1555283894}
+  - component: {fileID: 1555283893}
+  m_Layer: 0
+  m_Name: Cualquiercosa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1555283892
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555283891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1790861090}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -1.8088989, y: 188}
+  m_SizeDelta: {x: 216.9137, y: 259.9452}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1555283893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555283891}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1617315986, guid: d129009516372c746a8c61debb3ff976, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1555283894
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555283891}
+  m_CullTransparentMesh: 1
 --- !u!1 &1720858048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,6 +1204,7 @@ RectTransform:
   - {fileID: 212006133}
   - {fileID: 843321402}
   - {fileID: 1026130855}
+  - {fileID: 1555283892}
   m_Father: {fileID: 195153191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
