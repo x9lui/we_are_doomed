@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     private float myGravity = -9.81f; // Gravity value
     public Animator camAnim; // Reference to the Animator component
     private bool isWalking; // Flag to check if the player is walking
-
+    public float momentumDamping = 5f; // Damping value for momentum
     private InventoryScript inventory; // Reference to the InventoryScript
     private InventoryScript.WeaponType currentSlot = InventoryScript.WeaponType.Fist; // Current selected slot
 
@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour
     private GameObject rocketLauncherWeapon = null; // Reference to the Rocket Launcher weapon GameObject
     private GameObject meleeWeapon = null; // Reference to the Melee weapon GameObject
 
-    private Gun currentGun; // Referencia al arma actualmente activa
+    public Gun currentGun { get; private set; }
 
     void Start()
     {
@@ -39,6 +39,8 @@ public class PlayerMove : MonoBehaviour
         meleeWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Melee));
 
         UpdateWeaponVisibility(); // Ensure the correct weapon is active at the start
+
+
     }
 
     private GameObject FindWeaponInHUD(string weaponName)
@@ -65,7 +67,6 @@ public class PlayerMove : MonoBehaviour
     {
         GetInput(); // Call the method to get player input
         MovePlayer(); // Call the method to move the player 
-        CheckForHeadBob(); // Call the method to check for head bobbing
         HandleInventoryInput(); // Handle inventory input
 
         // Detectar si el jugador presiona el botón de disparo
@@ -77,10 +78,21 @@ public class PlayerMove : MonoBehaviour
 
     void GetInput()
     {
-        inputvector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")); // Get input from the player
-        inputvector.Normalize(); // Normalize the input vector to ensure consistent movement speed
-        inputvector = transform.TransformDirection(inputvector); // Transform the input vector to world space
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            inputvector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")); // Get input from the player
+            inputvector.Normalize(); // Normalize the input vector to ensure consistent movement speed
+            inputvector = transform.TransformDirection(inputvector); // Transform the input vector to world space
+            isWalking = true; // Set the walking flag to true
+        }
+        else
+        {
+            inputvector = Vector3.Lerp(inputvector, Vector3.zero, momentumDamping * Time.deltaTime); // Smoothly reduce the input vector to zero
+            isWalking = false; // Set the walking flag to false
+        }
+        camAnim.SetBool("isWalking", isWalking); // Set the walking animation parameter in the Animator
         movementVector = (inputvector * speed) + (Vector3.up * myGravity); // Calculate the movement vector based on input and speed 
+
     }
 
     void MovePlayer()
@@ -96,18 +108,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void CheckForHeadBob()
-    {
-        if (MyCC.velocity.magnitude > 0) // Check if the player is moving
-        {
-            isWalking = true; // Set walking flag to true
-        }
-        else
-        {
-            isWalking = false; // Set walking flag to false
-        }
-        camAnim.SetBool("isWalking", isWalking); // Set the walking animation parameter in the Animator
-    }
+
 
     void HandleInventoryInput()
     {

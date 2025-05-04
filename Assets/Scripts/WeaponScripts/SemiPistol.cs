@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SemiPistol : Gun
 {
+
+
     public override void Fire()
     {
         if (ammo <= 0)

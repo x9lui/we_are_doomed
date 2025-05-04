@@ -4,16 +4,16 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [Header("Gun Settings")]
-    public float damage = 10f; // Daño que inflige el arma
-    public float range = 100f; // Alcance del arma
-    public float fireRate = 0.5f; // Velocidad de disparo (tiempo entre disparos)
-    public int ammo = 30; // Cantidad de munición actual
-    public int maxAmmo = 30; // Capacidad máxima de munición
+    public float damage; // Daño que inflige el arma
+    public float fireRate; // Velocidad de disparo (tiempo entre disparos)
+    public int ammo; // Cantidad de munición actual
+    public int maxAmmo; // Capacidad máxima de munición
+    public float RayCastDistance; // Distancia máxima del raycast
 
     [Header("References")]
     public AudioSource gunSound; // Sonido del disparo
 
-    private float nextTimeToFire = 0f; // Tiempo hasta el próximo disparo permitido
+    private float nextTimeToFire; // Tiempo hasta el próximo disparo permitido
 
     void Start()
     {
