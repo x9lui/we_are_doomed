@@ -21,8 +21,10 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Tiles")]
     public GameObject tilePrefab;
     public GameObject wallPrefab;
-    public List<Material> floorMaterials = new List<Material>();
-    public List<Material> wallMaterials = new List<Material>();
+
+    [Header("Materiales por Bioma")]
+    public List<BiomeMaterials> biomeMaterialSets = new List<BiomeMaterials>();
+    private Dictionary<Vector2Int, int> tileToCluster = new Dictionary<Vector2Int, int>();
     public Transform dungeonParent; // Padre para los tiles generados
     private List<Cell> cells = new List<Cell>();
     private List<Cell> rooms = new List<Cell>();
@@ -94,11 +96,11 @@ public class DungeonGenerator : MonoBehaviour
 
         Debug.Log("Pasillos creados.");
 
-        GenerateFloors();
-        Debug.Log("Suelos generados.");
-
         GenerateWalls();
         Debug.Log("Muros generados.");
+
+        GenerateFloors();
+        Debug.Log("Suelos generados.");
 
     }
 
@@ -518,11 +520,13 @@ public class DungeonGenerator : MonoBehaviour
 
     private void GenerateFloors()
     {
-        if (tilePrefab == null || floorMaterials.Count == 0)
+        if (tilePrefab == null || biomeMaterialSets.Count == 0)
         {
-            Debug.LogWarning("Falta asignar el prefab de tile o materiales de suelo.");
+            Debug.LogWarning("Faltan prefabs o materiales de biomas.");
             return;
         }
+
+        tileToCluster = AssignBiomesByKMeans();
 
         foreach (var cell in cells)
         {
@@ -532,27 +536,28 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     for (int y = 0; y < (int)cell.size.y; y++)
                     {
-                        Vector3 tilePos = new Vector3(cell.position.x + x + 0.5f, 0, cell.position.y + y + 0.5f);
+                        Vector2Int pos = new Vector2Int((int)cell.position.x + x, (int)cell.position.y + y);
+                        Vector3 tilePos = new Vector3(pos.x + 0.5f, 0, pos.y + 0.5f);
 
-                        // Instanciar el tile prefab
                         GameObject tile = Instantiate(tilePrefab, tilePos, Quaternion.identity, dungeonParent);
 
-                        // Elegir un material aleatorio
-                        Material randomMat = floorMaterials[Random.Range(0, floorMaterials.Count)];
+                        int cluster = tileToCluster.ContainsKey(pos) ? tileToCluster[pos] : 0;
+                        BiomeMaterials biome = biomeMaterialSets[Mathf.Clamp(cluster, 0, biomeMaterialSets.Count - 1)];
 
-                        // Asignar el material
-                        MeshRenderer renderer = tile.GetComponent<MeshRenderer>();
-                        if (renderer != null)
+                        if (biome.floorMaterials.Count > 0)
                         {
-                            renderer.material = randomMat;
+                            Material mat = biome.floorMaterials[Random.Range(0, biome.floorMaterials.Count)];
+                            MeshRenderer rend = tile.GetComponent<MeshRenderer>();
+                            if (rend != null) rend.material = mat;
                         }
                     }
                 }
             }
         }
 
-        Debug.Log("Suelos generados tile por tile con variedad de materiales.");
+        Debug.Log("Suelos generados por bioma.");
     }
+
 
     private void GenerateWalls()
     {
@@ -610,28 +615,100 @@ public class DungeonGenerator : MonoBehaviour
 
         Quaternion rotation = Quaternion.identity;
         if (direction == Vector2Int.left || direction == Vector2Int.right)
-        {
-            rotation = Quaternion.Euler(0f, 90f, 0f); // Rotar para muros horizontales
-        }
+            rotation = Quaternion.Euler(0f, 90f, 0f);
 
-        // Ahora generamos 5 cubos apilados (altura 5 unidades)
         for (int i = 0; i < 5; i++)
         {
-            Vector3 spawnPos = new Vector3(position.x + 0.5f, i + 0.5f, position.y + 0.5f); // Altura 0.5, 1.5, 2.5
-
+            Vector3 spawnPos = new Vector3(position.x + 0.5f, i + 0.5f, position.y + 0.5f);
             GameObject wallPiece = Instantiate(wallPrefab, spawnPos, rotation, dungeonParent);
 
-            if (wallMaterials.Count > 0)
-            {
-                Material randomMat = wallMaterials[Random.Range(0, wallMaterials.Count)];
-                MeshRenderer renderer = wallPiece.GetComponent<MeshRenderer>();
+            int cluster = tileToCluster.ContainsKey(position) ? tileToCluster[position] : 0;
+            BiomeMaterials biome = biomeMaterialSets[Mathf.Clamp(cluster, 0, biomeMaterialSets.Count - 1)];
 
-                if (renderer != null)
-                {
-                    renderer.material = randomMat;
-                }
+            if (biome.wallMaterials.Count > 0)
+            {
+                Material mat = biome.wallMaterials[Random.Range(0, biome.wallMaterials.Count)];
+                MeshRenderer rend = wallPiece.GetComponent<MeshRenderer>();
+                if (rend != null) rend.material = mat;
             }
         }
+    }
+
+    private Dictionary<Vector2Int, int> AssignBiomesByKMeans()
+    {
+        int k = biomeMaterialSets.Count;
+        List<Vector2Int> tileCoords = new List<Vector2Int>();
+        List<Vector2> positions = new List<Vector2>();
+
+        foreach (var kvp in tileMap)
+        {
+            if (kvp.Value == TileType.Floor)
+            {
+                tileCoords.Add(kvp.Key);
+                positions.Add(kvp.Key);
+            }
+        }
+
+        List<Vector2> centroids = new List<Vector2>();
+        HashSet<int> used = new HashSet<int>();
+        while (centroids.Count < k)
+        {
+            int idx = Random.Range(0, positions.Count);
+            if (used.Add(idx)) centroids.Add(positions[idx]);
+        }
+
+        Dictionary<Vector2Int, int> tileToCluster = new Dictionary<Vector2Int, int>();
+
+        bool changed = true;
+        int iterations = 0;
+        while (changed && iterations < 20)
+        {
+            changed = false;
+            iterations++;
+
+            for (int i = 0; i < positions.Count; i++)
+            {
+                Vector2Int tile = tileCoords[i];
+                Vector2 pos = positions[i];
+
+                float minDist = float.MaxValue;
+                int bestCluster = -1;
+
+                for (int j = 0; j < centroids.Count; j++)
+                {
+                    float dist = (pos - centroids[j]).sqrMagnitude;
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        bestCluster = j;
+                    }
+                }
+
+                if (!tileToCluster.ContainsKey(tile) || tileToCluster[tile] != bestCluster)
+                {
+                    tileToCluster[tile] = bestCluster;
+                    changed = true;
+                }
+            }
+
+            Vector2[] newCentroids = new Vector2[k];
+            int[] counts = new int[k];
+
+            foreach (var kvp in tileToCluster)
+            {
+                newCentroids[kvp.Value] += kvp.Key;
+                counts[kvp.Value]++;
+            }
+
+            for (int i = 0; i < k; i++)
+            {
+                if (counts[i] > 0)
+                    centroids[i] = newCentroids[i] / counts[i];
+            }
+        }
+
+        Debug.Log($"[Biomas] K-Means hecho en {iterations} iteraciones.");
+        return tileToCluster;
     }
 
     public class Edge
@@ -667,5 +744,14 @@ public class DungeonGenerator : MonoBehaviour
         Floor,
         Wall
     }
+
+    [System.Serializable]
+    public class BiomeMaterials
+    {
+        public string biomeName;
+        public List<Material> floorMaterials;
+        public List<Material> wallMaterials;
+    }
+
 
 }
