@@ -21,10 +21,8 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Tiles")]
     public GameObject tilePrefab;
     public GameObject wallPrefab;
-
-    [Header("Materiales por Bioma")]
-    public List<BiomeMaterials> biomeMaterialSets = new List<BiomeMaterials>();
-    private Dictionary<Vector2Int, int> tileToCluster = new Dictionary<Vector2Int, int>();
+    public List<Material> floorMaterials = new List<Material>();
+    public List<Material> wallMaterials = new List<Material>();
     public Transform dungeonParent; // Padre para los tiles generados
     private List<Cell> cells = new List<Cell>();
     private List<Cell> rooms = new List<Cell>();
@@ -99,6 +97,7 @@ public class DungeonGenerator : MonoBehaviour
         GenerateWalls();
         Debug.Log("Muros generados.");
 
+        MergeCorridorCells();
         GenerateFloors();
         Debug.Log("Suelos generados.");
 
@@ -518,50 +517,132 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private void GenerateFloors()
+    private void MergeCorridorCells()
     {
-        if (tilePrefab == null || biomeMaterialSets.Count == 0)
+        // Paso 1: Crear mapa binario de ocupación
+        List<Cell> corridorCells = cells.FindAll(c => c.isCorridor);
+
+        if (corridorCells.Count == 0) return;
+
+        // Obtener bounding box
+        float minX = float.MaxValue, minY = float.MaxValue;
+        float maxX = float.MinValue, maxY = float.MinValue;
+
+        foreach (var c in corridorCells)
         {
-            Debug.LogWarning("Faltan prefabs o materiales de biomas.");
-            return;
+            minX = Mathf.Min(minX, c.position.x);
+            minY = Mathf.Min(minY, c.position.y);
+            maxX = Mathf.Max(maxX, c.position.x + c.size.x);
+            maxY = Mathf.Max(maxY, c.position.y + c.size.y);
         }
 
-        tileToCluster = AssignBiomesByKMeans();
+        int width = Mathf.CeilToInt(maxX - minX);
+        int height = Mathf.CeilToInt(maxY - minY);
 
-        foreach (var cell in cells)
+        bool[,] map = new bool[width, height];
+
+        // Paso 2: Marcar las celdas ocupadas
+        foreach (var c in corridorCells)
         {
-            if (cell.isRoom || cell.isCorridor)
+            int startX = Mathf.RoundToInt(c.position.x - minX);
+            int startY = Mathf.RoundToInt(c.position.y - minY);
+
+            for (int x = 0; x < (int)c.size.x; x++)
             {
-                for (int x = 0; x < (int)cell.size.x; x++)
+                for (int y = 0; y < (int)c.size.y; y++)
                 {
-                    for (int y = 0; y < (int)cell.size.y; y++)
-                    {
-                        Vector2Int pos = new Vector2Int((int)cell.position.x + x, (int)cell.position.y + y);
-                        Vector3 tilePos = new Vector3(pos.x + 0.5f, 0, pos.y + 0.5f);
-
-                        GameObject tile = Instantiate(tilePrefab, tilePos, Quaternion.identity, dungeonParent);
-
-                        int cluster = tileToCluster.ContainsKey(pos) ? tileToCluster[pos] : 0;
-                        BiomeMaterials biome = biomeMaterialSets[Mathf.Clamp(cluster, 0, biomeMaterialSets.Count - 1)];
-
-                        if (biome.floorMaterials.Count > 0)
-                        {
-                            Material mat = biome.floorMaterials[Random.Range(0, biome.floorMaterials.Count)];
-                            MeshRenderer rend = tile.GetComponent<MeshRenderer>();
-                            if (rend != null) rend.material = mat;
-                        }
-                    }
+                    map[startX + x, startY + y] = true;
                 }
             }
         }
 
-        Debug.Log("Suelos generados por bioma.");
+        // Paso 3: Buscar bloques rectangulares máximos
+        List<Cell> merged = new List<Cell>();
+        bool[,] visited = new bool[width, height];
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                if (!map[x, y] || visited[x, y]) continue;
+
+                // Expandimos el bloque lo máximo posible en X y luego en Y
+                int maxWidth = 1;
+                while (x + maxWidth < width && map[x + maxWidth, y] && !visited[x + maxWidth, y])
+                    maxWidth++;
+
+                int maxHeight = 1;
+                bool valid = true;
+
+                while (y + maxHeight < height && valid)
+                {
+                    for (int i = 0; i < maxWidth; i++)
+                    {
+                        if (!map[x + i, y + maxHeight] || visited[x + i, y + maxHeight])
+                        {
+                            valid = false;
+                            break;
+                        }
+                    }
+
+                    if (valid) maxHeight++;
+                }
+
+                // Marcar como visitado
+                for (int dx = 0; dx < maxWidth; dx++)
+                {
+                    for (int dy = 0; dy < maxHeight; dy++)
+                    {
+                        visited[x + dx, y + dy] = true;
+                    }
+                }
+
+                Vector2 position = new Vector2(minX + x, minY + y);
+                Vector2 size = new Vector2(maxWidth, maxHeight);
+                Cell newCell = new Cell(position, size) { isCorridor = true };
+                merged.Add(newCell);
+            }
+        }
+
+        // Paso 4: Limpiar y reemplazar
+        cells.RemoveAll(c => c.isCorridor);
+        cells.AddRange(merged);
+
+        Debug.Log($"Corridors fusionados en {merged.Count} bloques rectangulares sin solapamiento.");
     }
 
+    private void GenerateFloors()
+    {
+        foreach (var cell in cells)
+        {
+            if (cell.isRoom || cell.isCorridor)
+            {
+                // Crear un plano por celda
+                GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
+
+                // El plano de Unity mide 10x10 por defecto, por lo tanto ajustamos escala
+                float scaleX = cell.size.x / 10f;
+                float scaleZ = cell.size.y / 10f;
+                floor.transform.localScale = new Vector3(scaleX, 1f, scaleZ);
+
+                // Posicionar el plano en el centro de la celda
+                Vector3 center = new Vector3(cell.position.x + cell.size.x / 2f, 0, cell.position.y + cell.size.y / 2f);
+                floor.transform.position = center;
+
+                // Agrupar en jerarquía
+                floor.transform.SetParent(dungeonParent);
+
+                // (Opcional) Renombrar para organización
+                floor.name = $"Floor_{(cell.isRoom ? "Room" : "Corridor")}_{center.x}_{center.z}";
+            }
+        }
+
+        Debug.Log("Suelos generados como planos por celda.");
+    }
 
     private void GenerateWalls()
     {
-        // Primero marcar los tiles de suelo
+        // 1. Marcar todos los tiles de suelo
         foreach (var cell in cells)
         {
             if (cell.isRoom || cell.isCorridor)
@@ -577,32 +658,163 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        // CREA UNA COPIA DEL LISTADO DE TILES PARA RECORRER
+        // 2. Identificar celdas vacías vecinas que necesitan muro
+        List<Vector2Int> directions = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+        HashSet<Vector2Int> wallPositions = new HashSet<Vector2Int>();
+
         List<Vector2Int> floorTiles = new List<Vector2Int>(tileMap.Keys);
-
-        List<Vector2Int> directions = new List<Vector2Int>
-        {
-            Vector2Int.up,
-            Vector2Int.down,
-            Vector2Int.left,
-            Vector2Int.right
-        };
-
-        foreach (var floorTile in floorTiles) // ⬅️ RECORREMOS LA COPIA
+        foreach (var floorTile in floorTiles)
         {
             foreach (var dir in directions)
             {
                 Vector2Int neighbor = floorTile + dir;
-                if (!tileMap.ContainsKey(neighbor))
+                if (!tileMap.ContainsKey(neighbor) && !AreConnected(floorTile, neighbor))
                 {
-                    if (!AreConnected(floorTile, neighbor))
-                    {
-                        PlaceWall(neighbor, dir);
-                        tileMap[neighbor] = TileType.Wall; // Marcar como muro
-                    }
+                    wallPositions.Add(neighbor);
+                    tileMap[neighbor] = TileType.Wall;
                 }
             }
         }
+
+        // 3. Agrupar posiciones contiguas en bloques rectangulares (como en MergeCorridorCells)
+        List<BoundsInt> wallBlocks = MergeWallPositions(wallPositions);
+
+        // 4. Generar mesh por bloque
+        foreach (var bounds in wallBlocks)
+        {
+            CreateWallBlock(bounds.position, bounds.size);
+        }
+
+        Debug.Log($"Muros generados como {wallBlocks.Count} bloques compactos.");
+    }
+
+    private List<BoundsInt> MergeWallPositions(HashSet<Vector2Int> wallPositions)
+    {
+        List<BoundsInt> result = new List<BoundsInt>();
+
+        if (wallPositions.Count == 0)
+            return result;
+
+        // Bounding box
+        int minX = int.MaxValue, minY = int.MaxValue;
+        int maxX = int.MinValue, maxY = int.MinValue;
+
+        foreach (var pos in wallPositions)
+        {
+            minX = Mathf.Min(minX, pos.x);
+            minY = Mathf.Min(minY, pos.y);
+            maxX = Mathf.Max(maxX, pos.x);
+            maxY = Mathf.Max(maxY, pos.y);
+        }
+
+        int width = maxX - minX + 1;
+        int height = maxY - minY + 1;
+
+        bool[,] grid = new bool[width, height];
+        bool[,] visited = new bool[width, height];
+
+        foreach (var pos in wallPositions)
+        {
+            int x = pos.x - minX;
+            int y = pos.y - minY;
+            grid[x, y] = true;
+        }
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                if (!grid[x, y] || visited[x, y]) continue;
+
+                int w = 1;
+                while (x + w < width && grid[x + w, y] && !visited[x + w, y]) w++;
+
+                int h = 1;
+                bool valid = true;
+                while (y + h < height && valid)
+                {
+                    for (int i = 0; i < w; i++)
+                    {
+                        if (!grid[x + i, y + h] || visited[x + i, y + h])
+                        {
+                            valid = false;
+                            break;
+                        }
+                    }
+                    if (valid) h++;
+                }
+
+                for (int dx = 0; dx < w; dx++)
+                    for (int dy = 0; dy < h; dy++)
+                        visited[x + dx, y + dy] = true;
+
+                Vector3Int pos = new Vector3Int(minX + x, 0, minY + y);
+                Vector3Int size = new Vector3Int(w, 5, h); // Altura 5 fija
+                result.Add(new BoundsInt(pos, size));
+            }
+        }
+
+        return result;
+    }
+
+    private void CreateWallBlock(Vector3Int position, Vector3Int size)
+    {
+        GameObject wall = new GameObject($"Wall_{position.x}_{position.z}");
+        wall.transform.SetParent(dungeonParent);
+
+        MeshFilter mf = wall.AddComponent<MeshFilter>();
+        MeshRenderer mr = wall.AddComponent<MeshRenderer>();
+        MeshCollider collider = wall.AddComponent<MeshCollider>();
+
+        Mesh mesh = CreateCubeMesh(size.x, size.y, size.z);
+        mf.mesh = mesh;
+        collider.sharedMesh = mesh;
+
+        wall.transform.position = new Vector3(position.x, 0, position.z);
+
+        if (wallMaterials.Count > 0)
+        {
+            mr.material = wallMaterials[Random.Range(0, wallMaterials.Count)];
+        }
+    }
+
+    private Mesh CreateCubeMesh(float width, float height, float depth)
+    {
+        Mesh mesh = new Mesh();
+
+        Vector3[] vertices = new Vector3[8]
+        {
+            new Vector3(0, 0, 0),                    // 0
+            new Vector3(width, 0, 0),                // 1
+            new Vector3(width, 0, depth),            // 2
+            new Vector3(0, 0, depth),                // 3
+            new Vector3(0, height, 0),               // 4
+            new Vector3(width, height, 0),           // 5
+            new Vector3(width, height, depth),       // 6
+            new Vector3(0, height, depth)            // 7
+        };
+
+        int[] triangles = new int[]
+        {
+            // Bottom
+            0, 2, 1, 0, 3, 2,
+            // Top
+            4, 5, 6, 4, 6, 7,
+            // Front
+            0, 1, 5, 0, 5, 4,
+            // Back
+            2, 3, 7, 2, 7, 6,
+            // Left
+            3, 0, 4, 3, 4, 7,
+            // Right
+            1, 2, 6, 1, 6, 5
+        };
+
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+
+        return mesh;
     }
 
     private void PlaceWall(Vector2Int position, Vector2Int direction)
@@ -615,100 +827,28 @@ public class DungeonGenerator : MonoBehaviour
 
         Quaternion rotation = Quaternion.identity;
         if (direction == Vector2Int.left || direction == Vector2Int.right)
-            rotation = Quaternion.Euler(0f, 90f, 0f);
+        {
+            rotation = Quaternion.Euler(0f, 90f, 0f); // Rotar para muros horizontales
+        }
 
+        // Ahora generamos 5 cubos apilados (altura 5 unidades)
         for (int i = 0; i < 5; i++)
         {
-            Vector3 spawnPos = new Vector3(position.x + 0.5f, i + 0.5f, position.y + 0.5f);
+            Vector3 spawnPos = new Vector3(position.x + 0.5f, i + 0.5f, position.y + 0.5f); // Altura 0.5, 1.5, 2.5
+
             GameObject wallPiece = Instantiate(wallPrefab, spawnPos, rotation, dungeonParent);
 
-            int cluster = tileToCluster.ContainsKey(position) ? tileToCluster[position] : 0;
-            BiomeMaterials biome = biomeMaterialSets[Mathf.Clamp(cluster, 0, biomeMaterialSets.Count - 1)];
-
-            if (biome.wallMaterials.Count > 0)
+            if (wallMaterials.Count > 0)
             {
-                Material mat = biome.wallMaterials[Random.Range(0, biome.wallMaterials.Count)];
-                MeshRenderer rend = wallPiece.GetComponent<MeshRenderer>();
-                if (rend != null) rend.material = mat;
-            }
-        }
-    }
+                Material randomMat = wallMaterials[Random.Range(0, wallMaterials.Count)];
+                MeshRenderer renderer = wallPiece.GetComponent<MeshRenderer>();
 
-    private Dictionary<Vector2Int, int> AssignBiomesByKMeans()
-    {
-        int k = biomeMaterialSets.Count;
-        List<Vector2Int> tileCoords = new List<Vector2Int>();
-        List<Vector2> positions = new List<Vector2>();
-
-        foreach (var kvp in tileMap)
-        {
-            if (kvp.Value == TileType.Floor)
-            {
-                tileCoords.Add(kvp.Key);
-                positions.Add(kvp.Key);
-            }
-        }
-
-        List<Vector2> centroids = new List<Vector2>();
-        HashSet<int> used = new HashSet<int>();
-        while (centroids.Count < k)
-        {
-            int idx = Random.Range(0, positions.Count);
-            if (used.Add(idx)) centroids.Add(positions[idx]);
-        }
-
-        Dictionary<Vector2Int, int> tileToCluster = new Dictionary<Vector2Int, int>();
-
-        bool changed = true;
-        int iterations = 0;
-        while (changed && iterations < 20)
-        {
-            changed = false;
-            iterations++;
-
-            for (int i = 0; i < positions.Count; i++)
-            {
-                Vector2Int tile = tileCoords[i];
-                Vector2 pos = positions[i];
-
-                float minDist = float.MaxValue;
-                int bestCluster = -1;
-
-                for (int j = 0; j < centroids.Count; j++)
+                if (renderer != null)
                 {
-                    float dist = (pos - centroids[j]).sqrMagnitude;
-                    if (dist < minDist)
-                    {
-                        minDist = dist;
-                        bestCluster = j;
-                    }
-                }
-
-                if (!tileToCluster.ContainsKey(tile) || tileToCluster[tile] != bestCluster)
-                {
-                    tileToCluster[tile] = bestCluster;
-                    changed = true;
+                    renderer.material = randomMat;
                 }
             }
-
-            Vector2[] newCentroids = new Vector2[k];
-            int[] counts = new int[k];
-
-            foreach (var kvp in tileToCluster)
-            {
-                newCentroids[kvp.Value] += kvp.Key;
-                counts[kvp.Value]++;
-            }
-
-            for (int i = 0; i < k; i++)
-            {
-                if (counts[i] > 0)
-                    centroids[i] = newCentroids[i] / counts[i];
-            }
         }
-
-        Debug.Log($"[Biomas] K-Means hecho en {iterations} iteraciones.");
-        return tileToCluster;
     }
 
     public class Edge
@@ -744,14 +884,5 @@ public class DungeonGenerator : MonoBehaviour
         Floor,
         Wall
     }
-
-    [System.Serializable]
-    public class BiomeMaterials
-    {
-        public string biomeName;
-        public List<Material> floorMaterials;
-        public List<Material> wallMaterials;
-    }
-
 
 }

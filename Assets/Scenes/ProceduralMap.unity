@@ -279,16 +279,16 @@ MonoBehaviour:
   roomSizeThreshold: {x: 20, y: 20}
   tilePrefab: {fileID: 203207713530102449, guid: f4744c459f8019541a51200e1eb4eb66, type: 3}
   wallPrefab: {fileID: 4011140061345648185, guid: eee1e4e9915bae64cade3bd8dd943b28, type: 3}
-  biomeMaterialSets:
-  - biomeName: Bloques
-    floorMaterials: []
-    wallMaterials: []
-  - biomeName: Inferno
-    floorMaterials: []
-    wallMaterials: []
-  - biomeName: Metal
-    floorMaterials: []
-    wallMaterials: []
+  floorMaterials:
+  - {fileID: 2100000, guid: a01d567cad641a24c8b43b1752114aad, type: 2}
+  - {fileID: 2100000, guid: 77000c220704869479bf4dfcfd95a4fb, type: 2}
+  - {fileID: 2100000, guid: b2e412f155b568041bb8b96c7b29e4fb, type: 2}
+  - {fileID: 2100000, guid: 69f4302e0b66b6d46b842b917fe32798, type: 2}
+  wallMaterials:
+  - {fileID: 2100000, guid: 53aa4bf70d1ad114b882d6ecd963b20a, type: 2}
+  - {fileID: 2100000, guid: 2854b14f56e8e5a45b2f2d6a458515cc, type: 2}
+  - {fileID: 2100000, guid: 3a7afccf270bf4343ab8bd75742171af, type: 2}
+  - {fileID: 2100000, guid: ceeec499284f0db4b937e55061064835, type: 2}
   dungeonParent: {fileID: 134895397}
 --- !u!4 &1514884218
 Transform:
