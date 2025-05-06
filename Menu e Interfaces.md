@@ -3,103 +3,120 @@
 En este documento se recoge y resume toda la funcionalidad e implementación de las **escenas relacionadas con los Menús e Interfaces** del proyecto.
 
 > [!NOTE]
-> Esta documentación solo cubre **la parte del sistema de menús e interfaces**. El resto de elementos del juego (enemigos, armas, IA, etc.) no se recogen aqui.
+> Esta documentación solo cubre **la parte del sistema de menús e interfaces**. El resto de elementos del juego (enemigos, armas, IA, etc.) no se recogen aquí.
 
 ---
 
 ## 🧭 ESCENA: **MainMenu**
 
-### 📝 RESUMEN DE ESCENA
-Esta escena corresponde al **menú principal del juego**. Desde aquí, el jugador puede:
+### 📝 RESUMEN  
+Esta escena representa el **menú principal del juego**. Desde aquí, el jugador puede navegar a distintas secciones o cerrar el juego.
 
-- Iniciar una nueva partida
-- Ajustar opciones
-- Ver los créditos
-- Salir del juego
+---
 
-### 📜 SCRIPTS
+### 🎮 MENÚ PRINCIPAL
+
+| Botón         | Funcionalidad                                                                 |
+|---------------|-------------------------------------------------------------------------------|
+| Un Jugador    | Carga la escena de prueba `LoadScene`.                                       |
+| Multijugador  | ❌ *No implementado*.                                                         |
+| Opciones      | Abre el submenú con configuraciones de audio y sensibilidad.                 |
+| Créditos      | Cambia a la escena de créditos. ✅ *Implementado*.                           |
+| Salir         | Cierra el juego. ✅ *Implementado*.                                          |
+
+---
+
+### ⚙️ SCRIPTS USADOS EN **MainMenu**
 
 - **MenuActions.cs**  
-  Controla toda la lógica de los botones: qué debe activarse según el botón pulsado.  
-  Acciones implementadas:
-
-  - **Un Jugador**: De forma temporal, salta a una escena de trabajo llamada `LoadScene`.
-  - **Multijugador**: ❌ **(NO IMPLEMENTADO)**
-  - **Opciones**: Abre un menú con configuraciones como:
-    - Audio
-    - Sensibilidad  
-  - **Créditos**: Salta a la escena de créditos ✅ **(IMPLEMENTADO)**
-  - **Salir**: Cierra el juego ✅ **(IMPLEMENTADO)**
+  Controla las acciones según el botón pulsado.
 
 - **MenuSelector.cs**  
-  Controla el movimiento de la calavera sobre los botones, el cambio de color al seleccionar y accede a la opción al pulsar `Enter`.
+  Mueve la calavera por los botones, gestiona colores y entrada con `Enter`.
 
 - **SceneTransition.cs**  
-  Se encarga de la **pantalla en negro** para suavizar la transición entre escenas.
+  Implementa la pantalla negra de transición entre escenas.
 
 - **ScreenEffectManager.cs**  
-  Controla los **efectos de vibración de pantalla**.
+  Aplica efectos de vibración visual.
 
 - **ScreenMessageControl.cs**  
-  Muestra mensajes contextuales en pantalla dependiendo del botón sobre el que se sitúe el selector.
+  Muestra mensajes contextuales en pantalla al pasar por un botón.
+
+- **SettingsManager.cs**
+  Controla las variables globales para ajustar las opciones
+
+- **SettingsUI.cs**
+  Enlaza las opciones con sus correspondiente Sliders.
+
+- **AudioButton.cs**
+  Script que reproduce sonidos.
 
 ---
 
 ## ⚙️ ESCENA: **LoadScene**
 
-### 📝 RESUMEN DE ESCENA
-Escena de trabajo. El nombre actual no representa su función final. Actualmente se ha implementado:
+### 📝 RESUMEN  
+Escena temporal de pruebas. Simula una carga de escena y contiene la interfaz del HUD y el menú de pausa.
 
-#### 🔄 CARGA DE ESCENA FALSA
+---
 
-Carga simulada que funciona con el script:
+### 🔄 CARGA DE ESCENA FALSA
 
-- **FakeLoaderScene.cs**  
-  Recibe como parámetros:
-  - Tiempo de carga deseado (en segundos)
-  - Imágenes que deben mostrarse secuencialmente
+Simulación de carga visual. No representa una carga real.
+
+| Parámetro              | Función                                                             |
+|------------------------|---------------------------------------------------------------------|
+| Tiempo de carga        | Define la duración de la carga simulada (en segundos).             |
+| Lista de imágenes      | Se muestran de forma secuencial durante la carga.                  |
+
+- **Script**: `FakeLoaderScene.cs`
 
 > [!CAUTION]
-> Esta carga no representa una carga real de datos. Solo simula un proceso de espera.
+> Solo simula el proceso de carga; no hay carga real de datos.
 
 ---
 
-### ⏸️ MENÚ DE PARTIDA
+### ⏸️ MENÚ DE PAUSA
 
-Al pulsar la tecla `ESC` aparece un pequeño menú con las siguientes opciones:
+Se accede pulsando `ESC` durante la partida.
 
-- **Reanudar**: Quita el menú ✅ **(IMPLEMENTADO)**
-- **Reaparecer**: Mueres en la partida y reapareces ❌ **(NO IMPLEMENTADO)**
-- **Salir**: Abre un submenú de confirmación para salir de la partida ✅ **(IMPLEMENTADO)**
+| Botón        | Funcionalidad                                                                 |
+|--------------|-------------------------------------------------------------------------------|
+| Reanudar     | Cierra el menú de pausa y continúa el juego. ✅ *Implementado*.               |
+| Reaparecer   | Mata y reaparece al jugador. ❌ *No implementado*.                            |
+| Salir        | Abre un submenú de confirmación para salir de la partida. ✅ *Implementado*.  |
 
-**Script usado**:
-
-- **OptionActions.cs**  
-  Maneja toda la lógica de los botones del menú de pausa.
+- **Script**: `OptionActions.cs`
 
 > [!WARNING]
-> El botón de *Reaparecer* aún no tiene lógica implementada. No recomiendo su ejecución actualmente, ya que puede generar errores si se pulsa reiteradamente.
+> El botón *Reaparecer* no tiene lógica implementada. Su uso puede causar errores.
 
 ---
 
-### 🧑‍🚀 INTERFAZ DE USUARIO
+### 🧑‍🚀 HUD / INTERFAZ DE JUEGO
 
-Implementación temprana de la **UI de partida**. Simula un casco. Como prueba:
+Primer prototipo de HUD simulando el casco del jugador.
 
-- Al pulsar las teclas de dirección `↑` y `↓`, la vida sube y baja.
-- Conforme cambia la vida:
-  - La interfaz se ve más dañada.
-  - La **cara del marine cambia** si la vida baja o si se pulsa `A` o `D`.
+**Acciones temporales de prueba:**
 
-**Scripts usados**:
+| Tecla         | Efecto en HUD                                                               |
+|---------------|------------------------------------------------------------------------------|
+| `↑` / `↓`     | Sube / baja la vida (para pruebas visuales).                                |
+| `A` / `D`     | Cambia el sprite de la cabeza del marine.                                   |
+
+**Cambios visuales:**
+
+- Vida baja = interfaz más dañada
+- Cambios en el sprite del rostro del jugador según salud y acciones
+
+#### SCRIPTS USADOS
 
 - **CabezaDoom.cs**  
-  Cambia el sprite de la cabeza según la acción del jugador y el nivel de vida.
+  Cambia el sprite de la cara del jugador según el estado.
 
 - **BarraProgresoDoom.cs**  
-  Actualiza la barra de vida e interfaz. Permite modificar la vida con las teclas de dirección.
+  Controla la barra de vida y su comportamiento frente a inputs.
 
 > [!NOTE]
-> la funcionalidad dada por `↑` y `↓` es provisional y se usa para pruebas visuales. No representa el comportamiento final del HUD.
-
----
+> Las funcionalidades actuales son provisionales, pensadas solo para pruebas del HUD.
