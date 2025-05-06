@@ -24,6 +24,7 @@ public class SceneTransition : MonoBehaviour
     /// </summary>
     [Header("UI Content Settings")]
     public GameObject contentGroup;
+    public MenuSelector _MenuSelector;
 
     /// <summary>
     /// Delay before starting the UI content fade-in after panel fade-out.
@@ -51,6 +52,7 @@ public class SceneTransition : MonoBehaviour
 
         // Initially hide the UI content
         contentGroup.SetActive(false);
+        _MenuSelector.enabled = false;
         contentCanvasGroup.alpha = 0f;
 
         // Start the fade-out sequence
@@ -87,6 +89,7 @@ public class SceneTransition : MonoBehaviour
 
         // Activate the UI content
         contentGroup.SetActive(true);
+        _MenuSelector.enabled = true;
 
         // Start fading in the content
         StartCoroutine(FadeInContent());

@@ -60,7 +60,6 @@ public class OptionActions : MonoBehaviour
         _mover.Move(_OptionsMenuDisplay, _OptionsMenuDisplay.transform.localPosition, _optionsOriginal + downOffset);
         _mover.Move(_MenuPrincipalDisplay, _MenuPrincipalDisplay.transform.localPosition, _menuOriginal + downOffset);
         pulsado = false;
-        _OptionsMenu.SetActive(false);
     }
 
     public void Reaparecer()

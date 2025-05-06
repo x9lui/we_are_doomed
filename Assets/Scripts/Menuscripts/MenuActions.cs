@@ -2,24 +2,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Defines actions that can be triggered from menu buttons.
 /// </summary>
 public class MenuActions : MonoBehaviour
 {
+    [SerializeField] private MenuSelector _MenuSelector;
     [SerializeField] private GameObject _MainMenu;
-
     [SerializeField] private GameObject _ExitMenu;
     [SerializeField] private Image _TransitionPanel;
-
     [SerializeField] private GameObject _MessagePanel;
     [SerializeField] private GameObject _SettingPanel;
-
+    [SerializeField] private AudioClip ClickDeBoton;
+    [SerializeField] private AudioClip _MetalSound;
     [SerializeField] private float _MenuSlideDuration = 0.2f;
     [SerializeField] private Vector3 _MenuHiddenPosition = new Vector3(0, -500, 0);
     [SerializeField] private Vector3 _MenuVisiblePosition = Vector3.zero;
-
     private Vector3 _messagePanelOriginalPos;
     private Vector3 _settingPanelOriginalPos;
 
@@ -32,8 +32,11 @@ public class MenuActions : MonoBehaviour
 
     public void SinglePlayerMode()
     {
-        Debug.Log("Single Player Mode Started.");  
         StartCoroutine(FadeAndLoadCredits("LoadScene"));
+
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(ClickDeBoton);
+        Debug.Log("Single Player Mode Started.");  
     }
 
     public void MultiplayerMode()
@@ -44,34 +47,47 @@ public class MenuActions : MonoBehaviour
     public void OpenOptions()
     {
         _MainMenu.SetActive(false);
+        _MenuSelector.enabled = false;
 
         if (_MessagePanel != null)
             StartCoroutine(SlidePanel(_MessagePanel, _messagePanelOriginalPos + new Vector3(-800, 0, 0), _messagePanelOriginalPos));
-        
         if (_SettingPanel != null)
             StartCoroutine(SlidePanel(_SettingPanel, _settingPanelOriginalPos + new Vector3(0, 600, 0), _settingPanelOriginalPos));
 
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(_MetalSound);
         Debug.Log("Options Menu Opened.");
     }
 
     public void QuitGame()
     {
+
         _ExitMenu.SetActive(true);
+        _MenuSelector.enabled = false;
         _ExitMenu.transform.localPosition = _MenuHiddenPosition;
         StartCoroutine(SlideMenuUp(_ExitMenu));
 
         SetPanelOpacityInstant(0.9f);
+        
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(_MetalSound);
         Debug.Log("Game Exited.");
     }
 
     public void Credits()
     {
-        Debug.Log("Credits.");
+        
         StartCoroutine(FadeAndLoadCredits("Credits"));
+        
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(ClickDeBoton);
+        Debug.Log("Credits.");
     }
 
     public void Back()
     {
+        _MenuSelector.enabled = true;
+
         if (_MessagePanel != null)
             StartCoroutine(SlidePanel(_MessagePanel, _messagePanelOriginalPos, _messagePanelOriginalPos + new Vector3(-800, 0, 0)));
         
@@ -79,6 +95,9 @@ public class MenuActions : MonoBehaviour
             StartCoroutine(SlidePanel(_SettingPanel, _settingPanelOriginalPos, _settingPanelOriginalPos + new Vector3(0, 600, 0)));
 
         StartCoroutine(SwitchToMainAfterDelay(_MenuSlideDuration));
+        
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(_MetalSound);
         Debug.Log("Back.");
     }
 
@@ -91,6 +110,9 @@ public class MenuActions : MonoBehaviour
     public void QuitConfirm()
     {
         Application.Quit();
+
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(ClickDeBoton);
         Debug.Log("QuitConfirm.");
     }
 

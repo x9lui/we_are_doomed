@@ -13,6 +13,7 @@ public class MenuSelector : MonoBehaviour{
     [SerializeField] private Button[] _buttons;
     [SerializeField] private Vector2 _offset;
     [SerializeField] private ScreenMessageControl _descriptionHandler;
+    [SerializeField] private AudioClip _bottonSound;
 
     private int _selectedIndex = 0;
     private bool _isMouseOverButton = false;
@@ -55,6 +56,10 @@ public class MenuSelector : MonoBehaviour{
     /// </summary>
     private void UpdateSkullPosition()
     {
+        
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(_bottonSound);
+
         RectTransform buttonTransform = _buttons[_selectedIndex].GetComponent<RectTransform>();
         Vector3 newPosition = buttonTransform.position + new Vector3(_offset.x, _offset.y, 0f);
 
