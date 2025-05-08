@@ -5,61 +5,73 @@ using System.Collections;
 
 public class OptionActions : MonoBehaviour
 {
-    [Header("Referencias del Menú")]
-    [SerializeField] private GameObject _OptionsMenu;
-    [SerializeField] private GameObject _ConfirmationExit;
-    [SerializeField] private GameObject _ConfirmationExitYes;
-    [SerializeField] private GameObject _ConfirmationExitNo;
+    
+    [SerializeField] private GameObject _OptionPanel;
     [SerializeField] private GameObject _DescripcionText;
     [SerializeField] private Image _TransitionPanel;
 
+    [Header("Menus")]
+    
     [SerializeField] private GameObject _OptionsMenuDisplay;
     [SerializeField] private GameObject _MenuPrincipalDisplay;
+    [SerializeField] private GameObject _ConfirmationExit;
 
-    [Header("Mover")]
+    [Header("Scripts")]
     [SerializeField] private UIElementMover _mover;
 
+    // Variables para controlar la posición
     private Vector3 _optionsOriginal;
     private Vector3 _menuOriginal;
+    private Vector3 _confirmationOriginal;
+    private Vector3 _menuUp;
+    private Vector3 _optionUp;
 
-    private bool pulsado = false;
+    // Variables para controlar el estado de los botones
+    private bool pulsadoOpciones = false;
+    private bool pulsadoAbandonar = false;
+     private bool pulsadoReanudar = false;
 
     private void Start()
     {
         // Guardamos las posiciones originales
         _optionsOriginal = _OptionsMenuDisplay.transform.localPosition;
         _menuOriginal = _MenuPrincipalDisplay.transform.localPosition;
+        _confirmationOriginal = _ConfirmationExit.transform.localPosition;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ToggleOptionsMenu();
-        }
-    }
-
-    private void ToggleOptionsMenu()
-    {
-        bool isActive = _OptionsMenu.activeSelf;
-        _OptionsMenu.SetActive(!isActive);
-
-        if (!isActive)
-        {
-            _ConfirmationExit.SetActive(false);
-            _ConfirmationExitYes.SetActive(false);
-            _ConfirmationExitNo.SetActive(false);
-            _DescripcionText.SetActive(false);
+            Reanudar();
         }
     }
 
     public void Reanudar()
     {
-        // Ambos bajan desde su posición actual
-        Vector3 downOffset = new Vector3(0, -600, 0);
-        _mover.Move(_OptionsMenuDisplay, _OptionsMenuDisplay.transform.localPosition, _optionsOriginal + downOffset);
-        _mover.Move(_MenuPrincipalDisplay, _MenuPrincipalDisplay.transform.localPosition, _menuOriginal + downOffset);
-        pulsado = false;
+        _menuUp = _menuOriginal + new Vector3(0, 566, 0);
+        _optionUp = _optionsOriginal + new Vector3(0, 567, 0);
+
+        if(!pulsadoReanudar){
+
+            pulsadoReanudar = true;
+
+            _OptionPanel.SetActive(true);
+            _MenuPrincipalDisplay.SetActive(true);
+            _OptionsMenuDisplay.SetActive(true);
+
+            _mover.Move(_MenuPrincipalDisplay, _menuOriginal, _menuUp);
+            _mover.Move(_OptionsMenuDisplay, _optionsOriginal, _optionUp);
+        }else{
+            pulsadoReanudar = false;
+            _OptionPanel.SetActive(false);
+
+            _mover.Move(_MenuPrincipalDisplay, _menuOriginal, _menuOriginal);
+            _mover.Move(_OptionsMenuDisplay, _optionsOriginal, _optionsOriginal);
+        }
+
+        pulsadoOpciones = false;
+        pulsadoAbandonar = false;
     }
 
     public void Reaparecer()
@@ -69,37 +81,39 @@ public class OptionActions : MonoBehaviour
 
     public void Opciones()
     {
-        // MenuPrincipal se mueve un poco a la izquierda
-        // OptionsMenuDisplay se mueve un poco a la derecha
-        Vector3 menuLeft = _menuOriginal + new Vector3(-138, 0, 0);
-        Vector3 optionsRight = _optionsOriginal + new Vector3(214, 0, 0);
+        Vector3 menuLeft = _menuUp + new Vector3(-138, 0, 0);
+        Vector3 optionsRight = _optionUp + new Vector3(180, 0, 0);
 
-        if(!pulsado)
+        if(!pulsadoOpciones)
         {
-            pulsado = true;
+            pulsadoOpciones = true;
     
-            _mover.Move(_MenuPrincipalDisplay, _MenuPrincipalDisplay.transform.localPosition, menuLeft);
-            _mover.Move(_OptionsMenuDisplay, _OptionsMenuDisplay.transform.localPosition, optionsRight);
+            _mover.Move(_MenuPrincipalDisplay, _menuOriginal, menuLeft);
+            _mover.Move(_OptionsMenuDisplay, _optionsOriginal, optionsRight);
         }
         else
         {
-            pulsado = false;
-            _mover.Move(_MenuPrincipalDisplay, _MenuPrincipalDisplay.transform.localPosition, _menuOriginal);
-            _mover.Move(_OptionsMenuDisplay, _OptionsMenuDisplay.transform.localPosition, _optionsOriginal);
+            pulsadoOpciones = false;
+            _mover.Move(_MenuPrincipalDisplay, _menuOriginal, _menuUp);
+            _mover.Move(_OptionsMenuDisplay, _optionsOriginal, _optionUp);
         }
 
     }
 
     public void Salir()
     {
-        bool active = _ConfirmationExit.activeSelf;
+        Vector3 ConfirmationDown = _confirmationOriginal + new Vector3(0, -86, 0);
 
-        _ConfirmationExit.SetActive(!active);
-        _ConfirmationExitYes.SetActive(!active);
-        _ConfirmationExitNo.SetActive(!active);
-        _DescripcionText.SetActive(!active);
+        if(!pulsadoAbandonar){
+            pulsadoAbandonar = true;
 
-        Debug.Log(active ? "Menú de confirmación cerrado." : "Menú de confirmación abierto.");
+            _mover.Move(_ConfirmationExit, _confirmationOriginal, ConfirmationDown);
+        }else{
+            pulsadoAbandonar = false;
+            _mover.Move(_ConfirmationExit, _confirmationOriginal, _confirmationOriginal);
+        }
+
+        Debug.Log(pulsadoAbandonar ? "Menú de confirmación cerrado." : "Menú de confirmación abierto.");
     }
 
     public void SalirSI()
@@ -109,9 +123,9 @@ public class OptionActions : MonoBehaviour
 
     public void SalirNO()
     {
-        _ConfirmationExit.SetActive(false);
-        _ConfirmationExitYes.SetActive(false);
-        _ConfirmationExitNo.SetActive(false);
-        _DescripcionText.SetActive(false);
+        pulsadoAbandonar = false;
+        _mover.Move(_ConfirmationExit, _confirmationOriginal, _confirmationOriginal);
+
+        Debug.Log("Menú de confirmación cerrado.");
     }
 }
