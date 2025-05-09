@@ -3,111 +3,106 @@ using TMPro;
 using System.Collections.Generic;
 
 /// <summary>
-/// Manages visual effects on multiple UI screens to simulate an old CRT monitor.
+/// Administra efectos visuales en múltiples pantallas de UI para simular un monitor CRT antiguo.
 /// </summary>
-public class ScreenEffectManager : MonoBehaviour
+public class GestorEfectosPantalla : MonoBehaviour
 {
     [System.Serializable]
-    public class TextPanelPair
+    public class _ParTextoPanel
     {
-        public RectTransform _screenPanel;
-        public TextMeshProUGUI _screenText;
+        public RectTransform _panelPantalla;
+        public TextMeshProUGUI _textoPantalla;
     }
 
-    [SerializeField]
-    private List<TextPanelPair> _screenPairs;
+    [SerializeField] private List<_ParTextoPanel> paresPantalla;
 
-    [SerializeField]
-    private float _shakeMagnitude = 2f;
+    [SerializeField] private float _magnitudTemblor = 2f;
 
-    [SerializeField]
-    private float _shakeSpeed = 5f;
+    [SerializeField] private float _velocidadTemblor = 5f;
 
-    [SerializeField]
-    private float _flickerIntensity = 0.1f;
+    [SerializeField] private float _intensidadParpadeo = 0.1f;
 
-    [SerializeField]
-    private float _flickerSpeed = 5f;
+    [SerializeField] private float _velocidadParpadeo = 5f;
 
-    private List<Vector3> _initialPositions = new List<Vector3>();
-    private List<Color> _initialColors = new List<Color>();
-    private Vector3 _maxShakeOffset;
+    private List<Vector3> _posicionesIniciales = new List<Vector3>();
+    private List<Color> _coloresIniciales = new List<Color>();
+    private Vector3 _maxDesplazamientoTemblor;
 
     private void Start()
     {
-        if (_screenPairs != null && _screenPairs.Count > 0)
+        if (paresPantalla != null && paresPantalla.Count > 0)
         {
-            foreach (var pair in _screenPairs)
+            foreach (var par in paresPantalla)
             {
-                if (pair._screenPanel != null)
+                if (par._panelPantalla != null)
                 {
-                    _initialPositions.Add(pair._screenPanel.localPosition);
+                    _posicionesIniciales.Add(par._panelPantalla.localPosition);
                 }
 
-                if (pair._screenText != null)
+                if (par._textoPantalla != null)
                 {
-                    _initialColors.Add(pair._screenText.color);
+                    _coloresIniciales.Add(par._textoPantalla.color);
                 }
             }
 
-            _maxShakeOffset = new Vector3(_shakeMagnitude, _shakeMagnitude, 0f);
+            _maxDesplazamientoTemblor = new Vector3(_magnitudTemblor, _magnitudTemblor, 0f);
         }
     }
 
     private void Update()
     {
-        this.ApplyScreenEffects();
+        AplicarEfectosPantalla();
     }
 
     /// <summary>
-    /// Applies shaking and flickering effects to simulate a CRT screen.
+    /// Aplica efectos de sacudida y parpadeo para simular una pantalla CRT.
     /// </summary>
-    private void ApplyScreenEffects()
+    private void AplicarEfectosPantalla()
     {
-        for (int i = 0; i < _screenPairs.Count; i++)
+        for (int i = 0; i < paresPantalla.Count; i++)
         {
-            if (_screenPairs[i]._screenPanel != null)
+            if (paresPantalla[i]._panelPantalla != null)
             {
-                ApplyShake(i);
+                AplicarTemblor(i);
             }
-            if (_screenPairs[i]._screenText != null)
+            if (paresPantalla[i]._textoPantalla != null)
             {
-                ApplyFlicker(i);
+                AplicarParpadeo(i);
             }
         }
     }
 
     /// <summary>
-    /// Applies a small shake to the screen panel while keeping it within the allowed bounds.
+    /// Aplica una pequeña sacudida al panel de la pantalla manteniéndolo dentro de los límites permitidos.
     /// </summary>
-    private void ApplyShake(int index)
+    private void AplicarTemblor(int indice)
     {
-        Vector3 randomOffset = new Vector3(
-            Mathf.PerlinNoise(Time.time * _shakeSpeed, 0f) - 0.5f,
-            Mathf.PerlinNoise(0f, Time.time * _shakeSpeed) - 0.5f,
+        Vector3 desplazamientoAleatorio = new Vector3(
+            Mathf.PerlinNoise(Time.time * _velocidadTemblor, 0f) - 0.5f,
+            Mathf.PerlinNoise(0f, Time.time * _velocidadTemblor) - 0.5f,
             0f
-        ) * _shakeMagnitude;
+        ) * _magnitudTemblor;
 
-        Vector3 newPosition = _initialPositions[index] + randomOffset;
+        Vector3 nuevaPosicion = _posicionesIniciales[indice] + desplazamientoAleatorio;
 
         // Restringir el desplazamiento a los límites establecidos
-        newPosition.x = Mathf.Clamp(newPosition.x, _initialPositions[index].x - _maxShakeOffset.x, _initialPositions[index].x + _maxShakeOffset.x);
-        newPosition.y = Mathf.Clamp(newPosition.y, _initialPositions[index].y - _maxShakeOffset.y, _initialPositions[index].y + _maxShakeOffset.y);
+        nuevaPosicion.x = Mathf.Clamp(nuevaPosicion.x, _posicionesIniciales[indice].x - _maxDesplazamientoTemblor.x, _posicionesIniciales[indice].x + _maxDesplazamientoTemblor.x);
+        nuevaPosicion.y = Mathf.Clamp(nuevaPosicion.y, _posicionesIniciales[indice].y - _maxDesplazamientoTemblor.y, _posicionesIniciales[indice].y + _maxDesplazamientoTemblor.y);
 
-        _screenPairs[index]._screenPanel.localPosition = newPosition;
+        paresPantalla[indice]._panelPantalla.localPosition = nuevaPosicion;
     }
 
     /// <summary>
-    /// Applies a flicker effect to the screen text.
+    /// Aplica un efecto de parpadeo al texto de la pantalla.
     /// </summary>
-    private void ApplyFlicker(int index)
+    private void AplicarParpadeo(int indice)
     {
-        float flicker = Mathf.PerlinNoise(Time.time * _flickerSpeed, 0f) * _flickerIntensity;
-        _screenPairs[index]._screenText.color = new Color(
-            _initialColors[index].r,
-            _initialColors[index].g,
-            _initialColors[index].b,
-            1f - flicker
+        float parpadeo = Mathf.PerlinNoise(Time.time * _velocidadParpadeo, 0f) * _intensidadParpadeo;
+        paresPantalla[indice]._textoPantalla.color = new Color(
+            _coloresIniciales[indice].r,
+            _coloresIniciales[indice].g,
+            _coloresIniciales[indice].b,
+            1f - parpadeo
         );
     }
 }

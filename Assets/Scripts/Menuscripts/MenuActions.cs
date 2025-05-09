@@ -2,38 +2,62 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Defines actions that can be triggered from menu buttons.
 /// </summary>
 public class MenuActions : MonoBehaviour
 {
+    
+
+    [Header("Menus")]
     [SerializeField] private GameObject _MainMenu;
-
     [SerializeField] private GameObject _ExitMenu;
-    [SerializeField] private Image _TransitionPanel;
+    [SerializeField] private GameObject _OptionMenu;
 
+    [Header("Panels")]
+    [SerializeField] private Image _TransitionPanel;
     [SerializeField] private GameObject _MessagePanel;
     [SerializeField] private GameObject _SettingPanel;
 
-    [SerializeField] private float _MenuSlideDuration = 0.2f;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip ClickDeBoton;
+    [SerializeField] private AudioClip _MetalSound;
+    [SerializeField] private float _MenuSlideDuration = 1f;
     [SerializeField] private Vector3 _MenuHiddenPosition = new Vector3(0, -500, 0);
     [SerializeField] private Vector3 _MenuVisiblePosition = Vector3.zero;
 
+    // Variables para controlar la posición de los paneles
     private Vector3 _messagePanelOriginalPos;
     private Vector3 _settingPanelOriginalPos;
+    private Vector3 _confirmationOriginalPos;
+    private Vector3 _OptionLeft;
+    private Vector3 _OptionDown;
+    private Vector3 _ConfirmationUp;
+
+
+    [Header("Scripts")]
+    [SerializeField] private MenuSelector _MenuSelector;
+    [SerializeField] private UIElementMover _mover;
 
     void Awake()
     {
         // Guardar posiciones originales
-        if (_MessagePanel != null) _messagePanelOriginalPos = _MessagePanel.transform.localPosition;
-        if (_SettingPanel != null) _settingPanelOriginalPos = _SettingPanel.transform.localPosition;
+        _messagePanelOriginalPos = _MessagePanel.transform.localPosition;
+        _settingPanelOriginalPos = _SettingPanel.transform.localPosition;
+        _confirmationOriginalPos = _ExitMenu.transform.localPosition;
     }
 
     public void SinglePlayerMode()
     {
-        Debug.Log("Single Player Mode Started.");  
         StartCoroutine(FadeAndLoadCredits("LoadScene"));
+
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(ClickDeBoton);
+
+        // Mensaje terminal
+        Debug.Log("Single Player Mode Started.");  
     }
 
     public void MultiplayerMode()
@@ -43,57 +67,119 @@ public class MenuActions : MonoBehaviour
 
     public void OpenOptions()
     {
+        _OptionMenu.SetActive(true);
+
+        // Desactivar el menú principal y el selector de menú
         _MainMenu.SetActive(false);
+        _MenuSelector.enabled = false;
 
-        if (_MessagePanel != null)
-            StartCoroutine(SlidePanel(_MessagePanel, _messagePanelOriginalPos + new Vector3(-800, 0, 0), _messagePanelOriginalPos));
-        
-        if (_SettingPanel != null)
-            StartCoroutine(SlidePanel(_SettingPanel, _settingPanelOriginalPos + new Vector3(0, 600, 0), _settingPanelOriginalPos));
+        // Nuevas posiciones para los paneles
+        _OptionLeft = _messagePanelOriginalPos + new Vector3(652, 0, 0);
+        _OptionDown = _settingPanelOriginalPos + new Vector3(0, -550, 0);
 
+        // Movemos los paneles a sus nuevas posiciones
+        _mover.Move(_MessagePanel, _messagePanelOriginalPos, _OptionLeft);
+        _mover.Move(_SettingPanel, _settingPanelOriginalPos, _OptionDown);
+
+
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(_MetalSound);
+
+        // Mensaje terminal
         Debug.Log("Options Menu Opened.");
     }
 
     public void QuitGame()
     {
         _ExitMenu.SetActive(true);
-        _ExitMenu.transform.localPosition = _MenuHiddenPosition;
-        StartCoroutine(SlideMenuUp(_ExitMenu));
 
+        //Desactivar el selector de menú
+        _MenuSelector.enabled = false;
+
+        // Nuevas posiciones para los paneles
+        _ConfirmationUp = _confirmationOriginalPos + new Vector3(0, 726, 0);
+
+        // Movemos los paneles a sus nuevas posiciones
+        _mover.Move(_ExitMenu, _confirmationOriginalPos, _ConfirmationUp);
+
+        // Opacidad del panel de transición
         SetPanelOpacityInstant(0.9f);
+
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(_MetalSound);
+
+        // Mensaje terminal
         Debug.Log("Game Exited.");
     }
 
     public void Credits()
     {
-        Debug.Log("Credits.");
+        
         StartCoroutine(FadeAndLoadCredits("Credits"));
+        
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(ClickDeBoton);
+
+        // Mensaje terminal
+        Debug.Log("Credits.");
     }
 
     public void Back()
     {
-        if (_MessagePanel != null)
-            StartCoroutine(SlidePanel(_MessagePanel, _messagePanelOriginalPos, _messagePanelOriginalPos + new Vector3(-800, 0, 0)));
-        
-        if (_SettingPanel != null)
-            StartCoroutine(SlidePanel(_SettingPanel, _settingPanelOriginalPos, _settingPanelOriginalPos + new Vector3(0, 600, 0)));
+        // Activar el menú principal y el selector de menú
+        StartCoroutine(SwitchToMainAfterDelay(_MenuSlideDuration, _MainMenu, true));
+        _MenuSelector.enabled = true;
 
-        StartCoroutine(SwitchToMainAfterDelay(_MenuSlideDuration));
+        // Movemos los paneles a sus nuevas posiciones
+        _mover.Move(_MessagePanel, _OptionLeft, _messagePanelOriginalPos);
+        _mover.Move(_SettingPanel, _OptionDown, _settingPanelOriginalPos);
+
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(_MetalSound);
+
+        StartCoroutine(SwitchToMainAfterDelay(_MenuSlideDuration, _OptionMenu, false));
+
+        // Mensaje terminal
         Debug.Log("Back.");
-    }
-
-    private IEnumerator SwitchToMainAfterDelay(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
-        _MainMenu.SetActive(true);
     }
 
     public void QuitConfirm()
     {
         Application.Quit();
+
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(ClickDeBoton);
+
+        // Mensaje terminal
         Debug.Log("QuitConfirm.");
     }
 
+    public void QuitCancel()
+    {
+        // Activar el selector de menú
+        _MenuSelector.enabled = true;
+
+        // Movemos los paneles a sus nuevas posiciones
+        _mover.Move(_ExitMenu, _ConfirmationUp, _confirmationOriginalPos);
+
+        // Sonido de botón
+        AudioManager.Instance.Reproducir(_MetalSound);
+
+        // Opacidad del panel de transición
+        _TransitionPanel.gameObject.SetActive(false);
+
+        // Desactivar el menú de salida
+        StartCoroutine(SwitchToMainAfterDelay(_MenuSlideDuration, _ExitMenu, false));
+
+        // Mensaje terminal
+        Debug.Log("Quit Cancel.");
+    }
+
+
+    private IEnumerator SwitchToMainAfterDelay(float delay, GameObject menu, bool isActive){
+        yield return new WaitForSecondsRealtime(delay);
+        menu.SetActive(isActive);
+    }
     private void SetPanelOpacityInstant(float targetAlpha)
     {
         if (_TransitionPanel != null)
@@ -133,38 +219,5 @@ public class MenuActions : MonoBehaviour
             color.a = targetAlpha;
             _TransitionPanel.color = color;
         }
-    }
-
-    private IEnumerator SlideMenuUp(GameObject menu)
-    {
-        float elapsed = 0f;
-        Vector3 start = _MenuHiddenPosition;
-        Vector3 end = _MenuVisiblePosition;
-
-        while (elapsed < _MenuSlideDuration)
-        {
-            elapsed += Time.unscaledDeltaTime;
-            menu.transform.localPosition = Vector3.Lerp(start, end, elapsed / _MenuSlideDuration);
-            yield return null;
-        }
-
-        menu.transform.localPosition = end;
-    }
-
-    private IEnumerator SlidePanel(GameObject panel, Vector3 start, Vector3 end)
-    {
-        panel.SetActive(true);
-        panel.transform.localPosition = start;
-
-        float elapsed = 0f;
-
-        while (elapsed < _MenuSlideDuration)
-        {
-            elapsed += Time.unscaledDeltaTime;
-            panel.transform.localPosition = Vector3.Lerp(start, end, elapsed / _MenuSlideDuration);
-            yield return null;
-        }
-
-        panel.transform.localPosition = end;
     }
 }
