@@ -617,28 +617,31 @@ public class DungeonGenerator : MonoBehaviour
         {
             if (cell.isRoom || cell.isCorridor)
             {
-                // Crear un plano por celda
                 GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
-
-                // El plano de Unity mide 10x10 por defecto, por lo tanto ajustamos escala
                 float scaleX = cell.size.x / 10f;
                 float scaleZ = cell.size.y / 10f;
                 floor.transform.localScale = new Vector3(scaleX, 1f, scaleZ);
 
-                // Posicionar el plano en el centro de la celda
                 Vector3 center = new Vector3(cell.position.x + cell.size.x / 2f, 0, cell.position.y + cell.size.y / 2f);
                 floor.transform.position = center;
 
-                // Agrupar en jerarquía
                 floor.transform.SetParent(dungeonParent);
-
-                // (Opcional) Renombrar para organización
                 floor.name = $"Floor_{(cell.isRoom ? "Room" : "Corridor")}_{center.x}_{center.z}";
+
+                // 🎯 Aquí asignamos un material desde la lista
+                if (floorMaterials.Count > 0)
+                {
+                    Renderer r = floor.GetComponent<Renderer>();
+                    Material mat = new Material(floorMaterials[0]); // Crea una instancia para modificar
+                    r.material = mat;
+                }
+
             }
         }
 
         Debug.Log("Suelos generados como planos por celda.");
     }
+
 
     private void GenerateWalls()
     {
@@ -774,7 +777,7 @@ public class DungeonGenerator : MonoBehaviour
 
         if (wallMaterials.Count > 0)
         {
-            mr.material = wallMaterials[Random.Range(0, wallMaterials.Count)];
+            mr.material = wallMaterials[0];
         }
     }
 
@@ -799,20 +802,21 @@ public class DungeonGenerator : MonoBehaviour
             // Bottom
             0, 2, 1, 0, 3, 2,
             // Top
-            4, 5, 6, 4, 6, 7,
+            4, 6, 5, 4, 7, 6,
             // Front
-            0, 1, 5, 0, 5, 4,
+            4, 5, 1, 4, 1, 0,
             // Back
-            2, 3, 7, 2, 7, 6,
+            6, 7, 3, 6, 3, 2,
             // Left
-            3, 0, 4, 3, 4, 7,
+            7, 4, 0, 7, 0, 3,
             // Right
-            1, 2, 6, 1, 6, 5
+            5, 6, 2, 5, 2, 1
         };
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
 
         return mesh;
     }
