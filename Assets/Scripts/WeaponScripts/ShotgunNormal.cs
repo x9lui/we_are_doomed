@@ -15,30 +15,27 @@ public class ShotgunNormal : Gun
 
         ammo--; // Reducir la munición
         Debug.Log($"ShotgunNormal fired! Ammo left: {ammo}");
+        spriteAnim.SetTrigger("Fire"); // Activar la animación de disparo
 
-    //     // Efectos visuales y de sonido
-    //     if (muzzleFlash != null) muzzleFlash.Play();
-    //     if (gunSound != null) gunSound.Play();
-
-    //     // Disparar múltiples perdigones
-    //     for (int i = 0; i < pellets; i++)
-    //     {
-    //         Vector3 shootDirection = fpsCamera.transform.forward;
-    //         shootDirection.x += Random.Range(-spreadAngle, spreadAngle) * 0.01f;
-    //         shootDirection.y += Random.Range(-spreadAngle, spreadAngle) * 0.01f;
-
-    //         RaycastHit hit;
-    //         if (Physics.Raycast(fpsCamera.transform.position, shootDirection, out hit, range))
-    //         {
-    //             Debug.Log($"ShotgunNormal hit: {hit.collider.name}");
-
-    //             // Aplicar daño si el objeto impactado tiene un componente de salud
-    //             var target = hit.collider.GetComponent<Health>();
-    //             if (target != null)
-    //             {
-    //                 target.TakeDamage(damage);
-    //             }
-    //         }
-    //     }
+        // Disparar múltiples perdigones
+        for (int i = 0; i < pellets; i++)
+        {
+            HandleRaycastAndDamage(); // Usar el método genérico para cada perdigón
+        }
     }
+
+    public override void Walk()
+    {
+        spriteAnim.SetBool("isWalking", true); // Set the walking animation
+        // Implementar la lógica de caminar con el puño
+        Debug.Log("Fist: Walking");
+    }
+
+    public override void Idle()
+    {
+        spriteAnim.SetBool("isWalking", false); // Set the walking animation
+
+        // Implementar la lógica de estar inactivo con el puño
+        Debug.Log("Fist: Idle");
+    }   
 }

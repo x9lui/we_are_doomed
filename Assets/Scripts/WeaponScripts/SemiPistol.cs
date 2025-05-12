@@ -14,23 +14,24 @@ public class SemiPistol : Gun
 
         ammo--; // Reducir la munición
         Debug.Log($"SemiPistol fired! Ammo left: {ammo}");
+        spriteAnim.SetTrigger("Fire"); // Activar la animación de disparo
 
-        // // Efectos visuales y de sonido
-        // if (muzzleFlash != null) muzzleFlash.Play();
-        // if (gunSound != null) gunSound.Play();
-
-        // // Realizar un raycast para detectar impactos
-        // RaycastHit hit;
-        // if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
-        // {
-        //     Debug.Log($"SemiPistol hit: {hit.collider.name}");
-
-        //     // Aplicar daño si el objeto impactado tiene un componente de salud
-        //     var target = hit.collider.GetComponent<Health>();
-        //     if (target != null)
-        //     {
-        //         target.TakeDamage(damage);
-        //     }
-        // }
+        // Usar el método genérico para manejar el raycast y el daño
+        HandleRaycastAndDamage();
     }
+
+    public override void Walk()
+    {
+        spriteAnim.SetBool("isWalking", true); // Set the walking animation
+        // Implementar la lógica de caminar con el puño
+        Debug.Log("Fist: Walking");
+    }
+
+    public override void Idle()
+    {
+        spriteAnim.SetBool("isWalking", false); // Set the walking animation
+
+        // Implementar la lógica de estar inactivo con el puño
+        Debug.Log("Fist: Idle");
+    }   
 }

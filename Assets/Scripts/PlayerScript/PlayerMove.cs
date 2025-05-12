@@ -78,21 +78,33 @@ public class PlayerMove : MonoBehaviour
 
     void GetInput()
     {
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             inputvector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")); // Get input from the player
             inputvector.Normalize(); // Normalize the input vector to ensure consistent movement speed
             inputvector = transform.TransformDirection(inputvector); // Transform the input vector to world space
             isWalking = true; // Set the walking flag to true
+
+            // Llamar a la función Walk del arma actual
+            if (currentGun != null)
+            {
+                currentGun.Walk();
+            }
         }
         else
         {
             inputvector = Vector3.Lerp(inputvector, Vector3.zero, momentumDamping * Time.deltaTime); // Smoothly reduce the input vector to zero
             isWalking = false; // Set the walking flag to false
-        }
-        camAnim.SetBool("isWalking", isWalking); // Set the walking animation parameter in the Animator
-        movementVector = (inputvector * speed) + (Vector3.up * myGravity); // Calculate the movement vector based on input and speed 
 
+            // Llamar a la función Idle del arma actual
+            if (currentGun != null)
+            {
+                currentGun.Idle();
+            }
+        }
+
+        camAnim.SetBool("isWalking", isWalking); // Set the walking animation parameter in the Animator
+        movementVector = (inputvector * speed) + (Vector3.up * myGravity); // Calculate the movement vector based on input and speed
     }
 
     void MovePlayer()
@@ -154,7 +166,7 @@ public class PlayerMove : MonoBehaviour
             if (gun != null)
             {
                 // Mostrar solo el arma correspondiente al slot actual
-                if (gun.GetName() == inventory.GetWeapon(currentSlot))
+                if (gun.name == inventory.GetWeapon(currentSlot))
                 {
                     child.gameObject.SetActive(true);
                     currentGun = gun; // Actualizar la referencia al arma activa

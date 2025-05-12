@@ -10,61 +10,64 @@ public class Gun : MonoBehaviour
     public int maxAmmo; // Capacidad máxima de munición
     public float RayCastDistance; // Distancia máxima del raycast
 
+    protected RayCast rayCast; // Referencia al script RayCast
+
     [Header("References")]
     public AudioSource gunSound; // Sonido del disparo
 
     private float nextTimeToFire; // Tiempo hasta el próximo disparo permitido
 
+    protected Animator spriteAnim;
+
+    [Obsolete]
     void Start()
     {
-        // if (fpsCamera == null)
-        // {
-        //     fpsCamera = Camera.main; // Asignar la cámara principal si no está configurada
-        // }
-    }
-
-    void Update()
-    {
-        // Detectar si el jugador presiona el botón de disparo
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+        spriteAnim = GetComponent<Animator>(); // Get the Animator component attached to the enemy
+        rayCast = FindObjectOfType<RayCast>();
+        if (rayCast == null)
         {
-            nextTimeToFire = Time.time + fireRate; // Calcular el tiempo para el próximo disparo
-            Fire(); // Llamar al método disparar
+            Debug.LogError("RayCast script not found!");
         }
     }
 
-    public string GetName()
+    public GameObject HandleRaycastAndDamage()
     {
-        return gameObject.name; // Devolver el nombre del objeto del arma
+        // Llamar al método CheckRayCastCollisionWithEnemy del script RayCast
+        GameObject enemyObject = rayCast.CheckRayCastCollisionWithEnemy();
+        if (enemyObject != null)
+        {
+            Debug.Log($"Hit enemy: {enemyObject.name}");
+
+            // Obtener el componente Enemy y aplicar daño
+            Enemy enemy = enemyObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage); // Aplicar daño al enemigo
+                return enemyObject; // Devolver el enemigo golpeado
+            }
+            else
+            {
+                Debug.LogWarning("Hit object does not have an Enemy component!");
+            }
+        }
+        else
+        {
+            Debug.Log("No enemy hit");
+        }
+
+        return null; // Si no se golpeó a ningún enemigo
     }
 
     public virtual void Fire()
     {
-        // if (ammo <= 0)
-        // {
-        //     Debug.Log("Out of ammo!");
-        //     return; // No disparar si no hay munición
-        // }
+        Debug.Log("Gun: Fire method called.");
+    }
 
-        // ammo--; // Reducir la munición
-        // Debug.Log($"Shot fired! Ammo left: {ammo}");
+    public virtual void Walk()
+    {
+    }
 
-        // // Efectos visuales y de sonido
-        // if (muzzleFlash != null) muzzleFlash.Play();
-        // if (gunSound != null) gunSound.Play();
-
-        // // Realizar un raycast para detectar impactos
-        // RaycastHit hit;
-        // if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
-        // {
-        //     Debug.Log($"Hit: {hit.collider.name}");
-
-        //     // Aplicar daño si el objeto impactado tiene un componente de salud
-        //     var target = hit.collider.GetComponent<Health>();
-        //     if (target != null)
-        //     {
-        //         target.TakeDamage(damage);
-        //     }
-        // }
+    public virtual void Idle()
+    {
     }
 }
