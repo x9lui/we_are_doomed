@@ -58,7 +58,7 @@ public class MenuSelector : MonoBehaviour{
     {
         
         // Sonido de botón
-        AudioManager.Instance.Reproducir(_bottonSound);
+        AudioManager.Instance.ReproducirInterfaz(_bottonSound);
 
         RectTransform buttonTransform = _buttons[_selectedIndex].GetComponent<RectTransform>();
         Vector3 newPosition = buttonTransform.position + new Vector3(_offset.x, _offset.y, 0f);

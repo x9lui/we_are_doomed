@@ -5,7 +5,9 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     [Header("Fuentes de audio")]
-    public AudioSource Boton;
+    public AudioSource BotonMusica;
+    public AudioSource BotonEfectos;
+    public AudioSource BotonInterfaz;
 
     private void Awake()
     {
@@ -32,15 +34,19 @@ public class AudioManager : MonoBehaviour
     {
         if (SettingsManager.Instance == null) return;
 
-        Boton.volume = SettingsManager.Instance.audioMusica;
+        BotonMusica.volume = SettingsManager.Instance.audioMusica;
+        BotonEfectos.volume = SettingsManager.Instance.audioEfectos;
+        BotonInterfaz.volume = SettingsManager.Instance.audioBotones;
+
     }
 
-    // Métodos para reproducir clips
-    public void Reproducir(AudioClip clip)
+    // Métodos para reproducir clips para Interfaz.
+    public void ReproducirInterfaz(AudioClip clip)
     {
         if(clip == null){
-            Boton.Play();
+            BotonInterfaz.Play();
         }
-        Boton.PlayOneShot(clip);
+        BotonInterfaz.PlayOneShot(clip);
     }
+    
 }

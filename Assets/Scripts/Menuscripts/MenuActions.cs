@@ -54,7 +54,7 @@ public class MenuActions : MonoBehaviour
         StartCoroutine(FadeAndLoadCredits("LoadScene"));
 
         // Sonido de botón
-        AudioManager.Instance.Reproducir(ClickDeBoton);
+        AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);
 
         // Mensaje terminal
         Debug.Log("Single Player Mode Started.");  
@@ -83,7 +83,7 @@ public class MenuActions : MonoBehaviour
 
 
         // Sonido de botón
-        AudioManager.Instance.Reproducir(_MetalSound);
+        AudioManager.Instance.ReproducirInterfaz(_MetalSound);
 
         // Mensaje terminal
         Debug.Log("Options Menu Opened.");
@@ -106,7 +106,7 @@ public class MenuActions : MonoBehaviour
         SetPanelOpacityInstant(0.9f);
 
         // Sonido de botón
-        AudioManager.Instance.Reproducir(_MetalSound);
+        AudioManager.Instance.ReproducirInterfaz(_MetalSound);
 
         // Mensaje terminal
         Debug.Log("Game Exited.");
@@ -118,7 +118,7 @@ public class MenuActions : MonoBehaviour
         StartCoroutine(FadeAndLoadCredits("Credits"));
         
         // Sonido de botón
-        AudioManager.Instance.Reproducir(ClickDeBoton);
+        AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);
 
         // Mensaje terminal
         Debug.Log("Credits.");
@@ -135,7 +135,7 @@ public class MenuActions : MonoBehaviour
         _mover.Move(_SettingPanel, _OptionDown, _settingPanelOriginalPos);
 
         // Sonido de botón
-        AudioManager.Instance.Reproducir(_MetalSound);
+        AudioManager.Instance.ReproducirInterfaz(_MetalSound);
 
         StartCoroutine(SwitchToMainAfterDelay(_MenuSlideDuration, _OptionMenu, false));
 
@@ -148,7 +148,7 @@ public class MenuActions : MonoBehaviour
         Application.Quit();
 
         // Sonido de botón
-        AudioManager.Instance.Reproducir(ClickDeBoton);
+        AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);
 
         // Mensaje terminal
         Debug.Log("QuitConfirm.");
@@ -163,7 +163,7 @@ public class MenuActions : MonoBehaviour
         _mover.Move(_ExitMenu, _ConfirmationUp, _confirmationOriginalPos);
 
         // Sonido de botón
-        AudioManager.Instance.Reproducir(_MetalSound);
+        AudioManager.Instance.ReproducirInterfaz(_MetalSound);
 
         // Opacidad del panel de transición
         _TransitionPanel.gameObject.SetActive(false);

@@ -4,9 +4,9 @@ public class SettingsManager : MonoBehaviour
 {
     public static SettingsManager Instance;
 
-    [Range(0f, 1f)] public float audioMusica = 1f;
-    [Range(0f, 1f)] public float audioBotones = 1f;
-    [Range(0f, 1f)] public float audioEfectos = 1f;
+    [Range(0f, 1)] public float audioMusica = 1f;
+    [Range(0f, 1)] public float audioBotones = 1f;
+    [Range(0f, 1)] public float audioEfectos = 1f;
     [Range(0.1f, 10f)] public float sensibilidad = 1f;
 
     private void Awake()
@@ -19,6 +19,7 @@ public class SettingsManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            Debug.LogWarning("Instancia duplicada de SettingsManager destruida.");
         }
     }
 

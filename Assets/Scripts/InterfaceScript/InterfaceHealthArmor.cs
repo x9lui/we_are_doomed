@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class BarraProgresoDoom : MonoBehaviour
+public class InterfaceHealthArmor : MonoBehaviour
 {
     [Header("Configuración de la barra")]
     [SerializeField] private Image _barraLlena;

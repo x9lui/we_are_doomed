@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class CabezaDoom : MonoBehaviour
+public class InterfaceHead : MonoBehaviour
 {
     [Header("Imagen de la cabeza del HUD")]
     [SerializeField] private Image imagenCabeza;

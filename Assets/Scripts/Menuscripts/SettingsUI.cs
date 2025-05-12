@@ -10,6 +10,13 @@ public class SettingsUI : MonoBehaviour
 
     void Start()
     {
+        if (_audioMusica != null && _audioBotones != null && _audioEfectos != null && _sensibilidad != null){
+            Initialize();
+        }
+    }
+
+    public void Initialize()
+    {
         // Cargar valores actuales
         _audioMusica.value = SettingsManager.Instance.audioMusica;
         _audioBotones.value = SettingsManager.Instance.audioBotones;
@@ -18,6 +25,7 @@ public class SettingsUI : MonoBehaviour
 
         // Asignar listeners
         _audioMusica.onValueChanged.AddListener(SettingsManager.Instance.SetAudioMusica);
+        Debug.Log("AudioMusica: " + SettingsManager.Instance.audioMusica);
         _audioBotones.onValueChanged.AddListener(SettingsManager.Instance.SetAudioBotones);
         _audioEfectos.onValueChanged.AddListener(SettingsManager.Instance.SetAudioEfectos);
         _sensibilidad.onValueChanged.AddListener(SettingsManager.Instance.SetSensibilidad);

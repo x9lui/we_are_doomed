@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &25846497
 RectTransform:
   m_ObjectHideFlags: 0
@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 89992964}
   - component: {fileID: 89992963}
   - component: {fileID: 89992962}
+  - component: {fileID: 89992965}
   m_Layer: 0
   m_Name: BotonReanudar
   m_TagString: Untagged
@@ -404,6 +405,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89992960}
   m_CullTransparentMesh: 1
+--- !u!114 &89992965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89992960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 844376337}
+          m_TargetAssemblyTypeName: MenuPauseActions, Assembly-CSharp
+          m_MethodName: SonidoBotonInterfaz
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: db3bc8c05321e9f40b8838455ebaad87, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &90709217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,6 +1265,7 @@ GameObject:
   - component: {fileID: 321960794}
   - component: {fileID: 321960793}
   - component: {fileID: 321960792}
+  - component: {fileID: 321960795}
   m_Layer: 0
   m_Name: Back
   m_TagString: Untagged
@@ -1356,6 +1387,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321960790}
   m_CullTransparentMesh: 1
+--- !u!114 &321960795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321960790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 844376337}
+          m_TargetAssemblyTypeName: MenuPauseActions, Assembly-CSharp
+          m_MethodName: SonidoBotonInterfaz
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: db3bc8c05321e9f40b8838455ebaad87, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &322923471
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,6 +2655,7 @@ GameObject:
   - component: {fileID: 601527869}
   - component: {fileID: 601527868}
   - component: {fileID: 601527867}
+  - component: {fileID: 601527870}
   m_Layer: 0
   m_Name: BotonSalir
   m_TagString: Untagged
@@ -2716,6 +2777,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601527865}
   m_CullTransparentMesh: 1
+--- !u!114 &601527870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601527865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 844376337}
+          m_TargetAssemblyTypeName: MenuPauseActions, Assembly-CSharp
+          m_MethodName: SonidoBotonInterfaz
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: db3bc8c05321e9f40b8838455ebaad87, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &628142193
 GameObject:
   m_ObjectHideFlags: 0
@@ -3629,6 +3719,7 @@ GameObject:
   - component: {fileID: 844376338}
   - component: {fileID: 844376339}
   - component: {fileID: 844376340}
+  - component: {fileID: 844376341}
   m_Layer: 5
   m_Name: SceneManager
   m_TagString: Untagged
@@ -3691,6 +3782,8 @@ MonoBehaviour:
   _MenuPrincipalDisplay: {fileID: 1916681593}
   _ConfirmationExit: {fileID: 1985696486}
   _mover: {fileID: 844376339}
+  ClickDeBoton: {fileID: 8300000, guid: cbc91ceda4da56f4b993416fe46b07e1, type: 3}
+  _MetalSound: {fileID: 8300000, guid: 2aa31e2de9668d441a7a6b94040fc5d3, type: 3}
 --- !u!114 &844376338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3744,6 +3837,22 @@ MonoBehaviour:
   _audioBotones: {fileID: 2014424359}
   _audioEfectos: {fileID: 1045250588}
   _sensibilidad: {fileID: 953503688}
+--- !u!114 &844376341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844376334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0284b2ea121f295489a58bd15bd2a2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SliderMusica: {fileID: 1324288847}
+  _SliderEfectos: {fileID: 1045250588}
+  _SliderInterfaz: {fileID: 2014424359}
+  _SliderSensibilidad: {fileID: 953503688}
 --- !u!1 &848660015
 GameObject:
   m_ObjectHideFlags: 0
@@ -4137,7 +4246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &929841661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5926,7 +6035,7 @@ RectTransform:
   m_Father: {fileID: 993940674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6245,7 +6354,7 @@ RectTransform:
   m_Father: {fileID: 820409543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.15240479, y: 0.83860016}
   m_SizeDelta: {x: 9.6951, y: -6.5564}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7491,6 +7600,7 @@ GameObject:
   - component: {fileID: 1573532485}
   - component: {fileID: 1573532484}
   - component: {fileID: 1573532483}
+  - component: {fileID: 1573532486}
   m_Layer: 0
   m_Name: SiBoton
   m_TagString: Untagged
@@ -7612,6 +7722,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1573532481}
   m_CullTransparentMesh: 1
+--- !u!114 &1573532486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573532481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 844376337}
+          m_TargetAssemblyTypeName: MenuPauseActions, Assembly-CSharp
+          m_MethodName: SonidoBotonInterfaz
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: db3bc8c05321e9f40b8838455ebaad87, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1576076448
 GameObject:
   m_ObjectHideFlags: 0
@@ -8507,6 +8646,7 @@ GameObject:
   - component: {fileID: 1739370229}
   - component: {fileID: 1739370228}
   - component: {fileID: 1739370227}
+  - component: {fileID: 1739370230}
   m_Layer: 0
   m_Name: NoBoton
   m_TagString: Untagged
@@ -8579,7 +8719,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 844376337}
-        m_TargetAssemblyTypeName: OptionActions, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuPauseActions, Assembly-CSharp
         m_MethodName: SalirNO
         m_Mode: 1
         m_Arguments:
@@ -8628,6 +8768,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739370225}
   m_CullTransparentMesh: 1
+--- !u!114 &1739370230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739370225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 844376337}
+          m_TargetAssemblyTypeName: MenuPauseActions, Assembly-CSharp
+          m_MethodName: SonidoBotonInterfaz
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: db3bc8c05321e9f40b8838455ebaad87, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1747358517
 GameObject:
   m_ObjectHideFlags: 0
@@ -9164,6 +9333,7 @@ RectTransform:
   m_Children:
   - {fileID: 226829178}
   - {fileID: 844376335}
+  - {fileID: 2055114161}
   - {fileID: 929841661}
   - {fileID: 350017659}
   - {fileID: 774595473}
@@ -9982,6 +10152,7 @@ GameObject:
   - component: {fileID: 2003809098}
   - component: {fileID: 2003809097}
   - component: {fileID: 2003809096}
+  - component: {fileID: 2003809099}
   m_Layer: 0
   m_Name: BotonReaparecer
   m_TagString: Untagged
@@ -10103,6 +10274,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003809094}
   m_CullTransparentMesh: 1
+--- !u!114 &2003809099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003809094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 844376337}
+          m_TargetAssemblyTypeName: MenuPauseActions, Assembly-CSharp
+          m_MethodName: SonidoBotonInterfaz
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: db3bc8c05321e9f40b8838455ebaad87, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2014424357
 GameObject:
   m_ObjectHideFlags: 0
@@ -10346,6 +10546,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047517642}
   m_CullTransparentMesh: 1
+--- !u!1 &2055114160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2055114161}
+  - component: {fileID: 2055114163}
+  - component: {fileID: 2055114162}
+  m_Layer: 5
+  m_Name: AudioManagerProper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2055114161
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055114160}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1837056634}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0897, y: 4.4782}
+  m_SizeDelta: {x: 84.1855, y: 91.6595}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2055114162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055114160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5987c98638f0ad34eba4a6d7d7bf341f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioMusica: {fileID: 1324288847}
+  _audioBotones: {fileID: 2014424359}
+  _audioEfectos: {fileID: 1045250588}
+  _sensibilidad: {fileID: 953503688}
+--- !u!114 &2055114163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055114160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0284b2ea121f295489a58bd15bd2a2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SliderMusica: {fileID: 1324288847}
+  _SliderEfectos: {fileID: 1045250588}
+  _SliderInterfaz: {fileID: 2014424359}
+  _SliderSensibilidad: {fileID: 953503688}
 --- !u!1 &2072505227
 GameObject:
   m_ObjectHideFlags: 0
