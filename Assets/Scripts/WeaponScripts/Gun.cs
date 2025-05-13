@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
     public AudioSource gunSound; // Sonido del disparo
 
     private float nextTimeToFire; // Tiempo hasta el próximo disparo permitido
+    protected bool isFiring = false; // Nueva bandera para controlar si el arma está disparando
 
     protected Animator spriteAnim;
 
@@ -60,7 +61,19 @@ public class Gun : MonoBehaviour
 
     public virtual void Fire()
     {
-        Debug.Log("Gun: Fire method called.");
+        if (isFiring || Time.time < nextTimeToFire)
+        {
+            Debug.Log("Gun is not ready to fire.");
+            return;
+        }
+
+        isFiring = true; // Marcar el arma como disparando
+        nextTimeToFire = Time.time + fireRate; // Configurar el tiempo para el próximo disparo
+    }
+
+    protected void FinishFire()
+    {
+        isFiring = false; // Marcar el arma como lista para disparar nuevamente
     }
 
     public virtual void Walk()
