@@ -1,0 +1,1363 @@
+fileFormatVersion: 2
+guid: 387c40065b2a09346b713fa6d1b109d2
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 20
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 314
+        width: 42
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72398952d6e5f754a92de0f663018f88
+      internalID: -1412374142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 316
+        width: 40
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d606533149ab834390d27dc9e245c6a
+      internalID: -1231511485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 320
+        width: 36
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a434390e4c51cc94289cad22faf5f2d0
+      internalID: -257153037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 326
+        width: 30
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2e1240cfbe76fd48a0961f78a6bec80
+      internalID: -82793828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 324
+        width: 35
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d4f70c62f22baf4bb6e502adcc1cec6
+      internalID: 1371547325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 315
+        width: 39
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ea82a8c21b46144e8072e37b819a5c3
+      internalID: 35180491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 316
+        width: 38
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 334d2ee5abf1a9e4ca53a3ba2c06e72e
+      internalID: 1037090019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 322
+        width: 38
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a42f0dd93eff56242807c3b8bc53ba24
+      internalID: 1354777768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 326
+        width: 33
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20c1675bdf10e3847bf968012f19fd16
+      internalID: 1727394286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 327
+        width: 33
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ace33d19a26c27a488d15c31616916ee
+      internalID: 359268054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 313
+        width: 39
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d33ab343956d9a458c0903340cf9ceb
+      internalID: -1128172910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 315
+        width: 41
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c12db827adb3fd24a8314f90562b4451
+      internalID: 1642916929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 257
+        width: 31
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09494d22794be054fb2b80490e3b3374
+      internalID: -1948536012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 258
+        width: 28
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5824440b759f2f46a963f9d8fd57c9e
+      internalID: -552936658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 259
+        width: 35
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882724800327103408c496cf5495cc55
+      internalID: -696542371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 255
+        width: 37
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b019edb4fd3f2fd4cb275bab8ff7337a
+      internalID: 46073540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 256
+        width: 45
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afe33605610df904e9eee1ddb58a1474
+      internalID: -2042885607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 253
+        width: 39
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16e25d4684c530f40902d803066f20fa
+      internalID: 1097506013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 255
+        width: 30
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9a93abff21015b4e9650f3f44b22b6f
+      internalID: -1961154684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 255
+        width: 33
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be3ce80e6f1549d4d84e5e1c0e997aed
+      internalID: 221455560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 241
+        width: 49
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06482d2fb6ba6b2469e7f8688821fc3e
+      internalID: -1501735859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 245
+        width: 32
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38302803672a21b4cb7e2aaf15f71e54
+      internalID: -2004850052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 252
+        width: 39
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f82ca60018ad57a4b8b504d448b37f23
+      internalID: -1094200423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 254
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67fdefcb75936aa4cb17fbbdc315c0e9
+      internalID: -1612828631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 193
+        width: 38
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 584000f5d9bcd524b8e23468ec4c5cab
+      internalID: 1290080821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 192
+        width: 44
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29f10f56362b1724bb0565334157d109
+      internalID: 573498850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 193
+        width: 45
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eccba8b151edbb48897218165a5a8c5
+      internalID: -359036823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 193
+        width: 42
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f4f41c43537bbb48b4e4b497b040a71
+      internalID: -2082874108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 193
+        width: 36
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eb88a61947a0ab4ea7c6483d9d10e0c
+      internalID: -1120761463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_29
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 193
+        width: 33
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1df60bf3b8545b04690bc8b1677ccf19
+      internalID: -161205986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_30
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 184
+        width: 32
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4e9555c1e6681d4c8109ca79814074b
+      internalID: -485201033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_31
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 175
+        width: 55
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ceaf7d88679fd94da3708fffc5f5ef1
+      internalID: -2108712702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_32
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 178
+        width: 59
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83900e633c79459439b780f5fb0e1221
+      internalID: 216738659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 139
+        width: 46
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd37f4038a8edc7438f66ee135814719
+      internalID: 194280031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_34
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 139
+        width: 31
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1373688dcbd8b0b4c8d35e6d07023b35
+      internalID: -1231164739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_35
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 130
+        width: 41
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2804b12686aac1146bcb651ab49bb14b
+      internalID: 1002281351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_36
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 129
+        width: 31
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 244675e4f133fb34fadcaf85bb6d893b
+      internalID: -2122399635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_37
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 129
+        width: 34
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbaa1aaf9635aef44871b939bc9872d9
+      internalID: 569652437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_38
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 129
+        width: 34
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c1a7f80548172940b4939b58f6daee5
+      internalID: -841805824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_39
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 121
+        width: 39
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b175fac4c404eb4e97b97777e514d4f
+      internalID: -315185875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_40
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 106
+        width: 55
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1b26a7373855d24ab7ce6626eab568a
+      internalID: -557558854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_41
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 110
+        width: 41
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd031e55d3fe48b429493a698700da12
+      internalID: -93664272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_42
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 112
+        width: 40
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 624be0fc226794e458f65ba8d133ebf4
+      internalID: 1248840856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_43
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 57
+        width: 48
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10b49edac274c764692f9a5e5e47b937
+      internalID: 1984613786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_44
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 49
+        width: 58
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d5d74dcebbe98a41b762ed6c13f06ee
+      internalID: 1866199030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_45
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 49
+        width: 46
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf6fa355987863b4babb67bffb4d3438
+      internalID: 486509742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_46
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 49
+        width: 49
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d13792d361842b49837be52fae96356
+      internalID: 507001868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_47
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 49
+        width: 55
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af0cd71db3b2083439822ca71647ed51
+      internalID: -301433649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_48
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 42
+        width: 58
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eb766e1c9efa8349967d0c230e826c9
+      internalID: -171213638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_50
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 49
+        width: 57
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54419e4c1312a6f4da565d135caf89d5
+      internalID: -1950069380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_51
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 49
+        width: 57
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 286d192af94df0f448df4c58ec44c9dd
+      internalID: -91392305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_52
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 56
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 592ec40e6f7514849ad473a47bac07b1
+      internalID: 2028174813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Imp-from-Doom-Spritesheet_53
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 4
+        width: 56
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7bf9ec55ac5c1247bc9de2a07a93e3f
+      internalID: 1043482405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 65b7f3357b1cd0b4ca0432f1874fe83d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Imp-from-Doom-Spritesheet_0: -1412374142
+      Imp-from-Doom-Spritesheet_1: -1231511485
+      Imp-from-Doom-Spritesheet_10: -1128172910
+      Imp-from-Doom-Spritesheet_11: 1642916929
+      Imp-from-Doom-Spritesheet_12: -1948536012
+      Imp-from-Doom-Spritesheet_13: -552936658
+      Imp-from-Doom-Spritesheet_14: -696542371
+      Imp-from-Doom-Spritesheet_15: 46073540
+      Imp-from-Doom-Spritesheet_16: -2042885607
+      Imp-from-Doom-Spritesheet_17: 1097506013
+      Imp-from-Doom-Spritesheet_18: -1961154684
+      Imp-from-Doom-Spritesheet_19: 221455560
+      Imp-from-Doom-Spritesheet_2: -257153037
+      Imp-from-Doom-Spritesheet_20: -1501735859
+      Imp-from-Doom-Spritesheet_21: -2004850052
+      Imp-from-Doom-Spritesheet_22: -1094200423
+      Imp-from-Doom-Spritesheet_23: -1612828631
+      Imp-from-Doom-Spritesheet_24: 1290080821
+      Imp-from-Doom-Spritesheet_25: 573498850
+      Imp-from-Doom-Spritesheet_26: -359036823
+      Imp-from-Doom-Spritesheet_27: -2082874108
+      Imp-from-Doom-Spritesheet_28: -1120761463
+      Imp-from-Doom-Spritesheet_29: -161205986
+      Imp-from-Doom-Spritesheet_3: -82793828
+      Imp-from-Doom-Spritesheet_30: -485201033
+      Imp-from-Doom-Spritesheet_31: -2108712702
+      Imp-from-Doom-Spritesheet_32: 216738659
+      Imp-from-Doom-Spritesheet_33: 194280031
+      Imp-from-Doom-Spritesheet_34: -1231164739
+      Imp-from-Doom-Spritesheet_35: 1002281351
+      Imp-from-Doom-Spritesheet_36: -2122399635
+      Imp-from-Doom-Spritesheet_37: 569652437
+      Imp-from-Doom-Spritesheet_38: -841805824
+      Imp-from-Doom-Spritesheet_39: -315185875
+      Imp-from-Doom-Spritesheet_4: 1371547325
+      Imp-from-Doom-Spritesheet_40: -557558854
+      Imp-from-Doom-Spritesheet_41: -93664272
+      Imp-from-Doom-Spritesheet_42: 1248840856
+      Imp-from-Doom-Spritesheet_43: 1984613786
+      Imp-from-Doom-Spritesheet_44: 1866199030
+      Imp-from-Doom-Spritesheet_45: 486509742
+      Imp-from-Doom-Spritesheet_46: 507001868
+      Imp-from-Doom-Spritesheet_47: -301433649
+      Imp-from-Doom-Spritesheet_48: -171213638
+      Imp-from-Doom-Spritesheet_49: -139719934
+      Imp-from-Doom-Spritesheet_5: 35180491
+      Imp-from-Doom-Spritesheet_50: -1950069380
+      Imp-from-Doom-Spritesheet_51: -91392305
+      Imp-from-Doom-Spritesheet_52: 2028174813
+      Imp-from-Doom-Spritesheet_53: 1043482405
+      Imp-from-Doom-Spritesheet_6: 1037090019
+      Imp-from-Doom-Spritesheet_7: 1354777768
+      Imp-from-Doom-Spritesheet_8: 1727394286
+      Imp-from-Doom-Spritesheet_9: 359268054
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
