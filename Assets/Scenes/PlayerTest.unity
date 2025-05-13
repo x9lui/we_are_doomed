@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 195153192}
   - component: {fileID: 195153195}
   - component: {fileID: 195153196}
+  - component: {fileID: 195153198}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -407,6 +408,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da02d7ee2c87b8b4991c173e12838f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &195153198
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195153190}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &212006132
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,6 +2107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f162004499dc41240863e22b374f9215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 2
+  attackCooldown: 1.5
 --- !u!114 &1724999027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2134,6 +2158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunHitEffect: {fileID: 992790962501269390, guid: ab1307b0c818e1247a8e1c88e5468f83, type: 3}
   enemyManager: {fileID: 0}
+  enemyHealth: 500
 --- !u!1 &1790861089
 GameObject:
   m_ObjectHideFlags: 0
