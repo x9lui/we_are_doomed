@@ -11,6 +11,9 @@ public class ArmorPickUp : ItemPickUp
         {
             playerHealth.CurrentArmor = Mathf.Min(playerHealth.CurrentArmor + armorAmount, playerHealth.MaxArmor);
             Debug.Log($"Player picked up armor. Current armor: {playerHealth.CurrentArmor}");
+        }else
+        {
+            Debug.LogError("PlayerHealth component not found on the player!");
         }
     }
 }
