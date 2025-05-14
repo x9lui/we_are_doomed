@@ -19,11 +19,16 @@ public class MenuPauseActions : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private UIElementMover _mover;
 
+    [SerializeField] private MouseLook _mouseLookScript;
+
     [Header("Sounds")]
 
     [SerializeField] private AudioClip ClickDeBoton;
     [SerializeField] private AudioClip _MetalSound;
 
+    [Header("Modo")]
+
+    [SerializeField] private bool UnJugador = true;
 
     // Variables para controlar la posición
     private Vector3 _optionsOriginal;
@@ -60,6 +65,14 @@ public class MenuPauseActions : MonoBehaviour
         _optionUp = _optionsOriginal + new Vector3(0, 567, 0);
 
         if(!pulsadoReanudar){
+            Cursor.lockState = CursorLockMode.None;     // Libera Cursor
+            Cursor.visible = true;                      // Ver
+            if(UnJugador)
+            {
+                Time.timeScale = 0f;
+            }
+
+            _mouseLookScript.enabled = false;          // Desactiva el script de movimiento del ratón
 
             pulsadoReanudar = true;
 
@@ -70,6 +83,14 @@ public class MenuPauseActions : MonoBehaviour
             _mover.Move(_MenuPrincipalDisplay, _menuOriginal, _menuUp);
             _mover.Move(_OptionsMenuDisplay, _optionsOriginal, _optionUp);
         }else{
+            Cursor.lockState = CursorLockMode.Locked;     // Bloquea el cursor en el centro de la pantalla
+            Cursor.visible = false;                      // Ocutar el cursor
+            if(UnJugador)
+            {
+                Time.timeScale = 1f;
+            }
+            _mouseLookScript.enabled = true;           // Activa el script de movimiento del ratón
+
             pulsadoReanudar = false;
             _OptionPanel.SetActive(false);
 
@@ -133,8 +154,10 @@ public class MenuPauseActions : MonoBehaviour
 
     public void SalirSI()
     {
+        Debug.Log("Saliendo del juego...");
         AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);
         SceneManager.LoadScene("MainMenu");
+
     }
 
     public void SalirNO()

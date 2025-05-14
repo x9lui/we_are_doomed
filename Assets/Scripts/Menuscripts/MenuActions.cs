@@ -51,7 +51,7 @@ public class MenuActions : MonoBehaviour
 
     public void SinglePlayerMode()
     {
-        StartCoroutine(FadeAndLoadCredits("LoadScene"));
+        StartCoroutine(FadeAndLoadCredits("PlayerTest"));
 
         // Sonido de botón
         AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);

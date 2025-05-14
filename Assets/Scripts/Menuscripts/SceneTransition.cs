@@ -43,10 +43,15 @@ public class SceneTransition : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        if(Time.timeScale == 0f)
+        {
+            Time.timeScale = 1f;
+        }
         // Ensure contentGroup has a CanvasGroup
         contentCanvasGroup = contentGroup.GetComponent<CanvasGroup>();
         if (contentCanvasGroup == null)
         {
+            Debug.LogWarning("CanvasGroup not found on contentGroup. Adding one.");
             contentCanvasGroup = contentGroup.AddComponent<CanvasGroup>();
         }
 
@@ -66,7 +71,7 @@ public class SceneTransition : MonoBehaviour
     {
         float elapsed = 0f;
         Color panelColor = fadePanel.color;
-
+        Debug.Log(panelColor);
         // Gradually reduce panel alpha from 1 to 0
         while (elapsed < fadeDuration)
         {
@@ -76,7 +81,7 @@ public class SceneTransition : MonoBehaviour
             fadePanel.color = panelColor;
             yield return null;
         }
-
+        
         // Ensure the panel is fully transparent
         panelColor.a = 0f;
         fadePanel.color = panelColor;

@@ -49,7 +49,8 @@ public class PlayerMove : MonoBehaviour
         if (string.IsNullOrEmpty(weaponName)) return null;
 
         // Search for the weapon GameObject in the HUD
-        Transform hudTransform = transform.Find("Camera/HUD");
+        Transform hudTransform = GameObject.Find("HUD")?.transform;
+
         if (hudTransform != null)
         {
             Transform weaponTransform = hudTransform.Find(weaponName);
@@ -151,10 +152,10 @@ public class PlayerMove : MonoBehaviour
     void UpdateWeaponVisibility()
     {
         // Obtener todos los hijos del HUD que tengan un componente que herede de Gun
-        Transform hudTransform = transform.Find("Camera/HUD");
+        Transform hudTransform = GameObject.Find("HUD")?.transform;
         if (hudTransform == null)
         {
-            Debug.LogWarning("HUD not found!");
+            Debug.LogWarning("HUD not found! UPDATE WEAPON VISIBILITY FAILED");
             return;
         }
 
