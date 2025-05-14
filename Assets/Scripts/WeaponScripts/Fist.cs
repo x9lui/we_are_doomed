@@ -44,4 +44,9 @@ public class Fist : Gun
         spriteAnim.SetBool("isWalking", false); // Set the walking animation
         Debug.Log("Fist: Idle");
     }
+
+    public override void setCanAuto()
+    {
+        canAuto = false;
+    }
 }

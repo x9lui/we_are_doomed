@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class SemiPistolPickUp : ItemPickUp
+public class ShotgunNormallPickUp : ItemPickUp
 {
-    public string weaponName = "SemiPistol"; // Nombre del arma
+    public string weaponName = "EnergyGun"; // Nombre del arma
 
     protected override void OnPickUp(Collider player)
     {
@@ -10,10 +10,9 @@ public class SemiPistolPickUp : ItemPickUp
         if (playerInventory != null)
         {
             // Intentar añadir el arma al inventario del jugador
-            if (playerInventory.AddWeapon(InventoryScript.WeaponType.Pistol, weaponName))
+            if (playerInventory.AddWeapon(InventoryScript.WeaponType.Shotgun, weaponName))
             {
                 Debug.Log($"Picked up {weaponName}.");
-                // Aquí puedes añadir la lógica para otorgar munición al arma
                 // playerInventory.AddAmmo(weaponName, ammoAmount);
                 ActivateWeapon(player, weaponName); // Activar el arma en el jugador
                 Destroy(gameObject); // Destruir el objeto después de recogerlo

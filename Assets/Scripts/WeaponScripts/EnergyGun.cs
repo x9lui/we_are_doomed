@@ -1,28 +1,29 @@
 using UnityEngine;
 using System.Collections;
 
-public class ShotgunNormal : Gun
+public class EnergyGun : Gun
 {
-    public int pellets = 8; // Número de perdigones disparados por la escopeta
-    public float spreadAngle = 10f; // Ángulo de dispersión de los perdigones
+    public int pellets = 40; // Número de perdigones disparados por la escopeta
+    public float spreadAngle = 30f; // Ángulo de dispersión de los perdigones
 
+    
     public override void Fire()
     {
         if (isFiring)
         {
-            Debug.Log("ShotgunNormal is already firing!");
+            Debug.Log("EnergyGun is already firing!");
             return;
         }
 
         if (ammo <= 0)
         {
-            Debug.Log("ShotgunNormal: Out of ammo!");
+            Debug.Log("EnergyGun: Out of ammo!");
             return;
         }
 
         isFiring = true; // Marcar el arma como disparando
         ammo--; // Reducir la munición
-        Debug.Log($"ShotgunNormal fired! Ammo left: {ammo}");
+        Debug.Log($"EnergyGun fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire"); // Activar la animación de disparo
 
         // Disparar múltiples perdigones
@@ -38,27 +39,28 @@ public class ShotgunNormal : Gun
     private IEnumerator FinishFireAfterDelay(float actionDelay, float unlockDelay)
     {
         yield return new WaitForSeconds(actionDelay); // Esperar a que termine la acción principal
-        Debug.Log("ShotgunNormal: Action completed.");
+        Debug.Log("EnergyGun: Action completed.");
 
         yield return new WaitForSeconds(unlockDelay); // Esperar tiempo adicional antes de desbloquear
         FinishFire(); // Marcar el arma como lista para disparar nuevamente
-        Debug.Log("ShotgunNormal: Ready to fire again.");
+        Debug.Log("EnergyGun: Ready to fire again.");
     }
 
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("ShotgunNormal: Walking");
+        Debug.Log("EnergyGun: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("ShotgunNormal: Idle");
+        Debug.Log("EnergyGun: Idle");
     }
 
     public override void setCanAuto()
     {
         canAuto = false;
     }
+
 }

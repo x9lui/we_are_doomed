@@ -29,7 +29,6 @@ public abstract class ItemPickUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             OnPickUp(other); // Llamar al comportamiento específico del pickup
-            Destroy(gameObject); // Destruir el objeto después de recogerlo
         }
     }
 }
