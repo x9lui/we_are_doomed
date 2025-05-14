@@ -33,7 +33,7 @@ public class DungeonGenerator : MonoBehaviour
     private HashSet<(Vector2Int, Vector2Int)> connectedTiles = new HashSet<(Vector2Int, Vector2Int)>();
 
 
-    private void Start()
+    public void GenerateDungeon()
     {
         GenerateInitialCells();
         StartCoroutine(SeparateAndSelectRooms());
