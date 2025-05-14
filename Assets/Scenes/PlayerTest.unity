@@ -7627,9 +7627,9 @@ MonoBehaviour:
   currentAmmoDigit1: {fileID: 1543760074}
   currentAmmoDigit2: {fileID: 1648444901}
   currentAmmoDigit3: {fileID: 985259679}
-  maxAmmoDigit1: {fileID: 500739859}
+  maxAmmoDigit1: {fileID: 1432778360}
   maxAmmoDigit2: {fileID: 1617679091}
-  maxAmmoDigit3: {fileID: 1432778360}
+  maxAmmoDigit3: {fileID: 500739859}
 --- !u!1 &1044405929
 GameObject:
   m_ObjectHideFlags: 0

@@ -89,10 +89,12 @@ public class Gun : MonoBehaviour
 
     public int GetAmmo()
     {
+
         return ammo; // Devolver la cantidad de munición actual
     }
     public int GetMaxAmmo()
     {
+
         return maxAmmo; // Cantidad Maxima de Municion
     }
 
