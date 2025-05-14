@@ -60,6 +60,9 @@ public class PlayerHealth : MonoBehaviour
         // Handle player death (e.g., play animation, disable controls, etc.)
         Debug.Log("Player has died!"); // Log player death
         
+        Cursor.lockState = CursorLockMode.None;     // Libera Cursor
+        Cursor.visible = true;                      // Ver
+
         if (deathPanelUI != null)
             deathPanelUI.SetActive(true); // Mostrar el menú de muerte
 
