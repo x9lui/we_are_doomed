@@ -83,4 +83,10 @@ public class Gun : MonoBehaviour
     public virtual void Idle()
     {
     }
+
+    public int GetAmmo()
+    {
+        return ammo; // Devolver la cantidad de munición actual
+    }
+
 }
