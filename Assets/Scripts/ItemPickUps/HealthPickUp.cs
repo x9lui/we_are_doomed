@@ -9,7 +9,7 @@ public class HealthPickUp : ItemPickUp
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
-            playerHealth.CurrentHealth = Mathf.Min(playerHealth.CurrentHealth + healthAmount, playerHealth.MaxHealth);
+            playerHealth.HealPlayer(healthAmount);
             Debug.Log($"Player picked up health. Current health: {playerHealth.CurrentHealth}");
         }else
         {

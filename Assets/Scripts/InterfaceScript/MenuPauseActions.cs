@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class MenuPauseActions : MonoBehaviour
 {
@@ -139,10 +140,13 @@ public class MenuPauseActions : MonoBehaviour
 
         if(!pulsadoAbandonar){
             pulsadoAbandonar = true;
+            _DescripcionText.gameObject.SetActive(true);
 
             _mover.Move(_ConfirmationExit, _confirmationOriginal, ConfirmationDown);
         }else{
             pulsadoAbandonar = false;
+            _DescripcionText.gameObject.SetActive(false);
+
             _mover.Move(_ConfirmationExit, ConfirmationDown, _confirmationOriginal);
         }
 
@@ -164,6 +168,7 @@ public class MenuPauseActions : MonoBehaviour
     {
         pulsadoAbandonar = false;
         _mover.Move(_ConfirmationExit, ConfirmationDown, _confirmationOriginal);
+        _DescripcionText.gameObject.SetActive(false);
 
         AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);
 

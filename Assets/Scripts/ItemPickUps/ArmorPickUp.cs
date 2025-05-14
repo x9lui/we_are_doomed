@@ -9,7 +9,7 @@ public class ArmorPickUp : ItemPickUp
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
-            playerHealth.CurrentArmor = Mathf.Min(playerHealth.CurrentArmor + armorAmount, playerHealth.MaxArmor);
+            playerHealth.ArmorPlayer(armorAmount);
             Debug.Log($"Player picked up armor. Current armor: {playerHealth.CurrentArmor}");
         }else
         {

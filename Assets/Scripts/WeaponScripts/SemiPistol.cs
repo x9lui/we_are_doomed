@@ -32,22 +32,22 @@ public class SemiPistol : Gun
     private IEnumerator FinishFireAfterDelay(float actionDelay, float unlockDelay)
     {
         yield return new WaitForSeconds(actionDelay); // Esperar a que termine la acción principal
-        Debug.Log("SemiPistol: Action completed.");
+        //Debug.Log("SemiPistol: Action completed.");
 
         yield return new WaitForSeconds(unlockDelay); // Esperar tiempo adicional antes de desbloquear
         FinishFire(); // Marcar el arma como lista para disparar nuevamente
-        Debug.Log("SemiPistol: Ready to fire again.");
+        //Debug.Log("SemiPistol: Ready to fire again.");
     }
 
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("SemiPistol: Walking");
+        //Debug.Log("SemiPistol: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("SemiPistol: Idle");
+        //Debug.Log("SemiPistol: Idle");
     }
 }
