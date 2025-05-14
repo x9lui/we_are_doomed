@@ -50,4 +50,9 @@ public class SemiPistol : Gun
         spriteAnim.SetBool("isWalking", false);
         //Debug.Log("SemiPistol: Idle");
     }
+
+    public override void setCanAuto()
+    {
+        canAuto = false;
+    }
 }

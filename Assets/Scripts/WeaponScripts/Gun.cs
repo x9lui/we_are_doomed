@@ -18,6 +18,8 @@ public class Gun : MonoBehaviour
     private float nextTimeToFire; // Tiempo hasta el próximo disparo permitido
     protected bool isFiring = false; // Nueva bandera para controlar si el arma está disparando
 
+    public bool canAuto;
+
     protected Animator spriteAnim;
 
     [Obsolete]
@@ -29,6 +31,7 @@ public class Gun : MonoBehaviour
         {
             Debug.LogError("RayCast script not found!");
         }
+
     }
 
     public GameObject HandleRaycastAndDamage()
@@ -90,6 +93,21 @@ public class Gun : MonoBehaviour
     }
     public int GetMaxAmmo()
     {
-        return maxAmmo; // Establecer la nueva cantidad de munición
+        return maxAmmo; // Cantidad Maxima de Municion
     }
+
+    public virtual void setCanAuto()
+    {
+    }
+
+    public bool getCanAuto()
+    {
+        return canAuto; // Devolver el estado de canAuto
+    }
+
+    public virtual void StopFiringAnim()
+    {
+        
+    }
+
 }

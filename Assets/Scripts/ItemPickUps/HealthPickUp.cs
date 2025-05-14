@@ -11,6 +11,8 @@ public class HealthPickUp : ItemPickUp
         {
             playerHealth.HealPlayer(healthAmount);
             Debug.Log($"Player picked up health. Current health: {playerHealth.CurrentHealth}");
+            Destroy(gameObject); // Destruir el objeto después de recogerlo
+
         }else
         {
             Debug.LogError("PlayerHealth component not found on the player!");

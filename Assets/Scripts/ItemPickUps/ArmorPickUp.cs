@@ -11,6 +11,8 @@ public class ArmorPickUp : ItemPickUp
         {
             playerHealth.ArmorPlayer(armorAmount);
             Debug.Log($"Player picked up armor. Current armor: {playerHealth.CurrentArmor}");
+            Destroy(gameObject); // Destruir el objeto después de recogerlo
+
         }else
         {
             Debug.LogError("PlayerHealth component not found on the player!");
