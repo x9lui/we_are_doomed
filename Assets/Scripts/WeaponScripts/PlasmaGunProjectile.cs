@@ -79,14 +79,16 @@ public class PlasmaGunProjectile : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
+                continue; // No aplicar fuerza a enemigos
             }
             // Daño al jugador (opcional)
             PlayerHealth player = nearby.GetComponent<PlayerHealth>();
             if (player != null)
             {
                 player.TakeDamage(damage);
+                // Si tampoco quieres empujar al jugador, pon 'continue;' aquí
             }
-            // Física
+            // Física SOLO a objetos que no sean enemigos
             Rigidbody rb = nearby.GetComponent<Rigidbody>();
             if (rb != null)
             {

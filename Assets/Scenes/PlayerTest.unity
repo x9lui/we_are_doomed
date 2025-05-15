@@ -445,6 +445,7 @@ GameObject:
   - component: {fileID: 33834885}
   - component: {fileID: 33834888}
   - component: {fileID: 33834887}
+  - component: {fileID: 33834889}
   - component: {fileID: 33834886}
   m_Layer: 0
   m_Name: Bfg
@@ -501,7 +502,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33834884}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -532,6 +533,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33834884}
   m_CullTransparentMesh: 1
+--- !u!114 &33834889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33834884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a176b4ed74c263439fe591e4c8f147c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1000
+  fireRate: 4
+  ammo: 3
+  maxAmmo: 3
+  RayCastDistance: 0
+  gunSound: {fileID: 0}
+  canAuto: 0
+  rocketPrefab: {fileID: 4616632626326483663, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+  firePoint: {fileID: 0}
 --- !u!1 &34122557
 GameObject:
   m_ObjectHideFlags: 0
@@ -2630,7 +2652,7 @@ MonoBehaviour:
   - weaponType: 3
     weaponName: PlasmaGun
   - weaponType: 4
-    weaponName: RocketLauncher
+    weaponName: Bfg
   - weaponType: 5
     weaponName: 
 --- !u!114 &351862521
@@ -13847,6 +13869,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5a317066018b484fb9409786d243ed9, type: 3}
+--- !u!1001 &7309230522446134860
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4616632626326483663, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_Name
+      value: BfgRocket
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155378886765321060, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155378886765321060, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155378886765321060, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155378886765321060, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155378886765321060, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155378886765321060, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155378886765321060, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155378886765321060, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155378886765321060, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155378886765321060, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a875b8800c8eeef4d9bf204aebee0dd8, type: 3}
 --- !u!1001 &7728371947989535258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13920,3 +13999,4 @@ SceneRoots:
   - {fileID: 7728371947989535258}
   - {fileID: 4727609772968277825}
   - {fileID: 3551714219556702804}
+  - {fileID: 7309230522446134860}
