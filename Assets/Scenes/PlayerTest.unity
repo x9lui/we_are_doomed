@@ -2628,11 +2628,11 @@ MonoBehaviour:
   - weaponType: 2
     weaponName: 
   - weaponType: 3
-    weaponName: MachineGun
+    weaponName: PlasmaGun
   - weaponType: 4
-    weaponName: 
-  - weaponType: 5
     weaponName: RocketLauncher
+  - weaponType: 5
+    weaponName: 
 --- !u!114 &351862521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3412,6 +3412,7 @@ GameObject:
   - component: {fileID: 454936148}
   - component: {fileID: 454936151}
   - component: {fileID: 454936150}
+  - component: {fileID: 454936152}
   - component: {fileID: 454936149}
   m_Layer: 0
   m_Name: PlasmaGun
@@ -3468,7 +3469,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454936147}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3499,6 +3500,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454936147}
   m_CullTransparentMesh: 1
+--- !u!114 &454936152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454936147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02bfc8eb632eb854ab476b061791c4e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+  fireRate: 0.1
+  ammo: 100
+  maxAmmo: 100
+  RayCastDistance: 0
+  gunSound: {fileID: 0}
+  canAuto: 1
+  plasmaProjectilePrefab: {fileID: 2199006499931126397, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+  firePoint: {fileID: 0}
 --- !u!1 &477898425
 GameObject:
   m_ObjectHideFlags: 0
@@ -13654,6 +13676,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 149dce5714b931c438f6cc805c961a18, type: 3}
+--- !u!1001 &3551714219556702804
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2199006499931126397, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_Name
+      value: PlasmaGunRocket
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867601068326702717, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867601068326702717, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867601068326702717, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867601068326702717, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867601068326702717, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867601068326702717, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867601068326702717, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867601068326702717, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867601068326702717, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867601068326702717, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 530bf411b90835c44a3ff3ad9e80472d, type: 3}
 --- !u!1001 &4727609772968277825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13668,7 +13747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2898082729051815476, guid: f11d6de21f1591f4ca8161ba4c1d3aa8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 28.8
       objectReference: {fileID: 0}
     - target: {fileID: 2898082729051815476, guid: f11d6de21f1591f4ca8161ba4c1d3aa8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13676,7 +13755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2898082729051815476, guid: f11d6de21f1591f4ca8161ba4c1d3aa8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 11.4
       objectReference: {fileID: 0}
     - target: {fileID: 2898082729051815476, guid: f11d6de21f1591f4ca8161ba4c1d3aa8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13840,3 +13919,4 @@ SceneRoots:
   - {fileID: 3278174400782298824}
   - {fileID: 7728371947989535258}
   - {fileID: 4727609772968277825}
+  - {fileID: 3551714219556702804}

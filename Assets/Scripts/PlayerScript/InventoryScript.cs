@@ -9,7 +9,6 @@ public class InventoryScript : MonoBehaviour
         Pistol,
         Shotgun,
         Rifle,
-        Sniper,
         RocketLauncher,
         Melee
     }

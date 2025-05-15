@@ -34,7 +34,6 @@ public class PlayerMove : MonoBehaviour
         pistolWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Pistol));
         shotgunWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Shotgun));
         rifleWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Rifle));
-        sniperWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Sniper));
         rocketLauncherWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.RocketLauncher));
         meleeWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Melee));
 
@@ -136,7 +135,6 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2)) newSlot = InventoryScript.WeaponType.Pistol;
         if (Input.GetKeyDown(KeyCode.Alpha3)) newSlot = InventoryScript.WeaponType.Shotgun;
         if (Input.GetKeyDown(KeyCode.Alpha4)) newSlot = InventoryScript.WeaponType.Rifle;
-        if (Input.GetKeyDown(KeyCode.Alpha5)) newSlot = InventoryScript.WeaponType.Sniper;
         if (Input.GetKeyDown(KeyCode.Alpha6)) newSlot = InventoryScript.WeaponType.RocketLauncher;
         if (Input.GetKeyDown(KeyCode.Alpha7)) newSlot = InventoryScript.WeaponType.Melee;
 

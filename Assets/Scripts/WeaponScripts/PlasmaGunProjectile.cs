@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RocketProjectile : MonoBehaviour
+public class PlasmaGunProjectile : MonoBehaviour
 {
     public float speed = 20f;
     public float explosionDelay = 3f;
@@ -8,6 +8,8 @@ public class RocketProjectile : MonoBehaviour
     public float explosionForce = 700f;
     public float damage = 50f;
     public GameObject explosionEffect;
+    public GameObject plasmaProjectilePrefab;
+    public Transform firePoint;
 
     private float timer;
 
@@ -28,13 +30,23 @@ public class RocketProjectile : MonoBehaviour
         }
 
         // Ignorar colisión con otros proyectiles
-        RocketProjectile[] allProjectiles = FindObjectsOfType<RocketProjectile>();
+        PlasmaGunProjectile[] allProjectiles = FindObjectsOfType<PlasmaGunProjectile>();
         foreach (var other in allProjectiles)
         {
             if (other == this) continue;
             Collider otherCol = other.GetComponent<Collider>();
             if (otherCol != null && rocketCol != null)
                 Physics.IgnoreCollision(rocketCol, otherCol, true);
+        }
+
+        // Instanciar proyectil de plasma
+        if (plasmaProjectilePrefab != null && firePoint != null)
+        {
+            Debug.Log("Instanciando proyectil de plasma");
+            float spawnOffset = 0.5f;
+            Vector3 spawnPos = firePoint.position + firePoint.forward * spawnOffset;
+            GameObject plasma = Instantiate(plasmaProjectilePrefab, spawnPos, firePoint.rotation);
+            // ... resto del código ...
         }
     }
 
