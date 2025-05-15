@@ -38,13 +38,13 @@ public class Chainsaw : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("Chainsaw: Walking");
+        //Debug.Log("Chainsaw: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("Chainsaw: Idle");
+        //Debug.Log("Chainsaw: Idle");
     }
 
     public override void setCanAuto()

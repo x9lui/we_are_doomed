@@ -113,8 +113,8 @@ public class MenuPauseActions : MonoBehaviour
 
     public void Opciones()
     {
-        Vector3 menuLeft = _menuUp + new Vector3(-138, 0, 0);
-        Vector3 optionsRight = _optionUp + new Vector3(180, 0, 0);
+        Vector3 menuLeft = _menuUp + new Vector3(-80, 0, 0);
+        Vector3 optionsRight = _optionUp + new Vector3(150, 0, 0);
 
         if(!pulsadoOpciones)
         {

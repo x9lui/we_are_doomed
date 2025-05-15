@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class InventoryScript : MonoBehaviour
 {
+    public WeaponHUDDisplay weaponHUDDisplay;
+
     public enum WeaponType
     {
         Fist,
@@ -29,6 +32,8 @@ public class InventoryScript : MonoBehaviour
         {
             inventory.Add(new WeaponSlot { weaponType = type, weaponName = null });
         }
+
+        weaponHUDDisplay?.UpdateHUD(inventory);
     }
 
     public bool AddWeapon(WeaponType type, string weaponName)
@@ -40,6 +45,9 @@ public class InventoryScript : MonoBehaviour
         {
             slot.weaponName = weaponName; // Añadir el arma al slot
             Debug.Log($"Added {weaponName} to {type} slot.");
+
+            weaponHUDDisplay?.ActivateWeaponUI(type, weaponName);
+
             return true;
         }
 
@@ -56,6 +64,9 @@ public class InventoryScript : MonoBehaviour
         {
             Debug.Log($"Removed {slot.weaponName} from {type} slot.");
             slot.weaponName = null; // Vaciar el slot
+
+            weaponHUDDisplay?.DeactivateWeaponUI(type);
+
             return true;
         }
 
@@ -67,6 +78,12 @@ public class InventoryScript : MonoBehaviour
     {
         // Obtener el arma específica en el slot del tipo de arma
         WeaponSlot slot = inventory.Find(s => s.weaponType == type);
-        return (slot != null && !string.IsNullOrEmpty(slot.weaponName)) ? slot.weaponName : null;
+        if (slot != null && !string.IsNullOrEmpty(slot.weaponName))
+        {
+            weaponHUDDisplay?.HighlightCurrentWeapon(type, slot.weaponName, inventory);
+            return slot.weaponName;
+        }
+
+        return null;
     }
 }
