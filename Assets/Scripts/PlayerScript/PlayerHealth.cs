@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
     public InterfaceHealthArmor armorBarUI; // Reference to the armor bar UI script
     public GameObject deathPanelUI;         // Reference to the death panel UI
 
+    public InterfaceHead interfaceHead; 
+
     public bool UnJugador;
 
     void Start()
@@ -41,7 +43,12 @@ public class PlayerHealth : MonoBehaviour
             healthBarUI.SetProgreso(CurrentHealth /MaxHealth);
             CurrentHealth -= damage; // Reduce health by damage amount
         }
-
+        if (interfaceHead != null){
+            interfaceHead.SetSalud(CurrentHealth / MaxHealth);
+        }
+        if (interfaceHead != null){
+            interfaceHead.SetArmadura(CurrentArmor / MaxArmor);
+        }
         if (CurrentHealth <= 0) // Check if health is zero or below
         {
             Die(); // Call the Die method to handle player death
@@ -54,12 +61,35 @@ public class PlayerHealth : MonoBehaviour
         {
             CurrentHealth = MaxHealth; // Set health to maximum health
         }
+        healthBarUI.SetProgreso(CurrentHealth / MaxHealth);
+
+        if (interfaceHead != null)
+            interfaceHead.SetSalud(CurrentHealth / MaxHealth);
+            
     }
+
+    public void ArmorPlayer(float amount)
+    {
+        CurrentArmor += amount; // Increase armor by the healing amount
+        if (CurrentArmor > MaxArmor) // Check if armor exceeds maximum health
+        {
+            MaxArmor = CurrentArmor; // Set health to maximum health
+        }
+        armorBarUI.SetProgreso(CurrentArmor / MaxArmor);
+        
+        if (interfaceHead != null)
+            interfaceHead.SetArmadura(CurrentArmor/MaxArmor);
+    }
+
+
 
     public void Die(){
         // Handle player death (e.g., play animation, disable controls, etc.)
         Debug.Log("Player has died!"); // Log player death
         
+        Cursor.lockState = CursorLockMode.None;     // Libera Cursor
+        Cursor.visible = true;                      // Ver
+
         if (deathPanelUI != null)
             deathPanelUI.SetActive(true); // Mostrar el menú de muerte
 

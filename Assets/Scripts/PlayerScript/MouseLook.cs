@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /// <summary>
 /// A simple FPP (First Person Perspective) camera rotation script.
@@ -11,12 +12,32 @@ public class MouseLook : MonoBehaviour {
     {
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
         Cursor.visible = false; // Hide the cursor
+
+        // Configurar el slider si está asignado
+        if (sensitivitySlider != null)
+        {
+            // Leer sensibilidad previa si existe
+            if (PlayerPrefs.HasKey("MouseSensitivity"))
+            {
+                sensitivity = PlayerPrefs.GetFloat("MouseSensitivity");
+            }
+
+            sensitivitySlider.minValue = 0.1f;
+            sensitivitySlider.maxValue = 10f;
+            sensitivitySlider.value = sensitivity;
+
+            // Escuchar cambios del slider
+            sensitivitySlider.onValueChanged.AddListener(SetSensitivity);
+        }
     }
-    public float Sensitivity {
-        get { return sensitivity; }
-        set { sensitivity = value; }
+    public float Sensitivity
+    {
+        get => sensitivity;
+        set => SetSensitivity(value);
     }
-    [Range(0.1f, 9f)][SerializeField] float sensitivity = 2f;
+    [Range(0.1f, 10f)][SerializeField] float sensitivity = 2f;
+    [SerializeField] private Slider sensitivitySlider; // Referencia al Slider de la UI
+
     [Tooltip("Limits vertical camera rotation. Prevents the flipping that happens when rotation goes above 90.")]
     [Range(0f, 90f)][SerializeField] float yRotationLimit = 88f;
 
@@ -43,4 +64,14 @@ public class MouseLook : MonoBehaviour {
         // Apply horizontal rotation to the player body
         playerBody.Rotate(Vector3.up * mouseX);
     }
+    
+    public void SetSensitivity(float value)
+    {
+        sensitivity = value;
+
+        // Guardar sensibilidad
+        PlayerPrefs.SetFloat("MouseSensitivity", value);
+        PlayerPrefs.Save();
+    }
+
 }

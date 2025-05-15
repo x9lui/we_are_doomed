@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -26,7 +28,6 @@ public class Enemy : MonoBehaviour
     {
         spriteAnim.SetFloat("SpriteRotation", angleToPlayer.lastIndex); // Convert lastIndex to float and set the sprite rotation
     }
-
 
     public void TakeDamage(float damage)
     {
@@ -57,6 +58,38 @@ public class Enemy : MonoBehaviour
                 playerHealth.TakeDamage(attackDamage);
                 Debug.Log($"Player took {attackDamage} damage from enemy.");
             }
+        }
+    }
+
+    public void Knockback(Vector3 force)
+    {
+        var agent = GetComponent<NavMeshAgent>();
+        var rb = GetComponent<Rigidbody>();
+
+        if (agent != null && rb != null)
+        {
+            agent.enabled = false; // Desactivar navegación
+            rb.isKinematic = false; // Permitir física
+
+            float knockbackMultiplier = 0.1f; // Ajusta este valor para más o menos fuerza
+            rb.AddForce(force * knockbackMultiplier, ForceMode.Impulse);
+
+            // Reactivar navegación tras un breve tiempo
+            StartCoroutine(ReenableNavMeshAgent(0.5f));
+        }
+    }
+
+    private IEnumerator ReenableNavMeshAgent(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        var agent = GetComponent<NavMeshAgent>();
+        var rb = GetComponent<Rigidbody>();
+        if (agent != null && rb != null)
+        {
+            rb.linearVelocity = Vector3.zero; // ¡Esto sí detiene el movimiento!
+            rb.isKinematic = true; // Volver a modo kinematic
+            agent.enabled = true;
+            agent.Warp(transform.position); // Recolocar el agente en la posición actual
         }
     }
 }

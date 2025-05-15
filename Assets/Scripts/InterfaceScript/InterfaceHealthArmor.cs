@@ -50,15 +50,15 @@ public class InterfaceHealthArmor : MonoBehaviour
         _progresoActual = valor;
     }
 
-    // Ejemplo de reducción progresiva (quitar para tu juego real)
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.DownArrow))
-            SetProgreso(_progresoActual - Time.deltaTime * 0.2f);
-
-        if (Input.GetKey(KeyCode.UpArrow))
-            SetProgreso(_progresoActual + Time.deltaTime * 0.2f);
-    }
+    //// Ejemplo de reducción progresiva (quitar para tu juego real)
+    //private void Update()
+    //{
+    //    if (Input.GetKey(KeyCode.DownArrow))
+    //        SetProgreso(_progresoActual - Time.deltaTime * 0.2f);
+//
+    //    if (Input.GetKey(KeyCode.UpArrow))
+    //        SetProgreso(_progresoActual + Time.deltaTime * 0.2f);
+    //}
 
     [System.Serializable]
     public class ThresholdEffect

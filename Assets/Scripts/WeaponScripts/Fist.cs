@@ -36,12 +36,17 @@ public class Fist : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true); // Set the walking animation
-        Debug.Log("Fist: Walking");
+        //Debug.Log("Fist: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false); // Set the walking animation
-        Debug.Log("Fist: Idle");
+        //Debug.Log("Fist: Idle");
+    }
+
+    public override void setCanAuto()
+    {
+        canAuto = false;
     }
 }

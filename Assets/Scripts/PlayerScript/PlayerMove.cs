@@ -34,7 +34,6 @@ public class PlayerMove : MonoBehaviour
         pistolWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Pistol));
         shotgunWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Shotgun));
         rifleWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Rifle));
-        sniperWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Sniper));
         rocketLauncherWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.RocketLauncher));
         meleeWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Melee));
 
@@ -66,14 +65,20 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        GetInput(); // Call the method to get player input
-        MovePlayer(); // Call the method to move the player 
-        HandleInventoryInput(); // Handle inventory input
+        GetInput();
+        MovePlayer();
+        HandleInventoryInput();
 
-        // Detectar si el jugador presiona el botón de disparo
-        if (Input.GetButtonDown("Fire1"))
+        // Detectar si el jugador está disparando
+        if (Input.GetButton("Fire1"))
         {
-            Fire(); // Llamar a la función Fire
+            Fire();
+        }
+
+        // Detectar si el jugador ha soltado el botón de disparo
+        if (Input.GetButtonUp("Fire1") && currentGun != null && currentGun.getCanAuto())
+        {
+            currentGun.StopFiringAnim();
         }
     }
 
@@ -121,30 +126,38 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-
-
     void HandleInventoryInput()
     {
-        // Check for number keys to switch slots
-        if (Input.GetKeyDown(KeyCode.Alpha1)) currentSlot = InventoryScript.WeaponType.Fist;
-        if (Input.GetKeyDown(KeyCode.Alpha2)) currentSlot = InventoryScript.WeaponType.Pistol;
-        if (Input.GetKeyDown(KeyCode.Alpha3)) currentSlot = InventoryScript.WeaponType.Shotgun;
-        if (Input.GetKeyDown(KeyCode.Alpha4)) currentSlot = InventoryScript.WeaponType.Rifle;
-        if (Input.GetKeyDown(KeyCode.Alpha5)) currentSlot = InventoryScript.WeaponType.Sniper;
-        if (Input.GetKeyDown(KeyCode.Alpha6)) currentSlot = InventoryScript.WeaponType.RocketLauncher;
-        if (Input.GetKeyDown(KeyCode.Alpha7)) currentSlot = InventoryScript.WeaponType.Melee;
+        // Verificar si el jugador intenta cambiar de slot
+        InventoryScript.WeaponType newSlot = currentSlot;
 
-        // Update weapon visibility when switching slots
-        UpdateWeaponVisibility();
+        if (Input.GetKeyDown(KeyCode.Alpha1)) newSlot = InventoryScript.WeaponType.Fist;
+        if (Input.GetKeyDown(KeyCode.Alpha2)) newSlot = InventoryScript.WeaponType.Pistol;
+        if (Input.GetKeyDown(KeyCode.Alpha3)) newSlot = InventoryScript.WeaponType.Shotgun;
+        if (Input.GetKeyDown(KeyCode.Alpha4)) newSlot = InventoryScript.WeaponType.Rifle;
+        if (Input.GetKeyDown(KeyCode.Alpha6)) newSlot = InventoryScript.WeaponType.RocketLauncher;
+        if (Input.GetKeyDown(KeyCode.Alpha7)) newSlot = InventoryScript.WeaponType.Melee;
 
-        // Remove weapon from the current slot when pressing Q
+        // Verificar si el slot tiene un arma asignada
+        string weaponName = inventory.GetWeapon(newSlot);
+        if (!string.IsNullOrEmpty(weaponName))
+        {
+            currentSlot = newSlot; // Cambiar al nuevo slot si tiene un arma asignada
+            UpdateWeaponVisibility(); // Actualizar la visibilidad de las armas
+        }
+        else
+        {
+            Debug.LogWarning($"Slot {newSlot} is empty. Cannot switch to this slot.");
+        }
+
+        // Eliminar el arma del slot actual si se presiona la tecla Q
         if (Input.GetKeyDown(KeyCode.Q))
         {
             bool removed = inventory.RemoveWeapon(currentSlot);
             if (removed)
             {
                 Debug.Log($"Weapon removed from slot: {currentSlot}");
-                UpdateWeaponVisibility(); // Update visibility after removing a weapon
+                UpdateWeaponVisibility(); // Actualizar la visibilidad después de eliminar un arma
             }
         }
     }
@@ -196,7 +209,22 @@ public class PlayerMove : MonoBehaviour
     {
         if (currentGun != null)
         {
-            currentGun.Fire(); // Llamar al método Fire del arma activa
+            if (currentGun.getCanAuto()) // Verificar si el arma es automática
+            {
+                // Disparar mientras se mantiene presionado el botón izquierdo del ratón
+                if (Input.GetMouseButton(0)) // Mantener el botón presionado
+                {
+                    currentGun.Fire();
+                }
+            }
+            else
+            {
+                // Disparar solo cuando se presiona el botón izquierdo del ratón
+                if (Input.GetMouseButtonDown(0)) // Presionar el botón una vez
+                {
+                    currentGun.Fire();
+                }
+            }
         }
         else
         {

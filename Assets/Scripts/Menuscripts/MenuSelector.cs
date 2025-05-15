@@ -56,28 +56,35 @@ public class MenuSelector : MonoBehaviour{
     /// </summary>
     private void UpdateSkullPosition()
     {
-        
         // Sonido de botón
         AudioManager.Instance.ReproducirInterfaz(_bottonSound);
-
+    
         RectTransform buttonTransform = _buttons[_selectedIndex].GetComponent<RectTransform>();
-        Vector3 newPosition = buttonTransform.position + new Vector3(_offset.x, _offset.y, 0f);
-
-        if (_selectedIndex == 3 || _selectedIndex == 4)
-        {
-            newPosition.x += 90f;
-        }
-
+    
+        // Obtener la esquina inferior izquierda (borde izquierdo del botón)
+        Vector3[] buttonCorners = new Vector3[4];
+        buttonTransform.GetWorldCorners(buttonCorners);
+        Vector3 buttonLeftEdge = buttonCorners[0]; // esquina inferior izquierda del botón
+    
+        // Obtener el ancho del cráneo
+        float skullWidth = _skullImage.rect.width * _skullImage.lossyScale.x; // tener en cuenta el escalado
+    
+        // Calcular la nueva posición: borde derecho de la calavera alineado al borde izquierdo del botón
+        Vector3 newPosition = new Vector3(
+            buttonLeftEdge.x - skullWidth + _offset.x,
+            buttonTransform.position.y + _offset.y,
+            buttonTransform.position.z
+        );
+    
         _skullImage.position = newPosition;
-
-        // Notify the description handler
+    
+        // Notificar al manejador de descripciones
         if (_descriptionHandler != null)
         {
             _descriptionHandler.OnButtonSelected(_buttons[_selectedIndex]);
         }
-
-        this.UpdateButtonVisuals();
-
+    
+        UpdateButtonVisuals();
     }
 
     /// <summary>

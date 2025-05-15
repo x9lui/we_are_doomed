@@ -56,4 +56,9 @@ public class ShotgunNormal : Gun
         spriteAnim.SetBool("isWalking", false);
         Debug.Log("ShotgunNormal: Idle");
     }
+
+    public override void setCanAuto()
+    {
+        canAuto = false;
+    }
 }

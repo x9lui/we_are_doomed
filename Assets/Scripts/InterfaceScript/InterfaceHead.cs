@@ -7,10 +7,14 @@ public class InterfaceHead : MonoBehaviour
     [Header("Imagen de la cabeza del HUD")]
     [SerializeField] private Image imagenCabeza;
 
-    [Header("Rangos de salud y sprites")]
-    [SerializeField] private List<RangoEstado> rangos;
+    [Header("Rangos de armadura")]
+    [SerializeField] private List<RangoEstado> rangosArmadura;
 
-    private float saludActual = 1f; // entre 0 y 1
+    [Header("Rangos de salud")]
+    [SerializeField] private List<RangoEstado> rangosSalud;
+
+    private float saludActual = 1f;  // entre 0 y 1
+    private float armaduraActual = 1f;  // entre 0 y 1
 
     public void SetSalud(float nuevaSalud)
     {
@@ -18,25 +22,28 @@ public class InterfaceHead : MonoBehaviour
         ActualizarSprite();
     }
 
-    private void Update()
-    {
-        // Ejemplo para probar: simula daño y teclas
-        if (Input.GetKey(KeyCode.DownArrow))
-            SetSalud(saludActual - Time.deltaTime * 0.2f);
-        if (Input.GetKey(KeyCode.UpArrow))
-            SetSalud(saludActual + Time.deltaTime * 0.2f);
+    private void Update(){
+        ActualizarSprite();
+    }
 
-        ActualizarSprite(); // Detectar pulsaciones en tiempo real
+    public void SetArmadura(float nuevaArmadura)
+    {
+        armaduraActual = Mathf.Clamp01(nuevaArmadura);
+        ActualizarSprite();
     }
 
     private void ActualizarSprite()
     {
-        foreach (var rango in rangos)
+        List<RangoEstado> rangosAUsar = armaduraActual > 0 ? rangosArmadura : rangosSalud;
+        float valorActual = armaduraActual > 0 ? armaduraActual : saludActual;
+
+        foreach (var rango in rangosAUsar)
         {
-            if (saludActual <= rango.maxSalud && saludActual > rango.minSalud)
+            if (valorActual <= rango.maxSalud && valorActual > rango.minSalud)
             {
                 if (Input.GetKey(KeyCode.A))
                 {
+
                     imagenCabeza.sprite = rango.spriteIzquierda;
                 }
                 else if (Input.GetKey(KeyCode.D))
