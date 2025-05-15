@@ -66,14 +66,20 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        GetInput(); // Call the method to get player input
-        MovePlayer(); // Call the method to move the player 
-        HandleInventoryInput(); // Handle inventory input
+        GetInput();
+        MovePlayer();
+        HandleInventoryInput();
 
         // Detectar si el jugador está disparando
-        if (Input.GetButton("Fire1")) // Detectar si el botón está siendo mantenido
+        if (Input.GetButton("Fire1"))
         {
-            Fire(); // Llamar a la función Fire
+            Fire();
+        }
+
+        // Detectar si el jugador ha soltado el botón de disparo
+        if (Input.GetButtonUp("Fire1") && currentGun != null && currentGun.getCanAuto())
+        {
+            currentGun.StopFiringAnim();
         }
     }
 

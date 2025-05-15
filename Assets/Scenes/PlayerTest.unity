@@ -9877,7 +9877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  fireRate: 0.5
+  fireRate: 0.1
   ammo: 999
   maxAmmo: 999
   RayCastDistance: 100
