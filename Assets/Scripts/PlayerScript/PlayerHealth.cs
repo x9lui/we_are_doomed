@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
     public InterfaceHealthArmor armorBarUI; // Reference to the armor bar UI script
     public GameObject deathPanelUI;         // Reference to the death panel UI
 
+    [SerializeField] private MouseLook _mouseLookScript;
+
     public InterfaceHead interfaceHead; 
 
     public bool UnJugador;
@@ -89,6 +91,7 @@ public class PlayerHealth : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.None;     // Libera Cursor
         Cursor.visible = true;                      // Ver
+        _mouseLookScript.enabled = false;
 
         if (deathPanelUI != null)
             deathPanelUI.SetActive(true); // Mostrar el menú de muerte

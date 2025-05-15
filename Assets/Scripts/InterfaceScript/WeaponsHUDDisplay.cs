@@ -68,6 +68,30 @@ public class WeaponHUDDisplay : MonoBehaviour
             }
         }
 
-        weaponNameText.text = currentWeaponName;
+        switch (currentWeaponName)
+        {
+            case "Fist":
+                weaponNameText.text = "Manos";
+                break;
+            case "Pistol2":
+                weaponNameText.text = "Pistola";
+                break;
+            case "Shotgun":
+                weaponNameText.text = "Escopeta";
+                break;
+            case "PlasmaGun":
+                weaponNameText.text = "Arma de Plasma";
+                break;
+            case "Bfg":
+                weaponNameText.text = "LanzaCohetes";
+                break;
+            case "Chainsaw":
+                weaponNameText.text = "Motosierra";
+                break;
+            default:
+                weaponNameText.text = "Arma No Reconocida";
+                break;
+                
+        }
     }
 }
