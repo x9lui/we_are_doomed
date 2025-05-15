@@ -10,7 +10,7 @@ public class ChainsawPickUp : ItemPickUp
         if (playerInventory != null)
         {
             // Intentar añadir el arma al inventario del jugador
-            if (playerInventory.AddWeapon(InventoryScript.WeaponType.Shotgun, weaponName))
+            if (playerInventory.AddWeapon(InventoryScript.WeaponType.Melee, weaponName))
             {
                 Debug.Log($"Picked up {weaponName}.");
                 // playerInventory.AddAmmo(weaponName, ammoAmount);

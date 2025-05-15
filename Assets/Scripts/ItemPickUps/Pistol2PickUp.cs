@@ -10,7 +10,7 @@ public class Pistol2PickUp : ItemPickUp
         if (playerInventory != null)
         {
             // Intentar añadir el arma al inventario del jugador
-            if (playerInventory.AddWeapon(InventoryScript.WeaponType.Shotgun, weaponName))
+            if (playerInventory.AddWeapon(InventoryScript.WeaponType.Pistol, weaponName))
             {
                 Debug.Log($"Picked up {weaponName}.");
                 // playerInventory.AddAmmo(weaponName, ammoAmount);

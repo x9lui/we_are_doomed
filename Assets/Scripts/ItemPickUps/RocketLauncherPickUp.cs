@@ -10,7 +10,7 @@ public class RocketLauncherPickUp : ItemPickUp
         if (playerInventory != null)
         {
             // Intentar añadir el arma al inventario del jugador
-            if (playerInventory.AddWeapon(InventoryScript.WeaponType.Shotgun, weaponName))
+            if (playerInventory.AddWeapon(InventoryScript.WeaponType.RocketLauncher, weaponName))
             {
                 Debug.Log($"Picked up {weaponName}.");
                 // playerInventory.AddAmmo(weaponName, ammoAmount);
