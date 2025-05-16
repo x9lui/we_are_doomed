@@ -925,6 +925,21 @@ public class DungeonGenerator : MonoBehaviour
             this.position = position;
             this.size = size;
         }
+
+        /// <summary>
+        /// This function gives a position contained in a room.
+        /// </summary>
+        /// <param name="insidePositionOffset">
+        /// The distance offset is used to add distance to the walls of the
+        /// room, very useful to generate points for spawning gameobjects
+        /// and avoid clipping them through walls
+        /// </param>
+        /// <returns> A random position in a room </returns>
+        public Vector2 GetRandomPositionInside(float insidePositionOffset)
+        {
+            return new Vector2(Random.Range(position.x + insidePositionOffset, position.x + size.x - insidePositionOffset),
+                                Random.Range(position.y + insidePositionOffset, position.y + size.y - insidePositionOffset));
+        }
     }
 
     public enum TileType
