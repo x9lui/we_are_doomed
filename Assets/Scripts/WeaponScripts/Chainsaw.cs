@@ -10,8 +10,9 @@ public class Chainsaw : Gun
         {
             if (ammo <= 0)
             {
-                Debug.Log("Chainsaw: Out of ammo!");
-                spriteAnim.SetBool("Fire", false);
+                Debug.Log("Out of ammo!");
+                spriteAnim.SetBool("Fire", false); // O el parámetro que uses
+                isFiring = false; // <- IMPORTANTE
                 return;
             }
 

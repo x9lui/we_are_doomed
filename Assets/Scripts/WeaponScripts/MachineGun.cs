@@ -11,8 +11,9 @@ public class MachineGun : Gun
         {
             if (ammo <= 0)
             {
-                Debug.Log("MachineGun: Out of ammo!");
-                spriteAnim.SetBool("Fire", false); // Desactivar la animación de disparo
+                Debug.Log("Out of ammo!");
+                spriteAnim.SetBool("Fire", false); // O el parámetro que uses
+                isFiring = false; // <- IMPORTANTE
                 return;
             }
 

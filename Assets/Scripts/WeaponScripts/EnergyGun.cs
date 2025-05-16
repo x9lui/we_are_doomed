@@ -18,7 +18,9 @@ public class EnergyGun : Gun
 
         if (ammo <= 0)
         {
-            Debug.Log("EnergyGun: Out of ammo!");
+            Debug.Log("Out of ammo!");
+            spriteAnim.SetBool("Fire", false); // O el parámetro que uses
+            isFiring = false; // <- IMPORTANTE
             return;
         }
 

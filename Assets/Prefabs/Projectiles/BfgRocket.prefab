@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9155378886765321060}
   - component: {fileID: 6127222540504545611}
   - component: {fileID: 7389393537019431115}
-  - component: {fileID: 8692037903617588309}
+  - component: {fileID: -5058752193726562262}
   m_Layer: 0
   m_Name: BfgRocket
   m_TagString: Untagged
@@ -83,7 +83,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8692037903617588309
+--- !u!114 &-5058752193726562262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,14 +92,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4616632626326483663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c16b2194466649345bf399fd54840cd4, type: 3}
+  m_Script: {fileID: 11500000, guid: 670f7e778309bce44af98aacbba2932c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
   explosionDelay: 3
-  explosionRadius: 5
-  explosionForce: 700
-  damage: 50
+  explosionRadius: 20
+  explosionForce: 5000
+  damage: 200
   explosionEffect: {fileID: 0}
   plasmaProjectilePrefab: {fileID: 0}
   firePoint: {fileID: 0}

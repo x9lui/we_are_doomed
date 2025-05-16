@@ -32,7 +32,9 @@ public class Bfg : Gun
 
         if (ammo <= 0)
         {
-            Debug.Log("Bfg: Out of ammo!");
+            Debug.Log("Out of ammo!");
+            spriteAnim.SetBool("Fire", false); // O el parámetro que uses
+            isFiring = false; // <- IMPORTANTE
             return;
         }
 

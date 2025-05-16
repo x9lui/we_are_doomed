@@ -145,7 +145,10 @@ public class PlayerMove : MonoBehaviour
 
     void HandleInventoryInput()
     {
-        // Verificar si el jugador intenta cambiar de slot
+        // No permitir cambiar ni dropear arma si está disparando
+        if (currentGun != null && currentGun.isFiring)
+            return;
+
         InventoryScript.WeaponType newSlot = currentSlot;
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) newSlot = InventoryScript.WeaponType.Fist;
@@ -155,12 +158,11 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5)) newSlot = InventoryScript.WeaponType.RocketLauncher;
         if (Input.GetKeyDown(KeyCode.Alpha6)) newSlot = InventoryScript.WeaponType.Melee;
 
-        // Verificar si el slot tiene un arma asignada
         string weaponName = inventory.GetWeapon(newSlot);
         if (!string.IsNullOrEmpty(weaponName))
         {
-            currentSlot = newSlot; // Cambiar al nuevo slot si tiene un arma asignada
-            UpdateWeaponVisibility(); // Actualizar la visibilidad de las armas
+            currentSlot = newSlot;
+            UpdateWeaponVisibility();
         }
         else
         {
@@ -170,7 +172,6 @@ public class PlayerMove : MonoBehaviour
         // Eliminar el arma del slot actual si se presiona la tecla Q
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            // Aleja el arma 3 unidades delante del jugador
             Vector3 dropPos = transform.position + transform.forward * 3f;
             bool removed = inventory.RemoveWeapon(currentSlot, dropPos);
             if (removed)
