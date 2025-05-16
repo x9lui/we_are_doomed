@@ -5,7 +5,6 @@ public class PlasmaGun : Gun
 {
     public GameObject plasmaProjectilePrefab;
     public Transform firePoint; // Punto de salida del proyectil
-    private float nextTimeToFire = 0f;
 
     [System.Obsolete]
     void Awake()
@@ -27,8 +26,9 @@ public class PlasmaGun : Gun
         {
             if (ammo <= 0)
             {
-                Debug.Log("PlasmaGun: Out of ammo!");
-                spriteAnim.SetBool("Fire", false);
+                Debug.Log("Out of ammo!");
+                spriteAnim.SetBool("Fire", false); // O el parámetro que uses
+                isFiring = false; // <- IMPORTANTE
                 return;
             }
 
@@ -65,13 +65,13 @@ public class PlasmaGun : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("PlasmaGun: Walking");
+        //Debug.Log("PlasmaGun: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("PlasmaGun: Idle");
+        //Debug.Log("PlasmaGun: Idle");
     }
 
     public override void setCanAuto()

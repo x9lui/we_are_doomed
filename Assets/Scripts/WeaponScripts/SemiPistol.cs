@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class SemiPistol : Gun
 {
+    private bool hasAppliedDamage = false;
+
     public override void Fire()
     {
         if (isFiring)
@@ -13,42 +16,53 @@ public class SemiPistol : Gun
 
         if (ammo <= 0)
         {
-            Debug.Log("SemiPistol: Out of ammo!");
+            Debug.Log("Out of ammo!");
+            spriteAnim.SetBool("Fire", false); // O el parámetro que uses
+            isFiring = false; // <- IMPORTANTE
             return;
         }
 
-        isFiring = true; // Marcar el arma como disparando
-        ammo--; // Reducir la munición
+        isFiring = true;
+        ammo--;
         Debug.Log($"SemiPistol fired! Ammo left: {ammo}");
-        spriteAnim.SetTrigger("Fire"); // Activar la animación de disparo
+        spriteAnim.SetTrigger("Fire");
+        hasAppliedDamage = false; // Resetear para este disparo
 
-        // Llamar al método genérico para manejar el raycast y el daño
-        HandleRaycastAndDamage();
-
-        // Finalizar el disparo después de un breve retraso
+        StartCoroutine(WaitForDamageSprite());
         StartCoroutine(FinishFireAfterDelay(0.1f, 0.2f));
+    }
+
+    private IEnumerator WaitForDamageSprite()
+    {
+        // Esperar hasta que el sprite sea 'shoot_2'
+        while (!hasAppliedDamage)
+        {
+            if (gunImage != null && gunImage.sprite.name == "shoot_2")
+            {
+                // Aquí se hace el raycast y el daño
+                HandleRaycastAndDamage();
+                hasAppliedDamage = true;
+            }
+
+            yield return null; // Esperar al siguiente frame
+        }
     }
 
     private IEnumerator FinishFireAfterDelay(float actionDelay, float unlockDelay)
     {
-        yield return new WaitForSeconds(actionDelay); // Esperar a que termine la acción principal
-        //Debug.Log("SemiPistol: Action completed.");
-
-        yield return new WaitForSeconds(unlockDelay); // Esperar tiempo adicional antes de desbloquear
-        FinishFire(); // Marcar el arma como lista para disparar nuevamente
-        //Debug.Log("SemiPistol: Ready to fire again.");
+        yield return new WaitForSeconds(actionDelay);
+        yield return new WaitForSeconds(unlockDelay);
+        FinishFire();
     }
 
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        //Debug.Log("SemiPistol: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        //Debug.Log("SemiPistol: Idle");
     }
 
     public override void setCanAuto()

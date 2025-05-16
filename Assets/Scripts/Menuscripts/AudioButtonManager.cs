@@ -43,10 +43,14 @@ public class AudioManager : MonoBehaviour
     // Métodos para reproducir clips para Interfaz.
     public void ReproducirInterfaz(AudioClip clip)
     {
-        if(clip == null){
+        if (clip == null)
+        {
             BotonInterfaz.Play();
         }
         BotonInterfaz.PlayOneShot(clip);
     }
+
+    // Para los sonidos de Efectos usar el BotonEfectos
+    // Para los sonidos de la musica usar BotonMusica
     
 }

@@ -1,12 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class EnergyGun : Gun
 {
     public int pellets = 40; // Número de perdigones disparados por la escopeta
     public float spreadAngle = 30f; // Ángulo de dispersión de los perdigones
+    private bool hasAppliedDamage = false;
 
-    
     public override void Fire()
     {
         if (isFiring)
@@ -17,50 +18,61 @@ public class EnergyGun : Gun
 
         if (ammo <= 0)
         {
-            Debug.Log("EnergyGun: Out of ammo!");
+            Debug.Log("Out of ammo!");
+            spriteAnim.SetBool("Fire", false); // O el parámetro que uses
+            isFiring = false; // <- IMPORTANTE
             return;
         }
 
-        isFiring = true; // Marcar el arma como disparando
-        ammo--; // Reducir la munición
+        isFiring = true;
+        ammo--;
         Debug.Log($"EnergyGun fired! Ammo left: {ammo}");
-        spriteAnim.SetTrigger("Fire"); // Activar la animación de disparo
+        spriteAnim.SetTrigger("Fire");
+        hasAppliedDamage = false;
 
-        // Disparar múltiples perdigones
-        for (int i = 0; i < pellets; i++)
-        {
-            HandleRaycastAndDamage(); // Usar el método genérico para cada perdigón
-        }
-
-        // Finalizar el disparo después de un breve retraso
+        StartCoroutine(WaitForDamageSprite());
         StartCoroutine(FinishFireAfterDelay(0.2f, 0.5f));
+    }
+
+    private IEnumerator WaitForDamageSprite()
+    {
+        // Esperar hasta que el sprite sea 'shoot_2'
+        while (!hasAppliedDamage)
+        {
+            if (gunImage != null && gunImage.sprite.name == "shoot_2")
+            {
+                for (int i = 0; i < pellets; i++)
+                {
+                    HandleRaycastAndDamage();
+                }
+                hasAppliedDamage = true;
+            }
+            yield return null;
+        }
     }
 
     private IEnumerator FinishFireAfterDelay(float actionDelay, float unlockDelay)
     {
-        yield return new WaitForSeconds(actionDelay); // Esperar a que termine la acción principal
+        yield return new WaitForSeconds(actionDelay);
         Debug.Log("EnergyGun: Action completed.");
 
-        yield return new WaitForSeconds(unlockDelay); // Esperar tiempo adicional antes de desbloquear
-        FinishFire(); // Marcar el arma como lista para disparar nuevamente
+        yield return new WaitForSeconds(unlockDelay);
+        FinishFire();
         Debug.Log("EnergyGun: Ready to fire again.");
     }
 
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("EnergyGun: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("EnergyGun: Idle");
     }
 
     public override void setCanAuto()
     {
         canAuto = false;
     }
-
 }

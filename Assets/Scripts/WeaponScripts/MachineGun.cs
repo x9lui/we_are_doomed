@@ -3,7 +3,6 @@ using System.Collections;
 
 public class MachineGun : Gun
 {
-    private float nextTimeToFire = 0f; // Tiempo hasta el próximo disparo permitido
 
     public override void Fire()
     {
@@ -12,8 +11,9 @@ public class MachineGun : Gun
         {
             if (ammo <= 0)
             {
-                Debug.Log("MachineGun: Out of ammo!");
-                spriteAnim.SetBool("Fire", false); // Desactivar la animación de disparo
+                Debug.Log("Out of ammo!");
+                spriteAnim.SetBool("Fire", false); // O el parámetro que uses
+                isFiring = false; // <- IMPORTANTE
                 return;
             }
 
@@ -36,13 +36,13 @@ public class MachineGun : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("MachineGun: Walking");
+        //Debug.Log("MachineGun: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("MachineGun: Idle");
+        //Debug.Log("MachineGun: Idle");
     }
 
     public override void setCanAuto()

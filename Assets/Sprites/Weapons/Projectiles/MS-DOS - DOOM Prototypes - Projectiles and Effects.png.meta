@@ -1,0 +1,2115 @@
+fileFormatVersion: 2
+guid: 42fe860df95672a4fb415e6b564dcf27
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 20
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 647
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 024c011dba989d6408056beacfe4f442
+      internalID: -585754561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_1
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 649
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3da29cecd58c354439d53582ceeb9879
+      internalID: -293294255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_2
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 642
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8e2003842d8dc14ba61f9416d515094
+      internalID: 474376802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_3
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 643
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2add5cd5d3703648b00e6d5e684c6c3
+      internalID: 1755985917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_4
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 645
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78138738f846da44f98856d58782dc76
+      internalID: -1537364121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_5
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 649
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a9f5904b2193824181ff341a8ca878f
+      internalID: 484697457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_6
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 595
+        width: 42
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b0bf6a1786f5664496a2acaa8b762f0
+      internalID: -947785545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_7
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 599
+        width: 40
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a399aa7c6029d60449b4a0dca9bfb031
+      internalID: 1179539114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_8
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 601
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72140fc93341db0478fdfb77bc363cec
+      internalID: 584937512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_9
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 614
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ea4fad44fa83c842b1575c4de94c8af
+      internalID: 1217977931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_10
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 614
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15cc93f94a99d48488dd97b9833af5a3
+      internalID: 2047202225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_11
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 611
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fc1a4dee72237044a48f82cbf48b4dd
+      internalID: -345164480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_12
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 573
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b5de0a5217d0aa4883af6d54c0356f9
+      internalID: 713511147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_13
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 574
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba060be70f2a70f42937ed63e6316599
+      internalID: 1344737443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_14
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 576
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d52ee2468cd3ed498a2c5f0bacbfd67
+      internalID: 220755994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_15
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 575
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6da5e62232b2c741a431d641ae8d5f0
+      internalID: -1526678966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_16
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 568
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bce03a9eae1d5742be1e97416184a1a
+      internalID: 1658932029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_17
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 546
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03884c053a15578439f592e81f91fafa
+      internalID: -1977236827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_18
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 547
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1caee740f85ef804ca735e958a3aac9f
+      internalID: -1553351082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_19
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 551
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9e6cf651175a8349a0796bc3740021b
+      internalID: -211168251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_20
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 547
+        width: 42
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 500c4af37bef3d94c97bb4832fcf8585
+      internalID: 1430761224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_21
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 547
+        width: 22
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f66a1cb83c4c7b4cbd24196a6a606f2
+      internalID: 974787743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_22
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 546
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4acd69e7f97aa1744a5c4bd27a3fad3b
+      internalID: 2095472712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_23
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 547
+        width: 29
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ac655ddad0fd6548ae450243aa654de
+      internalID: 1517511998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_24
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 547
+        width: 39
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbef627ebb5a6104682463a622aa5851
+      internalID: -1707319605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_25
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 547
+        width: 21
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e8e61689a60a8a419f2922e9293064c
+      internalID: -289020276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_26
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 541
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73b3ac8358e00eb49b9e687f41e2aa2a
+      internalID: -529877225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_27
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 499
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2963f094a7df9b14f88d56b5820cd282
+      internalID: 1389480059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_28
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 487
+        width: 13
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba4cf77ebf19dbe489700b11e6a65154
+      internalID: 1101111234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_29
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 472
+        width: 13
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e9f73d271d73644d8525f82b2f92474
+      internalID: 931738213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_30
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 472
+        width: 13
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b37ca3225abd15540bb01d7f52e17fb6
+      internalID: -600320737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_31
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 466
+        width: 14
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2b6fe263ebb3a84bbbc8520461db3b8
+      internalID: 1578199834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_32
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 466
+        width: 20
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a465b8fcb5a22b447ad63a8e6554f8f4
+      internalID: 396029228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_33
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 466
+        width: 23
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a108dda7c31ff0749b6ca7a69142347b
+      internalID: -291489286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_34
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 337
+        width: 52
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e065cf6f15c315a4c83c933e5f79175a
+      internalID: -470963650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_35
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 397
+        width: 13
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b64e0036b3ca183439e433fcf67c1708
+      internalID: 891418244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_36
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 391
+        width: 14
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5073212e660ce284d8a938de0a675c35
+      internalID: 404767326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_37
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 391
+        width: 19
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36c702747c7667540aa1d6bc77d7951f
+      internalID: 1429269271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_38
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 391
+        width: 23
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a99797d58714d945bb38d51efade6dd
+      internalID: -1336112673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_39
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 322
+        width: 6
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c131edeb6ddb02447af7ed4b7a35f1e8
+      internalID: 1201305078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_40
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 322
+        width: 13
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2766a054e0510f2439f34fe1467b0ab2
+      internalID: -578921505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_41
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 316
+        width: 14
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68058399de373b040b8a5654692c44bf
+      internalID: -345386083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_42
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 316
+        width: 20
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49ac0062eda75fb49bc53815ecc5bf9f
+      internalID: -197089695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_43
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 316
+        width: 23
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e3216c5f131daf4bad2621148a9ddcc
+      internalID: 449413126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_50
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 247
+        width: 46
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad2f4641cbba55d418943b8e0d53e13f
+      internalID: 1836897851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_51
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 247
+        width: 13
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7283a115179a77643aea9bddacbadabf
+      internalID: -2066240793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_52
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 241
+        width: 14
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fb20d5592e7492489af0466a817dc2b
+      internalID: 187368925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_53
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 241
+        width: 20
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27d390f1a1ec97d439296383dfb4b52a
+      internalID: 473631834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_65
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 211
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bbada713fecd5a4f9a2db3c446f03df
+      internalID: -90291887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_66
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 199
+        width: 13
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 389e9ba8ce3716440b5e2da9def79401
+      internalID: -1163282658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_67
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 190
+        width: 32
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3e74b2066629cb4dbecdd1abd10383a
+      internalID: -451759998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_68
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 191
+        width: 35
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb43ebc62ccb189409bfe32570df48a9
+      internalID: 648231859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_69
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 190
+        width: 49
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 281715dd7122c1c4196b72f145eb5a32
+      internalID: -1647693684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_70
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 172
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4188d52c7e8c09f4e8f89291f1f3f8ae
+      internalID: -1194922134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_71
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 170
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 799b69d018be6c54393b1eeb0cdda263
+      internalID: -74101187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_72
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 167
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd8d9bcbc529e9e40a887c50270affd6
+      internalID: 513409919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_73
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 129
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d949c8e6b47fe0447a0769dc8b16ab0a
+      internalID: 221462385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_74
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 126
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66c4bf5ed6aac8a4f85e81bbf7f3e43f
+      internalID: -855526345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_75
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 122
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7878a6bdeba3ba342a306d50d9cb05c3
+      internalID: 1710938554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_76
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 117
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6ad0fea75e221947834baa1dbf0e4d7
+      internalID: 936591491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_77
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 110
+        width: 55
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d11c87c14e308664faeb81894d68a64a
+      internalID: 425026442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_78
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 101
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f1cac151352a04eae2432d177bbc9b
+      internalID: 2100475200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_79
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 99
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e3257613f9ec174d828bad775cf8c1e
+      internalID: 461698767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_80
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 98
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1513942fd3791540be86ed6eacf0b08
+      internalID: -1112511381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_81
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 75
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5fd8a3fc8e7bd74089265e32a254c3f
+      internalID: 969588216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_82
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 74
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89a3bc7eec4eee94fb0da37efdae59c1
+      internalID: 1545918738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_83
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 69
+        width: 17
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c8596dc92f2fbf4b8ab63c1cf319fbe
+      internalID: -1795183942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_84
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 71
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b25f122eb69fc14eac0ee55a71c7c85
+      internalID: -1066984461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_85
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 50
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6863214fb33a20c479650c319fc0d2c7
+      internalID: -193399337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_86
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 7
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b94f0af3cde3bb43bd55a1a5a53d358
+      internalID: -2002493894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_87
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 56
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 491dec2b58fe0c545af68caae04a1e12
+      internalID: 1525742342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_88
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 43
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 516c6bc349ace5d459eb4d4d473c6436
+      internalID: -1798365136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_89
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 22
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d939a3fc5e91ba4ab7806729b4ec46e
+      internalID: 535170329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_90
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 44
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 778051714f9b4cf4da314a12ad2aae44
+      internalID: -535412452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_91
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 23
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac15656dcd2b9074f96515f21ebb797a
+      internalID: -2034762844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_92
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 42
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41c4c5a7dbc0d964bad3828c6f3e011c
+      internalID: 518233856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_93
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 42
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07589cacf61eefd46869aa499d520d56
+      internalID: 553590792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_94
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 31
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a12c8e948fb62944ca0d51f6f627c43e
+      internalID: -718421031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_95
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 23
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 750168dace6bba94d85988a92ab3b8fc
+      internalID: -1875524612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_96
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 25
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b3e6cf92a3c61a42a0f5680955cf586
+      internalID: 1157763759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_97
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 17
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9195e146941166f4f9d6fa8a275f06dc
+      internalID: 1919798357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_98
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 16
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b647560504a09e645ac3df3389b0d97e
+      internalID: -127091050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_99
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 16
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd12725cc01aa6f4aad17a03cfe94b82
+      internalID: 1110094371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_100
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 16
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 650637e7e8effd641b3ee9acbb7dca72
+      internalID: 849894038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MS-DOS - DOOM Prototypes - Projectiles and Effects_101
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 11
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 926efadf8abc9d948b7de243f0ae5521
+      internalID: 935753762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9ebddf7352908074d9c3e551951d5cfe
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_0: -585754561
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_1: -293294255
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_10: 2047202225
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_100: 849894038
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_101: 935753762
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_11: -345164480
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_12: 713511147
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_13: 1344737443
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_14: 220755994
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_15: -1526678966
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_16: 1658932029
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_17: -1977236827
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_18: -1553351082
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_19: -211168251
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_2: 474376802
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_20: 1430761224
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_21: 974787743
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_22: 2095472712
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_23: 1517511998
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_24: -1707319605
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_25: -289020276
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_26: -529877225
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_27: 1389480059
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_28: 1101111234
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_29: 931738213
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_3: 1755985917
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_30: -600320737
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_31: 1578199834
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_32: 396029228
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_33: -291489286
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_34: -470963650
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_35: 891418244
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_36: 404767326
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_37: 1429269271
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_38: -1336112673
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_39: 1201305078
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_4: -1537364121
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_40: -578921505
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_41: -345386083
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_42: -197089695
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_43: 449413126
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_44: -1773791562
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_45: -1252541869
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_46: -599913280
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_47: 1328783288
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_48: -1432233390
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_49: 1828372275
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_5: 484697457
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_50: 1836897851
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_51: -2066240793
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_52: 187368925
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_53: 473631834
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_54: -328315314
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_55: -107974014
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_56: -1123744135
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_57: -842577367
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_58: -262105272
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_59: -2050136076
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_6: -947785545
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_60: 1144680713
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_61: -1533446365
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_62: 950888422
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_63: 1069280246
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_64: -532057361
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_65: -90291887
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_66: -1163282658
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_67: -451759998
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_68: 648231859
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_69: -1647693684
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_7: 1179539114
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_70: -1194922134
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_71: -74101187
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_72: 513409919
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_73: 221462385
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_74: -855526345
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_75: 1710938554
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_76: 936591491
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_77: 425026442
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_78: 2100475200
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_79: 461698767
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_8: 584937512
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_80: -1112511381
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_81: 969588216
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_82: 1545918738
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_83: -1795183942
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_84: -1066984461
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_85: -193399337
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_86: -2002493894
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_87: 1525742342
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_88: -1798365136
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_89: 535170329
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_9: 1217977931
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_90: -535412452
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_91: -2034762844
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_92: 518233856
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_93: 553590792
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_94: -718421031
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_95: -1875524612
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_96: 1157763759
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_97: 1919798357
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_98: -127091050
+      MS-DOS - DOOM Prototypes - Projectiles and Effects_99: 1110094371
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

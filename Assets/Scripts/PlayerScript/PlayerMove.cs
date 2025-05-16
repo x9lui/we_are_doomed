@@ -12,13 +12,14 @@ public class PlayerMove : MonoBehaviour
     public float momentumDamping = 5f; // Damping value for momentum
     private InventoryScript inventory; // Reference to the InventoryScript
     private InventoryScript.WeaponType currentSlot = InventoryScript.WeaponType.Fist; // Current selected slot
+    public float jumpForce = 8f; // Jump force
+    public float gravityMultiplier = 2.5f; // Gravity multiplier
 
     [Header("Weapon GameObjects")]
     private GameObject fistWeapon = null; // Reference to the Fist weapon GameObject
     private GameObject pistolWeapon = null; // Reference to the Pistol weapon GameObject
     private GameObject shotgunWeapon = null; // Reference to the Shotgun weapon GameObject
     private GameObject rifleWeapon = null; // Reference to the Rifle weapon GameObject
-    private GameObject sniperWeapon = null; // Reference to the Sniper weapon GameObject
     private GameObject rocketLauncherWeapon = null; // Reference to the Rocket Launcher weapon GameObject
     private GameObject meleeWeapon = null; // Reference to the Melee weapon GameObject
 
@@ -69,16 +70,25 @@ public class PlayerMove : MonoBehaviour
         MovePlayer();
         HandleInventoryInput();
 
-        // Detectar si el jugador está disparando
-        if (Input.GetButton("Fire1"))
+        if (currentGun != null)
         {
-            Fire();
-        }
-
-        // Detectar si el jugador ha soltado el botón de disparo
-        if (Input.GetButtonUp("Fire1") && currentGun != null && currentGun.getCanAuto())
-        {
-            currentGun.StopFiringAnim();
+            if (currentGun.getCanAuto())
+            {
+                // Solo dispara si el botón está presionado
+                if (Input.GetMouseButton(0))
+                    currentGun.Fire();
+                // Detener animación al soltar
+                if (Input.GetMouseButtonUp(0))
+                    currentGun.StopFiringAnim();
+            }
+            else
+            {
+                // Solo dispara una vez por click
+                if (Input.GetMouseButtonDown(0))
+                    currentGun.Fire();
+                if (Input.GetMouseButtonUp(0))
+                    currentGun.StopFiringAnim();
+            }
         }
     }
 
@@ -109,6 +119,12 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+        // --- SALTO ---
+        if (MyCC.isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            myGravity = jumpForce; // Aplica fuerza de salto
+        }
+
         camAnim.SetBool("isWalking", isWalking); // Set the walking animation parameter in the Animator
         movementVector = (inputvector * speed) + (Vector3.up * myGravity); // Calculate the movement vector based on input and speed
     }
@@ -118,32 +134,35 @@ public class PlayerMove : MonoBehaviour
         MyCC.Move(movementVector * Time.deltaTime); // Move the player using the CharacterController component
         if (MyCC.isGrounded) // Check if the player is grounded
         {
-            myGravity = -9.81f; // Reset gravity when grounded
+            if (myGravity < 0) // Solo resetea gravedad si está cayendo
+                myGravity = -9.81f; // Reset gravity when grounded
         }
         else
         {
-            myGravity -= 9.81f * Time.deltaTime; // Apply gravity when not grounded
+            myGravity -= 9.81f * gravityMultiplier * Time.deltaTime; // Apply gravity when not grounded
         }
     }
 
     void HandleInventoryInput()
     {
-        // Verificar si el jugador intenta cambiar de slot
+        // No permitir cambiar ni dropear arma si está disparando
+        if (currentGun != null && currentGun.isFiring)
+            return;
+
         InventoryScript.WeaponType newSlot = currentSlot;
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) newSlot = InventoryScript.WeaponType.Fist;
         if (Input.GetKeyDown(KeyCode.Alpha2)) newSlot = InventoryScript.WeaponType.Pistol;
         if (Input.GetKeyDown(KeyCode.Alpha3)) newSlot = InventoryScript.WeaponType.Shotgun;
         if (Input.GetKeyDown(KeyCode.Alpha4)) newSlot = InventoryScript.WeaponType.Rifle;
-        if (Input.GetKeyDown(KeyCode.Alpha6)) newSlot = InventoryScript.WeaponType.RocketLauncher;
-        if (Input.GetKeyDown(KeyCode.Alpha7)) newSlot = InventoryScript.WeaponType.Melee;
+        if (Input.GetKeyDown(KeyCode.Alpha5)) newSlot = InventoryScript.WeaponType.RocketLauncher;
+        if (Input.GetKeyDown(KeyCode.Alpha6)) newSlot = InventoryScript.WeaponType.Melee;
 
-        // Verificar si el slot tiene un arma asignada
         string weaponName = inventory.GetWeapon(newSlot);
         if (!string.IsNullOrEmpty(weaponName))
         {
-            currentSlot = newSlot; // Cambiar al nuevo slot si tiene un arma asignada
-            UpdateWeaponVisibility(); // Actualizar la visibilidad de las armas
+            currentSlot = newSlot;
+            UpdateWeaponVisibility();
         }
         else
         {
@@ -153,11 +172,12 @@ public class PlayerMove : MonoBehaviour
         // Eliminar el arma del slot actual si se presiona la tecla Q
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            bool removed = inventory.RemoveWeapon(currentSlot);
+            Vector3 dropPos = transform.position + transform.forward * 3f;
+            bool removed = inventory.RemoveWeapon(currentSlot, dropPos);
             if (removed)
             {
-                Debug.Log($"Weapon removed from slot: {currentSlot}");
-                UpdateWeaponVisibility(); // Actualizar la visibilidad después de eliminar un arma
+                currentSlot = InventoryScript.WeaponType.Fist;
+                UpdateWeaponVisibility();
             }
         }
     }

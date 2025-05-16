@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 {
@@ -15,12 +16,15 @@ public class Gun : MonoBehaviour
     [Header("References")]
     public AudioSource gunSound; // Sonido del disparo
 
-    private float nextTimeToFire; // Tiempo hasta el próximo disparo permitido
-    protected bool isFiring = false; // Nueva bandera para controlar si el arma está disparando
+    public float nextTimeToFire; // Tiempo hasta el próximo disparo permitido
+    public bool isFiring = false; // Nueva bandera para controlar si el arma está disparando
 
     public bool canAuto;
 
     protected Animator spriteAnim;
+
+    protected Image gunImage; // Asigna este Image en el inspector
+
 
     [Obsolete]
     void Start()
@@ -31,7 +35,11 @@ public class Gun : MonoBehaviour
         {
             Debug.LogError("RayCast script not found!");
         }
-
+        gunImage = GetComponent<Image>(); // Asignar el componente Image
+        if (gunImage == null)
+        {
+            Debug.LogError("Gun Image component not found!");
+        }
     }
 
     public GameObject HandleRaycastAndDamage()

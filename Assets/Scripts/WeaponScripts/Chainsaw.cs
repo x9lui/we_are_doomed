@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Chainsaw : Gun
 {
-    private float nextTimeToFire = 0f; // Tiempo hasta el próximo disparo permitido
 
     public override void Fire()
     {
@@ -11,8 +10,9 @@ public class Chainsaw : Gun
         {
             if (ammo <= 0)
             {
-                Debug.Log("Chainsaw: Out of ammo!");
-                spriteAnim.SetBool("Fire", false);
+                Debug.Log("Out of ammo!");
+                spriteAnim.SetBool("Fire", false); // O el parámetro que uses
+                isFiring = false; // <- IMPORTANTE
                 return;
             }
 
@@ -38,13 +38,13 @@ public class Chainsaw : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("Chainsaw: Walking");
+        //Debug.Log("Chainsaw: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("Chainsaw: Idle");
+        //Debug.Log("Chainsaw: Idle");
     }
 
     public override void setCanAuto()
