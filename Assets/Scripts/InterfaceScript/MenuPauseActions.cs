@@ -11,6 +11,8 @@ public class MenuPauseActions : MonoBehaviour
     [SerializeField] private GameObject _OptionPanel;
     [SerializeField] private GameObject _DescripcionText;
     [SerializeField] private Image _TransitionPanel;
+    public TextMeshProUGUI _ContadorDeMuertes;
+    private int muertes = 0;
 
     [Header("Menus")]
     
@@ -22,7 +24,6 @@ public class MenuPauseActions : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private UIElementMover _mover;
-
     [SerializeField] private MouseLook _mouseLookScript;
 
     [Header("Sounds")]
@@ -123,6 +124,7 @@ public class MenuPauseActions : MonoBehaviour
 
     public void Reaparecer()
     {
+        muertes++;
         player.SetActive(false);
         player.GetComponent<PlayerHealth>().HealPlayer(100);
         player.GetComponent<PlayerHealth>().ArmorPlayer(120);
@@ -162,6 +164,7 @@ public class MenuPauseActions : MonoBehaviour
         {
             _OptionPanel.SetActive(false);
         }
+        _ContadorDeMuertes.text = muertes.ToString();
         pulsadoReanudar = false;
         player.SetActive(true);
         Debug.Log(player.transform.position);
