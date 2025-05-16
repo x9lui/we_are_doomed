@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TriangleNet.Geometry;
 using TriangleNet.Meshing;
+using System.Threading.Tasks;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -32,11 +33,45 @@ public class DungeonGenerator : MonoBehaviour
     private Dictionary<Vector2Int, TileType> tileMap = new Dictionary<Vector2Int, TileType>();
     private HashSet<(Vector2Int, Vector2Int)> connectedTiles = new HashSet<(Vector2Int, Vector2Int)>();
 
+    [Header("Syncronization")]
 
+    //This flag is used to tell that all the process of dugeon generation has finished
+    private volatile bool dungeonHeavyWorkDone = false;
+    public bool DungeonGenerated { get; private set; } = false;
+
+    private System.Random rnd; 
+    public void Awake()
+    {
+        rnd = new System.Random();
+    }
     public void GenerateDungeon()
     {
-        GenerateInitialCells();
-        StartCoroutine(SeparateAndSelectRooms());
+        Task.Run(() =>
+        {
+            GenerateInitialCells();
+            SeparateAndSelectRooms();
+            Debug.Log("Dungeon heavy work already done");
+            dungeonHeavyWorkDone = true;
+        });
+    }
+
+    private void Update()
+    {
+        if (dungeonHeavyWorkDone && !DungeonGenerated)
+        {
+            GenerateWalls();
+            Debug.Log("Muros generados.");
+
+            MergeCorridorCells();
+            GenerateFloors();
+            Debug.Log("Suelos generados.");
+            DungeonGenerated = true;
+        }
+    }
+
+    public List<Cell> GetDungeonRooms()
+    {
+        return rooms;
     }
 
     private void GenerateInitialCells()
@@ -50,17 +85,20 @@ public class DungeonGenerator : MonoBehaviour
             // Repetir hasta que la celda no sea demasiado alargada
             do
             {
-                width = Mathf.RoundToInt(Mathf.Lerp(roomSizeMin.x, roomSizeMax.x, Mathf.Pow(Random.value, 2)));
-                height = Mathf.RoundToInt(Mathf.Lerp(roomSizeMin.y, roomSizeMax.y, Mathf.Pow(Random.value, 2)));
+                double t = System.Math.Pow(rnd.NextDouble(), 2);  // Random.value²
+                width = (int)System.Math.Round(Lerp(roomSizeMin.x, roomSizeMax.x, t));
+                t = System.Math.Pow(rnd.NextDouble(), 2);
+                height = (int)System.Math.Round(Lerp(roomSizeMin.y, roomSizeMax.y, t));
             }
-            while (Mathf.Abs(width - height) > 3); // Si la diferencia es mayor que 3, repetir
+            while (System.Math.Abs(width - height) > 3); // Si la diferencia es mayor que 3, repetir
 
             // Generar posición aleatoria en circunferencia (esquina inferior izquierda)
-            float angle = Random.Range(0f, Mathf.PI * 2f);
-            float distance = Random.Range(0f, spawnRadius);
+            float angle = (float)(rnd.NextDouble() * System.Math.PI * 2.0f);
+            float distance = (float)(rnd.NextDouble() * spawnRadius);
 
-            int posX = Mathf.RoundToInt(Mathf.Cos(angle) * distance);
-            int posY = Mathf.RoundToInt(Mathf.Sin(angle) * distance);
+            int posX = (int)System.Math.Round(System.Math.Cos(angle) * distance);
+            int posY = (int)System.Math.Round(System.Math.Sin(angle) * distance);
+
 
             Cell newCell = new Cell(new Vector2(posX, posY), new Vector2(width, height));
             cells.Add(newCell);
@@ -69,9 +107,9 @@ public class DungeonGenerator : MonoBehaviour
         Debug.Log($"{cells.Count} celdas generadas.");
     }
 
-    private IEnumerator SeparateAndSelectRooms()
+    private void SeparateAndSelectRooms()
     {
-        yield return StartCoroutine(SeparateCells());
+        SeparateCells();
 
         rooms = SelectRooms();
         FillEmptySpacesWithSmallCells();
@@ -94,17 +132,23 @@ public class DungeonGenerator : MonoBehaviour
 
         Debug.Log("Pasillos creados.");
 
+        /*
+        This part of the process is commented because Unity instantiation in
+        Task.Run doesn't work and must be done in the main Unity thread. See
+        current code in Update()
+
         GenerateWalls();
         Debug.Log("Muros generados.");
 
         MergeCorridorCells();
         GenerateFloors();
         Debug.Log("Suelos generados.");
+        */
 
     }
 
 
-    private IEnumerator SeparateCells()
+    private void SeparateCells()
     {
         bool overlapsExist = true;
         int iterations = 0;
@@ -134,8 +178,8 @@ public class DungeonGenerator : MonoBehaviour
                 if (move != Vector2Int.zero)
                 {
                     a.position += new Vector2(
-                        Mathf.Sign(move.x),
-                        Mathf.Sign(move.y)
+                        System.Math.Sign(move.x),
+                        System.Math.Sign(move.y)
                     );
                 }
 
@@ -148,7 +192,7 @@ public class DungeonGenerator : MonoBehaviour
 
         Debug.Log($"Separación terminada en {iterations} iteraciones.");
 
-        yield return null;
+        return;
 
     }
 
@@ -221,20 +265,21 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         // Definir el tamaño del grid
-        int width = Mathf.CeilToInt(max.x - min.x);
-        int height = Mathf.CeilToInt(max.y - min.y);
+        int width = (int)System.Math.Ceiling(max.x - min.x);
+        int height = (int)System.Math.Ceiling(max.y - min.y);
+
 
         bool[,] grid = new bool[width, height];
 
         // Paso 2: Marcar los tiles ocupados
         foreach (var cell in cells)
         {
-            for (int x = 0; x < Mathf.RoundToInt(cell.size.x); x++)
+            for (int x = 0; x < (int)System.Math.Round(cell.size.x); x++)
             {
-                for (int y = 0; y < Mathf.RoundToInt(cell.size.y); y++)
+                for (int y = 0; y < (int)System.Math.Round(cell.size.y); y++)
                 {
-                    int gridX = Mathf.RoundToInt(cell.position.x - min.x) + x;
-                    int gridY = Mathf.RoundToInt(cell.position.y - min.y) + y;
+                    int gridX = (int)System.Math.Round(cell.position.x - min.x) + x;
+                    int gridY = (int)System.Math.Round(cell.position.y - min.y) + y;
 
                     if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height)
                     {
@@ -363,7 +408,7 @@ public class DungeonGenerator : MonoBehaviour
         foreach (var e in delaunay)
         {
             var norm = NormalizeEdge(e);
-            if (!existing.Contains(norm) && Random.value < loopChance)
+            if (!existing.Contains(norm) && (float)rnd.NextDouble() < loopChance)
             {
                 allEdges.Add(new Edge(e.Item1, e.Item2));
                 existing.Add(norm);
@@ -389,8 +434,8 @@ public class DungeonGenerator : MonoBehaviour
             Vector2 start = edge.a;
             Vector2 end = edge.b;
 
-            Vector2Int startInt = new Vector2Int(Mathf.RoundToInt(start.x), Mathf.RoundToInt(start.y));
-            Vector2Int endInt = new Vector2Int(Mathf.RoundToInt(end.x), Mathf.RoundToInt(end.y));
+            Vector2Int startInt = new Vector2Int((int)System.Math.Round(start.x), (int)System.Math.Round(start.y));
+            Vector2Int endInt = new Vector2Int((int)System.Math.Round(end.x), (int)System.Math.Round(end.y));
 
             Vector2Int current = startInt;
 
@@ -530,22 +575,22 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (var c in corridorCells)
         {
-            minX = Mathf.Min(minX, c.position.x);
-            minY = Mathf.Min(minY, c.position.y);
-            maxX = Mathf.Max(maxX, c.position.x + c.size.x);
-            maxY = Mathf.Max(maxY, c.position.y + c.size.y);
+            minX = System.Math.Min(minX, c.position.x);
+            minY = System.Math.Min(minY, c.position.y);
+            maxX = System.Math.Max(maxX, c.position.x + c.size.x);
+            maxY = System.Math.Max(maxY, c.position.y + c.size.y);
         }
 
-        int width = Mathf.CeilToInt(maxX - minX);
-        int height = Mathf.CeilToInt(maxY - minY);
+        int width = (int)System.Math.Ceiling(maxX - minX);
+        int height = (int)System.Math.Ceiling(maxY - minY);
 
         bool[,] map = new bool[width, height];
 
         // Paso 2: Marcar las celdas ocupadas
         foreach (var c in corridorCells)
         {
-            int startX = Mathf.RoundToInt(c.position.x - minX);
-            int startY = Mathf.RoundToInt(c.position.y - minY);
+            int startX = (int)System.Math.Round(c.position.x - minX);
+            int startY = (int)System.Math.Round(c.position.y - minY);
 
             for (int x = 0; x < (int)c.size.x; x++)
             {
@@ -704,10 +749,10 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (var pos in wallPositions)
         {
-            minX = Mathf.Min(minX, pos.x);
-            minY = Mathf.Min(minY, pos.y);
-            maxX = Mathf.Max(maxX, pos.x);
-            maxY = Mathf.Max(maxY, pos.y);
+            minX = System.Math.Min(minX, pos.x);
+            minY = System.Math.Min(minY, pos.y);
+            maxX = System.Math.Max(maxX, pos.x);
+            maxY = System.Math.Max(maxY, pos.y);
         }
 
         int width = maxX - minX + 1;
@@ -844,7 +889,7 @@ public class DungeonGenerator : MonoBehaviour
 
             if (wallMaterials.Count > 0)
             {
-                Material randomMat = wallMaterials[Random.Range(0, wallMaterials.Count)];
+                Material randomMat = wallMaterials[rnd.Next(0, wallMaterials.Count)];
                 MeshRenderer renderer = wallPiece.GetComponent<MeshRenderer>();
 
                 if (renderer != null)
@@ -887,6 +932,11 @@ public class DungeonGenerator : MonoBehaviour
         Empty,
         Floor,
         Wall
+    }
+
+    private double Lerp(double a, double b, double t)
+    {
+        return a + (b - a) * t;
     }
 
 }
