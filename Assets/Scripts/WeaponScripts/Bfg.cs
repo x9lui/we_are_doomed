@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Bfg : Gun
 {
     public GameObject rocketPrefab;
     public Transform firePoint; // El punto desde donde sale el cohete
+    private bool hasFiredProjectile = false;
 
     [System.Obsolete]
     void Awake()
@@ -38,48 +40,57 @@ public class Bfg : Gun
         ammo--;
         Debug.Log($"Bfg fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");
+        hasFiredProjectile = false;
 
-        // Instanciar el proyectil
-        if (rocketPrefab != null && firePoint != null)
-        {
-            float spawnOffset = 1.0f; // Ajusta este valor según el tamaño de tu arma/cohete
-            Vector3 spawnPos = firePoint.position + firePoint.forward * spawnOffset;
-            GameObject rocket = Instantiate(rocketPrefab, spawnPos, firePoint.rotation);
-
-            // Ignorar colisión con el jugador
-            Collider rocketCol = rocket.GetComponent<Collider>();
-            GameObject player = GameObject.FindWithTag("Player"); // Asegúrate de que el jugador tenga el tag "Player"
-            if (player != null && rocketCol != null)
-            {
-                Collider playerCol = player.GetComponent<Collider>();
-                if (playerCol != null)
-                    Physics.IgnoreCollision(rocketCol, playerCol);
-            }
-        }
-
+        StartCoroutine(WaitForProjectileSprite());
         StartCoroutine(FinishFireAfterDelay(0.1f, 0.2f));
+    }
+
+    private IEnumerator WaitForProjectileSprite()
+    {
+        // Esperar hasta que el sprite sea 'shoot_2'
+        while (!hasFiredProjectile)
+        {
+            if (gunImage != null && gunImage.sprite.name == "shoot_2")
+            {
+                // Instanciar el proyectil
+                if (rocketPrefab != null && firePoint != null)
+                {
+                    float spawnOffset = 1.0f;
+                    Vector3 spawnPos = firePoint.position + firePoint.forward * spawnOffset;
+                    GameObject rocket = Instantiate(rocketPrefab, spawnPos, firePoint.rotation);
+
+                    // Ignorar colisión con el jugador
+                    Collider rocketCol = rocket.GetComponent<Collider>();
+                    GameObject player = GameObject.FindWithTag("Player");
+                    if (player != null && rocketCol != null)
+                    {
+                        Collider playerCol = player.GetComponent<Collider>();
+                        if (playerCol != null)
+                            Physics.IgnoreCollision(rocketCol, playerCol);
+                    }
+                }
+                hasFiredProjectile = true;
+            }
+            yield return null;
+        }
     }
 
     private IEnumerator FinishFireAfterDelay(float actionDelay, float unlockDelay)
     {
-        yield return new WaitForSeconds(actionDelay); // Esperar a que termine la acción principal
-        //Debug.Log("Bfg: Action completed.");
-
-        yield return new WaitForSeconds(unlockDelay); // Esperar tiempo adicional antes de desbloquear
-        FinishFire(); // Marcar el arma como lista para disparar nuevamente
-        //Debug.Log("Bfg: Ready to fire again.");
+        yield return new WaitForSeconds(actionDelay);
+        yield return new WaitForSeconds(unlockDelay);
+        FinishFire();
     }
 
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        //Debug.Log("Bfg: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        //Debug.Log("Bfg: Idle");
     }
 
     public override void setCanAuto()

@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ShotgunNormal : Gun
 {
     public int pellets = 8; // Número de perdigones disparados por la escopeta
     public float spreadAngle = 10f; // Ángulo de dispersión de los perdigones
+    private bool hasAppliedDamage = false;
 
     public override void Fire()
     {
@@ -20,41 +22,52 @@ public class ShotgunNormal : Gun
             return;
         }
 
-        isFiring = true; // Marcar el arma como disparando
-        ammo--; // Reducir la munición
+        isFiring = true;
+        ammo--;
         Debug.Log($"ShotgunNormal fired! Ammo left: {ammo}");
-        spriteAnim.SetTrigger("Fire"); // Activar la animación de disparo
+        spriteAnim.SetTrigger("Fire");
+        hasAppliedDamage = false;
 
-        // Disparar múltiples perdigones
-        for (int i = 0; i < pellets; i++)
-        {
-            HandleRaycastAndDamage(); // Usar el método genérico para cada perdigón
-        }
-
-        // Finalizar el disparo después de un breve retraso
+        StartCoroutine(WaitForDamageSprite());
         StartCoroutine(FinishFireAfterDelay(0.2f, 0.5f));
+    }
+
+    private IEnumerator WaitForDamageSprite()
+    {
+        // Esperar hasta que el sprite sea 'shoot_1'
+        while (!hasAppliedDamage)
+        {
+            if (gunImage != null && gunImage.sprite.name == "shoot_1")
+            {
+                // Disparar múltiples perdigones solo en este frame
+                for (int i = 0; i < pellets; i++)
+                {
+                    HandleRaycastAndDamage();
+                }
+                hasAppliedDamage = true;
+            }
+            yield return null;
+        }
     }
 
     private IEnumerator FinishFireAfterDelay(float actionDelay, float unlockDelay)
     {
-        yield return new WaitForSeconds(actionDelay); // Esperar a que termine la acción principal
+        yield return new WaitForSeconds(actionDelay);
         Debug.Log("ShotgunNormal: Action completed.");
 
-        yield return new WaitForSeconds(unlockDelay); // Esperar tiempo adicional antes de desbloquear
-        FinishFire(); // Marcar el arma como lista para disparar nuevamente
+        yield return new WaitForSeconds(unlockDelay);
+        FinishFire();
         Debug.Log("ShotgunNormal: Ready to fire again.");
     }
 
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        //Debug.Log("ShotgunNormal: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        //Debug.Log("ShotgunNormal: Idle");
     }
 
     public override void setCanAuto()

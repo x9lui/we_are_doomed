@@ -69,16 +69,25 @@ public class PlayerMove : MonoBehaviour
         MovePlayer();
         HandleInventoryInput();
 
-        // Detectar si el jugador está disparando
-        if (Input.GetButton("Fire1"))
+        if (currentGun != null)
         {
-            Fire();
-        }
-
-        // Detectar si el jugador ha soltado el botón de disparo
-        if (Input.GetButtonUp("Fire1") && currentGun != null && currentGun.getCanAuto())
-        {
-            currentGun.StopFiringAnim();
+            if (currentGun.getCanAuto())
+            {
+                // Solo dispara si el botón está presionado
+                if (Input.GetMouseButton(0))
+                    currentGun.Fire();
+                // Detener animación al soltar
+                if (Input.GetMouseButtonUp(0))
+                    currentGun.StopFiringAnim();
+            }
+            else
+            {
+                // Solo dispara una vez por click
+                if (Input.GetMouseButtonDown(0))
+                    currentGun.Fire();
+                if (Input.GetMouseButtonUp(0))
+                    currentGun.StopFiringAnim();
+            }
         }
     }
 

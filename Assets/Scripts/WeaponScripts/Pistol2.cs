@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Pistol2 : Gun
 {
+    private bool hasAppliedDamage = false;
+
     public override void Fire()
     {
         if (isFiring)
@@ -21,13 +23,29 @@ public class Pistol2 : Gun
         ammo--; // Reducir la munición
         Debug.Log($"Pistol2 fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire"); // Activar la animación de disparo
+        hasAppliedDamage = false; // Resetear para este disparo
 
-        // Llamar al método genérico para manejar el raycast y el daño
-        HandleRaycastAndDamage();
-
+        StartCoroutine(WaitForDamageSprite());
         // Finalizar el disparo después de un breve retraso
         StartCoroutine(FinishFireAfterDelay(0.1f, 0.2f));
     }
+
+    private IEnumerator WaitForDamageSprite()
+    {
+        // Esperar hasta que el sprite sea 'shoot_2'
+        while (!hasAppliedDamage)
+        {
+            if (gunImage != null && gunImage.sprite.name == "shoot_2")
+            {
+                // Aquí se hace el raycast y el daño
+                HandleRaycastAndDamage();
+                hasAppliedDamage = true;
+            }
+
+            yield return null; // Esperar al siguiente frame
+        }
+    }
+
 
     private IEnumerator FinishFireAfterDelay(float actionDelay, float unlockDelay)
     {
