@@ -18,7 +18,6 @@ public class PlayerMove : MonoBehaviour
     private GameObject pistolWeapon = null; // Reference to the Pistol weapon GameObject
     private GameObject shotgunWeapon = null; // Reference to the Shotgun weapon GameObject
     private GameObject rifleWeapon = null; // Reference to the Rifle weapon GameObject
-    private GameObject sniperWeapon = null; // Reference to the Sniper weapon GameObject
     private GameObject rocketLauncherWeapon = null; // Reference to the Rocket Launcher weapon GameObject
     private GameObject meleeWeapon = null; // Reference to the Melee weapon GameObject
 

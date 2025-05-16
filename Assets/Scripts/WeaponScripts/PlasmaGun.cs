@@ -5,7 +5,6 @@ public class PlasmaGun : Gun
 {
     public GameObject plasmaProjectilePrefab;
     public Transform firePoint; // Punto de salida del proyectil
-    private float nextTimeToFire = 0f;
 
     [System.Obsolete]
     void Awake()

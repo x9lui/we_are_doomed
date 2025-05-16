@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,8 +15,11 @@ public class Enemy : MonoBehaviour
     public float attackDamage = 10f; // Daño que inflige el enemigo
     public float attackCooldown = 1.5f; // Tiempo entre ataques
     private float lastAttackTime; // Tiempo del último ataque
+    private bool hasAppliedAttackDamage = false; // Indica si el daño ya fue aplicado
 
     private PlayerHealth playerHealth; // Referencia al componente PlayerHealth
+
+    public Sprite attackSprite; // Asigna 'Imp-from-Doom-Spritesheet_30' en el inspector
 
     void Start()
     {
@@ -26,7 +30,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        spriteAnim.SetFloat("SpriteRotation", angleToPlayer.lastIndex); // Convert lastIndex to float and set the sprite rotation
+        Debug.Log("Angle: " + angleToPlayer.lastIndex);
+        spriteAnim.SetFloat("SpriteRotation", angleToPlayer.lastIndex);
     }
 
     public void TakeDamage(float damage)
@@ -41,23 +46,32 @@ public class Enemy : MonoBehaviour
 
     public void AttackPlayer()
     {
-        // Verificar si el ataque está en cooldown
         if (Time.time >= lastAttackTime + attackCooldown)
         {
-            lastAttackTime = Time.time; // Actualizar el tiempo del último ataque
-
-            // Activar la animación de ataque
+            lastAttackTime = Time.time;
             if (spriteAnim != null)
-            {
                 spriteAnim.SetTrigger("Attack");
-            }
 
-            // Infligir daño al jugador
-            if (playerHealth != null)
+            hasAppliedAttackDamage = false;
+            StartCoroutine(WaitForAttackSprite());
+        }
+    }
+
+    private IEnumerator WaitForAttackSprite()
+    {
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        while (!hasAppliedAttackDamage)
+        {
+            if (sr != null && sr.sprite == attackSprite)
             {
-                playerHealth.TakeDamage(attackDamage);
-                Debug.Log($"Player took {attackDamage} damage from enemy.");
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(attackDamage);
+                    Debug.Log($"Player took {attackDamage} damage from enemy.");
+                }
+                hasAppliedAttackDamage = true;
             }
+            yield return null;
         }
     }
 

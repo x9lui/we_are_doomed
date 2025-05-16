@@ -3,7 +3,6 @@ using System.Collections;
 
 public class MachineGun : Gun
 {
-    private float nextTimeToFire = 0f; // Tiempo hasta el próximo disparo permitido
 
     public override void Fire()
     {

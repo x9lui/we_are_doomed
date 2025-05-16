@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
     [Header("References")]
     public AudioSource gunSound; // Sonido del disparo
 
-    private float nextTimeToFire; // Tiempo hasta el próximo disparo permitido
+    public float nextTimeToFire; // Tiempo hasta el próximo disparo permitido
     protected bool isFiring = false; // Nueva bandera para controlar si el arma está disparando
 
     public bool canAuto;
