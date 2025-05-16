@@ -2174,7 +2174,7 @@ MonoBehaviour:
   _OptionPanel: {fileID: 352223484}
   _DescripcionText: {fileID: 1918064646}
   _TransitionPanel: {fileID: 352223486}
-  _ContadorDeMuertes: {fileID: 0}
+  _ContadorDeMuertes: {fileID: 79932900}
   _OptionsMenuDisplay: {fileID: 212767745}
   _MenuPrincipalDisplay: {fileID: 1344821270}
   _ConfirmationExit: {fileID: 16191361}
