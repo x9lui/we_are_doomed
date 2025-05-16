@@ -27,6 +27,15 @@ public class InventoryScript : MonoBehaviour
 
     private List<WeaponSlot> Originalinventory;
 
+    public GameObject semiPistolPickUpPrefab;
+    public GameObject pistol2PickUpPrefab;
+    public GameObject shotgunPickUpPrefab;
+    public GameObject EnergyGunPickUpPrefab;
+    public GameObject MachineGunPickUpPrefab;
+    public GameObject PlasmaPickUpPrefab;
+    public GameObject RocketLauncherPickUpPrefab;
+    public GameObject bfgPickUpPrefab;
+    public GameObject ChainSawPickUpPrefab;
     public void Start()
     {
         // Inicializar el inventario con slots vacíos
@@ -67,16 +76,62 @@ public class InventoryScript : MonoBehaviour
         return false;
     }
 
-    public bool RemoveWeapon(WeaponType type)
+    public bool RemoveWeapon(WeaponType type, Vector3 dropPosition)
     {
-        // Buscar el slot correspondiente al tipo de arma
+        if (type == WeaponType.Fist)
+        {
+            Debug.LogWarning("¡No puedes eliminar los Fist!");
+            return false;
+        }
+
         WeaponSlot slot = inventory.Find(s => s.weaponType == type);
 
         if (slot != null && !string.IsNullOrEmpty(slot.weaponName))
         {
             Debug.Log($"Removed {slot.weaponName} from {type} slot.");
-            slot.weaponName = null; // Vaciar el slot
 
+            // Dropear el arma específica antes de vaciar el slot
+            GameObject prefabToDrop = null;
+            switch (slot.weaponName)
+            {
+                case "SemiPistol":
+                    prefabToDrop = semiPistolPickUpPrefab;
+                    break;
+                case "Pistol2":
+                    prefabToDrop = pistol2PickUpPrefab;
+                    break;
+                case "ShotgunNormal":
+                    prefabToDrop = shotgunPickUpPrefab;
+                    break;
+                case "EnergyGun":
+                    prefabToDrop = EnergyGunPickUpPrefab;
+                    break;
+                case "MachineGun":
+                    prefabToDrop = MachineGunPickUpPrefab;
+                    break;
+                case "PlasmaGun":
+                    prefabToDrop = PlasmaPickUpPrefab;
+                    break;
+                case "RocketLauncher":
+                    prefabToDrop = RocketLauncherPickUpPrefab;
+                    break;
+                case "Bfg":
+                    prefabToDrop = bfgPickUpPrefab;
+                    break;
+                case "Chainsaw":
+                    prefabToDrop = ChainSawPickUpPrefab;
+                    break;
+                default:
+                    Debug.LogWarning($"No prefab found for {slot.weaponName}.");
+                    break;
+            }
+
+            if (prefabToDrop != null)
+            {
+                Instantiate(prefabToDrop, dropPosition, Quaternion.identity);
+            }
+
+            slot.weaponName = null;
             weaponHUDDisplay?.DeactivateWeaponUI(type);
 
             return true;
@@ -112,4 +167,30 @@ public class InventoryScript : MonoBehaviour
         }
         weaponHUDDisplay?.UpdateHUD(inventory);
     }
+
+    public void AddAmmo(int ammoAmount)
+    {
+        Transform hudTransform = GameObject.Find("HUD")?.transform;
+        if (hudTransform == null) return;
+
+        foreach (var slot in inventory)
+        {
+            if (!string.IsNullOrEmpty(slot.weaponName))
+            {
+                Transform weaponTransform = hudTransform.Find(slot.weaponName);
+                if (weaponTransform != null)
+                {
+                    Gun gun = weaponTransform.GetComponent<Gun>();
+                    if (gun != null)
+                    {
+                        int ammoToAdd = Mathf.Min(ammoAmount, gun.maxAmmo - gun.ammo);
+                        gun.ammo += ammoToAdd;
+                        // Debug.Log($"{gun.name} recibió {ammoToAdd} de munición. Total: {gun.ammo}/{gun.maxAmmo}");
+                    }
+                }
+            }
+        }
+    }
+
+
 }
