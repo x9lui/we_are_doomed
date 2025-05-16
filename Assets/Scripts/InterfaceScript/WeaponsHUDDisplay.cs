@@ -13,29 +13,33 @@ public class WeaponHUDDisplay : MonoBehaviour
     public Color disabledColor;
     public Color currentColor;
 
+
     public void UpdateHUD(List<InventoryScript.WeaponSlot> inventory)
     {
-
-        for (int i = 0; i < inventory.Count; i++)
+        for (int i = 0; i < weaponTexts.Count; i++)
         {
-            var type = (InventoryScript.WeaponType)i;
-            var slot = inventory.Find(s => s.weaponType == type);
-            if (slot != null && !string.IsNullOrEmpty(slot.weaponName))
+            // Evitar errores por desincronización entre inventory y weaponTexts
+            if (i < inventory.Count)
             {
-                Debug.Log(slot.weaponName);
-                Debug.Log(i);
-                weaponTexts[i].color = enabledColor;
+                var type = (InventoryScript.WeaponType)i;
+                var slot = inventory.Find(s => s.weaponType == type);
+                if (slot != null && !string.IsNullOrEmpty(slot.weaponName))
+                {
+                    weaponTexts[i].color = enabledColor;
+                }
+                else
+                {
+                    weaponTexts[i].color = disabledColor;
+                }
             }
             else
             {
+                // Si no hay datos en el inventario para esta posición, desactivar visualmente
                 weaponTexts[i].color = disabledColor;
             }
         }
-        for (int i = inventory.Count; i < weaponTexts.Count; i++)
-        {
-            weaponTexts[i].color = disabledColor;
-        }
     }
+
 
     public void ActivateWeaponUI(InventoryScript.WeaponType type, string weaponName)
     {
@@ -76,13 +80,25 @@ public class WeaponHUDDisplay : MonoBehaviour
             case "Pistol2":
                 weaponNameText.text = "Pistola";
                 break;
-            case "Shotgun":
+            case "SemiPistol":
+                weaponNameText.text = "Pistola Semiautomatica";
+                break;
+            case "EnergyGun":
+                weaponNameText.text = "Escopeta de Energia";
+                break;
+            case "MachineGun":
+                weaponNameText.text = "Subfusil";
+                break;
+            case "ShotgunNormal":
                 weaponNameText.text = "Escopeta";
                 break;
             case "PlasmaGun":
-                weaponNameText.text = "Arma de Plasma";
+                weaponNameText.text = "Rifle de Plasma";
                 break;
             case "Bfg":
+                weaponNameText.text = "BFG 9000";
+                break;
+             case "RocketLauncher":
                 weaponNameText.text = "LanzaCohetes";
                 break;
             case "Chainsaw":

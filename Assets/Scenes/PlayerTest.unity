@@ -2041,11 +2041,13 @@ MonoBehaviour:
   _OptionsMenuDisplay: {fileID: 212767745}
   _MenuPrincipalDisplay: {fileID: 1344821270}
   _ConfirmationExit: {fileID: 16191361}
+  deathPanelUI: {fileID: 1522988779}
   _mover: {fileID: 222960523}
   _mouseLookScript: {fileID: 195153196}
   ClickDeBoton: {fileID: 8300000, guid: cbc91ceda4da56f4b993416fe46b07e1, type: 3}
   _MetalSound: {fileID: 8300000, guid: 2aa31e2de9668d441a7a6b94040fc5d3, type: 3}
   UnJugador: 1
+  player: {fileID: 351862516}
 --- !u!114 &222960523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10980,7 +10982,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.23426974, y: 0}
   m_AnchorMax: {x: 0.46428075, y: 0.29074138}
-  m_AnchoredPosition: {x: -16.67984, y: -25.266846}
+  m_AnchoredPosition: {x: -16.67981, y: -25.266846}
   m_SizeDelta: {x: 94.12491, y: 129.63641}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1552213555

@@ -25,7 +25,9 @@ public class InventoryScript : MonoBehaviour
 
     [SerializeField] private List<WeaponSlot> inventory = new List<WeaponSlot>(7);
 
-    void Start()
+    private List<WeaponSlot> Originalinventory;
+
+    public void Start()
     {
         // Inicializar el inventario con slots vacíos
         foreach (WeaponType type in System.Enum.GetValues(typeof(WeaponType)))
@@ -33,6 +35,16 @@ public class InventoryScript : MonoBehaviour
             inventory.Add(new WeaponSlot { weaponType = type, weaponName = null });
         }
 
+        // Copia del Inventario Original para cuando reaparezcamos
+        Originalinventory = new List<WeaponSlot>();
+        foreach (var slot in inventory)
+        {
+            Originalinventory.Add(new WeaponSlot
+            {
+                weaponType = slot.weaponType,
+                weaponName = slot.weaponName
+            });
+        }
         weaponHUDDisplay?.UpdateHUD(inventory);
     }
 
@@ -85,5 +97,19 @@ public class InventoryScript : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void ResetInventory()
+    {
+        inventory = new List<WeaponSlot>();
+        foreach (var slot in Originalinventory)
+        {
+            inventory.Add(new WeaponSlot
+            {
+                weaponType = slot.weaponType,
+                weaponName = slot.weaponName
+            });
+        }
+        weaponHUDDisplay?.UpdateHUD(inventory);
     }
 }

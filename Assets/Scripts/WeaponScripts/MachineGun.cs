@@ -36,13 +36,13 @@ public class MachineGun : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("MachineGun: Walking");
+        //Debug.Log("MachineGun: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("MachineGun: Idle");
+        //Debug.Log("MachineGun: Idle");
     }
 
     public override void setCanAuto()

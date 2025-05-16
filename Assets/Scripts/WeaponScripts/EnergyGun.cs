@@ -49,13 +49,13 @@ public class EnergyGun : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("EnergyGun: Walking");
+        //Debug.Log("EnergyGun: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("EnergyGun: Idle");
+        //Debug.Log("EnergyGun: Idle");
     }
 
     public override void setCanAuto()

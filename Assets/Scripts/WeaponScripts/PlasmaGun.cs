@@ -65,13 +65,13 @@ public class PlasmaGun : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("PlasmaGun: Walking");
+        //Debug.Log("PlasmaGun: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("PlasmaGun: Idle");
+        //Debug.Log("PlasmaGun: Idle");
     }
 
     public override void setCanAuto()

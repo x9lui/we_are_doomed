@@ -48,13 +48,13 @@ public class ShotgunNormal : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("ShotgunNormal: Walking");
+        //Debug.Log("ShotgunNormal: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("ShotgunNormal: Idle");
+        //Debug.Log("ShotgunNormal: Idle");
     }
 
     public override void setCanAuto()

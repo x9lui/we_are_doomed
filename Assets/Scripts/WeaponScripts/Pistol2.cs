@@ -42,13 +42,13 @@ public class Pistol2 : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        Debug.Log("Pistol2: Walking");
+        //Debug.Log("Pistol2: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        Debug.Log("Pistol2: Idle");
+        //Debug.Log("Pistol2: Idle");
     }
 
     public override void setCanAuto()

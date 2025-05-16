@@ -4,7 +4,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public float MaxHealth = 100f; // Maximum health of the player
     public float CurrentHealth; // Current health of the player
-    public float MaxArmor = 100f; // Maximum armor of the player
+    public float MaxArmor = 120f; // Maximum armor of the player
     public float CurrentArmor; // Current armor of the player
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -22,6 +22,9 @@ public class PlayerHealth : MonoBehaviour
     {
         CurrentHealth = MaxHealth; // Initialize current health to maximum health
         CurrentArmor = MaxArmor; // Initialize current armor to maximum armor
+
+        healthBarUI.SetProgreso(CurrentHealth / MaxHealth);
+        interfaceHead.SetArmadura(CurrentArmor / MaxArmor);
     }
 
     public void TakeDamage(float damage)
@@ -75,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
         CurrentArmor += amount; // Increase armor by the healing amount
         if (CurrentArmor > MaxArmor) // Check if armor exceeds maximum health
         {
-            MaxArmor = CurrentArmor; // Set health to maximum health
+            CurrentArmor = MaxArmor; // Set health to maximum health
         }
         armorBarUI.SetProgreso(CurrentArmor / MaxArmor);
         
@@ -85,10 +88,11 @@ public class PlayerHealth : MonoBehaviour
 
 
 
-    public void Die(){
+    public void Die()
+    {
         // Handle player death (e.g., play animation, disable controls, etc.)
         Debug.Log("Player has died!"); // Log player death
-        
+
         Cursor.lockState = CursorLockMode.None;     // Libera Cursor
         Cursor.visible = true;                      // Ver
         _mouseLookScript.enabled = false;
@@ -96,10 +100,9 @@ public class PlayerHealth : MonoBehaviour
         if (deathPanelUI != null)
             deathPanelUI.SetActive(true); // Mostrar el menú de muerte
 
-        if(UnJugador)
+        if (UnJugador)
         {
             Time.timeScale = 0f;
-        }
-        
+        }        
     }
 }
