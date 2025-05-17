@@ -39,6 +39,8 @@ public class Pistol2 : Gun
         {
             if (gunImage != null && gunImage.sprite.name == "shoot_2")
             {
+                audioSource.PlayOneShot(GunSHot);
+
                 // Aquí se hace el raycast y el daño
                 HandleRaycastAndDamage();
                 hasAppliedDamage = true;

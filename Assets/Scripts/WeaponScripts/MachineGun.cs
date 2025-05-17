@@ -22,6 +22,8 @@ public class MachineGun : Gun
             Debug.Log($"MachineGun fired! Ammo left: {ammo}");
             spriteAnim.SetBool("Fire", true); // Activar la animación de disparo
 
+            audioSource.PlayOneShot(GunSHot);
+
             // Manejar el disparo y el daño
             HandleRaycastAndDamage();
         }

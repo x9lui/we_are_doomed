@@ -21,9 +21,11 @@ public class Chainsaw : Gun
 
             // Solo hacer daño y consumir munición si la animación está en el estado "Fire"
             AnimatorStateInfo stateInfo = spriteAnim.GetCurrentAnimatorStateInfo(0);
+            audioSource.PlayOneShot(GunSHot);
+
             if (stateInfo.IsName("Chainsaw Fire")) // Cambia "Fire" por el nombre exacto de tu animación
             {
-                audioSource.PlayOneShot(sound);
+
                 ammo--;
                 Debug.Log($"Chainsaw fired! Ammo left: {ammo}");
                 HandleRaycastAndDamage();
