@@ -106,7 +106,8 @@ public class DungeonGenerator : MonoBehaviour
             // Repetir hasta que la celda no sea demasiado alargada
             do
             {
-                double t = System.Math.Pow(rnd.NextDouble(), 2);  // Random.value²
+                //double t = System.Math.Pow(rnd.NextDouble(), 2);  // Random.value²
+                double t = rnd.NextDouble();  //Not using pow, because it makes rooms smaller
                 width = (int)System.Math.Round(Lerp(roomSizeMin.x, roomSizeMax.x, t));
                 t = System.Math.Pow(rnd.NextDouble(), 2);
                 height = (int)System.Math.Round(Lerp(roomSizeMin.y, roomSizeMax.y, t));
