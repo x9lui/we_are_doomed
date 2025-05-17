@@ -4375,15 +4375,15 @@ MonoBehaviour:
   - weaponType: 0
     weaponName: Fist
   - weaponType: 1
-    weaponName: Pistol2
+    weaponName: 
   - weaponType: 2
-    weaponName: ShotgunNormal
+    weaponName: 
   - weaponType: 3
-    weaponName: PlasmaGun
+    weaponName: 
   - weaponType: 4
-    weaponName: Bfg
+    weaponName: 
   - weaponType: 5
-    weaponName: Chainsaw
+    weaponName: 
   semiPistolPickUpPrefab: {fileID: 3506498588915887599, guid: e5a317066018b484fb9409786d243ed9, type: 3}
   pistol2PickUpPrefab: {fileID: 1232841755510998309, guid: aa8b32ede502abe4284e8417a9de02c9, type: 3}
   shotgunPickUpPrefab: {fileID: 3907614084857794023, guid: 3574da0447d3e3846b90b52d5512ce30, type: 3}
