@@ -188,7 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunHitEffect: {fileID: 992790962501269390, guid: ab1307b0c818e1247a8e1c88e5468f83, type: 3}
   enemyManager: {fileID: 0}
-  enemyHealth: 100000
+  enemyHealth: 100
   audioSource: {fileID: 5748179483814906609}
   sounds:
   - {fileID: 8300000, guid: e4f044aaeebd29344b1d774df6d61578, type: 3}
