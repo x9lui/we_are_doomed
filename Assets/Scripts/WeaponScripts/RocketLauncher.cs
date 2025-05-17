@@ -38,7 +38,6 @@ public class RocketLauncher : Gun
 
         isFiring = true;
         ammo--;
-        audioSource.PlayOneShot(sound);
         Debug.Log($"RocketLauncher fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");
         hasFiredProjectile = false;
@@ -57,6 +56,8 @@ public class RocketLauncher : Gun
                 // Instanciar el proyectil
                 if (rocketPrefab != null && firePoint != null)
                 {
+                audioSource.PlayOneShot(GunSHot);
+
                     float spawnOffset = 1.0f;
                     Vector3 spawnPos = firePoint.position + firePoint.forward * spawnOffset;
                     GameObject rocket = Instantiate(rocketPrefab, spawnPos, firePoint.rotation);

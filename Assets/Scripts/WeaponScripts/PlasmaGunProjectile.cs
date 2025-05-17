@@ -10,7 +10,8 @@ public class PlasmaGunProjectile : MonoBehaviour
     public GameObject explosionEffect;
     public GameObject plasmaProjectilePrefab;
     public Transform firePoint;
-
+    private AudioSource audioSource;
+    private AudioClip ExplosionSound;
     private float timer;
 
     [System.Obsolete]
@@ -18,7 +19,8 @@ public class PlasmaGunProjectile : MonoBehaviour
     {
         timer = explosionDelay;
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
-
+        audioSource = GetComponent<AudioSource>();
+        ExplosionSound = audioSource.clip; // Asignar el clip de audio
         // Ignorar colisión con el jugador
         GameObject player = GameObject.FindWithTag("Player");
         Collider rocketCol = GetComponent<Collider>();
@@ -66,10 +68,17 @@ public class PlasmaGunProjectile : MonoBehaviour
 
     void Explode()
     {
-        // Efecto visual
-        if (explosionEffect != null)
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
-
+        // Efecto de sonido
+        if (audioSource != null && ExplosionSound != null)
+        {
+            // Crea un objeto temporal para el sonido
+            GameObject tempAudio = new GameObject("TempRocketExplosionAudio");
+            tempAudio.transform.position = transform.position;
+            AudioSource tempSource = tempAudio.AddComponent<AudioSource>();
+            tempSource.clip = ExplosionSound;
+            tempSource.Play();
+            Destroy(tempAudio, ExplosionSound.length);
+        }
         // Daño en área
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider nearby in colliders)

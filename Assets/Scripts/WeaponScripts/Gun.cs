@@ -14,7 +14,6 @@ public class Gun : MonoBehaviour
     protected RayCast rayCast; // Referencia al script RayCast
 
     [Header("References")]
-    public AudioSource gunSound; // Sonido del disparo
 
     public float nextTimeToFire; // Tiempo hasta el próximo disparo permitido
     public bool isFiring = false; // Nueva bandera para controlar si el arma está disparando
@@ -25,8 +24,7 @@ public class Gun : MonoBehaviour
 
     protected Image gunImage; // Asigna este Image en el inspector
     public AudioSource audioSource;
-    public AudioClip sound;
-
+    public AudioClip GunSHot;
 
     [Obsolete]
     void Start()
@@ -41,6 +39,16 @@ public class Gun : MonoBehaviour
         if (gunImage == null)
         {
             Debug.LogError("Gun Image component not found!");
+        }
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource component not found!");
+        }
+        GunSHot = audioSource.clip; // Asignar el clip de audio
+        if (GunSHot == null)
+        {
+            Debug.LogError("GunSHot audio clip not found!");
         }
     }
 

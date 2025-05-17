@@ -26,6 +26,8 @@ public class EnergyGun : Gun
 
         isFiring = true;
         ammo--;
+            audioSource.PlayOneShot(GunSHot);
+
         Debug.Log($"EnergyGun fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");
         hasAppliedDamage = false;
@@ -39,6 +41,7 @@ public class EnergyGun : Gun
         // Esperar hasta que el sprite sea 'shoot_2'
         while (!hasAppliedDamage)
         {
+
             if (gunImage != null && gunImage.sprite.name == "shoot_2")
             {
                 for (int i = 0; i < pellets; i++)

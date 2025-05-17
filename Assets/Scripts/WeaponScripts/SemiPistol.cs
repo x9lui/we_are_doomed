@@ -23,7 +23,6 @@ public class SemiPistol : Gun
         }
 
         isFiring = true;
-        audioSource.PlayOneShot(sound);
         ammo--;
         Debug.Log($"SemiPistol fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");
@@ -40,6 +39,8 @@ public class SemiPistol : Gun
         {
             if (gunImage != null && gunImage.sprite.name == "shoot_2")
             {
+        audioSource.PlayOneShot(GunSHot);
+
                 // Aquí se hace el raycast y el daño
                 HandleRaycastAndDamage();
                 hasAppliedDamage = true;
