@@ -112,7 +112,8 @@ public class DungeonGenerator : MonoBehaviour
                 t = System.Math.Pow(rnd.NextDouble(), 2);
                 height = (int)System.Math.Round(Lerp(roomSizeMin.y, roomSizeMax.y, t));
             }
-            while (System.Math.Max(width/height, height/width) > 1.8); // Si la diferencia es mayor que 3, repetir
+            while (System.Math.Max(width/height, height/width) > 1.8); // if proportion between width and height
+            //is bigger than 1.8, repeat
 
             // Generar posición aleatoria en circunferencia (esquina inferior izquierda)
             float angle = (float)(rnd.NextDouble() * System.Math.PI * 2.0f);
