@@ -950,6 +950,16 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         /// <summary>
+        /// This function gives the position in the center of the room.
+        /// </summary>
+        /// <returns>
+        /// The position in the center of the room.
+        /// </returns>
+        public Vector2 GetCenter()
+        {
+            return new Vector2(position.x + size.x / 2, position.y + size.y / 2);
+        }
+        /// <summary>
         /// This function gives a position contained in a room.
         /// </summary>
         /// <param name="insidePositionOffset">
