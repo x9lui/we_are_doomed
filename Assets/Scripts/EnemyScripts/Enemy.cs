@@ -10,6 +10,9 @@ public class Enemy : MonoBehaviour
     public float enemyHealth;
     private Animator spriteAnim;
     private AngleToPlayer angleToPlayer;
+    public AudioSource audioSource;
+    public AudioClip[] sounds;
+    private enum SoundType { Hit = 0, Death = 1, Fight = 2}
 
     [Header("Attack Settings")]
     public float attackDamage = 10f; // Daño que inflige el enemigo
@@ -37,9 +40,15 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         enemyHealth -= damage; // Reduce the enemy's health by the damage amount
+        if (enemyHealth > 0)
+        {
+            PlaySound(SoundType.Hit);
+        }
         Instantiate(gunHitEffect, transform.position, Quaternion.identity); // Instantiate the gun hit effect at the enemy's position
         Debug.Log($"Enemy took damage: {damage}. Remaining health: {enemyHealth}"); // Log the damage taken and remaining health
-        if(enemyHealth <= 0){
+        if (enemyHealth <= 0)
+        {
+            PlaySound(SoundType.Death);
             Destroy(gameObject); // Destroy the enemy game object
         }
     }
@@ -66,6 +75,7 @@ public class Enemy : MonoBehaviour
             {
                 if (playerHealth != null)
                 {
+                    PlaySound(SoundType.Fight);
                     playerHealth.TakeDamage(attackDamage);
                     Debug.Log($"Player took {attackDamage} damage from enemy.");
                 }
@@ -104,6 +114,19 @@ public class Enemy : MonoBehaviour
             rb.isKinematic = true; // Volver a modo kinematic
             agent.enabled = true;
             agent.Warp(transform.position); // Recolocar el agente en la posición actual
+        }
+    }
+
+    private void PlaySound(SoundType type)
+    {
+        int index = (int)type;
+        if (index >= 0 && index < sounds.Length)
+        {
+            audioSource.PlayOneShot(sounds[index], 0.5f);
+        }
+        else
+        {
+            Debug.LogWarning("Índice de sonido fuera de rango.");
         }
     }
 }
