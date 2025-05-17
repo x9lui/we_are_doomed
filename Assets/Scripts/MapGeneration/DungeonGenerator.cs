@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TriangleNet.Geometry;
 using TriangleNet.Meshing;
 using System.Threading.Tasks;
+using System;
+using System.Linq;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -33,16 +35,20 @@ public class DungeonGenerator : MonoBehaviour
     private Dictionary<Vector2Int, TileType> tileMap = new Dictionary<Vector2Int, TileType>();
     private HashSet<(Vector2Int, Vector2Int)> connectedTiles = new HashSet<(Vector2Int, Vector2Int)>();
 
-    [Header("Syncronization")]
+    //Synchronization events
+    private event Action DungeonHeavyWorkDone;
+    public event Action DungeonGenerated;
 
-    //This flag is used to tell that all the process of dugeon generation has finished
-    private volatile bool dungeonHeavyWorkDone = false;
-    public bool DungeonGenerated { get; private set; } = false;
+    private System.Random rnd;
 
-    private System.Random rnd; 
+    /*This queue is used to enqueue actions in non main threads, and execute
+    those actions in the main one.*/
+    Queue<Action> mainThreadActionQueue;
     public void Awake()
     {
+        mainThreadActionQueue = new Queue<Action>();
         rnd = new System.Random();
+        DungeonHeavyWorkDone += FinishDungeonGeneration;
     }
     public void GenerateDungeon()
     {
@@ -51,21 +57,36 @@ public class DungeonGenerator : MonoBehaviour
             GenerateInitialCells();
             SeparateAndSelectRooms();
             Debug.Log("Dungeon heavy work already done");
-            dungeonHeavyWorkDone = true;
+            lock (mainThreadActionQueue)
+            {
+                mainThreadActionQueue.Enqueue(() =>
+                {
+                    DungeonHeavyWorkDone.Invoke();
+                });
+            }
         });
+    }
+
+    private void FinishDungeonGeneration()
+    {
+        GenerateWalls();
+        Debug.Log("Muros generados.");
+
+        MergeCorridorCells();
+        GenerateFloors();
+        Debug.Log("Suelos generados.");
+        DungeonGenerated.Invoke();
     }
 
     private void Update()
     {
-        if (dungeonHeavyWorkDone && !DungeonGenerated)
+        lock (mainThreadActionQueue)
         {
-            GenerateWalls();
-            Debug.Log("Muros generados.");
-
-            MergeCorridorCells();
-            GenerateFloors();
-            Debug.Log("Suelos generados.");
-            DungeonGenerated = true;
+            while (mainThreadActionQueue.Count > 0)
+            {
+                Action action = mainThreadActionQueue.Dequeue();
+                action();
+            }
         }
     }
 
@@ -937,8 +958,8 @@ public class DungeonGenerator : MonoBehaviour
         /// <returns> A random position in a room </returns>
         public Vector2 GetRandomPositionInside(float insidePositionOffset)
         {
-            return new Vector2(Random.Range(position.x + insidePositionOffset, position.x + size.x - insidePositionOffset),
-                                Random.Range(position.y + insidePositionOffset, position.y + size.y - insidePositionOffset));
+            return new Vector2(UnityEngine.Random.Range(position.x + insidePositionOffset, position.x + size.x - insidePositionOffset),
+                                UnityEngine.Random.Range(position.y + insidePositionOffset, position.y + size.y - insidePositionOffset));
         }
     }
 
