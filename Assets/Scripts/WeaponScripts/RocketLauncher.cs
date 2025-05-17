@@ -38,6 +38,7 @@ public class RocketLauncher : Gun
 
         isFiring = true;
         ammo--;
+        audioSource.PlayOneShot(sound);
         Debug.Log($"RocketLauncher fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");
         hasFiredProjectile = false;
