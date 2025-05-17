@@ -26,6 +26,7 @@ public class ShotgunNormal : Gun
 
         isFiring = true;
         ammo--;
+        audioSource.PlayOneShot(sound);
         Debug.Log($"ShotgunNormal fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");
         hasAppliedDamage = false;

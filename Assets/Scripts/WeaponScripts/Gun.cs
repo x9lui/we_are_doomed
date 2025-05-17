@@ -24,6 +24,8 @@ public class Gun : MonoBehaviour
     protected Animator spriteAnim;
 
     protected Image gunImage; // Asigna este Image en el inspector
+    public AudioSource audioSource;
+    public AudioClip sound;
 
 
     [Obsolete]

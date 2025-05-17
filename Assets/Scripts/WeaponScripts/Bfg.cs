@@ -40,6 +40,7 @@ public class Bfg : Gun
 
         isFiring = true;
         ammo--;
+        audioSource.PlayOneShot(sound);
         Debug.Log($"Bfg fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");
         hasFiredProjectile = false;

@@ -23,6 +23,7 @@ public class SemiPistol : Gun
         }
 
         isFiring = true;
+        audioSource.PlayOneShot(sound);
         ammo--;
         Debug.Log($"SemiPistol fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");
