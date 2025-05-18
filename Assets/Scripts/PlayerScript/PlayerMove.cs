@@ -27,10 +27,9 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
-        MyCC = GetComponent<CharacterController>(); // Get the CharacterController component attached to the player
-        inventory = GetComponent<InventoryScript>(); // Get the InventoryScript component attached to the player
+        MyCC = GetComponent<CharacterController>();
+        inventory = GetComponent<InventoryScript>();
 
-        // Dynamically find weapon GameObjects based on inventory
         fistWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Fist));
         pistolWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Pistol));
         shotgunWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Shotgun));
@@ -38,17 +37,15 @@ public class PlayerMove : MonoBehaviour
         rocketLauncherWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.RocketLauncher));
         meleeWeapon = FindWeaponInHUD(inventory.GetWeapon(InventoryScript.WeaponType.Melee));
 
-        UpdateWeaponVisibility(); // Ensure the correct weapon is active at the start
+        UpdateWeaponVisibility();
 
 
     }
 
     private GameObject FindWeaponInHUD(string weaponName)
     {
-        // Return null if the weapon name is null or empty
         if (string.IsNullOrEmpty(weaponName)) return null;
 
-        // Search for the weapon GameObject in the HUD
         Transform hudTransform = GameObject.Find("HUD")?.transform;
 
         if (hudTransform != null)
@@ -60,7 +57,6 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        // Return null if the weapon is not found
         return null;
     }
 
@@ -96,12 +92,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            inputvector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")); // Get input from the player
-            inputvector.Normalize(); // Normalize the input vector to ensure consistent movement speed
-            inputvector = transform.TransformDirection(inputvector); // Transform the input vector to world space
-            isWalking = true; // Set the walking flag to true
+            inputvector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            inputvector.Normalize();
+            inputvector = transform.TransformDirection(inputvector);
+            isWalking = true;
 
-            // Llamar a la función Walk del arma actual
             if (currentGun != null)
             {
                 currentGun.Walk();
@@ -109,8 +104,8 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            inputvector = Vector3.Lerp(inputvector, Vector3.zero, momentumDamping * Time.deltaTime); // Smoothly reduce the input vector to zero
-            isWalking = false; // Set the walking flag to false
+            inputvector = Vector3.Lerp(inputvector, Vector3.zero, momentumDamping * Time.deltaTime);
+            isWalking = false;
 
             // Llamar a la función Idle del arma actual
             if (currentGun != null)
@@ -125,27 +120,26 @@ public class PlayerMove : MonoBehaviour
             myGravity = jumpForce; // Aplica fuerza de salto
         }
 
-        camAnim.SetBool("isWalking", isWalking); // Set the walking animation parameter in the Animator
-        movementVector = (inputvector * speed) + (Vector3.up * myGravity); // Calculate the movement vector based on input and speed
+        camAnim.SetBool("isWalking", isWalking);
+        movementVector = (inputvector * speed) + (Vector3.up * myGravity);
     }
 
     void MovePlayer()
     {
-        MyCC.Move(movementVector * Time.deltaTime); // Move the player using the CharacterController component
-        if (MyCC.isGrounded) // Check if the player is grounded
+        MyCC.Move(movementVector * Time.deltaTime);
+        if (MyCC.isGrounded)
         {
-            if (myGravity < 0) // Solo resetea gravedad si está cayendo
-                myGravity = -9.81f; // Reset gravity when grounded
+            if (myGravity < 0)
+                myGravity = -9.81f;
         }
         else
         {
-            myGravity -= 9.81f * gravityMultiplier * Time.deltaTime; // Apply gravity when not grounded
+            myGravity -= 9.81f * gravityMultiplier * Time.deltaTime;
         }
     }
 
     void HandleInventoryInput()
     {
-        // No permitir cambiar ni dropear arma si está disparando
         if (currentGun != null && currentGun.isFiring)
             return;
 
@@ -206,7 +200,7 @@ public class PlayerMove : MonoBehaviour
                     currentGun = gun; // Actualizar la referencia al arma activa
                     if (currentGun != gun)
                     {
-                        Debug.Log($"Current weapon: {gun.GetType().Name}, {currentSlot}"); // Escribir el nombre del arma actual en la consola
+                        Debug.Log($"Current weapon: {gun.GetType().Name}, {currentSlot}");
                     }
                     weaponFound = true;
                 }
@@ -217,11 +211,10 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        // Si no se encontró el arma actual, escribir un mensaje en la consola
         if (!weaponFound)
         {
             Debug.Log($"No weapon found for slot: {currentSlot}");
-            currentGun = null; // No hay arma activa
+            currentGun = null;
         }
     }
 
@@ -229,18 +222,16 @@ public class PlayerMove : MonoBehaviour
     {
         if (currentGun != null)
         {
-            if (currentGun.getCanAuto()) // Verificar si el arma es automática
+            if (currentGun.getCanAuto())
             {
-                // Disparar mientras se mantiene presionado el botón izquierdo del ratón
-                if (Input.GetMouseButton(0)) // Mantener el botón presionado
+                if (Input.GetMouseButton(0))
                 {
                     currentGun.Fire();
                 }
             }
             else
             {
-                // Disparar solo cuando se presiona el botón izquierdo del ratón
-                if (Input.GetMouseButtonDown(0)) // Presionar el botón una vez
+                if (Input.GetMouseButtonDown(0))
                 {
                     currentGun.Fire();
                 }

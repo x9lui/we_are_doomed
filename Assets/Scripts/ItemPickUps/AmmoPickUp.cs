@@ -6,8 +6,8 @@ public class AmmoPickUp : ItemPickUp
 
     protected override void OnPickUp(Collider player)
     {
-        playerInventory.AddAmmo(ammoAmount); // Añadir munición al inventario del jugador
-            Destroy(gameObject); // Destruir el objeto después de recogerlo
+        playerInventory.AddAmmo(ammoAmount);
+            Destroy(gameObject);
 
     }
 }

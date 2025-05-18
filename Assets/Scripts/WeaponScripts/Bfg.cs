@@ -33,8 +33,8 @@ public class Bfg : Gun
         if (ammo <= 0)
         {
             Debug.Log("Out of ammo!");
-            spriteAnim.SetBool("Fire", false); // O el parámetro que uses
-            isFiring = false; // <- IMPORTANTE
+            spriteAnim.SetBool("Fire", false);
+            isFiring = false;
             return;
         }
 
@@ -50,12 +50,10 @@ public class Bfg : Gun
 
     private IEnumerator WaitForProjectileSprite()
     {
-        // Esperar hasta que el sprite sea 'shoot_2'
         while (!hasFiredProjectile)
         {
             if (gunImage != null && gunImage.sprite.name == "shoot_2")
             {
-                // Instanciar el proyectil
                 if (rocketPrefab != null && firePoint != null)
                 {
                     float spawnOffset = 1.0f;
@@ -64,7 +62,6 @@ public class Bfg : Gun
                     Vector3 spawnPos = firePoint.position + firePoint.forward * spawnOffset;
                     GameObject rocket = Instantiate(rocketPrefab, spawnPos, firePoint.rotation);
 
-                    // Ignorar colisión con el jugador
                     Collider rocketCol = rocket.GetComponent<Collider>();
                     GameObject player = GameObject.FindWithTag("Player");
                     if (player != null && rocketCol != null)

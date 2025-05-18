@@ -5,38 +5,34 @@ using Vector3 = UnityEngine.Vector3;
 public class AngleToPlayer : MonoBehaviour
 {
 
-    private Transform player; // Reference to the player's transform
-    private Vector3 targetPos; // Position of the player
-    private Vector3 targetDir; // Direction from the enemy to the player
+    private Transform player;
+    private Vector3 targetPos;
+    private Vector3 targetDir;
     
     private float angle;
     public int lastIndex;
-    private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private SpriteRenderer spriteRenderer;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform; // Find the player's transform by tag
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the enemy
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        targetPos = new Vector3(player.position.x, transform.position.y, player.position.z); // Get the player's position
-        targetDir = targetPos - transform.position; // Calculate the direction from the enemy to the player
+        targetPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+        targetDir = targetPos - transform.position;
 
         //Get angle
-        angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up); // Calculate the angle between the enemy's forward direction and the direction to the player
+        angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
 
-        //Flip sprites if needed
-
-        UnityEngine.Vector3 tempScale = UnityEngine.Vector3.one; // Create a temporary scale vector
+        UnityEngine.Vector3 tempScale = UnityEngine.Vector3.one;
         if(angle >0){
-            tempScale.x = -1; // Flip the sprite horizontally if the angle is positive
+            tempScale.x = -1;
         }
 
-        spriteRenderer.transform.localScale = tempScale; // Apply the scale to the sprite renderer
-        lastIndex = GetIndex(angle); // Get the index based on the angle
+        spriteRenderer.transform.localScale = tempScale;
+        lastIndex = GetIndex(angle);
 
     }
 
@@ -76,7 +72,7 @@ public class AngleToPlayer : MonoBehaviour
         Gizmos.DrawRay(transform.position, transform.forward);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, targetPos); // Draw a line from the enemy to the player    
+        Gizmos.DrawLine(transform.position, targetPos);
     }
 
 }

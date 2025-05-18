@@ -6,7 +6,6 @@ public abstract class ItemPickUp : MonoBehaviour
     protected GameObject player;
     public void Start()
     {
-        // Obtener el GameObject del jugador usando la etiqueta "Player"
         player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
@@ -14,7 +13,6 @@ public abstract class ItemPickUp : MonoBehaviour
             return;
         }
 
-        // Obtener el componente InventoryScript del jugador
         playerInventory = player.GetComponent<InventoryScript>();
         if (playerInventory == null)
         {
@@ -28,7 +26,7 @@ public abstract class ItemPickUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            OnPickUp(other); // Llamar al comportamiento específico del pickup
+            OnPickUp(other);
         }
     }
 }

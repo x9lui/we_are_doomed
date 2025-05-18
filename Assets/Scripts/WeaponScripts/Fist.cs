@@ -8,13 +8,12 @@ public class Fist : Gun
     private IEnumerator PerformPunchAfterDelay(float actionDelay, float unlockDelay)
     {
         isFiring = true; // Marcar el arma como disparando
-        yield return new WaitForSeconds(actionDelay); // Esperar el tiempo de la acción principal
+        yield return new WaitForSeconds(actionDelay);
 
-        // Usar el método genérico para manejar el raycast y el daño
         HandleRaycastAndDamage();
 
-        yield return new WaitForSeconds(unlockDelay); // Esperar tiempo adicional antes de desbloquear
-        FinishFire(); // Marcar el arma como lista para disparar nuevamente
+        yield return new WaitForSeconds(unlockDelay);
+        FinishFire();
         Debug.Log("Fist: Ready to punch again.");
     }
 
@@ -28,22 +27,19 @@ public class Fist : Gun
 
         audioSource.PlayOneShot(GunSHot);
         Debug.Log("Fist: Punch!");
-        spriteAnim.SetTrigger("Fire"); // Activar la animación de golpe
+        spriteAnim.SetTrigger("Fire");
 
-        // Iniciar la corutina con retrasos específicos
         StartCoroutine(PerformPunchAfterDelay(0.25f, 0.2f));
     }
 
     public override void Walk()
     {
-        spriteAnim.SetBool("isWalking", true); // Set the walking animation
-        //Debug.Log("Fist: Walking");
+        spriteAnim.SetBool("isWalking", true);
     }
 
     public override void Idle()
     {
-        spriteAnim.SetBool("isWalking", false); // Set the walking animation
-        //Debug.Log("Fist: Idle");
+        spriteAnim.SetBool("isWalking", false);
     }
 
     public override void setCanAuto()

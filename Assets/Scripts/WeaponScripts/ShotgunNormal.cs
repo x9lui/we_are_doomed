@@ -4,8 +4,8 @@ using System.Collections;
 
 public class ShotgunNormal : Gun
 {
-    public int pellets = 8; // Número de perdigones disparados por la escopeta
-    public float spreadAngle = 10f; // Ángulo de dispersión de los perdigones
+    public int pellets = 8;
+    public float spreadAngle = 10f;
     private bool hasAppliedDamage = false;
 
     public override void Fire()
@@ -19,8 +19,8 @@ public class ShotgunNormal : Gun
         if (ammo <= 0)
         {
             Debug.Log("Out of ammo!");
-            spriteAnim.SetBool("Fire", false); // O el parámetro que uses
-            isFiring = false; // <- IMPORTANTE
+            spriteAnim.SetBool("Fire", false);
+            isFiring = false;
             return;
         }
 
@@ -37,12 +37,10 @@ public class ShotgunNormal : Gun
 
     private IEnumerator WaitForDamageSprite()
     {
-        // Esperar hasta que el sprite sea 'shoot_1'
         while (!hasAppliedDamage)
         {
             if (gunImage != null && gunImage.sprite.name == "shoot_1")
             {
-                // Disparar múltiples perdigones solo en este frame
                 for (int i = 0; i < pellets; i++)
                 {
                     HandleRaycastAndDamage();

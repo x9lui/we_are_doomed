@@ -6,11 +6,10 @@ public class PlayerHealth : MonoBehaviour
     public float CurrentHealth; // Current health of the player
     public float MaxArmor = 120f; // Maximum armor of the player
     public float CurrentArmor; // Current armor of the player
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public InterfaceHealthArmor healthBarUI; // Reference to the health bar UI script
-    public InterfaceHealthArmor armorBarUI; // Reference to the armor bar UI script
-    public GameObject deathPanelUI;         // Reference to the death panel UI
+    public InterfaceHealthArmor healthBarUI; 
+    public InterfaceHealthArmor armorBarUI;
+    public GameObject deathPanelUI;         
 
     [SerializeField] private MouseLook _mouseLookScript;
 
@@ -20,8 +19,8 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        CurrentHealth = MaxHealth; // Initialize current health to maximum health
-        CurrentArmor = MaxArmor; // Initialize current armor to maximum armor
+        CurrentHealth = MaxHealth;
+        CurrentArmor = MaxArmor;
 
         healthBarUI.SetProgreso(CurrentHealth / MaxHealth);
         interfaceHead.SetArmadura(CurrentArmor / MaxArmor);
@@ -29,24 +28,24 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (CurrentArmor > 0) // Check if the player has armor
+        if (CurrentArmor > 0)
         {
-            CurrentArmor -= damage; // Reduce armor by damage amount
+            CurrentArmor -= damage;
 
-            armorBarUI.SetProgreso(CurrentArmor/MaxArmor); // Update armor bar UI
+            armorBarUI.SetProgreso(CurrentArmor/MaxArmor);
 
-            if (CurrentArmor < 0) // If armor goes below zero, reduce health
+            if (CurrentArmor < 0)
             {
-                CurrentHealth += CurrentArmor; // Add the negative armor value to health
-                CurrentArmor = 0; // Set armor to zero
+                CurrentHealth += CurrentArmor;
+                CurrentArmor = 0;
                 healthBarUI.SetProgreso(CurrentHealth /MaxHealth);
 
             }
         }
-        else // If no armor left, reduce health directly
+        else
         {
             healthBarUI.SetProgreso(CurrentHealth /MaxHealth);
-            CurrentHealth -= damage; // Reduce health by damage amount
+            CurrentHealth -= damage;
         }
         if (interfaceHead != null){
             interfaceHead.SetSalud(CurrentHealth / MaxHealth);
@@ -54,17 +53,17 @@ public class PlayerHealth : MonoBehaviour
         if (interfaceHead != null){
             interfaceHead.SetArmadura(CurrentArmor / MaxArmor);
         }
-        if (CurrentHealth <= 0) // Check if health is zero or below
+        if (CurrentHealth <= 0)
         {
-            Die(); // Call the Die method to handle player death
+            Die();
         }
     }
     public void HealPlayer(float amount)
     {
-        CurrentHealth += amount; // Increase health by the healing amount
-        if (CurrentHealth > MaxHealth) // Check if health exceeds maximum health
+        CurrentHealth += amount;
+        if (CurrentHealth > MaxHealth)
         {
-            CurrentHealth = MaxHealth; // Set health to maximum health
+            CurrentHealth = MaxHealth;
         }
         healthBarUI.SetProgreso(CurrentHealth / MaxHealth);
 
@@ -75,10 +74,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void ArmorPlayer(float amount)
     {
-        CurrentArmor += amount; // Increase armor by the healing amount
-        if (CurrentArmor > MaxArmor) // Check if armor exceeds maximum health
+        CurrentArmor += amount;
+        if (CurrentArmor > MaxArmor)
         {
-            CurrentArmor = MaxArmor; // Set health to maximum health
+            CurrentArmor = MaxArmor;
         }
         armorBarUI.SetProgreso(CurrentArmor / MaxArmor);
         
@@ -90,11 +89,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void Die()
     {
-        // Handle player death (e.g., play animation, disable controls, etc.)
         Debug.Log("Player has died!"); // Log player death
 
-        Cursor.lockState = CursorLockMode.None;     // Libera Cursor
-        Cursor.visible = true;                      // Ver
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         _mouseLookScript.enabled = false;
 
         if (deathPanelUI != null)

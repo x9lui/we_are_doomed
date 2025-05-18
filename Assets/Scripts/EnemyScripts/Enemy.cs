@@ -5,7 +5,7 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject gunHitEffect; // Reference to the gun hit effect prefab
+    public GameObject gunHitEffect;
     public EnemyManager enemyManager;
     public float enemyHealth;
     private Animator spriteAnim;
@@ -26,9 +26,9 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        spriteAnim = GetComponentInChildren<Animator>(); // Obtener el Animator del enemigo
-        angleToPlayer = GetComponent<AngleToPlayer>(); // Obtener el componente AngleToPlayer
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>(); // Obtener el PlayerHealth del jugador
+        spriteAnim = GetComponentInChildren<Animator>();
+        angleToPlayer = GetComponent<AngleToPlayer>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     void Update()
@@ -39,17 +39,17 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        enemyHealth -= damage; // Reduce the enemy's health by the damage amount
+        enemyHealth -= damage;
         if (enemyHealth > 0)
         {
             PlaySound(SoundType.Hit);
         }
-        Instantiate(gunHitEffect, transform.position, Quaternion.identity); // Instantiate the gun hit effect at the enemy's position
-        Debug.Log($"Enemy took damage: {damage}. Remaining health: {enemyHealth}"); // Log the damage taken and remaining health
+        Instantiate(gunHitEffect, transform.position, Quaternion.identity);
+        Debug.Log($"Enemy took damage: {damage}. Remaining health: {enemyHealth}");
         if (enemyHealth <= 0)
         {
             PlaySound(SoundType.Death);
-            Destroy(gameObject); // Destroy the enemy game object
+            Destroy(gameObject);
         }
     }
 
@@ -92,13 +92,12 @@ public class Enemy : MonoBehaviour
 
         if (agent != null && rb != null)
         {
-            agent.enabled = false; // Desactivar navegación
-            rb.isKinematic = false; // Permitir física
+            agent.enabled = false;
+            rb.isKinematic = false;
 
             float knockbackMultiplier = 0.1f; // Ajusta este valor para más o menos fuerza
             rb.AddForce(force * knockbackMultiplier, ForceMode.Impulse);
 
-            // Reactivar navegación tras un breve tiempo
             StartCoroutine(ReenableNavMeshAgent(0.5f));
         }
     }
@@ -110,10 +109,10 @@ public class Enemy : MonoBehaviour
         var rb = GetComponent<Rigidbody>();
         if (agent != null && rb != null)
         {
-            rb.linearVelocity = Vector3.zero; // ¡Esto sí detiene el movimiento!
-            rb.isKinematic = true; // Volver a modo kinematic
+            rb.linearVelocity = Vector3.zero;
+            rb.isKinematic = true;
             agent.enabled = true;
-            agent.Warp(transform.position); // Recolocar el agente en la posición actual
+            agent.Warp(transform.position);
         }
     }
 

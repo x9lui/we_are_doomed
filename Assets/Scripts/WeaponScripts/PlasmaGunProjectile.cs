@@ -20,8 +20,7 @@ public class PlasmaGunProjectile : MonoBehaviour
         timer = explosionDelay;
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
         audioSource = GetComponent<AudioSource>();
-        ExplosionSound = audioSource.clip; // Asignar el clip de audio
-        // Ignorar colisión con el jugador
+        ExplosionSound = audioSource.clip;
         GameObject player = GameObject.FindWithTag("Player");
         Collider rocketCol = GetComponent<Collider>();
         if (player != null && rocketCol != null)
@@ -31,7 +30,6 @@ public class PlasmaGunProjectile : MonoBehaviour
                 Physics.IgnoreCollision(rocketCol, playerCol, true);
         }
 
-        // Ignorar colisión con otros proyectiles
         PlasmaGunProjectile[] allProjectiles = FindObjectsOfType<PlasmaGunProjectile>();
         foreach (var other in allProjectiles)
         {
@@ -41,14 +39,12 @@ public class PlasmaGunProjectile : MonoBehaviour
                 Physics.IgnoreCollision(rocketCol, otherCol, true);
         }
 
-        // Instanciar proyectil de plasma
         if (plasmaProjectilePrefab != null && firePoint != null)
         {
             Debug.Log("Instanciando proyectil de plasma");
             float spawnOffset = 0.5f;
             Vector3 spawnPos = firePoint.position + firePoint.forward * spawnOffset;
             GameObject plasma = Instantiate(plasmaProjectilePrefab, spawnPos, firePoint.rotation);
-            // ... resto del código ...
         }
     }
 
@@ -68,10 +64,8 @@ public class PlasmaGunProjectile : MonoBehaviour
 
     void Explode()
     {
-        // Efecto de sonido
         if (audioSource != null && ExplosionSound != null)
         {
-            // Crea un objeto temporal para el sonido
             GameObject tempAudio = new GameObject("TempRocketExplosionAudio");
             tempAudio.transform.position = transform.position;
             AudioSource tempSource = tempAudio.AddComponent<AudioSource>();
@@ -79,25 +73,21 @@ public class PlasmaGunProjectile : MonoBehaviour
             tempSource.Play();
             Destroy(tempAudio, ExplosionSound.length);
         }
-        // Daño en área
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider nearby in colliders)
         {
-            // Daño a enemigos
             Enemy enemy = nearby.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
-                continue; // No aplicar fuerza a enemigos
+                continue;
             }
-            // Daño al jugador (opcional)
             PlayerHealth player = nearby.GetComponent<PlayerHealth>();
             if (player != null)
             {
                 player.TakeDamage(damage);
-                // Si tampoco quieres empujar al jugador, pon 'continue;' aquí
+                
             }
-            // Física SOLO a objetos que no sean enemigos
             Rigidbody rb = nearby.GetComponent<Rigidbody>();
             if (rb != null)
             {

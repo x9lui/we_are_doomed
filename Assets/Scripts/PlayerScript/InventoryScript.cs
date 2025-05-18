@@ -20,7 +20,7 @@ public class InventoryScript : MonoBehaviour
     public class WeaponSlot
     {
         public WeaponType weaponType; // Tipo de arma para este slot
-        public string weaponName; // Nombre del arma específica (por ejemplo, "Pistola Automática")
+        public string weaponName; // Nombre del arma específica
     }
 
     [SerializeField] private List<WeaponSlot> inventory = new List<WeaponSlot>(7);
@@ -185,7 +185,6 @@ public class InventoryScript : MonoBehaviour
                     {
                         int ammoToAdd = Mathf.Min(ammoAmount, gun.maxAmmo - gun.ammo);
                         gun.ammo += ammoToAdd;
-                        // Debug.Log($"{gun.name} recibió {ammoToAdd} de munición. Total: {gun.ammo}/{gun.maxAmmo}");
                     }
                 }
             }
