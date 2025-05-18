@@ -25,7 +25,10 @@ public class Chainsaw : Gun
 
             if (stateInfo.IsName("Chainsaw Fire")) // Cambia "Fire" por el nombre exacto de tu animación
             {
-
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.PlayOneShot(GunSHot);
+                }
                 ammo--;
                 Debug.Log($"Chainsaw fired! Ammo left: {ammo}");
                 HandleRaycastAndDamage();
