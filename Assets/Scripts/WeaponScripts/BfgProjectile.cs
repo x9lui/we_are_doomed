@@ -65,12 +65,7 @@ public class BfgProjectile : MonoBehaviour
     {
         if (audioSource != null && ExplosionSound != null)
         {
-            GameObject tempAudio = new GameObject("TempRocketExplosionAudio");
-            tempAudio.transform.position = transform.position;
-            AudioSource tempSource = tempAudio.AddComponent<AudioSource>();
-            tempSource.clip = ExplosionSound;
-            tempSource.Play();
-            Destroy(tempAudio, ExplosionSound.length);
+            AudioManager.Instance.ReproducirEfectos2("TempRocketExplosionAudio", ExplosionSound);
         }
 
         // Daño en área

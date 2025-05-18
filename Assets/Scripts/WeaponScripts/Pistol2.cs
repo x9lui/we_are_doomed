@@ -37,7 +37,7 @@ public class Pistol2 : Gun
         {
             if (gunImage != null && gunImage.sprite.name == "shoot_2")
             {
-                audioSource.PlayOneShot(GunSHot);
+                AudioManager.Instance.ReproducirEfectos(GunSHot);
 
                 HandleRaycastAndDamage();
                 hasAppliedDamage = true;

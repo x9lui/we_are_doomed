@@ -81,7 +81,7 @@ public class WeaponHUDDisplay : MonoBehaviour
                 weaponNameText.text = "Pistola";
                 break;
             case "SemiPistol":
-                weaponNameText.text = "Pistola Semiautomatica";
+                weaponNameText.text = "Pistola Semi.";
                 break;
             case "EnergyGun":
                 weaponNameText.text = "Escopeta de Energia";

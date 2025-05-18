@@ -66,12 +66,7 @@ public class PlasmaGunProjectile : MonoBehaviour
     {
         if (audioSource != null && ExplosionSound != null)
         {
-            GameObject tempAudio = new GameObject("TempRocketExplosionAudio");
-            tempAudio.transform.position = transform.position;
-            AudioSource tempSource = tempAudio.AddComponent<AudioSource>();
-            tempSource.clip = ExplosionSound;
-            tempSource.Play();
-            Destroy(tempAudio, ExplosionSound.length);
+            AudioManager.Instance.ReproducirEfectos2("TempRocketExplosionAudio", ExplosionSound);
         }
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider nearby in colliders)

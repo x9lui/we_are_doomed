@@ -25,7 +25,7 @@ public class Fist : Gun
             return;
         }
 
-        audioSource.PlayOneShot(GunSHot);
+        AudioManager.Instance.ReproducirEfectos(GunSHot);
         Debug.Log("Fist: Punch!");
         spriteAnim.SetTrigger("Fire");
 

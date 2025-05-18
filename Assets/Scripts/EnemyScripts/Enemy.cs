@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Angle: " + angleToPlayer.lastIndex);
+        //Debug.Log("Angle: " + angleToPlayer.lastIndex);
         spriteAnim.SetFloat("SpriteRotation", angleToPlayer.lastIndex);
     }
 
@@ -121,7 +121,9 @@ public class Enemy : MonoBehaviour
         int index = (int)type;
         if (index >= 0 && index < sounds.Length)
         {
-            audioSource.PlayOneShot(sounds[index], 0.5f);
+            AudioManager.Instance.ReproducirEfectos(sounds[index]);
+
+            
         }
         else
         {

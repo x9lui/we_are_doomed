@@ -39,7 +39,7 @@ public class PlasmaGun : Gun
             if (plasmaProjectilePrefab != null && firePoint != null)
             {
                 float spawnOffset = 0.5f; // Ajusta si es necesario
-                audioSource.PlayOneShot(GunSHot);
+                AudioManager.Instance.ReproducirEfectos(GunSHot);
 
                 Vector3 spawnPos = firePoint.position + firePoint.forward * spawnOffset;
                 GameObject plasma = Instantiate(plasmaProjectilePrefab, spawnPos, firePoint.rotation);

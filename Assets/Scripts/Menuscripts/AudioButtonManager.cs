@@ -51,6 +51,23 @@ public class AudioManager : MonoBehaviour
     }
 
     // Para los sonidos de Efectos usar el BotonEfectos
+    public void ReproducirEfectos(AudioClip clip)
+    {
+        if (clip == null)
+        {
+            BotonEfectos.Play();
+        }
+        BotonEfectos.PlayOneShot(clip);
+    }
+
+    public void ReproducirEfectos2(string Objeto, AudioClip clip)
+    {
+        // Crea un objeto temporal para el sonido
+        GameObject tempAudio = new GameObject("TempRocketExplosionAudio");
+        tempAudio.transform.position = transform.position;
+        AudioSource BotonEfectos = tempAudio.AddComponent<AudioSource>();
+        BotonEfectos.Play();
+    }
     // Para los sonidos de la musica usar BotonMusica
-    
+
 }

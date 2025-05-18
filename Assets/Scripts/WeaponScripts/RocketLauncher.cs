@@ -54,7 +54,7 @@ public class RocketLauncher : Gun
             {
                 if (rocketPrefab != null && firePoint != null)
                 {
-                audioSource.PlayOneShot(GunSHot);
+                AudioManager.Instance.ReproducirEfectos(GunSHot);
 
                     float spawnOffset = 1.0f;
                     Vector3 spawnPos = firePoint.position + firePoint.forward * spawnOffset;

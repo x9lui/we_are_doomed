@@ -217,6 +217,32 @@ public class PlayerMove : MonoBehaviour
             currentGun = null;
         }
     }
+    public void UpdateFistVisibility()
+    {
+        Transform hudTransform = GameObject.Find("HUD")?.transform;
+        if (hudTransform == null)
+        {
+            Debug.LogWarning("HUD not found! UPDATE FIST VISIBILITY FAILED");
+            return;
+        }
+
+        foreach (Transform child in hudTransform)
+        {
+            // Busca solo el componente Fist
+            Fist fist = child.GetComponent<Fist>();
+            if (fist != null)
+            {
+                child.gameObject.SetActive(true);  // Activa los puños
+            }
+            else
+            {
+                child.gameObject.SetActive(false); // Desactiva todos los demás
+            }
+        }
+
+        currentGun = hudTransform.GetComponentInChildren<Fist>(); // Actualiza referencia (si la usas)
+        currentSlot = InventoryScript.WeaponType.Fist;            // Actualiza el slot actual
+}
 
     void Fire()
     {

@@ -125,31 +125,50 @@ public class MenuPauseActions : MonoBehaviour
     public void Reaparecer()
     {
         muertes++;
-        player.SetActive(false);
+
         player.GetComponent<PlayerHealth>().HealPlayer(100);
         player.GetComponent<PlayerHealth>().ArmorPlayer(120);
         player.GetComponent<InventoryScript>().ResetInventory();
+        player.GetComponent<PlayerMove>().enabled = false;
 
-        GameObject.Find("Canvas/HUD/Bfg").GetComponent<Bfg>().ammo = GameObject.Find("Canvas/HUD/Bfg").GetComponent<Bfg>().maxAmmo;
-        GameObject.Find("Canvas/HUD/Chainsaw").GetComponent<Chainsaw>().ammo = GameObject.Find("Canvas/HUD/Chainsaw").GetComponent<Chainsaw>().maxAmmo;
-        GameObject.Find("Canvas/HUD/EnergyGun").GetComponent<EnergyGun>().ammo = GameObject.Find("Canvas/HUD/EnergyGun").GetComponent<EnergyGun>().maxAmmo;
-        GameObject.Find("Canvas/HUD/Fist").GetComponent<Fist>().ammo = GameObject.Find("Canvas/HUD/Fist").GetComponent<Fist>().maxAmmo;
-        GameObject.Find("Canvas/HUD/MachineGun").GetComponent<MachineGun>().ammo = GameObject.Find("Canvas/HUD/MachineGun").GetComponent<MachineGun>().maxAmmo;
-        GameObject.Find("Canvas/HUD/Pistol2").GetComponent<Pistol2>().ammo = GameObject.Find("Canvas/HUD/Pistol2").GetComponent<Pistol2>().maxAmmo;
-        GameObject.Find("Canvas/HUD/PlasmaGun").GetComponent<PlasmaGun>().ammo = GameObject.Find("Canvas/HUD/PlasmaGun").GetComponent<PlasmaGun>().maxAmmo;
-        GameObject.Find("Canvas/HUD/ShotgunNormal").GetComponent<ShotgunNormal>().ammo = GameObject.Find("Canvas/HUD/ShotgunNormal").GetComponent<ShotgunNormal>().maxAmmo;
-        GameObject.Find("Canvas/HUD/SemiPistol").GetComponent<SemiPistol>().ammo = GameObject.Find("Canvas/HUD/SemiPistol").GetComponent<SemiPistol>().maxAmmo;
+        // Recargar munición de todas las armas automáticamente
+        string[] weaponNames = {
+            "Bfg", "Chainsaw", "EnergyGun", "Fist", "MachineGun", "Pistol2",
+            "PlasmaGun", "ShotgunNormal", "SemiPistol"
+        };
 
+        foreach (string weaponName in weaponNames)
+        {
+            GameObject weaponGO = GameObject.Find($"Player/Canvas/HUD/{weaponName}");
+            if (weaponGO != null)
+            {
+                Gun gun = weaponGO.GetComponent<Gun>();
+                if (gun != null)
+                {
+                    gun.ammo = gun.maxAmmo;
+                }
+                else
+                {
+                    Debug.LogWarning($"{weaponName} no tiene un componente Gun.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"{weaponName} no encontrado en HUD.");
+            }
+        }
+
+        
         if (UnJugador)
         {
             Time.timeScale = 1f;
         }
-        Debug.Log("Reapareciendo"); // Log player death
+        Debug.Log("Reapareciendo");
 
-        Cursor.lockState = CursorLockMode.Locked;     // Libera Cursor
-        Cursor.visible = false;                      // Ver
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         _mouseLookScript.enabled = true;
-
+        player.GetComponent<PlayerMove>().UpdateFistVisibility();
         if (player != null)
         {
             player.transform.position = posicionInicialJugador;
@@ -158,29 +177,35 @@ public class MenuPauseActions : MonoBehaviour
 
         if (deathPanelUI != null && deathPanelUI.activeSelf)
         {
-            deathPanelUI.SetActive(false); // Desactivamos Muerte
+            deathPanelUI.SetActive(false);
         }
         else
         {
             _OptionPanel.SetActive(false);
         }
+
+        
         _ContadorDeMuertes.text = muertes.ToString();
         pulsadoReanudar = false;
-        player.SetActive(true);
-        Debug.Log(player.transform.position);
-
-        //AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);
+        StartCoroutine(ActivarScriptDespuesDeTiempo(1));
     }
+
+    IEnumerator ActivarScriptDespuesDeTiempo(float segundos)
+    {
+        yield return new WaitForSeconds(segundos);
+        player.GetComponent<PlayerMove>().enabled = true;
+    }
+
 
     public void Opciones()
     {
         Vector3 menuLeft = _menuUp + new Vector3(-80, 0, 0);
         Vector3 optionsRight = _optionUp + new Vector3(150, 0, 0);
 
-        if(!pulsadoOpciones)
+        if (!pulsadoOpciones)
         {
             pulsadoOpciones = true;
-    
+
             _mover.Move(_MenuPrincipalDisplay, _menuUp, menuLeft);
             _mover.Move(_OptionsMenuDisplay, _optionUp, optionsRight);
         }

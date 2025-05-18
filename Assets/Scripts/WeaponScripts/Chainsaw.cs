@@ -25,7 +25,7 @@ public class Chainsaw : Gun
             {
                 if (!audioSource.isPlaying)
                 {
-                    audioSource.PlayOneShot(GunSHot);
+                    AudioManager.Instance.ReproducirEfectos(GunSHot);
                 }
                 ammo--;
                 Debug.Log($"Chainsaw fired! Ammo left: {ammo}");

@@ -26,7 +26,7 @@ public class EnergyGun : Gun
 
         isFiring = true;
         ammo--;
-            audioSource.PlayOneShot(GunSHot);
+            AudioManager.Instance.ReproducirEfectos(GunSHot);
 
         Debug.Log($"EnergyGun fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");

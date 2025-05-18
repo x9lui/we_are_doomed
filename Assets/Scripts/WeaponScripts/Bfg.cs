@@ -57,7 +57,7 @@ public class Bfg : Gun
                 if (rocketPrefab != null && firePoint != null)
                 {
                     float spawnOffset = 1.0f;
-                    audioSource.PlayOneShot(GunSHot);
+                    AudioManager.Instance.ReproducirEfectos(GunSHot);
 
                     Vector3 spawnPos = firePoint.position + firePoint.forward * spawnOffset;
                     GameObject rocket = Instantiate(rocketPrefab, spawnPos, firePoint.rotation);

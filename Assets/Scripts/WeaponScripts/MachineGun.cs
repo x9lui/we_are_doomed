@@ -21,7 +21,7 @@ public class MachineGun : Gun
             Debug.Log($"MachineGun fired! Ammo left: {ammo}");
             spriteAnim.SetBool("Fire", true);
 
-            audioSource.PlayOneShot(GunSHot);
+            AudioManager.Instance.ReproducirEfectos(GunSHot);
 
             // Manejar el disparo y el daño
             HandleRaycastAndDamage();
