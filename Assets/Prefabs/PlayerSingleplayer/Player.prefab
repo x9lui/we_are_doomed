@@ -4748,6 +4748,7 @@ MonoBehaviour:
   armorBarUI: {fileID: 7266068551537947894}
   deathPanelUI: {fileID: 3081289053880337211}
   _mouseLookScript: {fileID: 2937074317880846945}
+  Muerte: {fileID: 8300000, guid: b63ad779f61932040aeff08b1a488185, type: 3}
   interfaceHead: {fileID: 2407387686590957035}
   UnJugador: 1
 --- !u!114 &380354407227798022
@@ -14905,7 +14906,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 524e25fbb5208bd41a26ceeb56d9963d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paresPantalla: []
+  paresPantalla:
+  - _panelPantalla: {fileID: 1817560926896157190}
+    _textoPantalla: {fileID: 2172802958427402836}
+  - _panelPantalla: {fileID: 552355867661161477}
+    _textoPantalla: {fileID: 5709289175027849261}
+  - _panelPantalla: {fileID: 2437973354909197793}
+    _textoPantalla: {fileID: 3704543092673079438}
+  - _panelPantalla: {fileID: 3954752280641135164}
+    _textoPantalla: {fileID: 3731325714621444417}
+  - _panelPantalla: {fileID: 5044588604695939357}
+    _textoPantalla: {fileID: 2172802958427402836}
+  - _panelPantalla: {fileID: 5044588604695939357}
+    _textoPantalla: {fileID: 2172802958427402836}
+  - _panelPantalla: {fileID: 34552554935844241}
+    _textoPantalla: {fileID: 6116245475187905717}
+  - _panelPantalla: {fileID: 1707863638275505479}
+    _textoPantalla: {fileID: 6709923600106188762}
+  - _panelPantalla: {fileID: 5409232288638611958}
+    _textoPantalla: {fileID: 3581291413197648382}
   _magnitudTemblor: 2
   _velocidadTemblor: 5
   _intensidadParpadeo: 0.1
@@ -14934,6 +14953,7 @@ MonoBehaviour:
   _mouseLookScript: {fileID: 2937074317880846945}
   ClickDeBoton: {fileID: 8300000, guid: cbc91ceda4da56f4b993416fe46b07e1, type: 3}
   _MetalSound: {fileID: 8300000, guid: 2aa31e2de9668d441a7a6b94040fc5d3, type: 3}
+  _Death: {fileID: 8300000, guid: d5362eed30ff9fe49953861e963f1417, type: 3}
   UnJugador: 1
   player: {fileID: 2402309829230394580}
 --- !u!114 &5785297996516041172

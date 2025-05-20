@@ -22,6 +22,11 @@ public class Enemy : MonoBehaviour
 
     private PlayerHealth playerHealth; // Referencia al componente PlayerHealth
 
+    private float lastHitSoundTime = -1f;
+    public float hitSoundCooldown = 0.5f; // medio segundo
+    
+    private bool isDead = false; // Indica si el enemigo está muerto
+
     public Sprite attackSprite; // Asigna 'Imp-from-Doom-Spritesheet_30' en el inspector
 
     void Start()
@@ -39,15 +44,23 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if(isDead) return; // Si el enemigo ya está muerto, no hacer nada
+        
         enemyHealth -= damage;
-        if (enemyHealth > 0)
+    
+        // Solo reproduce el sonido si ha pasado suficiente tiempo
+        if (Time.time >= lastHitSoundTime + hitSoundCooldown)
         {
             PlaySound(SoundType.Hit);
+            lastHitSoundTime = Time.time;
         }
+    
         Instantiate(gunHitEffect, transform.position, Quaternion.identity);
         Debug.Log($"Enemy took damage: {damage}. Remaining health: {enemyHealth}");
+    
         if (enemyHealth <= 0)
         {
+            isDead = true; // Marcar al enemigo como muerto
             PlaySound(SoundType.Death);
             Destroy(gameObject);
         }
@@ -122,8 +135,7 @@ public class Enemy : MonoBehaviour
         if (index >= 0 && index < sounds.Length)
         {
             AudioManager.Instance.ReproducirEfectos(sounds[index]);
-
-            
+ 
         }
         else
         {

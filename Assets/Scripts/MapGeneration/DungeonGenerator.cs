@@ -6,6 +6,8 @@ using TriangleNet.Meshing;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
+using Unity.VisualScripting;
+using Unity.AI.Navigation;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -56,6 +58,8 @@ public class DungeonGenerator : MonoBehaviour
     }
     public void GenerateDungeon()
     {
+        dungeonParent = new GameObject("DungeonParent").transform;
+
         Task.Run(() =>
         {
             GenerateInitialCells();
@@ -71,6 +75,19 @@ public class DungeonGenerator : MonoBehaviour
         });
     }
 
+    public void DestroyDungeon()
+    {
+        Destroy(dungeonParent.gameObject);
+
+        cells = new List<Cell>();
+        rooms = new List<Cell>();
+        delaunayEdges = new List<(Vector2, Vector2)>();
+        mstEdges = new List<Edge>();
+        finalEdges = new List<Edge>();
+        tileMap = new Dictionary<Vector2Int, TileType>();
+        connectedTiles = new HashSet<(Vector2Int, Vector2Int)>();
+    }
+
     private void FinishDungeonGeneration()
     {
         AssignBiomesWithKMeans(floorMaterials.Count);
@@ -79,6 +96,12 @@ public class DungeonGenerator : MonoBehaviour
         Debug.Log("Muros generados.");
         GenerateFloors();
         Debug.Log("Suelos generados.");
+
+        //Navmesh is generated in the dungeon parent because it is applied in all its childs
+        NavMeshSurface navMeshSurface = dungeonParent.AddComponent<NavMeshSurface>();
+        navMeshSurface.BuildNavMesh();
+        Debug.Log("Nav mesh generada.");
+
         GenerateCeilings();
         Debug.Log("Techos generados.");
         DungeonGenerated?.Invoke();

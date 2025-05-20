@@ -119,37 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &631056801
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 631056802}
-  m_Layer: 0
-  m_Name: DungeonRoot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &631056802
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631056801}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &733669519
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,13 +169,14 @@ MonoBehaviour:
   roomSizeMax: {x: 30, y: 30}
   maxSeparationIterations: 1000
   roomSizeThreshold: {x: 4, y: 4}
+  wallHeight: 6
   tilePrefab: {fileID: 203207713530102449, guid: f4744c459f8019541a51200e1eb4eb66, type: 3}
   wallPrefab: {fileID: 4011140061345648185, guid: eee1e4e9915bae64cade3bd8dd943b28, type: 3}
   floorMaterials:
   - {fileID: 2100000, guid: 34a0d4ba2ddab384a84b28d0b030243e, type: 2}
   wallMaterials:
   - {fileID: 2100000, guid: edea41ebe84c02340a8e03566c622fd0, type: 2}
-  dungeonParent: {fileID: 631056802}
+  dungeonParent: {fileID: 0}
 --- !u!1 &779246219
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,15 +287,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dungeonGenerator: {fileID: 733669522}
   pickupsAndProbabilities:
-  - pickUpGO: {fileID: 5334057418579480403, guid: 920f357922b68c34193168d20ab3f5f7, type: 3}
-    probability: 0
+  - pickUpGO: {fileID: 3728481392082662203, guid: 6c849306bdd860441a747a06c8e63f4d, type: 3}
+    probability: 3
   - pickUpGO: {fileID: 853087508702292054, guid: 149dce5714b931c438f6cc805c961a18, type: 3}
-    probability: 0
-  - pickUpGO: {fileID: 3728481392082662203, guid: 6c849306bdd860441a747a06c8e63f4d, type: 3}
-    probability: 0
-  - pickUpGO: {fileID: 3728481392082662203, guid: 6c849306bdd860441a747a06c8e63f4d, type: 3}
-    probability: 0
-  player: {fileID: 2402309829230394580, guid: cb35393cdc67e8a4fbcf81a2c5b0d992, type: 3}
+    probability: 3
+  - pickUpGO: {fileID: 4664787651241518297, guid: d51e2a7274ae7cb4da2ae34bb174f37c, type: 3}
+    probability: 1
+  - pickUpGO: {fileID: 4788203807130142967, guid: 3032a2785f35ab44e8ab79e87a5807c1, type: 3}
+    probability: 3
+  - pickUpGO: {fileID: 1879800694312857236, guid: d1f52ffdd036a9448a16b0171e0b576c, type: 3}
+    probability: 2
+  - pickUpGO: {fileID: 5334057418579480403, guid: 920f357922b68c34193168d20ab3f5f7, type: 3}
+    probability: 4
+  - pickUpGO: {fileID: 5792902071977613540, guid: 6f46e5dc0d8c0fd44911ab1e5d87e7f3, type: 3}
+    probability: 2
+  - pickUpGO: {fileID: 1232841755510998309, guid: aa8b32ede502abe4284e8417a9de02c9, type: 3}
+    probability: 4
+  - pickUpGO: {fileID: 2826620292736054333, guid: 588a259b19bfb0749be00bf2f5d34be7, type: 3}
+    probability: 2
+  - pickUpGO: {fileID: 4147892172007253573, guid: a0d0891acf4016a4e863bff2110aaf17, type: 3}
+    probability: 2
+  - pickUpGO: {fileID: 3506498588915887599, guid: e5a317066018b484fb9409786d243ed9, type: 3}
+    probability: 4
+  - pickUpGO: {fileID: 3907614084857794023, guid: 3574da0447d3e3846b90b52d5512ce30, type: 3}
+    probability: 3
+  nextLevelItem: {fileID: 3492539110356153257, guid: 1db819e1108c04a4db84a709c9a3cd56, type: 3}
+  playerPrefab: {fileID: 2402309829230394580, guid: cb35393cdc67e8a4fbcf81a2c5b0d992, type: 3}
   imp: {fileID: 6477119415256762385, guid: cb582b1e9693e9d4b8b113484f024686, type: 3}
 --- !u!4 &1314769715
 Transform:
@@ -470,5 +457,4 @@ SceneRoots:
   - {fileID: 1701966176}
   - {fileID: 1314769715}
   - {fileID: 733669521}
-  - {fileID: 631056802}
   - {fileID: 779246222}
