@@ -59,41 +59,73 @@ public class SinglePlayerGameManager : MonoBehaviour
 
     void Start()
     {
-        dungeonParent = new GameObject("DugeonParent");
-        dungeonGenerator.dungeonParent = dungeonParent.transform;
         dungeonGenerator.GenerateDungeon();
+
+        //Generate player and disable it until game is ready
         playerInstance = Instantiate(playerPrefab);
         playerInstance.SetActive(false);
     }
 
     void StartLevel()
     {
-        enemyParent = new GameObject("EnemyParent");
 
         rooms = dungeonGenerator.GetDungeonRooms();
 
         //Select a trivial room as the spawn
         spawnRoom = rooms[Random.Range(0, rooms.Count - 1)];
 
-        //Select final room and generate the nextLevelItem in its center
-        SelectFinalRoom();
-        Instantiate(nextLevelItem, GetCellCenter3D(finalRoom) + Vector3.up * 1, Quaternion.identity);
+        ConfigureFinalRoom();
 
         //Move player to the spawn room and enable it
         playerInstance.transform.position = GetRandomPositionInsideCell3D(spawnRoom) + Vector3.up * 2f;
         playerInstance.SetActive(true);
 
-        //Generate creatures in all rooms except the spawn 
+        GenerateCreatures();
+
+        GeneratePickUps();
+        
+    }
+
+    /// <summary>
+    /// Selects the final room and generates the nextLevelItem in its center
+    /// </summary>
+    private void ConfigureFinalRoom()
+    {
+        SelectFinalRoom();
+        Instantiate(nextLevelItem, GetCellCenter3D(finalRoom) + Vector3.up * 1, Quaternion.identity);
+    }
+
+    /// <summary>
+    /// Generate creatures in all the rooms except the spawn
+    /// </summary>
+    private void GenerateCreatures()
+    {
+        enemyParent = new GameObject("EnemyParent");
         foreach (DungeonGenerator.Cell room in rooms)
         {
             if (room == spawnRoom) continue;
             for (int i = 0; i < Random.Range(currentLevel / 2 + 1, currentLevel + 1); i++)
                 Instantiate(imp, GetRandomPositionInsideCell3D(room) + Vector3.up * 2f, Quaternion.identity, enemyParent.transform);
         }
+    }
 
-        //Generate pick ups
+    private void DestroyCreatures()
+    {
+        Destroy(enemyParent);
+    }
+
+    private void DestroyDungeon()
+    {
+        dungeonGenerator.DestroyDungeon();
+    }
+
+    private void GeneratePickUps()
+    {
         foreach (DungeonGenerator.Cell room in rooms)
         {
+            if (room == spawnRoom) continue;
+            if (room == finalRoom) continue;
+            if (Random.value < 0.5f) continue;
             Instantiate(GetRandomPickup(), GetCellCenter3D(room) + Vector3.up * 1f, Quaternion.identity);
         }
     }
@@ -108,9 +140,8 @@ public class SinglePlayerGameManager : MonoBehaviour
         Destroy(enemyParent);
 
         //Destroy all the dungeon and create a new parent
-        Destroy(dungeonGenerator.dungeonParent.gameObject);
-        GameObject dungeonRoot = new GameObject("DugeonRoot");
-        dungeonGenerator.dungeonParent = dungeonRoot.transform;
+        DestroyDungeon();
+        DestroyCreatures();
 
         //Save player state
 

@@ -298,7 +298,7 @@ MonoBehaviour:
   - pickUpGO: {fileID: 1879800694312857236, guid: d1f52ffdd036a9448a16b0171e0b576c, type: 3}
     probability: 2
   - pickUpGO: {fileID: 5334057418579480403, guid: 920f357922b68c34193168d20ab3f5f7, type: 3}
-    probability: 3
+    probability: 4
   - pickUpGO: {fileID: 5792902071977613540, guid: 6f46e5dc0d8c0fd44911ab1e5d87e7f3, type: 3}
     probability: 2
   - pickUpGO: {fileID: 1232841755510998309, guid: aa8b32ede502abe4284e8417a9de02c9, type: 3}
@@ -312,7 +312,7 @@ MonoBehaviour:
   - pickUpGO: {fileID: 3907614084857794023, guid: 3574da0447d3e3846b90b52d5512ce30, type: 3}
     probability: 3
   nextLevelItem: {fileID: 3492539110356153257, guid: 1db819e1108c04a4db84a709c9a3cd56, type: 3}
-  player: {fileID: 2402309829230394580, guid: cb35393cdc67e8a4fbcf81a2c5b0d992, type: 3}
+  playerPrefab: {fileID: 2402309829230394580, guid: cb35393cdc67e8a4fbcf81a2c5b0d992, type: 3}
   imp: {fileID: 6477119415256762385, guid: cb582b1e9693e9d4b8b113484f024686, type: 3}
 --- !u!4 &1314769715
 Transform:
