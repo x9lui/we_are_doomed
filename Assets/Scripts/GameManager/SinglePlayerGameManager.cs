@@ -42,6 +42,7 @@ public class SinglePlayerGameManager : MonoBehaviour
 
     void Awake()
     {
+        //Singleton 
         if (Instance == null)
         {
             Instance = this;
