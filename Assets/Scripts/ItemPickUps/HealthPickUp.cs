@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HealthPickUp : ItemPickUp
 {
-    public float healthAmount = 20f; // Cantidad de armadura que restaura
+    public float healthAmount = 20f; // Cantidad de vida que restaura
 
     protected override void OnPickUp(Collider player)
     {
@@ -11,7 +11,7 @@ public class HealthPickUp : ItemPickUp
         {
             playerHealth.HealPlayer(healthAmount);
             Debug.Log($"Player picked up health. Current health: {playerHealth.CurrentHealth}");
-            Destroy(gameObject); // Destruir el objeto después de recogerlo
+            Destroy(gameObject);
 
         }else
         {

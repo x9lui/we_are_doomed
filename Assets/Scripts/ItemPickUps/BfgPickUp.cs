@@ -6,16 +6,13 @@ public class BfgPickUp : ItemPickUp
 
     protected override void OnPickUp(Collider player)
     {
-        // Verificar si el jugador tiene un inventario
         if (playerInventory != null)
         {
-            // Intentar añadir el arma al inventario del jugador
             if (playerInventory.AddWeapon(InventoryScript.WeaponType.RocketLauncher, weaponName))
             {
                 Debug.Log($"Picked up {weaponName}.");
-                // playerInventory.AddAmmo(weaponName, ammoAmount);
-                ActivateWeapon(player, weaponName); // Activar el arma en el jugador
-                Destroy(gameObject); // Destruir el objeto después de recogerlo
+                ActivateWeapon(player, weaponName);
+                Destroy(gameObject);
 
             }
             else
@@ -32,7 +29,5 @@ public class BfgPickUp : ItemPickUp
 
     private void ActivateWeapon(Collider player, string weaponName)
     {
-        // Aquí puedes implementar la lógica para activar el arma en el jugador
-
     }
 }

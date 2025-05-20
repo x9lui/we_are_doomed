@@ -6,23 +6,22 @@ public class MachineGun : Gun
 
     public override void Fire()
     {
-        // Verificar si el botón izquierdo del ratón está presionado y si se puede disparar
         if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire)
         {
             if (ammo <= 0)
             {
                 Debug.Log("Out of ammo!");
-                spriteAnim.SetBool("Fire", false); // O el parámetro que uses
-                isFiring = false; // <- IMPORTANTE
+                spriteAnim.SetBool("Fire", false);
+                isFiring = false;
                 return;
             }
 
-            nextTimeToFire = Time.time + fireRate; // Configurar el tiempo para el próximo disparo
-            ammo--; // Reducir la munición
+            nextTimeToFire = Time.time + fireRate;
+            ammo--;
             Debug.Log($"MachineGun fired! Ammo left: {ammo}");
-            spriteAnim.SetBool("Fire", true); // Activar la animación de disparo
+            spriteAnim.SetBool("Fire", true);
 
-            audioSource.PlayOneShot(GunSHot);
+            AudioManager.Instance.ReproducirEfectos(GunSHot);
 
             // Manejar el disparo y el daño
             HandleRaycastAndDamage();
@@ -38,18 +37,16 @@ public class MachineGun : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        //Debug.Log("MachineGun: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        //Debug.Log("MachineGun: Idle");
     }
 
     public override void setCanAuto()
     {
-        canAuto = true; // Configurar el arma como automática
+        canAuto = true;
     }
 
     public override void StopFiringAnim()

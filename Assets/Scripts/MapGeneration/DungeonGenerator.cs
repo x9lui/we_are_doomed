@@ -21,6 +21,10 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Selección de Habitaciones")]
     public Vector2 roomSizeThreshold = new Vector2(5, 5); // Tamaño mínimo para ser habitación
 
+    [Header("Altura de los Muros")]
+    public int wallHeight = 6;
+
+
     [Header("Tiles")]
     public GameObject tilePrefab;
     public GameObject wallPrefab;
@@ -69,7 +73,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 mainThreadActionQueue.Enqueue(() =>
                 {
-                    DungeonHeavyWorkDone.Invoke();
+                    DungeonHeavyWorkDone?.Invoke();
                 });
             }
         });
@@ -77,13 +81,15 @@ public class DungeonGenerator : MonoBehaviour
 
     private void FinishDungeonGeneration()
     {
+        AssignBiomesWithKMeans(floorMaterials.Count);
+        MergeCorridorCells();
         GenerateWalls();
         Debug.Log("Muros generados.");
-
-        MergeCorridorCells();
         GenerateFloors();
         Debug.Log("Suelos generados.");
-        DungeonGenerated.Invoke();
+        GenerateCeilings();
+        Debug.Log("Techos generados.");
+        DungeonGenerated?.Invoke();
     }
 
     private void Update()
@@ -120,7 +126,7 @@ public class DungeonGenerator : MonoBehaviour
                 t = System.Math.Pow(rnd.NextDouble(), 2);
                 height = (int)System.Math.Round(Lerp(roomSizeMin.y, roomSizeMax.y, t));
             }
-            while (System.Math.Max(width/height, height/width) > 1.8); // if proportion between width and height
+            while (System.Math.Max(width / height, height / width) > 1.8); // if proportion between width and height
             //is bigger than 1.8, repeat
 
             // Generar posición aleatoria en circunferencia (esquina inferior izquierda)
@@ -230,8 +236,9 @@ public class DungeonGenerator : MonoBehaviour
 
     private bool AreOverlapping(Cell a, Cell b, out Vector2Int pushDirection)
     {
-        Vector2 aMin = a.position - Vector2.one; // Expandimos A una unidad hacia fuera
-        Vector2 aMax = a.position + a.size + Vector2.one; // Expandimos el tamaño de A
+        Vector2 aMin = a.position - Vector2.one * 2f; // Introducimos margen de dos tiles
+        Vector2 aMax = a.position + a.size + Vector2.one * 2f;
+
 
         Vector2 bMin = b.position;
         Vector2 bMax = b.position + b.size;
@@ -532,160 +539,154 @@ public class DungeonGenerator : MonoBehaviour
 
 
 
-    private void OnDrawGizmos()
-    {
-        if (cells == null) return;
+    // private void OnDrawGizmos()
+    // {
+    //     if (cells == null) return;
 
-        foreach (var cell in cells)
-        {
-            Vector3 center = new Vector3(cell.position.x + cell.size.x / 2f, 0, cell.position.y + cell.size.y / 2f);
+    //     foreach (var cell in cells)
+    //     {
+    //         Vector3 center = new Vector3(cell.position.x + cell.size.x / 2f, 0, cell.position.y + cell.size.y / 2f);
 
-            if (cell.isRoom)
-            {
-                // Dibujar primero un cubo sólido semitransparente para habitaciones
-                Gizmos.color = new Color(0f, 1f, 0f, 0.3f); // Verde semitransparente
-                Gizmos.DrawCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
+    //         if (cell.isRoom)
+    //         {
+    //             // Dibujar primero un cubo sólido semitransparente para habitaciones
+    //             Gizmos.color = new Color(0f, 1f, 0f, 0.3f); // Verde semitransparente
+    //             Gizmos.DrawCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
 
-                // Luego bordes más vivos
-                Gizmos.color = Color.green;
-                Gizmos.DrawWireCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
-            }
-            else if (cell.isCorridor)
-            {
-                Gizmos.color = new Color(0f, 0.5f, 1f, 0.8f); // Azul más intenso para pasillos
-                Gizmos.DrawCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
-            }
-            else
-            {
-                Gizmos.color = Color.gray;
-                Gizmos.DrawWireCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
-            }
-        }
+    //             // Luego bordes más vivos
+    //             Gizmos.color = Color.green;
+    //             Gizmos.DrawWireCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
+    //         }
+    //         else if (cell.isCorridor)
+    //         {
+    //             Gizmos.color = new Color(0f, 0.5f, 1f, 0.8f); // Azul más intenso para pasillos
+    //             Gizmos.DrawCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
+    //         }
+    //         else
+    //         {
+    //             Gizmos.color = Color.gray;
+    //             Gizmos.DrawWireCube(center, new Vector3(cell.size.x, 1f, cell.size.y));
+    //         }
+    //     }
 
-        if (delaunayEdges != null && delaunayEdges.Count > 0)
-        {
-            Gizmos.color = Color.red;
+    //     if (delaunayEdges != null && delaunayEdges.Count > 0)
+    //     {
+    //         Gizmos.color = Color.red;
 
-            foreach (var edge in delaunayEdges)
-            {
-                Gizmos.DrawLine(new Vector3(edge.Item1.x, 0, edge.Item1.y), new Vector3(edge.Item2.x, 0, edge.Item2.y));
-            }
-        }
+    //         foreach (var edge in delaunayEdges)
+    //         {
+    //             Gizmos.DrawLine(new Vector3(edge.Item1.x, 0, edge.Item1.y), new Vector3(edge.Item2.x, 0, edge.Item2.y));
+    //         }
+    //     }
 
-        if (mstEdges != null && mstEdges.Count > 0)
-        {
-            Gizmos.color = Color.yellow;
+    //     if (mstEdges != null && mstEdges.Count > 0)
+    //     {
+    //         Gizmos.color = Color.yellow;
 
-            foreach (var edge in mstEdges)
-            {
-                Gizmos.DrawLine(new Vector3(edge.a.x, 0.5f, edge.a.y), new Vector3(edge.b.x, 0.5f, edge.b.y));
-            }
-        }
+    //         foreach (var edge in mstEdges)
+    //         {
+    //             Gizmos.DrawLine(new Vector3(edge.a.x, 0.5f, edge.a.y), new Vector3(edge.b.x, 0.5f, edge.b.y));
+    //         }
+    //     }
 
-        if (finalEdges != null && finalEdges.Count > 0)
-        {
-            Gizmos.color = Color.blue;
+    //     if (finalEdges != null && finalEdges.Count > 0)
+    //     {
+    //         Gizmos.color = Color.blue;
 
-            foreach (var edge in finalEdges)
-            {
-                Gizmos.DrawLine(new Vector3(edge.a.x, 1f, edge.a.y), new Vector3(edge.b.x, 1f, edge.b.y));
-            }
-        }
-    }
+    //         foreach (var edge in finalEdges)
+    //         {
+    //             Gizmos.DrawLine(new Vector3(edge.a.x, 1f, edge.a.y), new Vector3(edge.b.x, 1f, edge.b.y));
+    //         }
+    //     }
+    // }
 
     private void MergeCorridorCells()
     {
-        // Paso 1: Crear mapa binario de ocupación
-        List<Cell> corridorCells = cells.FindAll(c => c.isCorridor);
+        var corridorGroups = cells
+            .Where(c => c.isCorridor)
+            .GroupBy(c => c.biomeIndex);
 
-        if (corridorCells.Count == 0) return;
+        List<Cell> mergedCells = new List<Cell>();
 
-        // Obtener bounding box
-        float minX = float.MaxValue, minY = float.MaxValue;
-        float maxX = float.MinValue, maxY = float.MinValue;
-
-        foreach (var c in corridorCells)
+        foreach (var group in corridorGroups)
         {
-            minX = System.Math.Min(minX, c.position.x);
-            minY = System.Math.Min(minY, c.position.y);
-            maxX = System.Math.Max(maxX, c.position.x + c.size.x);
-            maxY = System.Math.Max(maxY, c.position.y + c.size.y);
-        }
+            int biome = group.Key;
+            List<Cell> corridorCells = group.ToList();
 
-        int width = (int)System.Math.Ceiling(maxX - minX);
-        int height = (int)System.Math.Ceiling(maxY - minY);
+            float minX = corridorCells.Min(c => c.position.x);
+            float minY = corridorCells.Min(c => c.position.y);
+            float maxX = corridorCells.Max(c => c.position.x + c.size.x);
+            float maxY = corridorCells.Max(c => c.position.y + c.size.y);
 
-        bool[,] map = new bool[width, height];
+            int width = Mathf.CeilToInt(maxX - minX);
+            int height = Mathf.CeilToInt(maxY - minY);
 
-        // Paso 2: Marcar las celdas ocupadas
-        foreach (var c in corridorCells)
-        {
-            int startX = (int)System.Math.Round(c.position.x - minX);
-            int startY = (int)System.Math.Round(c.position.y - minY);
+            bool[,] map = new bool[width, height];
+            bool[,] visited = new bool[width, height];
 
-            for (int x = 0; x < (int)c.size.x; x++)
+            foreach (var cell in corridorCells)
             {
-                for (int y = 0; y < (int)c.size.y; y++)
+                int startX = Mathf.RoundToInt(cell.position.x - minX);
+                int startY = Mathf.RoundToInt(cell.position.y - minY);
+
+                for (int x = 0; x < (int)cell.size.x; x++)
                 {
-                    map[startX + x, startY + y] = true;
+                    for (int y = 0; y < (int)cell.size.y; y++)
+                    {
+                        map[startX + x, startY + y] = true;
+                    }
                 }
             }
-        }
 
-        // Paso 3: Buscar bloques rectangulares máximos
-        List<Cell> merged = new List<Cell>();
-        bool[,] visited = new bool[width, height];
-
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
             {
-                if (!map[x, y] || visited[x, y]) continue;
-
-                // Expandimos el bloque lo máximo posible en X y luego en Y
-                int maxWidth = 1;
-                while (x + maxWidth < width && map[x + maxWidth, y] && !visited[x + maxWidth, y])
-                    maxWidth++;
-
-                int maxHeight = 1;
-                bool valid = true;
-
-                while (y + maxHeight < height && valid)
+                for (int x = 0; x < width; x++)
                 {
-                    for (int i = 0; i < maxWidth; i++)
+                    if (!map[x, y] || visited[x, y]) continue;
+
+                    int maxWidth = 1;
+                    while (x + maxWidth < width && map[x + maxWidth, y] && !visited[x + maxWidth, y]) maxWidth++;
+
+                    int maxHeight = 1;
+                    bool valid = true;
+
+                    while (y + maxHeight < height && valid)
                     {
-                        if (!map[x + i, y + maxHeight] || visited[x + i, y + maxHeight])
+                        for (int i = 0; i < maxWidth; i++)
                         {
-                            valid = false;
-                            break;
+                            if (!map[x + i, y + maxHeight] || visited[x + i, y + maxHeight])
+                            {
+                                valid = false;
+                                break;
+                            }
                         }
+
+                        if (valid) maxHeight++;
                     }
 
-                    if (valid) maxHeight++;
-                }
+                    for (int dx = 0; dx < maxWidth; dx++)
+                        for (int dy = 0; dy < maxHeight; dy++)
+                            visited[x + dx, y + dy] = true;
 
-                // Marcar como visitado
-                for (int dx = 0; dx < maxWidth; dx++)
-                {
-                    for (int dy = 0; dy < maxHeight; dy++)
+                    Vector2 pos = new Vector2(minX + x, minY + y);
+                    Vector2 size = new Vector2(maxWidth, maxHeight);
+                    Cell newCell = new Cell(pos, size)
                     {
-                        visited[x + dx, y + dy] = true;
-                    }
-                }
+                        isCorridor = true,
+                        biomeIndex = biome
+                    };
 
-                Vector2 position = new Vector2(minX + x, minY + y);
-                Vector2 size = new Vector2(maxWidth, maxHeight);
-                Cell newCell = new Cell(position, size) { isCorridor = true };
-                merged.Add(newCell);
+                    mergedCells.Add(newCell);
+                }
             }
         }
 
-        // Paso 4: Limpiar y reemplazar
         cells.RemoveAll(c => c.isCorridor);
-        cells.AddRange(merged);
+        cells.AddRange(mergedCells);
 
-        Debug.Log($"Corridors fusionados en {merged.Count} bloques rectangulares sin solapamiento.");
+        Debug.Log($"Pasillos fusionados en {mergedCells.Count} bloques por bioma.");
     }
+
 
     private void GenerateFloors()
     {
@@ -704,19 +705,18 @@ public class DungeonGenerator : MonoBehaviour
                 floor.transform.SetParent(dungeonParent);
                 floor.name = $"Floor_{(cell.isRoom ? "Room" : "Corridor")}_{center.x}_{center.z}";
 
-                // 🎯 Aquí asignamos un material desde la lista
                 if (floorMaterials.Count > 0)
                 {
                     Renderer r = floor.GetComponent<Renderer>();
-                    Material mat = new Material(floorMaterials[0]); // Crea una instancia para modificar
-                    r.material = mat;
+                    int matIndex = Mathf.Clamp(cell.biomeIndex, 0, floorMaterials.Count - 1);
+                    r.material = new Material(floorMaterials[matIndex]);
                 }
-
             }
         }
 
-        Debug.Log("Suelos generados como planos por celda.");
+        Debug.Log("Suelos generados con materiales por bioma.");
     }
+
 
 
     private void GenerateWalls()
@@ -767,74 +767,132 @@ public class DungeonGenerator : MonoBehaviour
         Debug.Log($"Muros generados como {wallBlocks.Count} bloques compactos.");
     }
 
-    private List<BoundsInt> MergeWallPositions(HashSet<Vector2Int> wallPositions)
+    private int GetBiomeAt(Vector2Int pos)
     {
-        List<BoundsInt> result = new List<BoundsInt>();
-
-        if (wallPositions.Count == 0)
-            return result;
-
-        // Bounding box
-        int minX = int.MaxValue, minY = int.MaxValue;
-        int maxX = int.MinValue, maxY = int.MinValue;
-
-        foreach (var pos in wallPositions)
+        foreach (var cell in cells)
         {
-            minX = System.Math.Min(minX, pos.x);
-            minY = System.Math.Min(minY, pos.y);
-            maxX = System.Math.Max(maxX, pos.x);
-            maxY = System.Math.Max(maxY, pos.y);
-        }
+            if (!cell.isRoom && !cell.isCorridor) continue;
 
-        int width = maxX - minX + 1;
-        int height = maxY - minY + 1;
+            Vector2 cellMin = cell.position;
+            Vector2 cellMax = cell.position + cell.size;
 
-        bool[,] grid = new bool[width, height];
-        bool[,] visited = new bool[width, height];
-
-        foreach (var pos in wallPositions)
-        {
-            int x = pos.x - minX;
-            int y = pos.y - minY;
-            grid[x, y] = true;
-        }
-
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
+            if (pos.x >= cellMin.x && pos.x < cellMax.x &&
+                pos.y >= cellMin.y && pos.y < cellMax.y)
             {
-                if (!grid[x, y] || visited[x, y]) continue;
-
-                int w = 1;
-                while (x + w < width && grid[x + w, y] && !visited[x + w, y]) w++;
-
-                int h = 1;
-                bool valid = true;
-                while (y + h < height && valid)
-                {
-                    for (int i = 0; i < w; i++)
-                    {
-                        if (!grid[x + i, y + h] || visited[x + i, y + h])
-                        {
-                            valid = false;
-                            break;
-                        }
-                    }
-                    if (valid) h++;
-                }
-
-                for (int dx = 0; dx < w; dx++)
-                    for (int dy = 0; dy < h; dy++)
-                        visited[x + dx, y + dy] = true;
-
-                Vector3Int pos = new Vector3Int(minX + x, 0, minY + y);
-                Vector3Int size = new Vector3Int(w, 5, h); // Altura 5 fija
-                result.Add(new BoundsInt(pos, size));
+                return cell.biomeIndex;
             }
         }
 
-        return result;
+        return -1;
     }
+
+
+    private List<BoundsInt> MergeWallPositions(HashSet<Vector2Int> wallPositions)
+    {
+        Dictionary<Vector2Int, int> wallBiomes = new Dictionary<Vector2Int, int>();
+
+        foreach (var cell in cells)
+        {
+            if (!cell.isRoom && !cell.isCorridor) continue;
+
+            int startX = Mathf.RoundToInt(cell.position.x);
+            int startY = Mathf.RoundToInt(cell.position.y);
+
+            for (int x = 0; x < (int)cell.size.x; x++)
+            {
+                for (int y = 0; y < (int)cell.size.y; y++)
+                {
+                    Vector2Int pos = new Vector2Int(startX + x, startY + y);
+                    if (!wallBiomes.ContainsKey(pos))
+                        wallBiomes[pos] = cell.biomeIndex;
+                }
+            }
+        }
+
+        // Agrupar posiciones de muro por bioma (basado en tiles vecinos)
+        Dictionary<int, HashSet<Vector2Int>> grouped = new();
+
+        foreach (var pos in wallPositions)
+        {
+            // Revisar vecinos para heredar bioma
+            int biome = -1;
+            foreach (Vector2Int dir in new[] { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right })
+            {
+                Vector2Int neighbor = pos + dir;
+                if (wallBiomes.TryGetValue(neighbor, out biome))
+                    break;
+            }
+
+            if (!grouped.ContainsKey(biome))
+                grouped[biome] = new HashSet<Vector2Int>();
+
+            grouped[biome].Add(pos);
+        }
+
+        List<BoundsInt> merged = new();
+
+        foreach (var kv in grouped)
+        {
+            var group = kv.Value;
+
+            if (group.Count == 0) continue;
+
+            int minX = group.Min(p => p.x);
+            int minY = group.Min(p => p.y);
+            int maxX = group.Max(p => p.x);
+            int maxY = group.Max(p => p.y);
+
+            int width = maxX - minX + 1;
+            int height = maxY - minY + 1;
+
+            bool[,] grid = new bool[width, height];
+            bool[,] visited = new bool[width, height];
+
+            foreach (var p in group)
+            {
+                int x = p.x - minX;
+                int y = p.y - minY;
+                grid[x, y] = true;
+            }
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    if (!grid[x, y] || visited[x, y]) continue;
+
+                    int w = 1;
+                    while (x + w < width && grid[x + w, y] && !visited[x + w, y]) w++;
+
+                    int h = 1;
+                    bool valid = true;
+                    while (y + h < height && valid)
+                    {
+                        for (int i = 0; i < w; i++)
+                        {
+                            if (!grid[x + i, y + h] || visited[x + i, y + h])
+                            {
+                                valid = false;
+                                break;
+                            }
+                        }
+                        if (valid) h++;
+                    }
+
+                    for (int dx = 0; dx < w; dx++)
+                        for (int dy = 0; dy < h; dy++)
+                            visited[x + dx, y + dy] = true;
+
+                    Vector3Int pos = new Vector3Int(minX + x, 0, minY + y);
+                    Vector3Int size = new Vector3Int(w, wallHeight, h);
+                    merged.Add(new BoundsInt(pos, size));
+                }
+            }
+        }
+
+        return merged;
+    }
+
 
     private void CreateWallBlock(Vector3Int position, Vector3Int size)
     {
@@ -853,9 +911,63 @@ public class DungeonGenerator : MonoBehaviour
 
         if (wallMaterials.Count > 0)
         {
-            mr.material = wallMaterials[0];
+            // 🔍 Detectar bioma más común en esta área
+            int biome = GetMostCommonBiomeAroundArea(position.x, position.z, size.x, size.z);
+            int matIndex = Mathf.Clamp(biome, 0, wallMaterials.Count - 1);
+            mr.material = wallMaterials[matIndex];
         }
     }
+
+    private int GetMostCommonBiomeAroundArea(int startX, int startZ, int width, int depth)
+    {
+        Dictionary<int, int> biomeCounts = new Dictionary<int, int>();
+
+        // Revisar borde del área
+        for (int x = startX - 1; x <= startX + width; x++)
+        {
+            for (int z = startZ - 1; z <= startZ + depth; z++)
+            {
+                // Saltar si está dentro del muro (no borde)
+                if (x >= startX && x < startX + width &&
+                    z >= startZ && z < startZ + depth)
+                    continue;
+
+                Vector2Int pos = new Vector2Int(x, z);
+                int biome = GetBiomeAt(pos);
+
+                if (biome >= 0)
+                {
+                    if (!biomeCounts.ContainsKey(biome)) biomeCounts[biome] = 0;
+                    biomeCounts[biome]++;
+                }
+            }
+        }
+
+        if (biomeCounts.Count == 0) return -1;
+        return biomeCounts.OrderByDescending(kv => kv.Value).First().Key;
+    }
+
+    private void GenerateCeilings()
+    {
+        foreach (Transform child in dungeonParent)
+        {
+            if (!child.name.StartsWith("Floor_")) continue;
+
+            // Clonar el objeto
+            GameObject ceiling = Instantiate(child.gameObject, dungeonParent);
+
+            // Moverlo hacia arriba wallHeight + 1
+            Vector3 pos = ceiling.transform.position;
+            pos.y += wallHeight;
+            ceiling.transform.position = pos;
+
+            ceiling.name = child.name.Replace("Floor_", "Ceiling_");
+        }
+
+        Debug.Log("Techos generados sobre los suelos.");
+    }
+
+
 
     private Mesh CreateCubeMesh(float width, float height, float depth)
     {
@@ -931,6 +1043,67 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    private void AssignBiomesWithKMeans(int biomeCount)
+    {
+        List<Cell> targetCells = cells.Where(c => c.isRoom || c.isCorridor).ToList();
+        List<Vector2> centers = targetCells.Select(c => c.GetCenter()).ToList();
+
+        List<Vector2> centroids = new List<Vector2>();
+        for (int i = 0; i < biomeCount; i++)
+            centroids.Add(centers[rnd.Next(centers.Count)]);
+
+        for (int iter = 0; iter < 10; iter++)
+        {
+            List<List<Vector2>> clusters = new();
+            for (int i = 0; i < biomeCount; i++) clusters.Add(new List<Vector2>());
+
+            foreach (var p in centers)
+            {
+                int best = 0;
+                float bestDist = Vector2.SqrMagnitude(p - centroids[0]);
+
+                for (int i = 1; i < biomeCount; i++)
+                {
+                    float dist = Vector2.SqrMagnitude(p - centroids[i]);
+                    if (dist < bestDist)
+                    {
+                        bestDist = dist;
+                        best = i;
+                    }
+                }
+                clusters[best].Add(p);
+            }
+
+            for (int i = 0; i < biomeCount; i++)
+            {
+                if (clusters[i].Count == 0) continue;
+                centroids[i] = clusters[i].Aggregate(Vector2.zero, (a, b) => a + b) / clusters[i].Count;
+            }
+        }
+
+        foreach (var cell in targetCells)
+        {
+            Vector2 c = cell.GetCenter();
+            int best = 0;
+            float bestDist = Vector2.SqrMagnitude(c - centroids[0]);
+
+            for (int i = 1; i < biomeCount; i++)
+            {
+                float dist = Vector2.SqrMagnitude(c - centroids[i]);
+                if (dist < bestDist)
+                {
+                    bestDist = dist;
+                    best = i;
+                }
+            }
+
+            cell.biomeIndex = best;
+        }
+
+        Debug.Log("Biomas asignados agrupadamente por KMeans.");
+    }
+
+
     public class Edge
     {
         public Vector2 a, b;
@@ -950,6 +1123,7 @@ public class DungeonGenerator : MonoBehaviour
         public Vector2 size;
         public bool isRoom = false;
         public bool isCorridor = false;
+        public int biomeIndex = -1;
 
         public Cell(Vector2 position, Vector2 size)
         {
@@ -957,25 +1131,11 @@ public class DungeonGenerator : MonoBehaviour
             this.size = size;
         }
 
-        /// <summary>
-        /// This function gives the position in the center of the room.
-        /// </summary>
-        /// <returns>
-        /// The position in the center of the room.
-        /// </returns>
         public Vector2 GetCenter()
         {
             return new Vector2(position.x + size.x / 2, position.y + size.y / 2);
         }
-        /// <summary>
-        /// This function gives a position contained in a room.
-        /// </summary>
-        /// <param name="insidePositionOffset">
-        /// The distance offset is used to add distance to the walls of the
-        /// room, very useful to generate points for spawning gameobjects
-        /// and avoid clipping them through walls
-        /// </param>
-        /// <returns> A random position in a room </returns>
+
         public Vector2 GetRandomPositionInside(float insidePositionOffset)
         {
             return new Vector2(UnityEngine.Random.Range(position.x + insidePositionOffset, position.x + size.x - insidePositionOffset),

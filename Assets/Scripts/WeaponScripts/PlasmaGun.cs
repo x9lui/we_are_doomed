@@ -9,7 +9,6 @@ public class PlasmaGun : Gun
     [System.Obsolete]
     void Awake()
     {
-        // Si firePoint no está asignado, buscar el RayCast y usar su transform (igual que RocketLauncher)
         if (firePoint == null)
         {
             RayCast rayCast = FindObjectOfType<RayCast>();
@@ -27,8 +26,8 @@ public class PlasmaGun : Gun
             if (ammo <= 0)
             {
                 Debug.Log("Out of ammo!");
-                spriteAnim.SetBool("Fire", false); // O el parámetro que uses
-                isFiring = false; // <- IMPORTANTE
+                spriteAnim.SetBool("Fire", false);
+                isFiring = false;
                 return;
             }
 
@@ -37,16 +36,14 @@ public class PlasmaGun : Gun
             Debug.Log($"PlasmaGun fired! Ammo left: {ammo}");
             spriteAnim.SetBool("Fire", true);
 
-            // Instanciar el proyectil de plasma
             if (plasmaProjectilePrefab != null && firePoint != null)
             {
                 float spawnOffset = 0.5f; // Ajusta si es necesario
-                audioSource.PlayOneShot(GunSHot);
+                AudioManager.Instance.ReproducirEfectos(GunSHot);
 
                 Vector3 spawnPos = firePoint.position + firePoint.forward * spawnOffset;
                 GameObject plasma = Instantiate(plasmaProjectilePrefab, spawnPos, firePoint.rotation);
 
-                // Ignorar colisión con el jugador (igual que RocketLauncher)
                 Collider plasmaCol = plasma.GetComponent<Collider>();
                 GameObject player = GameObject.FindWithTag("Player");
                 if (player != null && plasmaCol != null)
@@ -67,13 +64,11 @@ public class PlasmaGun : Gun
     public override void Walk()
     {
         spriteAnim.SetBool("isWalking", true);
-        //Debug.Log("PlasmaGun: Walking");
     }
 
     public override void Idle()
     {
         spriteAnim.SetBool("isWalking", false);
-        //Debug.Log("PlasmaGun: Idle");
     }
 
     public override void setCanAuto()

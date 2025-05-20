@@ -17,8 +17,8 @@ public class SemiPistol : Gun
         if (ammo <= 0)
         {
             Debug.Log("Out of ammo!");
-            spriteAnim.SetBool("Fire", false); // O el parámetro que uses
-            isFiring = false; // <- IMPORTANTE
+            spriteAnim.SetBool("Fire", false);
+            isFiring = false;
             return;
         }
 
@@ -26,7 +26,7 @@ public class SemiPistol : Gun
         ammo--;
         Debug.Log($"SemiPistol fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");
-        hasAppliedDamage = false; // Resetear para este disparo
+        hasAppliedDamage = false;
 
         StartCoroutine(WaitForDamageSprite());
         StartCoroutine(FinishFireAfterDelay(0.1f, 0.2f));
@@ -34,19 +34,18 @@ public class SemiPistol : Gun
 
     private IEnumerator WaitForDamageSprite()
     {
-        // Esperar hasta que el sprite sea 'shoot_2'
         while (!hasAppliedDamage)
         {
             if (gunImage != null && gunImage.sprite.name == "shoot_2")
             {
-        audioSource.PlayOneShot(GunSHot);
+        AudioManager.Instance.ReproducirEfectos(GunSHot);
 
-                // Aquí se hace el raycast y el daño
+                
                 HandleRaycastAndDamage();
                 hasAppliedDamage = true;
             }
 
-            yield return null; // Esperar al siguiente frame
+            yield return null;
         }
     }
 

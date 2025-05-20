@@ -4,8 +4,8 @@ using System.Collections;
 
 public class EnergyGun : Gun
 {
-    public int pellets = 40; // Número de perdigones disparados por la escopeta
-    public float spreadAngle = 30f; // Ángulo de dispersión de los perdigones
+    public int pellets = 40;
+    public float spreadAngle = 30f;
     private bool hasAppliedDamage = false;
 
     public override void Fire()
@@ -20,13 +20,13 @@ public class EnergyGun : Gun
         {
             Debug.Log("Out of ammo!");
             spriteAnim.SetBool("Fire", false); // O el parámetro que uses
-            isFiring = false; // <- IMPORTANTE
+            isFiring = false;
             return;
         }
 
         isFiring = true;
         ammo--;
-            audioSource.PlayOneShot(GunSHot);
+            AudioManager.Instance.ReproducirEfectos(GunSHot);
 
         Debug.Log($"EnergyGun fired! Ammo left: {ammo}");
         spriteAnim.SetTrigger("Fire");

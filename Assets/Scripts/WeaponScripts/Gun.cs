@@ -29,13 +29,13 @@ public class Gun : MonoBehaviour
     [Obsolete]
     void Start()
     {
-        spriteAnim = GetComponent<Animator>(); // Get the Animator component attached to the enemy
+        spriteAnim = GetComponent<Animator>();
         rayCast = FindObjectOfType<RayCast>();
         if (rayCast == null)
         {
             Debug.LogError("RayCast script not found!");
         }
-        gunImage = GetComponent<Image>(); // Asignar el componente Image
+        gunImage = GetComponent<Image>();
         if (gunImage == null)
         {
             Debug.LogError("Gun Image component not found!");
@@ -45,7 +45,7 @@ public class Gun : MonoBehaviour
         {
             Debug.LogError("AudioSource component not found!");
         }
-        GunSHot = audioSource.clip; // Asignar el clip de audio
+        GunSHot = audioSource.clip;
         if (GunSHot == null)
         {
             Debug.LogError("GunSHot audio clip not found!");
