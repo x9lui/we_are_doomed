@@ -169,13 +169,17 @@ MonoBehaviour:
   roomSizeMax: {x: 30, y: 30}
   maxSeparationIterations: 1000
   roomSizeThreshold: {x: 4, y: 4}
-  wallHeight: 6
+  wallHeight: 7
   tilePrefab: {fileID: 203207713530102449, guid: f4744c459f8019541a51200e1eb4eb66, type: 3}
   wallPrefab: {fileID: 4011140061345648185, guid: eee1e4e9915bae64cade3bd8dd943b28, type: 3}
   floorMaterials:
   - {fileID: 2100000, guid: 34a0d4ba2ddab384a84b28d0b030243e, type: 2}
+  - {fileID: 2100000, guid: 5b673b33dea2ed541ac7c00681bc2c3b, type: 2}
+  - {fileID: 2100000, guid: a2796585a70f91045b1783109b28e06f, type: 2}
   wallMaterials:
   - {fileID: 2100000, guid: edea41ebe84c02340a8e03566c622fd0, type: 2}
+  - {fileID: 2100000, guid: 00e83d8e85cc3824a94a973073905c5d, type: 2}
+  - {fileID: 2100000, guid: a2796585a70f91045b1783109b28e06f, type: 2}
   dungeonParent: {fileID: 0}
 --- !u!1 &779246219
 GameObject:
