@@ -2327,7 +2327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &545866225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10135,7 +10135,7 @@ MonoBehaviour:
   audioMusica: 0.201
   audioBotones: 0.5
   audioEfectos: 0.393
-  sensibilidad: 6.85
+  sensibilidad: 1
 --- !u!114 &1883822941
 MonoBehaviour:
   m_ObjectHideFlags: 0
