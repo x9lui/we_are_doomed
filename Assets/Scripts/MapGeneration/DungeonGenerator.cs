@@ -30,6 +30,10 @@ public class DungeonGenerator : MonoBehaviour
     [Range(1, 3)]
     public int biomeCount = 1;
 
+    [Header("Objetos por bioma")]
+    public List<GameObject> biome0Objects = new();
+    public List<GameObject> biome1Objects = new();
+    public List<GameObject> biome2Objects = new();
 
 
     [Header("Tiles")]
@@ -109,6 +113,10 @@ public class DungeonGenerator : MonoBehaviour
 
         GenerateCeilings();
         Debug.Log("Techos generados.");
+
+        PopulateCellsWithObjects();
+        Debug.Log("Objetos generados por bioma.");
+
         DungeonGenerated?.Invoke();
     }
 
@@ -1133,6 +1141,53 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         Debug.Log("Biomas asignados agrupadamente por KMeans.");
+    }
+
+    private void PopulateCellsWithObjects()
+    {
+        foreach (var cell in cells)
+        {
+            if (!cell.isRoom && !cell.isCorridor) continue;
+
+            // Cuántos objetos colocar según tamaño (ajustable)
+            int area = Mathf.RoundToInt(cell.size.x * cell.size.y);
+            int objectCount = Mathf.Clamp(area / 4, 1, 5); // Entre 1 y 5 objetos por celda
+
+            for (int i = 0; i < objectCount; i++)
+            {
+                Vector2 pos2D = cell.GetRandomPositionInside(0.5f);
+                Vector3 pos = new Vector3(pos2D.x, 0, pos2D.y);
+
+                GameObject prefabToPlace = GetRandomPrefabForBiome(cell.biomeIndex);
+                if (prefabToPlace != null)
+                {
+                    GameObject obj = Instantiate(prefabToPlace, pos, Quaternion.identity, dungeonParent);
+                    obj.name = $"Biome{cell.biomeIndex}_Object_{i}";
+                }
+            }
+        }
+
+        Debug.Log("Objetos colocados según biomas.");
+    }
+
+    private GameObject GetRandomPrefabForBiome(int biome)
+    {
+        switch (biome)
+        {
+            case 0:
+                if (biome0Objects.Count > 0)
+                    return biome0Objects[UnityEngine.Random.Range(0, biome0Objects.Count)];
+                break;
+            case 1:
+                if (biome1Objects.Count > 0)
+                    return biome1Objects[UnityEngine.Random.Range(0, biome1Objects.Count)];
+                break;
+            case 2:
+                if (biome2Objects.Count > 0)
+                    return biome2Objects[UnityEngine.Random.Range(0, biome2Objects.Count)];
+                break;
+        }
+        return null;
     }
 
 

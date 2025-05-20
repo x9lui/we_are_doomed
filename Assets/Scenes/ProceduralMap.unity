@@ -150,6 +150,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &688694000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 688694001}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &688694001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688694000}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 823524106}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &823524103
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,10 +268,11 @@ Transform:
   m_GameObject: {fileID: 823524103}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 688694001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &823524107
@@ -369,6 +401,21 @@ MonoBehaviour:
   roomSizeThreshold: {x: 20, y: 20}
   wallHeight: 6
   biomeCount: 2
+  biome0Objects:
+  - {fileID: 6816629870610399400, guid: d0066874c0be7ce4380c3e85af0261b2, type: 3}
+  - {fileID: 6816629870610399400, guid: 10a01d8c1c735b943ac2068a17207a21, type: 3}
+  - {fileID: 6816629870610399400, guid: f4d7c5d4eaf46af40866581f9f360544, type: 3}
+  biome1Objects:
+  - {fileID: 6816629870610399400, guid: 3f185598f10eef9428b3e18da2ab0027, type: 3}
+  - {fileID: 6816629870610399400, guid: 665bb62747c495d45b4ec62ea70f449b, type: 3}
+  - {fileID: 6816629870610399400, guid: b11ad3285ad455741824542b12f4de4f, type: 3}
+  - {fileID: 6816629870610399400, guid: 488ae5ee0a2ae114cab7ea3284747a50, type: 3}
+  biome2Objects:
+  - {fileID: 6816629870610399400, guid: 55f05a796cc1e314cbff6532b357a0a5, type: 3}
+  - {fileID: 3486604442387245456, guid: ee30e8ce134570a47ac999dd8624ce89, type: 3}
+  - {fileID: 6816629870610399400, guid: bd93f85e7c7838c4cabadebb26846e5a, type: 3}
+  - {fileID: 6816629870610399400, guid: 7c12ab1d3f32dbd439d192caeb9cb4dd, type: 3}
+  - {fileID: 6816629870610399400, guid: 0a569d6483563bc4d8f331b6403c4cd8, type: 3}
   tilePrefab: {fileID: 203207713530102449, guid: f4744c459f8019541a51200e1eb4eb66, type: 3}
   wallPrefab: {fileID: 4011140061345648185, guid: eee1e4e9915bae64cade3bd8dd943b28, type: 3}
   floorMaterials:

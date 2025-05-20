@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3149000447057638229}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1188124492, guid: 4b0edc40663e17e42b146b13aa8cdca4, type: 3}
+  m_Sprite: {fileID: 1173678066, guid: 4b0edc40663e17e42b146b13aa8cdca4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -111,7 +111,7 @@ Animator:
   m_GameObject: {fileID: 3149000447057638229}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cbe9b120d18cc234da8da716c9b0a6de, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4e065fca2be90c64ca4342f7b4372f5b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -133,8 +133,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4269810425874120516}
   - component: {fileID: 3364540231105487741}
+  - component: {fileID: -7843054187926787837}
   m_Layer: 0
-  m_Name: Antorcha azul
+  m_Name: Ojo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 6816629870610399400}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07700729, y: 0.98637706, z: 0.39037895}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -176,6 +177,18 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.9050236
-  m_Height: 3.7835722
+  m_Height: 2.9228373
   m_Direction: 1
-  m_Center: {x: 0.023038864, y: -0.009398699, z: -0.011323929}
+  m_Center: {x: 0.023038864, y: -0.08953047, z: -0.011323929}
+--- !u!114 &-7843054187926787837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6816629870610399400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b2596a0cfc4ea459800033f40a7a6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
