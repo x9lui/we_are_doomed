@@ -57,16 +57,42 @@ public class AudioManager : MonoBehaviour
         {
             BotonEfectos.Play();
         }
+        Debug.Log("Reproduciendo efectos de sonido: " + clip.name);
+        Debug.Log("Volumen de efectos: " + BotonEfectos.volume);
+        Debug.Log("AudioSource de efectos: " + BotonEfectos);
         BotonEfectos.PlayOneShot(clip);
     }
 
-    public void ReproducirEfectos2(string Objeto, AudioClip clip)
+    public void ReproducirEfectos2(string nombreObjeto, AudioClip clip)
     {
-        // Crea un objeto temporal para el sonido
-        GameObject tempAudio = new GameObject("TempRocketExplosionAudio");
+        GameObject tempAudio = new GameObject(nombreObjeto);
         tempAudio.transform.position = transform.position;
-        AudioSource BotonEfectos = tempAudio.AddComponent<AudioSource>();
-        BotonEfectos.Play();
+    
+        AudioSource original = GetComponent<AudioSource>(); // El AudioSource de referencia
+        if (original == null)
+        {
+            Debug.LogWarning("No se encontró un AudioSource de referencia en este objeto.");
+            Destroy(tempAudio);
+            return;
+        }
+    
+        AudioSource audioSource = tempAudio.AddComponent<AudioSource>();
+        
+        // Copiamos todos los parámetros necesarios desde el original
+        audioSource.clip = clip;
+        audioSource.volume = original.volume;
+        audioSource.pitch = original.pitch;
+        audioSource.spatialBlend = original.spatialBlend;
+        audioSource.loop = original.loop;
+        audioSource.priority = original.priority;
+        audioSource.dopplerLevel = original.dopplerLevel;
+        audioSource.rolloffMode = original.rolloffMode;
+        audioSource.minDistance = original.minDistance;
+        audioSource.maxDistance = original.maxDistance;
+        audioSource.outputAudioMixerGroup = original.outputAudioMixerGroup;
+    
+        audioSource.Play();
+        Destroy(tempAudio, clip.length);
     }
     // Para los sonidos de la musica usar BotonMusica
     public void ReproducirMusica(AudioClip clip)
