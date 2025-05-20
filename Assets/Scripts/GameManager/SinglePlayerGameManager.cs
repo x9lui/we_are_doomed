@@ -14,6 +14,7 @@ public class SinglePlayerGameManager : MonoBehaviour
 {
     public static SinglePlayerGameManager Instance { get; private set; }
     [SerializeField] private DungeonGenerator dungeonGenerator;
+    [SerializeField] private FakeSceneLoader fakeSceneLoader;
 
     //probabilities are not normalized
     [SerializeField] private List<PickUpGOAndProbability> pickupsAndProbabilities;
@@ -21,6 +22,8 @@ public class SinglePlayerGameManager : MonoBehaviour
     List<DungeonGenerator.Cell> rooms;
     DungeonGenerator.Cell spawnRoom;
     DungeonGenerator.Cell finalRoom;
+    private bool dungeonGenerated = false;
+    private bool loadingComplete = false;
 
     int currentLevel = 1;
 
@@ -49,43 +52,50 @@ public class SinglePlayerGameManager : MonoBehaviour
         }
 
         //Init game after dungeon is generated
-        dungeonGenerator.DungeonGenerated += StartLevel;
-
-        foreach (PickUpGOAndProbability el in pickupsAndProbabilities)
+        dungeonGenerator.DungeonGenerated += () => 
         {
-            totalPickupProbability += el.probability;
-        }
+            dungeonGenerated = true;
+            TryStartLevel();
+        };
     }
-
+    
     void Start()
     {
         dungeonGenerator.GenerateDungeon();
-
-        //Generate player and disable it until game is ready
+        
         playerInstance = Instantiate(playerPrefab);
         playerInstance.SetActive(false);
+        
+        fakeSceneLoader.OnLoadingComplete += () => 
+        {
+            loadingComplete = true;
+            TryStartLevel();
+        };
+        
+        fakeSceneLoader.CargarPantalla(1f);
     }
-
+    
+    private void TryStartLevel()
+    {
+        if (dungeonGenerated && loadingComplete)
+        {
+            StartLevel();
+        }
+    }
+    
     void StartLevel()
     {
-
         rooms = dungeonGenerator.GetDungeonRooms();
-
-        //Select a trivial room as the spawn
         spawnRoom = rooms[Random.Range(0, rooms.Count - 1)];
 
         ConfigureFinalRoom();
 
-        //Move player to the spawn room and enable it
         playerInstance.transform.position = GetRandomPositionInsideCell3D(spawnRoom) + Vector3.up * 2f;
         playerInstance.SetActive(true);
 
         GenerateCreatures();
-
         GeneratePickUps();
-        
     }
-
     /// <summary>
     /// Selects the final room and generates the nextLevelItem in its center
     /// </summary>
@@ -125,7 +135,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         {
             if (room == spawnRoom) continue;
             if (room == finalRoom) continue;
-            if (Random.value < 0.5f) continue;
+            if (Random.value < 0.1f) continue;
             Instantiate(GetRandomPickup(), GetCellCenter3D(room) + Vector3.up * 1f, Quaternion.identity);
         }
     }
@@ -138,7 +148,6 @@ public class SinglePlayerGameManager : MonoBehaviour
 
         //Destroy all the enemies
         Destroy(enemyParent);
-
         //Destroy all the dungeon and create a new parent
         DestroyDungeon();
         DestroyCreatures();
@@ -147,12 +156,27 @@ public class SinglePlayerGameManager : MonoBehaviour
 
         //Reconfigure probabilities
 
-
-        //display loading scene
-
         //Change number of cells and regenerate dungeon
         dungeonGenerator.numberOfCells = (int)(dungeonGenerator.numberOfCells * 1.2f);
+
+        // Reset the flags
+        dungeonGenerated = false;
+        loadingComplete = false;
+
+        dungeonGenerator.DungeonGenerated += () => 
+        {
+            dungeonGenerated = true;
+            TryStartLevel();
+        };
+
+        fakeSceneLoader.OnLoadingComplete += () => 
+        {
+            loadingComplete = true;
+            TryStartLevel();
+        };
+
         dungeonGenerator.GenerateDungeon();
+        fakeSceneLoader.CargarPantalla(1f);
     }
 
     /// <summary>

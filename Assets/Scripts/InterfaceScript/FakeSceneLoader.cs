@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class FakeSceneLoader : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class FakeSceneLoader : MonoBehaviour
     [Header("Barra de carga (solo visual)")]
     [SerializeField] private Slider _loadingBar;
     [SerializeField] private GameObject _loadingScreen;
+
+    [SerializeField] private GameObject _SceneLoader;
 
     [Header("Imagen principal que se va a cambiar")]
     [SerializeField] private Image _displayImage;
@@ -26,15 +29,15 @@ public class FakeSceneLoader : MonoBehaviour
     [Header("Duración del fundido (segundos)")]
     [SerializeField] private float _fadeDuration = 1f;
 
-    [Header("Interfaz Usuario")]
-    [SerializeField] private GameObject _UserInterface;
-
+    public event Action OnLoadingComplete;
 
 
     private int _currentImageIndex = 0;
 
-    private void Start()
+    public void CargarPantalla(float tiempo)
     {
+        _SceneLoader.SetActive(true);
+        _loadingDuration = tiempo;
         // Asegurar que el Slider no sea interactivo
         if (_loadingBar != null)
         {
@@ -80,12 +83,9 @@ public class FakeSceneLoader : MonoBehaviour
         Debug.Log("Carga falsa completada.");
 
         // Desactivar elementos
-        if (_loadingBar != null) _loadingBar.gameObject.SetActive(false);
-        if (_loadingScreen != null) _loadingScreen.SetActive(false);
-        if (_UserInterface != null) _UserInterface.SetActive(true);
-        if (_displayImage != null) _displayImage.gameObject.SetActive(false);
-        if (_fadeOverlay != null) _fadeOverlay.gameObject.SetActive(false);
-        this.enabled = false; // Desactivar este script
+        _SceneLoader.SetActive(false);
+
+        OnLoadingComplete?.Invoke();
     }
 
     private IEnumerator ImageCycleCoroutine()
