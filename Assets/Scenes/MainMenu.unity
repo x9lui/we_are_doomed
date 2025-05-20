@@ -10620,7 +10620,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Esta Seguro Soldado? La deserci\xF3n se paga con la muerte"
+  m_text: Esta Seguro Soldado? La desercion se paga con la muerte
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c521bf602606a44992e48d8647338d5, type: 2}
   m_sharedMaterial: {fileID: 3804413026529845908, guid: 1c521bf602606a44992e48d8647338d5, type: 2}
