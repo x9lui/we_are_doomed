@@ -9,8 +9,10 @@ public class PickUpGOAndProbability
     public float probability;
 }
 
+//Singleton class
 public class SinglePlayerGameManager : MonoBehaviour
 {
+    public static SinglePlayerGameManager Instance { get; private set; }
     [SerializeField] private DungeonGenerator dungeonGenerator;
 
     //probabilities are not normalized
@@ -20,48 +22,106 @@ public class SinglePlayerGameManager : MonoBehaviour
     DungeonGenerator.Cell spawnRoom;
     DungeonGenerator.Cell finalRoom;
 
-    [SerializeField] GameObject player;
+    int currentLevel = 1;
+
+    //nextLevelItem is the item the player interacts with to pass the level.
+    [SerializeField] private GameObject nextLevelItem;
+
+    //Gameobject parents/containers
+    private GameObject dungeonParent;
+    private GameObject enemyParent;
+
+    [SerializeField] private GameObject playerPrefab;
+    private GameObject playerInstance;
+
+    [Header("Enemies")]
     [SerializeField] GameObject imp;
 
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         //Init game after dungeon is generated
-        dungeonGenerator.DungeonGenerated += InitGame;
+        dungeonGenerator.DungeonGenerated += StartLevel;
 
         foreach (PickUpGOAndProbability el in pickupsAndProbabilities)
         {
             totalPickupProbability += el.probability;
         }
     }
+
     void Start()
     {
+        dungeonParent = new GameObject("DugeonParent");
+        dungeonGenerator.dungeonParent = dungeonParent.transform;
         dungeonGenerator.GenerateDungeon();
+        playerInstance = Instantiate(playerPrefab);
+        playerInstance.SetActive(false);
     }
 
-    void InitGame()
+    void StartLevel()
     {
+        enemyParent = new GameObject("EnemyParent");
+
         rooms = dungeonGenerator.GetDungeonRooms();
 
         //Select a trivial room as the spawn
         spawnRoom = rooms[Random.Range(0, rooms.Count - 1)];
 
+        //Select final room and generate the nextLevelItem in its center
         SelectFinalRoom();
+        Instantiate(nextLevelItem, GetCellCenter3D(finalRoom) + Vector3.up * 1, Quaternion.identity);
 
-        //Spawn player
-        Instantiate(player, GetRandomPositionInsideCell3D(spawnRoom) + Vector3.up * 2f, Quaternion.identity);
+        //Move player to the spawn room and enable it
+        playerInstance.transform.position = GetRandomPositionInsideCell3D(spawnRoom) + Vector3.up * 2f;
+        playerInstance.SetActive(true);
 
-        //Generate creatures in all rooms 
+        //Generate creatures in all rooms except the spawn 
         foreach (DungeonGenerator.Cell room in rooms)
         {
-            for (int i = 0; i < 3; i++)
-                Instantiate(imp, GetRandomPositionInsideCell3D(room) + Vector3.up * 2f, Quaternion.identity);
+            if (room == spawnRoom) continue;
+            for (int i = 0; i < Random.Range(currentLevel / 2 + 1, currentLevel + 1); i++)
+                Instantiate(imp, GetRandomPositionInsideCell3D(room) + Vector3.up * 2f, Quaternion.identity, enemyParent.transform);
         }
 
         //Generate pick ups
         foreach (DungeonGenerator.Cell room in rooms)
         {
-            Instantiate(GetRandomPickup(), GetCenterCell3D(room) + Vector3.up * 1f, Quaternion.identity);
+            Instantiate(GetRandomPickup(), GetCellCenter3D(room) + Vector3.up * 1f, Quaternion.identity);
         }
+    }
+
+    public void NextLevel()
+    {
+        playerInstance.SetActive(false);
+
+        currentLevel++;
+
+        //Destroy all the enemies
+        Destroy(enemyParent);
+
+        //Destroy all the dungeon and create a new parent
+        Destroy(dungeonGenerator.dungeonParent.gameObject);
+        GameObject dungeonRoot = new GameObject("DugeonRoot");
+        dungeonGenerator.dungeonParent = dungeonRoot.transform;
+
+        //Save player state
+
+        //Reconfigure probabilities
+
+
+        //display loading scene
+
+        //Change number of cells and regenerate dungeon
+        dungeonGenerator.numberOfCells = (int)(dungeonGenerator.numberOfCells * 1.2f);
+        dungeonGenerator.GenerateDungeon();
     }
 
     /// <summary>
@@ -119,7 +179,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     /// <returns>
     /// The center position of the room
     /// </returns>
-    Vector3 GetCenterCell3D(DungeonGenerator.Cell cell)
+    Vector3 GetCellCenter3D(DungeonGenerator.Cell cell)
     {
         Vector2 position2d = cell.GetCenter();
         return new Vector3(position2d.x, 0f, position2d.y);
