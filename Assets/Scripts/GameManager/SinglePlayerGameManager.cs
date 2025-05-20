@@ -94,10 +94,13 @@ public class SinglePlayerGameManager : MonoBehaviour
     void StartLevel()
     {
         rooms = dungeonGenerator.GetDungeonRooms();
+
+        //Select a trivial room as the spawn
         spawnRoom = rooms[Random.Range(0, rooms.Count - 1)];
 
         ConfigureFinalRoom();
 
+        //Move player to the spawn room and enable it
         playerInstance.transform.position = GetRandomPositionInsideCell3D(spawnRoom) + Vector3.up * 2f;
         playerInstance.SetActive(true);
 
