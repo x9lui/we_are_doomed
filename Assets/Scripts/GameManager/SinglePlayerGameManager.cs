@@ -52,6 +52,13 @@ public class SinglePlayerGameManager : MonoBehaviour
             Destroy(this);
         }
 
+        //We need to calculate the total probability because it isn't normalized
+        totalPickupProbability = 0;
+        foreach (PickUpGOAndProbability el in pickupsAndProbabilities)
+        {
+            totalPickupProbability += el.probability;
+        }
+
         //Init game after dungeon is generated
         dungeonGenerator.DungeonGenerated += () => 
         {
