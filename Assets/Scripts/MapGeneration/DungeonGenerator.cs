@@ -6,6 +6,8 @@ using TriangleNet.Meshing;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
+using Unity.VisualScripting;
+using Unity.AI.Navigation;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -87,6 +89,12 @@ public class DungeonGenerator : MonoBehaviour
         Debug.Log("Muros generados.");
         GenerateFloors();
         Debug.Log("Suelos generados.");
+
+        //Navmesh is generated in the dungeon parent because it is applied in all its childs
+        NavMeshSurface navMeshSurface = dungeonParent.AddComponent<NavMeshSurface>();
+        navMeshSurface.BuildNavMesh();
+        Debug.Log("Nav mesh generada.");
+
         GenerateCeilings();
         Debug.Log("Techos generados.");
         DungeonGenerated?.Invoke();
