@@ -31,6 +31,8 @@ public class MenuPauseActions : MonoBehaviour
     [SerializeField] private AudioClip ClickDeBoton;
     [SerializeField] private AudioClip _MetalSound;
 
+    [SerializeField] private AudioClip _Death;
+
     [Header("Modo")]
 
     [SerializeField] private bool UnJugador = true;
@@ -178,6 +180,7 @@ public class MenuPauseActions : MonoBehaviour
         if (deathPanelUI != null && deathPanelUI.activeSelf)
         {
             deathPanelUI.SetActive(false);
+            AudioManager.Instance.ReproducirInterfaz(_Death);
         }
         else
         {
@@ -224,23 +227,35 @@ public class MenuPauseActions : MonoBehaviour
     {
         ConfirmationDown = _confirmationOriginal + new Vector3(0, -86, 0);
 
-        if(!pulsadoAbandonar){
+        if (!pulsadoAbandonar)
+        {
             pulsadoAbandonar = true;
             _DescripcionText.gameObject.SetActive(true);
 
             _mover.Move(_ConfirmationExit, _confirmationOriginal, ConfirmationDown);
-        }else{
+        }
+        else
+        {
             pulsadoAbandonar = false;
             _DescripcionText.gameObject.SetActive(false);
 
             _mover.Move(_ConfirmationExit, ConfirmationDown, _confirmationOriginal);
         }
 
-        Debug.Log(pulsadoAbandonar ? "Menú de confirmación cerrado." : "Menú de confirmación abierto.");
+        if (deathPanelUI != null && deathPanelUI.activeSelf)
+        {
+            AudioManager.Instance.ReproducirInterfaz(_Death);
+        }
+        else
+        {
+            AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);
+            AudioManager.Instance.ReproducirInterfaz(_MetalSound);
+        }
 
-        AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);
-        AudioManager.Instance.ReproducirInterfaz(_MetalSound);
+        Debug.Log(pulsadoAbandonar ? "Menú de confirmación cerrado." : "Menú de confirmación abierto.");
     }
+
+        
 
     public void SalirSI()
     {

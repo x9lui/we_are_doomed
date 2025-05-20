@@ -4748,6 +4748,7 @@ MonoBehaviour:
   armorBarUI: {fileID: 7266068551537947894}
   deathPanelUI: {fileID: 3081289053880337211}
   _mouseLookScript: {fileID: 2937074317880846945}
+  Muerte: {fileID: 8300000, guid: b63ad779f61932040aeff08b1a488185, type: 3}
   interfaceHead: {fileID: 2407387686590957035}
   UnJugador: 1
 --- !u!114 &380354407227798022
@@ -14934,6 +14935,7 @@ MonoBehaviour:
   _mouseLookScript: {fileID: 2937074317880846945}
   ClickDeBoton: {fileID: 8300000, guid: cbc91ceda4da56f4b993416fe46b07e1, type: 3}
   _MetalSound: {fileID: 8300000, guid: 2aa31e2de9668d441a7a6b94040fc5d3, type: 3}
+  _Death: {fileID: 8300000, guid: d5362eed30ff9fe49953861e963f1417, type: 3}
   UnJugador: 1
   player: {fileID: 2402309829230394580}
 --- !u!114 &5785297996516041172

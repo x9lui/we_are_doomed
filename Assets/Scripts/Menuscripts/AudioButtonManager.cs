@@ -69,5 +69,13 @@ public class AudioManager : MonoBehaviour
         BotonEfectos.Play();
     }
     // Para los sonidos de la musica usar BotonMusica
+    public void ReproducirMusica(AudioClip clip)
+    {
+        if (clip == null) return;
+    
+        BotonMusica.clip = clip;
+        BotonMusica.loop = true; // Opcional: si quieres que la música se repita
+        BotonMusica.Play();
+    }
 
 }
