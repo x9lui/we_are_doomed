@@ -24,6 +24,8 @@ public class MenuActions : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip ClickDeBoton;
     [SerializeField] private AudioClip _MetalSound;
+
+    [SerializeField] private AudioClip _StartGame;
     [SerializeField] private float _MenuSlideDuration = 1f;
     [SerializeField] private Vector3 _MenuHiddenPosition = new Vector3(0, -500, 0);
     [SerializeField] private Vector3 _MenuVisiblePosition = Vector3.zero;
@@ -54,17 +56,11 @@ public class MenuActions : MonoBehaviour
         StartCoroutine(FadeAndLoadCredits("PlayerTest"));
 
         // Sonido de botón
-        AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);
+        AudioManager.Instance.ReproducirInterfaz(_StartGame);
 
         // Mensaje terminal
         Debug.Log("Single Player Mode Started.");  
     }
-
-    public void MultiplayerMode()
-    {
-        // Implementar si es necesario
-    }
-
     public void OpenOptions()
     {
         _OptionMenu.SetActive(true);

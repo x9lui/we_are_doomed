@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject deathPanelUI;         
 
     [SerializeField] private MouseLook _mouseLookScript;
+    [SerializeField] private AudioClip Muerte;
 
     public InterfaceHead interfaceHead; 
 
@@ -97,10 +98,11 @@ public class PlayerHealth : MonoBehaviour
 
         if (deathPanelUI != null)
             deathPanelUI.SetActive(true); // Mostrar el menú de muerte
+            AudioManager.Instance.ReproducirEfectos(Muerte);
 
         if (UnJugador)
         {
             Time.timeScale = 0f;
-        }        
+        }
     }
 }

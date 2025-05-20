@@ -2782,6 +2782,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7486201870186773211, guid: cb35393cdc67e8a4fbcf81a2c5b0d992, type: 3}
+      propertyPath: _Death
+      value: 
+      objectReference: {fileID: 8300000, guid: d5362eed30ff9fe49953861e963f1417, type: 3}
     - target: {fileID: 7665932547093194960, guid: cb35393cdc67e8a4fbcf81a2c5b0d992, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -17.179626
