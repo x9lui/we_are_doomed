@@ -38,7 +38,7 @@ public class SemiPistol : Gun
         {
             if (gunImage != null && gunImage.sprite.name == "shoot_2")
             {
-        AudioManager.Instance.ReproducirEfectos(GunSHot);
+                AudioManager.Instance.ReproducirEfectos(GunSHot);
 
                 
                 HandleRaycastAndDamage();

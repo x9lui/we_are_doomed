@@ -88,6 +88,8 @@ public class Gun : MonoBehaviour
             return;
         }
 
+        AudioManager.Instance.ReproducirEfectos(GunSHot);
+
         isFiring = true; // Marcar el arma como disparando
         nextTimeToFire = Time.time + fireRate; // Configurar el tiempo para el próximo disparo
     }

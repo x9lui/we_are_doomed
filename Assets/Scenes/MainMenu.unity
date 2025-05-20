@@ -6642,8 +6642,12 @@ MonoBehaviour:
     _textoPantalla: {fileID: 1366847134}
   - _panelPantalla: {fileID: 1653081216}
     _textoPantalla: {fileID: 737228564}
-  - _panelPantalla: {fileID: 0}
-    _textoPantalla: {fileID: 0}
+  - _panelPantalla: {fileID: 481519593}
+    _textoPantalla: {fileID: 2145843074}
+  - _panelPantalla: {fileID: 763253542}
+    _textoPantalla: {fileID: 654054942}
+  - _panelPantalla: {fileID: 1942830740}
+    _textoPantalla: {fileID: 1961780752}
   _magnitudTemblor: 2
   _velocidadTemblor: 5
   _intensidadParpadeo: 0.1
