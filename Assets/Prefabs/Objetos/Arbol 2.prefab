@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5980999641164939306}
   - component: {fileID: 1520792813813045484}
   - component: {fileID: 7036050051489148784}
-  - component: {fileID: 9082425853869599873}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -78,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1601527513, guid: 4b0edc40663e17e42b146b13aa8cdca4, type: 3}
+  m_Sprite: {fileID: -736830935, guid: 4b0edc40663e17e42b146b13aa8cdca4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,28 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b2596a0cfc4ea459800033f40a7a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &9082425853869599873
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3149000447057638229}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: babc1e0222e7c164aa7af52deb6d010b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6816629870610399400
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +111,7 @@ GameObject:
   - component: {fileID: 4269810425874120516}
   - component: {fileID: 3364540231105487741}
   m_Layer: 0
-  m_Name: Cabezas Raras
+  m_Name: Arbol 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +152,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.9050236
-  m_Height: 2.493433
+  m_Radius: 2.6162028
+  m_Height: 5.7376657
   m_Direction: 1
-  m_Center: {x: 0.023038864, y: -0.07159877, z: -0.011323929}
+  m_Center: {x: -0.07324839, y: -0.054379225, z: -0.011323929}
