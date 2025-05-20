@@ -58,14 +58,8 @@ public class DungeonGenerator : MonoBehaviour
     }
     public void GenerateDungeon()
     {
-        cells = new List<Cell>();
-        rooms = new List<Cell>();
-        delaunayEdges = new List<(Vector2, Vector2)>();
-        mstEdges = new List<Edge>();
-        finalEdges = new List<Edge>();
-        tileMap = new Dictionary<Vector2Int, TileType>();
-        connectedTiles = new HashSet<(Vector2Int, Vector2Int)>();
-        
+        dungeonParent = new GameObject("DungeonParent").transform;
+
         Task.Run(() =>
         {
             GenerateInitialCells();
@@ -79,6 +73,19 @@ public class DungeonGenerator : MonoBehaviour
                 });
             }
         });
+    }
+
+    public void DestroyDungeon()
+    {
+        Destroy(dungeonParent.gameObject);
+
+        cells = new List<Cell>();
+        rooms = new List<Cell>();
+        delaunayEdges = new List<(Vector2, Vector2)>();
+        mstEdges = new List<Edge>();
+        finalEdges = new List<Edge>();
+        tileMap = new Dictionary<Vector2Int, TileType>();
+        connectedTiles = new HashSet<(Vector2Int, Vector2Int)>();
     }
 
     private void FinishDungeonGeneration()
