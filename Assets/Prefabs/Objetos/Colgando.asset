@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a511f31b097b2d41963ce62e3467d72, type: 3}
-  m_Name: Monolito
+  m_Name: Colgando
   m_EditorClassIdentifier: 
-  placementType: 1
-  spawnChance: 0.6
+  placementType: 4
+  spawnChance: 0.5
   minDistanceBetween: 3
-  isCeilingObject: 0
+  isCeilingObject: 1

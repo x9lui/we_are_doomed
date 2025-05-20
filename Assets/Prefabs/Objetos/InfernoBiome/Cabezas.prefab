@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 5964499730793923507}
   - component: {fileID: 4892430521802162342}
   - component: {fileID: -4672063354324229189}
+  - component: {fileID: -4171387104654177517}
   m_Layer: 0
   m_Name: Cabezas
   m_TagString: Untagged
@@ -169,3 +170,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b2596a0cfc4ea459800033f40a7a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4171387104654177517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3486604442387245456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97199489faa52814fb71d658b5e3965b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  metadata: {fileID: 11400000, guid: 869c8d71deb26654f8def50eff689c7b, type: 2}
