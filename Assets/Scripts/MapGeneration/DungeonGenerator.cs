@@ -26,6 +26,11 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Altura de los Muros")]
     public int wallHeight = 6;
 
+    [Header("Número de Biomas (1-3)")]
+    [Range(1, 3)]
+    public int biomeCount = 1;
+
+
 
     [Header("Tiles")]
     public GameObject tilePrefab;
@@ -90,7 +95,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private void FinishDungeonGeneration()
     {
-        AssignBiomesWithKMeans(floorMaterials.Count);
+        AssignBiomesWithKMeans(biomeCount);
         MergeCorridorCells();
         GenerateWalls();
         Debug.Log("Muros generados.");
@@ -1060,6 +1065,18 @@ public class DungeonGenerator : MonoBehaviour
 
     private void AssignBiomesWithKMeans(int biomeCount)
     {
+        if (biomeCount <= 1)
+        {
+            foreach (var cell in cells)
+            {
+                if (cell.isRoom || cell.isCorridor)
+                    cell.biomeIndex = 0;
+            }
+
+            Debug.Log("Se asignó un único bioma a todas las celdas.");
+            return;
+        }
+
         List<Cell> targetCells = cells.Where(c => c.isRoom || c.isCorridor).ToList();
         List<Vector2> centers = targetCells.Select(c => c.GetCenter()).ToList();
 
