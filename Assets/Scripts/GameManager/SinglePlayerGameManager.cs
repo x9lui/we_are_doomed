@@ -35,6 +35,7 @@ public class SinglePlayerGameManager : MonoBehaviour
 
     //Gameobject parents/containers
     private GameObject enemyParent;
+    private GameObject pickUpParent;
 
     [SerializeField] private GameObject playerPrefab;
     private GameObject playerInstance;
@@ -172,6 +173,11 @@ public class SinglePlayerGameManager : MonoBehaviour
         Destroy(enemyParent);
     }
 
+    private void DestroyPickUps()
+    {
+        Destroy(pickUpParent);
+    }
+
     private void DestroyDungeon()
     {
         dungeonGenerator.DestroyDungeon();
@@ -179,6 +185,7 @@ public class SinglePlayerGameManager : MonoBehaviour
 
     private void GeneratePickUps()
     {
+        pickUpParent = new GameObject("PickUpParent");
         foreach (DungeonGenerator.Cell room in rooms)
         {
             if (room == spawnRoom) continue;
@@ -194,7 +201,7 @@ public class SinglePlayerGameManager : MonoBehaviour
                     iterationNumber++;
                     position = GetRandomPositionInsideCell3D(room) + Vector3.up * 1f;
                 } while (!NoObjectsInZone(position, 0.5f) && iterationNumber < maxIterations);
-                Instantiate(GetRandomPickup(), position, Quaternion.identity);
+                Instantiate(GetRandomPickup(), position, Quaternion.identity, pickUpParent.transform);
             }
             
         }
@@ -208,11 +215,9 @@ public class SinglePlayerGameManager : MonoBehaviour
 
         currentLevel++;
 
-        //Destroy all the enemies
-        Destroy(enemyParent);
-        //Destroy all the dungeon and create a new parent
         DestroyDungeon();
         DestroyCreatures();
+        DestroyPickUps();
 
         //Save player state
 
