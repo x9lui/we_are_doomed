@@ -892,8 +892,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: -0.022994995, y: -0.0000076293945}
+  m_SizeDelta: {x: -10.0461, y: 0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &736766913
 GameObject:
@@ -1628,9 +1628,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32982838e1a6fe0488fa3adac306e419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingDuration: 2
+  _timeBetweenImages: 5
+  _fadeDuration: 1
   _loadingBar: {fileID: 1517388063}
-  _loadingScreen: {fileID: 430801668}
   _SceneLoader: {fileID: 1534243037}
   _displayImage: {fileID: 1333952583}
   _loadingImages:
@@ -1638,8 +1638,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c69d8435d031c704696f560c70ef547f, type: 3}
   - {fileID: 21300000, guid: 93ed314171e241b41930872a98d01f33, type: 3}
   _fadeOverlay: {fileID: 1275632425}
-  _timeBetweenImages: 5
-  _fadeDuration: 1
 --- !u!1 &1701966174
 GameObject:
   m_ObjectHideFlags: 0

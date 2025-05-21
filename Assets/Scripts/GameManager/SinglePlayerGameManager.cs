@@ -14,7 +14,7 @@ public class SinglePlayerGameManager : MonoBehaviour
 {
     public static SinglePlayerGameManager Instance { get; private set; }
     [SerializeField] private DungeonGenerator dungeonGenerator;
-    [SerializeField] private FakeSceneLoader fakeSceneLoader;
+    [SerializeField] private LoaderScene fakeSceneLoader;
 
     //probabilities are not normalized
     [SerializeField] private List<PickUpGOAndProbability> pickupsAndProbabilities;
@@ -80,7 +80,6 @@ public class SinglePlayerGameManager : MonoBehaviour
             TryStartLevel();
         };
         
-        fakeSceneLoader.CargarPantalla(1f);
     }
     
     private void TryStartLevel()
@@ -187,7 +186,6 @@ public class SinglePlayerGameManager : MonoBehaviour
         };
 
         dungeonGenerator.GenerateDungeon();
-        fakeSceneLoader.CargarPantalla(1f);
     }
 
     /// <summary>

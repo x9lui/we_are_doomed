@@ -3,89 +3,75 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
-public class FakeSceneLoader : MonoBehaviour
+public class LoaderScene : MonoBehaviour
 {
-    [Header("Duración total de la carga (segundos)")]
-    [SerializeField] private float _loadingDuration = 120f;
-
-    [Header("Barra de carga (solo visual)")]
-    [SerializeField] private Slider _loadingBar;
-    [SerializeField] private GameObject _loadingScreen;
-
-    [SerializeField] private GameObject _SceneLoader;
-
-    [Header("Imagen principal que se va a cambiar")]
-    [SerializeField] private Image _displayImage;
-
-    [Header("Sprites a alternar")]
-    [SerializeField] private Sprite[] _loadingImages;
-
-    [Header("Overlay para fundido a negro")]
-    [SerializeField] private Image _fadeOverlay;
-
     [Header("Duración entre imágenes (segundos)")]
     [SerializeField] private float _timeBetweenImages = 5f;
 
     [Header("Duración del fundido (segundos)")]
     [SerializeField] private float _fadeDuration = 1f;
 
+    [Header("Componentes UI")]
+    [SerializeField] private Slider _loadingBar;
+    [SerializeField] private GameObject _SceneLoader;
+    [SerializeField] private Image _displayImage;
+    [SerializeField] private Sprite[] _loadingImages;
+    [SerializeField] private Image _fadeOverlay;
+
     public event Action OnLoadingComplete;
 
-
     private int _currentImageIndex = 0;
+    private Coroutine _imageCycleCoroutine;
 
-    public void CargarPantalla(float tiempo)
+    private void Start()
     {
-        _SceneLoader.SetActive(true);
-        _loadingDuration = tiempo;
-        // Asegurar que el Slider no sea interactivo
+        if (_fadeOverlay != null)
+        {
+            _fadeOverlay.color = new Color(0, 0, 0, 0);
+            _fadeOverlay.gameObject.SetActive(true);
+        }
+
         if (_loadingBar != null)
         {
             _loadingBar.interactable = false;
             _loadingBar.value = 0f;
-            _loadingBar.gameObject.SetActive(true);
         }
 
-        if (_displayImage != null) _displayImage.gameObject.SetActive(true);
-
-        if (_fadeOverlay != null)
-        {
-            _fadeOverlay.gameObject.SetActive(true);
-            _fadeOverlay.color = new Color(0, 0, 0, 0);
-        }
-
-        if (_loadingImages.Length > 0 && _displayImage != null)
+        if (_displayImage != null && _loadingImages.Length > 0)
             _displayImage.sprite = _loadingImages[0];
-
-        // Lanzar ambas coroutines
-        StartCoroutine(FakeLoadCoroutine());
-        StartCoroutine(ImageCycleCoroutine());
     }
 
-    private IEnumerator FakeLoadCoroutine()
+    public void LoaderSceneOn()
     {
-        float elapsed = 0f;
+        _SceneLoader.SetActive(true);
 
-        while (elapsed < _loadingDuration)
-        {
-            elapsed += Time.deltaTime;
-
-            if (_loadingBar != null)
-                _loadingBar.value = Mathf.Clamp01(elapsed / _loadingDuration);
-
-            yield return null;
-        }
-
-        // Asegurar que la barra se llena al final
         if (_loadingBar != null)
-            _loadingBar.value = 1f;
+            _loadingBar.value = 0f;
 
-        Debug.Log("Carga falsa completada.");
+        if (_displayImage != null && _loadingImages.Length > 0)
+            _displayImage.sprite = _loadingImages[0];
 
-        // Desactivar elementos
+        if (_imageCycleCoroutine == null)
+            _imageCycleCoroutine = StartCoroutine(ImageCycleCoroutine());
+    }
+
+    public void LoaderSceneOff()
+    {
         _SceneLoader.SetActive(false);
 
+        if (_imageCycleCoroutine != null)
+        {
+            StopCoroutine(_imageCycleCoroutine);
+            _imageCycleCoroutine = null;
+        }
+
         OnLoadingComplete?.Invoke();
+    }
+
+    public void LoaderSceneProgress(float value)
+    {
+        if (_loadingBar != null)
+            _loadingBar.value = Mathf.Clamp01(value);
     }
 
     private IEnumerator ImageCycleCoroutine()
@@ -93,6 +79,8 @@ public class FakeSceneLoader : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(_timeBetweenImages);
+
+            if (!_SceneLoader.activeSelf) continue;
 
             yield return StartCoroutine(FadeToBlack());
 
@@ -117,6 +105,7 @@ public class FakeSceneLoader : MonoBehaviour
             _fadeOverlay.color = color;
             yield return null;
         }
+
         _fadeOverlay.color = new Color(0, 0, 0, 1);
     }
 
@@ -132,6 +121,7 @@ public class FakeSceneLoader : MonoBehaviour
             _fadeOverlay.color = color;
             yield return null;
         }
+
         _fadeOverlay.color = new Color(0, 0, 0, 0);
     }
 }
