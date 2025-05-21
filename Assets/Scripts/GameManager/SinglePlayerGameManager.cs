@@ -41,6 +41,8 @@ public class SinglePlayerGameManager : MonoBehaviour
 
     [Header("Enemies")]
     [SerializeField] GameObject imp;
+    [SerializeField] GameObject zombieSoldier;
+    [SerializeField] GameObject cacodemon;
 
     //Events
     public event System.Action LevelStart;
@@ -153,8 +155,16 @@ public class SinglePlayerGameManager : MonoBehaviour
         {
             if (room == spawnRoom) continue;
             for (int i = 0; i < Random.Range(currentLevel / 2 + 1, currentLevel + 1); i++)
-                Instantiate(imp, GetRandomPositionInsideCell3D(room) + Vector3.up * 2f, Quaternion.identity, enemyParent.transform);
+                Instantiate(GetRandomEnemy(), GetRandomPositionInsideCell3D(room) + Vector3.up * 2f, Quaternion.identity, enemyParent.transform);
         }
+    }
+
+    GameObject GetRandomEnemy()
+    {
+        float val = Random.value;
+        if (val <= 0.33f) return imp;
+        if (val <= 0.66f) return zombieSoldier;
+        return cacodemon;
     }
 
     private void DestroyCreatures()
