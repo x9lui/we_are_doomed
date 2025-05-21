@@ -1,4 +1,4 @@
-# ___________________________ We Are Doomed _____________________________
+# We Are Doomed
 
 **We are Doomed** es una reinterpretación moderna y estilizada del videojuego clásico **DOOM**, con una estética única y una experiencia centrada en el modo solitario. El objetivo del jugador es abrirse paso por distintos niveles repletos de enemigos, obstáculos y pasillos claustrofóbicos, derrotando enemigos hasta alcanzar la sala de salida que permite avanzar al siguiente nivel.
 
