@@ -9,7 +9,7 @@
 
 - 🌌 Estética rediseñada.
 - 🧟‍♂️ Combate frenético contra hordas de enemigos.
-- 🗺️ Exploración de niveles con diseño laberíntico y procedurales.
+- 🗺️ Exploración de niveles con diseño laberíntico y procedurales con rejugabilidad ilimitada.
 - 🔫 Gestión de armas y recursos limitados.
 - 🕹️ Modo de un solo jugador con progresión por salas/niveles.
 
