@@ -87,7 +87,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     //For testing
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)) NextLevel();    
+        if (Input.GetKeyDown(KeyCode.T)) NextLevel();
     }
 
     /// <summary>
@@ -117,7 +117,7 @@ public class SinglePlayerGameManager : MonoBehaviour
 
         LevelLoadPercentage?.Invoke(totalLoading);
     }
-    
+
     void StartLevel()
     {
         LevelStart?.Invoke();
@@ -184,7 +184,19 @@ public class SinglePlayerGameManager : MonoBehaviour
             if (room == spawnRoom) continue;
             if (room == finalRoom) continue;
             if (Random.value < 0.1f) continue;
-            Instantiate(GetRandomPickup(), GetCellCenter3D(room) + Vector3.up * 1f, Quaternion.identity);
+
+            for (int i = 0; i < Random.Range(currentLevel / 2 + 1, currentLevel + 1); i++)
+            {
+                int maxIterations = 100;
+                int iterationNumber = 0;
+                Vector3 position;
+                do {
+                    iterationNumber++;
+                    position = GetRandomPositionInsideCell3D(room) + Vector3.up * 1f;
+                } while (!NoObjectsInZone(position, 0.5f) && iterationNumber < maxIterations);
+                Instantiate(GetRandomPickup(), position, Quaternion.identity);
+            }
+            
         }
     }
 
@@ -271,5 +283,10 @@ public class SinglePlayerGameManager : MonoBehaviour
     {
         Vector2 position2d = cell.GetCenter();
         return new Vector3(position2d.x, 0f, position2d.y);
+    }
+    
+    bool NoObjectsInZone(Vector3 center, float radius)
+    {
+        return Physics.OverlapSphere(center, radius).Length == 0;
     }
 }
