@@ -30,6 +30,14 @@ public class DungeonGenerator : MonoBehaviour
     [Range(1, 3)]
     public int biomeCount = 1;
 
+    [Header("Objetos por bioma")]
+    public List<GameObject> biome0Objects = new();
+    public List<GameObject> biome1Objects = new();
+    public List<GameObject> biome2Objects = new();
+
+    [Header("Colocación de objetos")]
+    [Range(0f, 1f)]
+    public float objectDensityFactor = 0.15f; // visible y ajustable en el inspector
 
 
     [Header("Tiles")]
@@ -109,6 +117,10 @@ public class DungeonGenerator : MonoBehaviour
 
         GenerateCeilings();
         Debug.Log("Techos generados.");
+
+        PopulateCellsWithObjects();
+        Debug.Log("Objetos generados por bioma.");
+
         DungeonGenerated?.Invoke();
     }
 
@@ -1133,6 +1145,162 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         Debug.Log("Biomas asignados agrupadamente por KMeans.");
+    }
+
+    private void PopulateCellsWithObjects()
+    {
+        foreach (var cell in cells)
+        {
+            if (!cell.isRoom && !cell.isCorridor) continue;
+
+            List<GameObject> candidates = GetPropsForBiome(cell.biomeIndex);
+            if (candidates == null || candidates.Count == 0) continue;
+
+            float smallestSide = Mathf.Min(cell.size.x, cell.size.y);
+            int objectCount;
+
+            if (cell.isCorridor)
+            {
+                objectCount = Mathf.Min(2, Mathf.FloorToInt(smallestSide * objectDensityFactor));
+            }
+            else
+            {
+                objectCount = Mathf.FloorToInt(smallestSide * objectDensityFactor);
+            }
+
+
+            // Limitar mínimo y máximo
+            if (objectCount < 1 && smallestSide >= 6) objectCount = 1;
+            objectCount = Mathf.Clamp(objectCount, 0, 10);
+
+
+            List<Vector3> placedPositions = new();
+
+            int safety = 50;
+            while (objectCount > 0 && safety-- > 0)
+            {
+                GameObject prefab = candidates[UnityEngine.Random.Range(0, candidates.Count)];
+                var propScript = prefab.GetComponent<PropInstance>();
+                if (propScript == null || propScript.metadata == null) continue;
+
+                if (UnityEngine.Random.value > propScript.metadata.spawnChance)
+                    continue;
+
+                Vector3 pos = GetPositionByMetadata(cell, propScript.metadata);
+
+                if (placedPositions.Any(p => Vector3.Distance(p, pos) < propScript.metadata.minDistanceBetween))
+                    continue;
+
+                float halfHeight = 0.5f; // fallback
+                var renderer = prefab.GetComponentInChildren<Renderer>();
+                if (renderer != null)
+                {
+                    halfHeight = renderer.bounds.size.y * 0.5f;
+                }
+
+                if (propScript.metadata.isCeilingObject)
+                    pos.y = wallHeight - halfHeight;
+                else
+                    pos.y = halfHeight;
+
+
+
+                GameObject obj = Instantiate(prefab, pos, Quaternion.identity, dungeonParent);
+                obj.name = $"{prefab.name}_Biome{cell.biomeIndex}";
+                placedPositions.Add(pos);
+
+                objectCount--;
+            }
+        }
+
+        Debug.Log("Objetos colocados con lógica según tipo y bioma.");
+    }
+
+    private Vector3 GetPositionByMetadata(Cell cell, PropMetadata meta)
+    {
+        Vector2 pos2D = Vector2.zero;
+
+        switch (meta.placementType)
+        {
+            case PropPlacementType.Center:
+                pos2D = cell.GetCenter();
+                break;
+
+            case PropPlacementType.NearWall:
+                pos2D = GetNearWallPosition(cell);
+                break;
+
+            case PropPlacementType.Grid:
+                pos2D = GetGridPosition(cell);
+                break;
+
+            case PropPlacementType.Scatter:
+            default:
+                pos2D = cell.GetRandomPositionInside(0.8f);
+                break;
+        }
+
+        return new Vector3(pos2D.x, 0, pos2D.y);
+    }
+
+    private List<GameObject> GetPropsForBiome(int biome)
+    {
+        return biome switch
+        {
+            0 => biome0Objects,
+            1 => biome1Objects,
+            2 => biome2Objects,
+            _ => null
+        };
+    }
+
+    private Vector2 GetNearWallPosition(Cell cell)
+    {
+        float margin = 0.3f;
+        float x = (UnityEngine.Random.value < 0.5f) ? cell.position.x + margin : cell.position.x + cell.size.x - margin;
+        float y = UnityEngine.Random.Range(cell.position.y + margin, cell.position.y + cell.size.y - margin);
+
+        if (UnityEngine.Random.value < 0.5f)
+        {
+            x = UnityEngine.Random.Range(cell.position.x + margin, cell.position.x + cell.size.x - margin);
+            y = (UnityEngine.Random.value < 0.5f) ? cell.position.y + margin : cell.position.y + cell.size.y - margin;
+        }
+
+        return new Vector2(x, y);
+    }
+
+    private Vector2 GetGridPosition(Cell cell)
+    {
+        int gridCount = Mathf.Clamp(Mathf.RoundToInt(Mathf.Min(cell.size.x, cell.size.y)), 2, 4);
+        float stepX = cell.size.x / gridCount;
+        float stepY = cell.size.y / gridCount;
+
+        int gx = UnityEngine.Random.Range(1, gridCount);
+        int gy = UnityEngine.Random.Range(1, gridCount);
+
+        return new Vector2(cell.position.x + gx * stepX, cell.position.y + gy * stepY);
+    }
+
+
+
+    private GameObject GetRandomPrefabForBiome(int biome)
+    {
+        switch (biome)
+        {
+            case 0:
+                if (biome0Objects.Count > 0)
+                    return biome0Objects[UnityEngine.Random.Range(0, biome0Objects.Count)];
+                break;
+            case 1:
+                if (biome1Objects.Count > 0)
+                    return biome1Objects[UnityEngine.Random.Range(0, biome1Objects.Count)];
+                break;
+            case 2:
+                if (biome2Objects.Count > 0)
+                    return biome2Objects[UnityEngine.Random.Range(0, biome2Objects.Count)];
+                break;
+        }
+        return null;
     }
 
 

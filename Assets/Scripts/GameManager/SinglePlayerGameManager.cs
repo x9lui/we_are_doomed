@@ -42,6 +42,7 @@ public class SinglePlayerGameManager : MonoBehaviour
 
     void Awake()
     {
+        //Singleton 
         if (Instance == null)
         {
             Instance = this;
@@ -49,6 +50,13 @@ public class SinglePlayerGameManager : MonoBehaviour
         else
         {
             Destroy(this);
+        }
+
+        //We need to calculate the total probability because it isn't normalized
+        totalPickupProbability = 0;
+        foreach (PickUpGOAndProbability el in pickupsAndProbabilities)
+        {
+            totalPickupProbability += el.probability;
         }
 
         //Init game after dungeon is generated
@@ -86,10 +94,13 @@ public class SinglePlayerGameManager : MonoBehaviour
     void StartLevel()
     {
         rooms = dungeonGenerator.GetDungeonRooms();
+
+        //Select a trivial room as the spawn
         spawnRoom = rooms[Random.Range(0, rooms.Count - 1)];
 
         ConfigureFinalRoom();
 
+        //Move player to the spawn room and enable it
         playerInstance.transform.position = GetRandomPositionInsideCell3D(spawnRoom) + Vector3.up * 2f;
         playerInstance.SetActive(true);
 

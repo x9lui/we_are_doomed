@@ -150,6 +150,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &688694000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 688694001}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &688694001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688694000}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 823524106}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &823524103
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,10 +268,11 @@ Transform:
   m_GameObject: {fileID: 823524103}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 688694001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &823524107
@@ -369,6 +401,49 @@ MonoBehaviour:
   roomSizeThreshold: {x: 20, y: 20}
   wallHeight: 6
   biomeCount: 2
+  biome0Objects:
+  - {fileID: 6816629870610399400, guid: f4d7c5d4eaf46af40866581f9f360544, type: 3}
+  - {fileID: 6816629870610399400, guid: da0a5f4d4f0b8a842b1d8572e9b22891, type: 3}
+  - {fileID: 6816629870610399400, guid: 56acccc356b334a439e83b85cbd25086, type: 3}
+  - {fileID: 6816629870610399400, guid: 6410887826774db4aa62d0fc7feb8ae2, type: 3}
+  - {fileID: 6816629870610399400, guid: 102bc0531874fb440a3231961bd54531, type: 3}
+  - {fileID: 6816629870610399400, guid: 3dc4cca9bf84d744fbdd3495918544d1, type: 3}
+  - {fileID: 6816629870610399400, guid: 10a01d8c1c735b943ac2068a17207a21, type: 3}
+  - {fileID: 6816629870610399400, guid: 970af1e5e7437ef48b7fd90b3d1c1848, type: 3}
+  - {fileID: 6816629870610399400, guid: d0066874c0be7ce4380c3e85af0261b2, type: 3}
+  - {fileID: 6816629870610399400, guid: 36501c422fcd3b34c954775eb85a0e37, type: 3}
+  - {fileID: 6816629870610399400, guid: 85ea2613866e0cd428c6d4ecd11c2400, type: 3}
+  - {fileID: 6816629870610399400, guid: fb52de662e7f5e64aba947985f7e2178, type: 3}
+  biome1Objects:
+  - {fileID: 6816629870610399400, guid: 3f185598f10eef9428b3e18da2ab0027, type: 3}
+  - {fileID: 6816629870610399400, guid: 7a9ec05ef9be64349a03840ee7b22230, type: 3}
+  - {fileID: 6816629870610399400, guid: 665bb62747c495d45b4ec62ea70f449b, type: 3}
+  - {fileID: 6816629870610399400, guid: 0303ee1774ed1044c80163166a538d76, type: 3}
+  - {fileID: 6816629870610399400, guid: b11ad3285ad455741824542b12f4de4f, type: 3}
+  - {fileID: 6816629870610399400, guid: a5cef870ae2d8f143b776724b23e4da6, type: 3}
+  - {fileID: 6816629870610399400, guid: 47049bc0dbd7c0b4ea8f1882c7220ac9, type: 3}
+  - {fileID: 6816629870610399400, guid: b17caa3d14430444e9e1d991ffc7fa04, type: 3}
+  - {fileID: 6816629870610399400, guid: 4435adf1bc65ef543ad8a55fb4c462bf, type: 3}
+  - {fileID: 6816629870610399400, guid: 9aa2f1f704bece5469ecb3d5e31314fc, type: 3}
+  - {fileID: 6816629870610399400, guid: 0f826be2929941b4784a1daf92ce4f96, type: 3}
+  - {fileID: 6816629870610399400, guid: 08d0aeb366eb39041b3cfbe067c540f6, type: 3}
+  - {fileID: 6816629870610399400, guid: c0cce7b9d482eb64392d99f2fcd12bc4, type: 3}
+  biome2Objects:
+  - {fileID: 6816629870610399400, guid: 55f05a796cc1e314cbff6532b357a0a5, type: 3}
+  - {fileID: 6816629870610399400, guid: 7f900f03c49cfb645a1f03529aea6df2, type: 3}
+  - {fileID: 3486604442387245456, guid: d586452568279e2469ed8ae2b5ec95f1, type: 3}
+  - {fileID: 3486604442387245456, guid: ee30e8ce134570a47ac999dd8624ce89, type: 3}
+  - {fileID: 6816629870610399400, guid: bd93f85e7c7838c4cabadebb26846e5a, type: 3}
+  - {fileID: 6816629870610399400, guid: 933e08b6362a55e45b74bd2a10f47026, type: 3}
+  - {fileID: 6816629870610399400, guid: 0e402aab4e0d28449900e25d2c0451c7, type: 3}
+  - {fileID: 6816629870610399400, guid: faf991de46736454f80b9f398fc2e874, type: 3}
+  - {fileID: 6816629870610399400, guid: 628dfe2bd75ea1146be8b1b19112d113, type: 3}
+  - {fileID: 6816629870610399400, guid: 7c12ab1d3f32dbd439d192caeb9cb4dd, type: 3}
+  - {fileID: 6816629870610399400, guid: cc36dcaa9e355e8478f2d7a3b8af8910, type: 3}
+  - {fileID: 6816629870610399400, guid: ca101a68cfcc1d04bb665315ff123275, type: 3}
+  - {fileID: 6816629870610399400, guid: 0a569d6483563bc4d8f331b6403c4cd8, type: 3}
+  - {fileID: 6816629870610399400, guid: 1fb3ff5cdcea8c64e8e08a1f07879d3a, type: 3}
+  objectDensityFactor: 0.3
   tilePrefab: {fileID: 203207713530102449, guid: f4744c459f8019541a51200e1eb4eb66, type: 3}
   wallPrefab: {fileID: 4011140061345648185, guid: eee1e4e9915bae64cade3bd8dd943b28, type: 3}
   floorMaterials:
