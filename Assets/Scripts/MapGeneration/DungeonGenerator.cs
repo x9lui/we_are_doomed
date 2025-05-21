@@ -537,7 +537,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 mainThreadActionQueue.Enqueue(() =>
                 {
-                    DungeonPercentageGenerated?.Invoke(i / connections.Count);
+                    DungeonPercentageGenerated?.Invoke((float)i / (float)connections.Count);
                 });
             }
         }
