@@ -1474,8 +1474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a35acd407f5f4249ab07ce1e6eeef78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
-  fireRate: 0
+  damage: 35
+  fireRate: 0.3
   ammo: 100
   maxAmmo: 100
   RayCastDistance: 100
@@ -3126,7 +3126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0eddbd09ddabe5489f4d17e75f13353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 35
   fireRate: 0.5
   ammo: 999
   maxAmmo: 999
@@ -3650,8 +3650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a048959996710459cb312065b406d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  fireRate: 0.5
+  damage: 20
+  fireRate: 0.4
   ammo: 30
   maxAmmo: 30
   RayCastDistance: 50
@@ -10774,7 +10774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1000
-  fireRate: 4
+  fireRate: 2
   ammo: 3
   maxAmmo: 3
   RayCastDistance: 0
@@ -11705,7 +11705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85e6f0bcc712bfc40b67fa6dc78be00f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 20
   fireRate: 0.1
   ammo: 999
   maxAmmo: 999
@@ -12508,8 +12508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638c67b64da33594d9aa15b01730929a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  fireRate: 0.5
+  damage: 35
+  fireRate: 0.3
   ammo: 30
   maxAmmo: 30
   RayCastDistance: 100
@@ -13053,7 +13053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1130819a584b7146afc166d3a8d8acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 100
   fireRate: 0.2
   ammo: 100
   maxAmmo: 100
