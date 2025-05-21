@@ -1,4 +1,4 @@
-# We are Doomed
+# ___________________________ We Are Doomed _____________________________
 
 **We are Doomed** es una reinterpretación moderna y estilizada del videojuego clásico **DOOM**, con una estética única y una experiencia centrada en el modo solitario. El objetivo del jugador es abrirse paso por distintos niveles repletos de enemigos, obstáculos y pasillos claustrofóbicos, derrotando enemigos hasta alcanzar la sala de salida que permite avanzar al siguiente nivel.
 
@@ -42,7 +42,3 @@ Este juego es una carta de amor a **DOOM (1993)**, uno de los pilares del géner
 - [Ángel Massanet Ruiz](https://github.com/Massru)
 - [Adolfo Gómez Morera](https://github.com/AdolfoGomezMorera)
 - [José Otero Castellano](https://github.com/PepeOte)
-
-## 🚀 Cómo ejecutar el juego
-
-<!-- Instrucciones para ejecutar el juego aquí -->
