@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LoaderScene : MonoBehaviour
 {
@@ -39,6 +40,10 @@ public class LoaderScene : MonoBehaviour
 
         if (_displayImage != null && _loadingImages.Length > 0)
             _displayImage.sprite = _loadingImages[0];
+
+        SinglePlayerGameManager.Instance.LevelStart += LoaderSceneOff;
+        SinglePlayerGameManager.Instance.LevelFinish += LoaderSceneOn;
+        SinglePlayerGameManager.Instance.LevelLoadPercentage += LoaderSceneProgress;
     }
 
     public void LoaderSceneOn()
