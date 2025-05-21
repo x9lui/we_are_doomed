@@ -1291,9 +1291,11 @@ MonoBehaviour:
     probability: 4
   - pickUpGO: {fileID: 3907614084857794023, guid: 3574da0447d3e3846b90b52d5512ce30, type: 3}
     probability: 3
-  nextLevelItem: {fileID: 3492539110356153257, guid: 1db819e1108c04a4db84a709c9a3cd56, type: 3}
+  nextLevelItem: {fileID: 6816629870610399400, guid: 8cb6ec04beaa9a14691a68a8d7ceb18c, type: 3}
   playerPrefab: {fileID: 2402309829230394580, guid: cb35393cdc67e8a4fbcf81a2c5b0d992, type: 3}
   imp: {fileID: 6477119415256762385, guid: cb582b1e9693e9d4b8b113484f024686, type: 3}
+  zombieSoldier: {fileID: 435538255884130662, guid: 370f81abc7f9fbc47b9095e2cae12c10, type: 3}
+  cacodemon: {fileID: 3630241447711453536, guid: 6fc72828c3ab19141b4f2b820b0f14ff, type: 3}
 --- !u!4 &1314769715
 Transform:
   m_ObjectHideFlags: 0
