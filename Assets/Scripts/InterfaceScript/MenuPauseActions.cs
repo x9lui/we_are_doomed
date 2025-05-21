@@ -11,8 +11,8 @@ public class MenuPauseActions : MonoBehaviour
     [SerializeField] private GameObject _OptionPanel;
     [SerializeField] private GameObject _DescripcionText;
     [SerializeField] private Image _TransitionPanel;
-    public TextMeshProUGUI _ContadorDeMuertes;
-    private int muertes = 0;
+    public TextMeshProUGUI _ContadorDeIntentos;
+    private int Intento = 1;
 
     [Header("Menus")]
     
@@ -61,6 +61,10 @@ public class MenuPauseActions : MonoBehaviour
         _optionsOriginal = _OptionsMenuDisplay.transform.localPosition;
         _menuOriginal = _MenuPrincipalDisplay.transform.localPosition;
         _confirmationOriginal = _ConfirmationExit.transform.localPosition;
+
+        Intento = PlayerPrefs.GetInt("Intento", 1);
+        _ContadorDeIntentos.text = Intento.ToString();
+
 
         // Posicion Inicial del Jugador 
         if (player != null)
@@ -126,71 +130,13 @@ public class MenuPauseActions : MonoBehaviour
 
     public void Reaparecer()
     {
-        muertes++;
-
-        player.GetComponent<PlayerHealth>().HealPlayer(100);
-        player.GetComponent<PlayerHealth>().ArmorPlayer(120);
-        player.GetComponent<InventoryScript>().ResetInventory();
-        player.GetComponent<PlayerMove>().enabled = false;
-
-        // Recargar munición de todas las armas automáticamente
-        string[] weaponNames = {
-            "Bfg", "Chainsaw", "EnergyGun", "Fist", "MachineGun", "Pistol2",
-            "PlasmaGun", "ShotgunNormal", "SemiPistol"
-        };
-
-        foreach (string weaponName in weaponNames)
-        {
-            GameObject weaponGO = GameObject.Find($"Player/Canvas/HUD/{weaponName}");
-            if (weaponGO != null)
-            {
-                Gun gun = weaponGO.GetComponent<Gun>();
-                if (gun != null)
-                {
-                    gun.ammo = gun.maxAmmo;
-                }
-                else
-                {
-                    Debug.LogWarning($"{weaponName} no tiene un componente Gun.");
-                }
-            }
-            else
-            {
-                Debug.LogWarning($"{weaponName} no encontrado en HUD.");
-            }
-        }
-
-        
-        if (UnJugador)
-        {
-            Time.timeScale = 1f;
-        }
-        Debug.Log("Reapareciendo");
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        _mouseLookScript.enabled = true;
-        player.GetComponent<PlayerMove>().UpdateFistVisibility();
-        if (player != null)
-        {
-            player.transform.position = posicionInicialJugador;
-            Debug.Log(posicionInicialJugador);
-        }
-
-        if (deathPanelUI != null && deathPanelUI.activeSelf)
-        {
-            deathPanelUI.SetActive(false);
-            AudioManager.Instance.ReproducirInterfaz(_Death);
-        }
-        else
-        {
-            _OptionPanel.SetActive(false);
-        }
-
-        
-        _ContadorDeMuertes.text = muertes.ToString();
-        pulsadoReanudar = false;
-        StartCoroutine(ActivarScriptDespuesDeTiempo(1));
+        Intento++;
+        PlayerPrefs.SetInt("Intento", Intento);         // Guardar el valor
+        PlayerPrefs.Save();                             // Asegurar que se guarda inmediatamente
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;       // Bloquea el cursor en el centro de la pantalla
+        Cursor.visible = false;                         // Ocutar el cursor
+        SceneManager.LoadScene("SinglePlayer");
     }
 
     IEnumerator ActivarScriptDespuesDeTiempo(float segundos)
@@ -255,14 +201,15 @@ public class MenuPauseActions : MonoBehaviour
         Debug.Log(pulsadoAbandonar ? "Menú de confirmación cerrado." : "Menú de confirmación abierto.");
     }
 
-        
+
 
     public void SalirSI()
     {
         Debug.Log("Saliendo del juego...");
+        PlayerPrefs.DeleteKey("Intento");
         AudioManager.Instance.ReproducirInterfaz(ClickDeBoton);
         SceneManager.LoadScene("MainMenu");
-
+    
     }
 
     public void SalirNO()
