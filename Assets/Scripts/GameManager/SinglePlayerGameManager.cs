@@ -29,7 +29,6 @@ public class SinglePlayerGameManager : MonoBehaviour
     [SerializeField] private GameObject nextLevelItem;
 
     //Gameobject parents/containers
-    private GameObject dungeonParent;
     private GameObject enemyParent;
 
     [SerializeField] private GameObject playerPrefab;
