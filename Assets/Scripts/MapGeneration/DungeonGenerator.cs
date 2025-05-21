@@ -57,6 +57,7 @@ public class DungeonGenerator : MonoBehaviour
     //Synchronization events
     private event Action DungeonHeavyWorkDone;
     public event Action DungeonGenerated;
+    public event Action<float> DungeonPercentageGenerated;
 
     private System.Random rnd;
 
@@ -499,10 +500,10 @@ public class DungeonGenerator : MonoBehaviour
 
     private void CreateCorridors(List<Edge> connections)
     {
-        foreach (var edge in connections)
+        for (int i = 0; i < connections.Count; i++)
         {
-            Vector2 start = edge.a;
-            Vector2 end = edge.b;
+            Vector2 start = connections[i].a;
+            Vector2 end = connections[i].b;
 
             Vector2Int startInt = new Vector2Int((int)System.Math.Round(start.x), (int)System.Math.Round(start.y));
             Vector2Int endInt = new Vector2Int((int)System.Math.Round(end.x), (int)System.Math.Round(end.y));
@@ -529,6 +530,15 @@ public class DungeonGenerator : MonoBehaviour
                 // Registrar conexión directa de borde a borde en Y
                 connectedTiles.Add((previous, current));
                 connectedTiles.Add((current, previous));
+            }
+
+            //Notify loading percentage
+            lock (mainThreadActionQueue)
+            {
+                mainThreadActionQueue.Enqueue(() =>
+                {
+                    DungeonPercentageGenerated?.Invoke(i / connections.Count);
+                });
             }
         }
     }
