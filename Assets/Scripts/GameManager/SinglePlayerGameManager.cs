@@ -143,6 +143,12 @@ public class SinglePlayerGameManager : MonoBehaviour
     private void ConfigureFinalRoom()
     {
         SelectFinalRoom();
+
+        //Destroy all the gameObjects in the center of the room
+        foreach (Collider collider in Physics.OverlapSphere(GetCellCenter3D(finalRoom) + Vector3.up * 1, 0.2f))
+        {
+            Destroy(collider.gameObject);
+        }
         Instantiate(nextLevelItem, GetCellCenter3D(finalRoom) + Vector3.up * 1, Quaternion.identity);
     }
 
