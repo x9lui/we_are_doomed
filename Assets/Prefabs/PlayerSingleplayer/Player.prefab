@@ -247,7 +247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fc3cf222867f0bd48a3d7bb2a9409208, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bc2777d42b80f94baebc35855d88402, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4851,7 +4851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Reaparecer
+  m_text: Reintentar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c521bf602606a44992e48d8647338d5, type: 2}
   m_sharedMaterial: {fileID: 3804413026529845908, guid: 1c521bf602606a44992e48d8647338d5, type: 2}
@@ -7844,7 +7844,7 @@ GameObject:
   - component: {fileID: 665580090421557080}
   - component: {fileID: 7468020206791573792}
   m_Layer: 5
-  m_Name: ContadorDeMuertes
+  m_Name: ContadorDeIntentos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7897,7 +7897,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -12119,7 +12119,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Reintentar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14944,7 +14944,7 @@ MonoBehaviour:
   _OptionPanel: {fileID: 905955536189715803}
   _DescripcionText: {fileID: 8190987422573163499}
   _TransitionPanel: {fileID: 6606938620079197742}
-  _ContadorDeMuertes: {fileID: 7468020206791573792}
+  _ContadorDeIntentos: {fileID: 7468020206791573792}
   _OptionsMenuDisplay: {fileID: 7332367531780345358}
   _MenuPrincipalDisplay: {fileID: 2040342771864867429}
   _ConfirmationExit: {fileID: 3846837380014572356}
@@ -14968,18 +14968,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32982838e1a6fe0488fa3adac306e419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingDuration: 2
+  _timeBetweenImages: 5
+  _fadeDuration: 1
   _loadingBar: {fileID: 0}
-  _loadingScreen: {fileID: 0}
+  _SceneLoader: {fileID: 0}
   _displayImage: {fileID: 0}
   _loadingImages:
   - {fileID: 21300000, guid: fc9a070c0c9691641acacab9d5af00ee, type: 3}
   - {fileID: 21300000, guid: c69d8435d031c704696f560c70ef547f, type: 3}
   - {fileID: 21300000, guid: 93ed314171e241b41930872a98d01f33, type: 3}
   _fadeOverlay: {fileID: 0}
-  _timeBetweenImages: 5
-  _fadeDuration: 1
-  _UserInterface: {fileID: 7266480268786538613}
 --- !u!114 &547264684355811934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15492,7 +15490,7 @@ GameObject:
   - component: {fileID: 8068001121641192911}
   - component: {fileID: 7624655112137739491}
   m_Layer: 5
-  m_Name: Muertes
+  m_Name: Intentos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15545,7 +15543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Muertes
+  m_text: Intentos
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
