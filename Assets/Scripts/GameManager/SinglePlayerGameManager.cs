@@ -23,7 +23,12 @@ public class SinglePlayerGameManager : MonoBehaviour
     DungeonGenerator.Cell finalRoom;
 
     int currentLevel = 1;
+
+    //Loading variables
     float totalLoading = 0f;
+
+    //Loading percentages variables
+    float dungeonGenerationLoadingPercentage = 0f;
 
     //nextLevelItem is the item the player interacts with to pass the level.
     [SerializeField] private GameObject nextLevelItem;
@@ -67,7 +72,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         //Init game after dungeon is generated
         dungeonGenerator.DungeonGenerated += StartLevel;
 
-        dungeonGenerator.DungeonPercentageGenerated += UpdateLevelLoadingPercentageDungeonGeneratorPart;
+        dungeonGenerator.DungeonPercentageGenerated += UpdateLoadingPercentageOfDungeonGenerator;
 
         dungeonGenerator.GenerateDungeon();
 
@@ -83,9 +88,31 @@ public class SinglePlayerGameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T)) NextLevel();    
     }
 
-    private void UpdateLevelLoadingPercentageDungeonGeneratorPart(float percentage)
+    /// <summary>
+    /// The main purpose of this function is to be suscribed to the event
+    /// of DungeonGenerator that is invoked when it updates it loading process
+    /// value.
+    /// </summary>
+    /// <param name="percentage"></param>
+    private void UpdateLoadingPercentageOfDungeonGenerator(float percentage)
     {
-        totalLoading = percentage;
+        dungeonGenerationLoadingPercentage = percentage;
+        UpdateLevelLoadingPercentage();
+    }
+
+    private void UpdateLevelLoadingPercentage()
+    {
+        totalLoading = 0f;
+
+        /*In our case we only have a part, and the 100% (1f) of the loading process
+        has been associated with that part
+        Example with more processes:
+        totalLoading += process1 * 0.3f
+        totalLoading += process2 * 0.2f
+        totalLoading += process3 * 0.5f
+        */
+        totalLoading += dungeonGenerationLoadingPercentage * 1f;
+
         LevelLoadPercentage?.Invoke(totalLoading);
     }
     
@@ -153,7 +180,6 @@ public class SinglePlayerGameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        totalLoading = 0f;
         LevelFinish?.Invoke();
 
         playerInstance.SetActive(false);
