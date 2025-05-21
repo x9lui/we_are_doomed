@@ -87,7 +87,7 @@ public class WeaponHUDDisplay : MonoBehaviour
                 weaponNameText.text = "Escopeta de Energia";
                 break;
             case "MachineGun":
-                weaponNameText.text = "Subfusil";
+                weaponNameText.text = "Ametralladora";
                 break;
             case "ShotgunNormal":
                 weaponNameText.text = "Escopeta";
