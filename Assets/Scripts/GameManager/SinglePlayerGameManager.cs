@@ -88,7 +88,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     //For testing
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)) NextLevel();
+        //if (Input.GetKeyDown(KeyCode.T)) NextLevel();
     }
 
     /// <summary>
