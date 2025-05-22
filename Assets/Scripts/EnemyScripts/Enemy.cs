@@ -135,7 +135,7 @@ public class Enemy : MonoBehaviour
         if (index >= 0 && index < sounds.Length)
         {
             AudioManager.Instance.ReproducirEfectos(sounds[index]);
- 
+
         }
         else
         {

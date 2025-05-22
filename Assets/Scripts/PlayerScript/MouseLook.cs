@@ -13,10 +13,11 @@ public class MouseLook : MonoBehaviour {
         // Configurar el slider si está asignado
         if (sensitivitySlider != null)
         {
+            sensitivity = SettingsManager.Instance.sensibilidad;
 
             sensitivitySlider.minValue = 0.1f;
             sensitivitySlider.maxValue = 10f;
-            sensitivitySlider.value = SettingsManager.Instance.sensibilidad;
+            sensitivitySlider.value = sensitivity;
 
             // Escuchar cambios del slider
             sensitivitySlider.onValueChanged.AddListener(SetSensitivity);
