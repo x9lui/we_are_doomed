@@ -13,15 +13,10 @@ public class MouseLook : MonoBehaviour {
         // Configurar el slider si está asignado
         if (sensitivitySlider != null)
         {
-            // Leer sensibilidad previa si existe
-            if (PlayerPrefs.HasKey("MouseSensitivity"))
-            {
-                sensitivity = PlayerPrefs.GetFloat("MouseSensitivity");
-            }
 
             sensitivitySlider.minValue = 0.1f;
             sensitivitySlider.maxValue = 10f;
-            sensitivitySlider.value = sensitivity;
+            sensitivitySlider.value = SettingsManager.Instance.sensibilidad;
 
             // Escuchar cambios del slider
             sensitivitySlider.onValueChanged.AddListener(SetSensitivity);

@@ -22,6 +22,8 @@ public class SettingsUI : MonoBehaviour
         _audioBotones.value = SettingsManager.Instance.audioBotones;
         _audioEfectos.value = SettingsManager.Instance.audioEfectos;
         _sensibilidad.value = SettingsManager.Instance.sensibilidad;
+        
+        Debug.Log("Sensibilidad: " + _sensibilidad.value);
 
         // Asignar listeners
         _audioMusica.onValueChanged.AddListener(SettingsManager.Instance.SetAudioMusica);
